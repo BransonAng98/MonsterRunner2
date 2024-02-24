@@ -158,13 +158,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  rotationSpeed: 40
+  rotationSpeed: 110
   rb: {fileID: 0}
   player: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   isGrounded: 0
+  targetRotationAngle: 0
+  isTurningRight: 0
+  isTurningLeft: 0
+  walkingStraight: 0
 --- !u!65 &352713065
 BoxCollider:
   m_ObjectHideFlags: 0

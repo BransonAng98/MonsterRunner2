@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class BossEnemyScript : MonoBehaviour
 {
-    public float speed = 5f; // Adjust this to control the speed of the enemy
+    [SerializeField] private float speed; // Adjust this to control the speed of the enemy
     public float rotationSpeed;
     public Rigidbody rb;
     public Transform player;
     private Animator animator;
     public LayerMask groundLayer; // Define the ground layer in the Unity Editor
     public bool isGrounded;
+    [SerializeField] private float targetRotationAngle;
+    [SerializeField] private bool isTurningRight; // Indicates if the enemy is turning right
+    [SerializeField] private bool isTurningLeft; // Indicates if the enemy is turning left
+    [SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
 
     void Start()
     {
@@ -25,21 +29,23 @@ public class BossEnemyScript : MonoBehaviour
         if (player != null)
         {
             CheckGrounded();
-            if(isGrounded == true)
+            if (isGrounded)
             {
+                checkRotation();
                 RotateMonster();
+                speed = 5f;
                 animator.SetBool("Walk Forward", true);
                 Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
                 Vector3 direction = (playerx - transform.position).normalized;
                 rb.velocity = direction * speed;
-               
+           
             }
-          
         }
     }
 
     void RotateMonster()
     {
+        speed = 0f;
         Vector3 directionToPlayer = player.position - transform.position;
 
         // Calculate the rotation to look at the player
@@ -47,6 +53,34 @@ public class BossEnemyScript : MonoBehaviour
 
         // Smoothly rotate towards the player
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // Calculate rotation angle
+        targetRotationAngle = Quaternion.Angle(transform.rotation, targetRotation);
+    }
+
+    void checkRotation()
+    {
+        // Determine if turning left or right
+        Vector3 cross = Vector3.Cross(transform.forward, player.position - transform.position);
+        isTurningRight = cross.y >= 0;
+        isTurningLeft = cross.y < 0;
+        if (targetRotationAngle == 0)
+        {
+            walkingStraight = true;
+            isTurningLeft = false;
+            isTurningRight = false;
+        }
+        //if(isTurningLeft == true)
+        //{
+        //    animator.SetTrigger("Turn Left");
+        //    Debug.Log("TurnLeft");
+        //}
+
+        //if (isTurningRight == true)
+        //{
+        //    animator.SetTrigger("Turn Right");
+        //    Debug.Log("TurnRight");
+        //}
     }
 
     void CheckGrounded()
