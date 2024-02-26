@@ -169,6 +169,9 @@ MonoBehaviour:
   isTurningRight: 0
   isTurningLeft: 0
   walkingStraight: 0
+  distanceToPlayer: 0
+  CanMove: 0
+  attackCooldown: 2
 --- !u!65 &352713065
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -180,8 +183,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.8569211, z: 4.1768103}
-  m_Center: {x: 0, y: 0.92456275, z: 0.21615243}
+  m_Size: {x: 1, y: 1.8569211, z: 3.2690496}
+  m_Center: {x: 0, y: 0.92456275, z: -0.23772764}
 --- !u!1 &409534610
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +416,10 @@ PrefabInstance:
       value: -99.10009
       objectReference: {fileID: 0}
     - target: {fileID: 4054819628335862, guid: c98be89c0e60ff64fbb71de2aaf0b986, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4054819628335862, guid: c98be89c0e60ff64fbb71de2aaf0b986, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -90
       objectReference: {fileID: 0}
@@ -642,7 +649,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: c98be89c0e60ff64fbb71de2aaf0b986, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.19
+      value: 20.1
       objectReference: {fileID: 0}
     - target: {fileID: 4444695180855720, guid: c98be89c0e60ff64fbb71de2aaf0b986, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1094,7 +1101,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942018136}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.78, y: 1.23, z: -16.65}
+  m_LocalPosition: {x: -0.39, y: 1.23, z: 4.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

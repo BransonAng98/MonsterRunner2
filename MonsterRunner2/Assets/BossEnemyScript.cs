@@ -15,6 +15,11 @@ public class BossEnemyScript : MonoBehaviour
     [SerializeField] private bool isTurningRight; // Indicates if the enemy is turning right
     [SerializeField] private bool isTurningLeft; // Indicates if the enemy is turning left
     [SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
+    [SerializeField] private float distanceToPlayer;
+    public bool CanMove;
+
+    public float attackCooldown = 2f; // Cooldown period between attacks
+    private float lastAttackTime; // Time when the last attack occurred
 
     void Start()
     {
@@ -22,6 +27,7 @@ public class BossEnemyScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
         groundLayer = LayerMask.GetMask("Ground");
         animator = GetComponent<Animator>();
+        lastAttackTime = -attackCooldown; // Set initial value to allow immediate attack
     }
 
     void Update()
@@ -33,12 +39,25 @@ public class BossEnemyScript : MonoBehaviour
             {
                 checkRotation();
                 RotateMonster();
-                speed = 5f;
-                animator.SetBool("Walk Forward", true);
-                Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-                Vector3 direction = (playerx - transform.position).normalized;
-                rb.velocity = direction * speed;
-           
+                if (CanMove)
+                {
+                    MoveMonster();
+                }
+
+                distanceToPlayer = Vector3.Distance(transform.position, player.position);
+                if (distanceToPlayer < 3)
+                {
+                    CanMove = false;
+                    if (Time.time - lastAttackTime > attackCooldown)
+                    {
+                        AttackPlayer();
+                        lastAttackTime = Time.time; // Update last attack time
+                    }
+                }
+                else
+                {
+                    CanMove = true;
+                }
             }
         }
     }
@@ -70,19 +89,24 @@ public class BossEnemyScript : MonoBehaviour
             isTurningLeft = false;
             isTurningRight = false;
         }
-        //if(isTurningLeft == true)
-        //{
-        //    animator.SetTrigger("Turn Left");
-        //    Debug.Log("TurnLeft");
-        //}
-
-        //if (isTurningRight == true)
-        //{
-        //    animator.SetTrigger("Turn Right");
-        //    Debug.Log("TurnRight");
-        //}
     }
 
+    void AttackPlayer()
+    {
+        Debug.Log("Attack Player");
+        speed = 0;
+        animator.SetTrigger("Smash Attack");
+        animator.SetBool("Walk Forward", false);
+    }
+
+    void MoveMonster()
+    {
+        speed = 5;
+        animator.SetBool("Walk Forward", true);
+        Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+        Vector3 direction = (playerx - transform.position).normalized;
+        rb.velocity = direction * speed;
+    }
     void CheckGrounded()
     {
         // Perform a raycast downwards to check if the enemy is grounded
