@@ -64,7 +64,9 @@ public class BossEnemyScript : MonoBehaviour
     void RotateMonster()
     {
         speed = 0f;
+        // Calculate direction to player, ignoring the x-axis
         Vector3 directionToPlayer = player.position - transform.position;
+        directionToPlayer.y = 0f;
 
         // Calculate the rotation to look at the player
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
@@ -146,6 +148,27 @@ public class BossEnemyScript : MonoBehaviour
             }
             // Set CanMove back to true after throwing the obstacle
             StartCoroutine(EnableMovementAfterDelay(1f)); // Enable movement after x seconds
+        }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+              // Calculate direction from the monster to the player
+            Vector3 direction = collision.transform.position - transform.position;
+            direction.Normalize(); // Normalize the direction vector
+
+            // Get the Rigidbody component of the player
+            Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+
+            if (playerRigidbody != null)
+            {
+                // Apply a force to the player to fling it away
+                float forceMagnitude = 20f; // Adjust this value as needed
+                float upwardForce = 350f; // Adjust this value to control the height of the arc
+                Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
+                playerRigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                Debug.Log("Player Fling");
+            }
+        
         }
     }
 
