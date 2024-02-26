@@ -28,6 +28,7 @@ public class BossEnemyScript : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         animator = GetComponent<Animator>();
         lastAttackTime = -attackCooldown; // Set initial value to allow immediate attack
+        CanMove = true;
     }
 
     void Update()
@@ -45,7 +46,7 @@ public class BossEnemyScript : MonoBehaviour
                 }
 
                 distanceToPlayer = Vector3.Distance(transform.position, player.position);
-                if (distanceToPlayer < 3)
+                if (distanceToPlayer < 8)
                 {
                     CanMove = false;
                     if (Time.time - lastAttackTime > attackCooldown)
@@ -54,10 +55,7 @@ public class BossEnemyScript : MonoBehaviour
                         lastAttackTime = Time.time; // Update last attack time
                     }
                 }
-                else
-                {
-                    CanMove = true;
-                }
+               
             }
         }
     }
@@ -93,7 +91,6 @@ public class BossEnemyScript : MonoBehaviour
 
     void AttackPlayer()
     {
-        Debug.Log("Attack Player");
         speed = 0;
         animator.SetTrigger("Smash Attack");
         animator.SetBool("Walk Forward", false);
@@ -101,7 +98,7 @@ public class BossEnemyScript : MonoBehaviour
 
     void MoveMonster()
     {
-        speed = 5;
+        speed = 15;
         animator.SetBool("Walk Forward", true);
         Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
         Vector3 direction = (playerx - transform.position).normalized;
@@ -120,6 +117,42 @@ public class BossEnemyScript : MonoBehaviour
         {
             isGrounded = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+
+        {
+            AttackPlayer();
+            CanMove = false;
+            // Calculate direction from the monster to the collided object
+            Vector3 direction = collision.transform.position - transform.position;
+            direction.Normalize(); // Normalize the direction vector
+
+            // Get the Rigidbody component of the collided object
+            Rigidbody collidedRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+
+            if (collidedRigidbody != null)
+            {
+                // Apply a force to the collided object to send it flying away in an arc
+                float forceMagnitude = 50f;
+                float upwardForce = 10f; // Adjust this value to control the height of the arc
+                Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
+                collidedRigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                Debug.Log("Throw");
+                
+            }
+            // Set CanMove back to true after throwing the obstacle
+            StartCoroutine(EnableMovementAfterDelay(1f)); // Enable movement after x seconds
+        }
+    }
+
+
+    private IEnumerator EnableMovementAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        CanMove = true;
     }
 }
 
