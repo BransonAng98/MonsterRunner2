@@ -58,7 +58,7 @@ public class DemoPlayer : MonoBehaviour
             Vector3 knockbackDirection = -transform.forward;
 
             // Apply knockback force
-            float knockbackForce = 35f; // Adjust the force as needed
+            float knockbackForce = 50f; // Adjust the force as needed
             rb.AddForce(knockbackDirection * knockbackForce * 100f, ForceMode.Impulse);
         }
     }
@@ -79,12 +79,37 @@ public class DemoPlayer : MonoBehaviour
 
     void Steer()
     {
-        foreach(var wheel in wheels)
+        foreach (var wheel in wheels)
         {
-            if(wheel.axel == Axel.Front)
+            if (wheel.axel == Axel.Front)
             {
                 var steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
-                wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, 0.6f);
+
+                // Check if the joystick input exceeds a threshold for initiating drift
+                float driftThreshold = 0.95f; // Adjust as needed
+                if (Mathf.Abs(steerInput) > driftThreshold)
+                {
+                    // Apply increased steering angle for drifting
+                    float driftMultiplier = 3f; // Adjust multiplier for stronger drift
+                    float driftSteerAngle = steerInput * turnSensitivity * maxSteeringAngle * driftMultiplier;
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, driftSteerAngle, 0.1f); // Adjust interpolation factor for smoother transition
+
+                    // Increase wheel slip while drifting
+                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                    sidewaysFriction.stiffness = 3f; // Adjust stiffness for more slip
+                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+                }
+                else
+                {
+                    // Apply regular steering angle
+                    float regularSteerAngle = steerInput * turnSensitivity * maxSteeringAngle;
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, regularSteerAngle, 0.6f); // Adjust interpolation factor for smoother transition
+
+                    // Reset wheel slip to normal
+                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                    sidewaysFriction.stiffness = 1f; // Reset stiffness to default
+                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+                }
             }
         }
     }
