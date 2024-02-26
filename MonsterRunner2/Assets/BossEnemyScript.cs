@@ -53,9 +53,10 @@ public class BossEnemyScript : MonoBehaviour
                     {
                         AttackPlayer();
                         lastAttackTime = Time.time; // Update last attack time
+                        
                     }
+                    StartCoroutine(EnableMovementAfterDelay(1f)); // Enable movement after x seconds
                 }
-               
             }
         }
     }
@@ -136,8 +137,8 @@ public class BossEnemyScript : MonoBehaviour
             if (collidedRigidbody != null)
             {
                 // Apply a force to the collided object to send it flying away in an arc
-                float forceMagnitude = 50f;
-                float upwardForce = 10f; // Adjust this value to control the height of the arc
+                float forceMagnitude = 500f;
+                float upwardForce = 400f; // Adjust this value to control the height of the arc
                 Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
                 collidedRigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 Debug.Log("Throw");
