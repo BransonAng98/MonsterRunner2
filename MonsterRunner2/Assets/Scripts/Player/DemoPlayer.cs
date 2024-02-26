@@ -55,6 +55,11 @@ public class DemoPlayer : MonoBehaviour
         if(collision.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Collided");
+            Vector3 knockbackDirection = -transform.forward;
+
+            // Apply knockback force
+            float knockbackForce = 35f; // Adjust the force as needed
+            rb.AddForce(knockbackDirection * knockbackForce * 100f, ForceMode.Impulse);
         }
     }
 
