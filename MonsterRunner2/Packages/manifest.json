@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.dgreenheck.openfracture": "file:C:/Users/Acer/Downloads/OpenFracture-main/OpenFracture-main",
+    "com.dgreenheck.openfracture": "https://github.com/dgreenheck/OpenFracture.git",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "2.0.0",
     "com.unity.feature.mobile": "1.0.0",

@@ -1,13 +1,14 @@
 {
   "dependencies": {
     "com.dgreenheck.openfracture": {
-      "version": "file:C:/Users/Acer/Downloads/OpenFracture-main/OpenFracture-main",
+      "version": "https://github.com/dgreenheck/OpenFracture.git",
       "depth": 0,
-      "source": "local",
+      "source": "git",
       "dependencies": {
         "com.unity.test-framework": "1.1.30",
         "com.unity.testtools.codecoverage": "1.0.1"
-      }
+      },
+      "hash": "6d0ddff64173193f024638c2de2dbeb8a2525965"
     },
     "com.unity.adaptiveperformance": {
       "version": "4.0.1",
