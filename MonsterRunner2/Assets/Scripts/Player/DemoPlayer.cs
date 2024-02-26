@@ -34,6 +34,7 @@ public class DemoPlayer : MonoBehaviour
 
     public float turnSensitivity;
     public float maxSteeringAngle;
+    public float maxTorque;
 
     public Vector3 centerOfMass;
 
@@ -72,24 +73,28 @@ public class DemoPlayer : MonoBehaviour
         moveInput = Input.GetAxis("Vertical");
         steerInput = joystick.Horizontal;
     }
-
     void Move()
     {
-        foreach(var wheel in wheels)
+        foreach (var wheel in wheels)
         {
             if (!isDrifting)
             {
-                wheel.wheelColliderl.motorTorque = 10f * 50 * maxAcceleration * Time.deltaTime;
-                currentTorque = wheel.wheelColliderl.motorTorque;
-            }
+                // Apply forward torque by default
+                float forwardTorque = Mathf.Clamp(30f * 50f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
+                wheel.wheelColliderl.motorTorque = forwardTorque;
 
+                // Update current torque for next frame
+                currentTorque = forwardTorque;
+            }
             else
             {
-                wheel.wheelColliderl.motorTorque = Mathf.Lerp( currentTorque, 0.05f, 0.1f);
-                wheel.wheelColliderl.motorTorque = currentTorque * Time.deltaTime;
+                // Use a fixed torque for drifting to keep it consistent
+                float driftTorque = Mathf.Clamp(10f * 50f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
+                wheel.wheelColliderl.motorTorque = driftTorque;
             }
         }
     }
+
     void Steer()
     {
         // Declare and initialize _stiffnessVelocity
@@ -118,7 +123,7 @@ public class DemoPlayer : MonoBehaviour
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Apply braking force to decrease speed during drift
-                    rb.AddForce(-rb.velocity * 0.5f, ForceMode.Force);
+                    rb.AddForce(-rb.velocity * 5f, ForceMode.Force);
                 }
                 else
                 {
@@ -129,7 +134,7 @@ public class DemoPlayer : MonoBehaviour
 
                     // Reset wheel slip to normal
                     WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 1f; // Reset stiffness to default
+                    sidewaysFriction.stiffness = 1.2f; // Reset stiffness to default
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
                 }
             }
