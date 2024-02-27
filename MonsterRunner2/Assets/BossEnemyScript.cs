@@ -138,13 +138,9 @@ public class BossEnemyScript : MonoBehaviour
 
             if (collidedRigidbody != null)
             {
-                // Apply a force to the collided object to send it flying away in an arc
-                float forceMagnitude = 500f;
-                float upwardForce = 400f; // Adjust this value to control the height of the arc
-                Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
-                collidedRigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                StartCoroutine(AddForceWithDelay(collidedRigidbody, direction, 0.5f));
                 Debug.Log("Throw");
-                
+
             }
             // Set CanMove back to true after throwing the obstacle
             StartCoroutine(EnableMovementAfterDelay(1f)); // Enable movement after x seconds
@@ -172,6 +168,16 @@ public class BossEnemyScript : MonoBehaviour
         }
     }
 
+
+    IEnumerator AddForceWithDelay(Rigidbody rigidbody, Vector3 direction, float delay)
+    {
+        yield return new WaitForSeconds(delay); // Change the delay time as needed
+
+        float forceMagnitude = 500f;
+        float upwardForce = 400f; // Adjust this value to control the height of the arc
+        Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
+        rigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+    }
 
     private IEnumerator EnableMovementAfterDelay(float delay)
     {
