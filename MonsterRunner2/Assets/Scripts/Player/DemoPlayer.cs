@@ -89,7 +89,7 @@ public class DemoPlayer : MonoBehaviour
             else
             {
                 // Use a fixed torque for drifting to keep it consistent
-                float driftTorque = Mathf.Clamp(10f * 50f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
+                float driftTorque = Mathf.Clamp(20f * 20f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
                 wheel.wheelColliderl.motorTorque = driftTorque;
             }
         }
@@ -114,16 +114,16 @@ public class DemoPlayer : MonoBehaviour
                     // Apply increased steering angle for drifting
                     float driftMultiplier = 2.5f; // Adjust multiplier for stronger drift
                     float driftSteerAngle = steerInput * turnSensitivity * maxSteeringAngle * driftMultiplier;
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, driftSteerAngle, 4f); // Adjust interpolation factor for smoother transition
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, driftSteerAngle, 2f); // Adjust interpolation factor for smoother transition
 
                     // Smoothly increase wheel slip while drifting
                     float targetStiffness = 10f; // Adjust target stiffness for more slip
                     WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = Mathf.SmoothDamp(sidewaysFriction.stiffness, targetStiffness, ref _stiffnessVelocity, 0.2f); // Adjust smooth time for smoother transition
+                    sidewaysFriction.stiffness = Mathf.SmoothDamp(sidewaysFriction.stiffness, targetStiffness, ref _stiffnessVelocity, 1f); // Adjust smooth time for smoother transition
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Apply braking force to decrease speed during drift
-                    rb.AddForce(-rb.velocity * 5f, ForceMode.Force);
+                    rb.AddForce(-rb.velocity * 10f, ForceMode.Force);
                 }
                 else
                 {
