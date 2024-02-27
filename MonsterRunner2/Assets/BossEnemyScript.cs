@@ -101,7 +101,7 @@ public class BossEnemyScript : MonoBehaviour
 
     void MoveMonster()
     {
-        speed = 15;
+        speed = 5;
         animator.SetBool("Walk Forward", true);
         Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
         Vector3 direction = (playerx - transform.position).normalized;
