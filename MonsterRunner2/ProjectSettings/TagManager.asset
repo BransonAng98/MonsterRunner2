@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Obstacle
+  - TopCollider
+  - BottomCollider
+  - LeftCollider
+  - RightCollider
   layers:
   - Default
   - TransparentFX
