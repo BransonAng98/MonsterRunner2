@@ -87,13 +87,15 @@ public class DemoPlayer : MonoBehaviour
             }
             else
             {
-                // Use a fixed torque for drifting to keep it consistent
-                float driftTorque = Mathf.Clamp(30f * maxAcceleration * Time.deltaTime, 0f, maxTorque * 0.7f);
-                wheel.wheelColliderl.motorTorque = driftTorque;
+                if(wheel.axel == Axel.Front)
+                {
+                    // Use a fixed torque for drifting to keep it consistent
+                    float driftTorque = Mathf.Clamp(1000f * maxAcceleration * Time.deltaTime, 0f, maxTorque * 3);
+                    wheel.wheelColliderl.motorTorque = driftTorque;
+                }
             }
         }
     }
-
     void Steer()
     {
         // Check if the vehicle is moving at high speed before allowing drift
@@ -108,37 +110,42 @@ public class DemoPlayer : MonoBehaviour
                 float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
 
                 // Check if the joystick input exceeds a threshold for initiating drift
-                float driftThreshold = 0.5f; // Adjust as needed
-                if (isMovingFast && Mathf.Abs(steerInput) > driftThreshold)
+                float driftThreshold = 0.85f; // Adjust as needed
+                float driftBuffer = 0.1f; // Add a buffer zone around the drift threshold
+
+                // Determine if drifting should be initiated or ended
+                bool shouldDrift = isMovingFast && Mathf.Abs(steerInput) > driftThreshold;
+                bool shouldEndDrift = !isMovingFast || Mathf.Abs(steerInput) < driftThreshold - driftBuffer;
+
+                // Smoothly transition between regular steering and drifting
+                if (shouldDrift)
                 {
                     isDrifting = true;
-
-                    // Apply increased steering angle for drifting
-                    float driftMultiplier = 3f; // Adjust multiplier for stronger drift
+                    // Calculate drift steer angle
+                    float driftMultiplier = 2f; // Adjust multiplier for stronger drift
                     float driftSteerAngle = steerAngle * driftMultiplier;
 
-                    // Set the steer angle directly without smoothing
-                    wheel.wheelColliderl.steerAngle = driftSteerAngle;
+                    // Interpolate between current steer angle and drift steer angle
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, driftSteerAngle, Time.deltaTime * 15f);
 
                     // Increase sideways friction to tighten drift radius
                     WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 3f; // Increase stiffness for tighter drifting
+                    sidewaysFriction.stiffness = 10f; // Increase stiffness for tighter drifting
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Apply braking force to decrease speed during drift
-                    rb.AddForce(-rb.velocity * 9f, ForceMode.Force);
+                    rb.AddForce(-rb.velocity * 5f, ForceMode.Force);
                 }
-                else
+                else if (shouldEndDrift)
                 {
                     isDrifting = false;
-
-                    // Apply regular steering angle if not drifting
-                    wheel.wheelColliderl.steerAngle = steerAngle;
-
                     // Reset sideways friction stiffness to default
                     WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
                     sidewaysFriction.stiffness = 1.2f; // Reset stiffness to default
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+
+                    // Interpolate back to regular steer angle
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 5f);
                 }
             }
         }
