@@ -28,7 +28,6 @@ public class DemoPlayer : MonoBehaviour
     }
 
     public float maxAcceleration;
-    public float brakeAcceleration;
 
     float currentTorque;
 
@@ -79,8 +78,8 @@ public class DemoPlayer : MonoBehaviour
         {
             if (!isDrifting)
             {
-                // Apply forward torque by default
-                float forwardTorque = Mathf.Clamp(30f * 50f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
+                // Apply forward torque by default with increased acceleration
+                float forwardTorque = Mathf.Clamp(50f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
                 wheel.wheelColliderl.motorTorque = forwardTorque;
 
                 // Update current torque for next frame
@@ -89,13 +88,18 @@ public class DemoPlayer : MonoBehaviour
             else
             {
                 // Use a fixed torque for drifting to keep it consistent
-                float driftTorque = Mathf.Clamp(25f * 25f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
+                float driftTorque = Mathf.Clamp(30f * maxAcceleration * Time.deltaTime, 0f, maxTorque * 0.7f);
                 wheel.wheelColliderl.motorTorque = driftTorque;
             }
         }
     }
+
     void Steer()
     {
+        // Check if the vehicle is moving at high speed before allowing drift
+        float highSpeedThreshold = 10f; // Adjust this threshold as needed
+        bool isMovingFast = rb.velocity.magnitude > highSpeedThreshold;
+
         foreach (var wheel in wheels)
         {
             if (wheel.axel == Axel.Front)
@@ -104,8 +108,8 @@ public class DemoPlayer : MonoBehaviour
                 float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
 
                 // Check if the joystick input exceeds a threshold for initiating drift
-                float driftThreshold = 0.8f; // Adjust as needed
-                if (Mathf.Abs(steerInput) > driftThreshold)
+                float driftThreshold = 0.5f; // Adjust as needed
+                if (isMovingFast && Mathf.Abs(steerInput) > driftThreshold)
                 {
                     isDrifting = true;
 
@@ -118,11 +122,11 @@ public class DemoPlayer : MonoBehaviour
 
                     // Increase sideways friction to tighten drift radius
                     WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 2.4f; // Increase stiffness for tighter drifting
+                    sidewaysFriction.stiffness = 3f; // Increase stiffness for tighter drifting
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Apply braking force to decrease speed during drift
-                    rb.AddForce(-rb.velocity * 7f, ForceMode.Force);
+                    rb.AddForce(-rb.velocity * 9f, ForceMode.Force);
                 }
                 else
                 {
