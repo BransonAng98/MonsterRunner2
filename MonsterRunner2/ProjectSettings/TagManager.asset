@@ -9,6 +9,7 @@ TagManager:
   - BottomCollider
   - LeftCollider
   - RightCollider
+  - Grid
   layers:
   - Default
   - TransparentFX
