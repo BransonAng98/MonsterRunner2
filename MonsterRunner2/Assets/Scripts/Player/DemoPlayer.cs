@@ -33,7 +33,7 @@ public class DemoPlayer : MonoBehaviour
 
     public float turnSensitivity;
     public float maxSteeringAngle;
-    public float maxTorque;
+    public float maxSpeed;
 
     public Vector3 centerOfMass;
 
@@ -62,7 +62,7 @@ public class DemoPlayer : MonoBehaviour
             Vector3 knockbackDirection = -transform.forward;
 
             // Apply knockback force
-            float knockbackForce = 50f; // Adjust the force as needed
+            float knockbackForce = 45f; // Adjust the force as needed
             rb.AddForce(knockbackDirection * knockbackForce * 100f, ForceMode.Impulse);
         }
     }
@@ -72,30 +72,41 @@ public class DemoPlayer : MonoBehaviour
         moveInput = Input.GetAxis("Vertical");
         steerInput = joystick.Horizontal;
     }
+
     void Move()
     {
         foreach (var wheel in wheels)
         {
-            if (!isDrifting)
+            if (wheel.axel == Axel.Rear)
             {
-                // Apply forward torque by default with increased acceleration
-                float forwardTorque = Mathf.Clamp(50f * maxAcceleration * Time.deltaTime, 0f, maxTorque);
-                wheel.wheelColliderl.motorTorque = forwardTorque;
+                if (!isDrifting)
+                {
+                    // Check if current speed is less than max speed
+                    if (rb.velocity.magnitude < maxSpeed)
+                    {
+                        // Apply forward torque with increased acceleration until max speed is reached
+                        float forwardTorque = maxAcceleration; // Increased base torque
+                        wheel.wheelColliderl.motorTorque = forwardTorque;
 
-                // Update current torque for next frame
-                currentTorque = forwardTorque;
-            }
-            else
-            {
-                if(wheel.axel == Axel.Front)
+                        // Update current torque for next frame
+                        currentTorque = forwardTorque;
+                    }
+                    else
+                    {
+                        // Once max speed is reached, stop applying torque
+                        wheel.wheelColliderl.motorTorque = 0f;
+                    }
+                }
+                else
                 {
                     // Use a fixed torque for drifting to keep it consistent
-                    float driftTorque = Mathf.Clamp(1000f * maxAcceleration * Time.deltaTime, 0f, maxTorque * 3);
+                    float driftTorque = maxAcceleration * 0.5f;
                     wheel.wheelColliderl.motorTorque = driftTorque;
                 }
             }
         }
     }
+
     void Steer()
     {
         // Check if the vehicle is moving at high speed before allowing drift
@@ -141,11 +152,11 @@ public class DemoPlayer : MonoBehaviour
                     isDrifting = false;
                     // Reset sideways friction stiffness to default
                     WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 3f; // Reset stiffness to default
+                    sidewaysFriction.stiffness = 4f; // Reset stiffness to default
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Interpolate back to regular steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 250f);
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 375f);
                 }
             }
         }
