@@ -110,7 +110,7 @@ public class DemoPlayer : MonoBehaviour
                 float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
 
                 // Check if the joystick input exceeds a threshold for initiating drift
-                float driftThreshold = 0.85f; // Adjust as needed
+                float driftThreshold = 0.95f; // Adjust as needed
                 float driftBuffer = 0.1f; // Add a buffer zone around the drift threshold
 
                 // Determine if drifting should be initiated or ended
@@ -141,11 +141,11 @@ public class DemoPlayer : MonoBehaviour
                     isDrifting = false;
                     // Reset sideways friction stiffness to default
                     WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 1.2f; // Reset stiffness to default
+                    sidewaysFriction.stiffness = 3f; // Reset stiffness to default
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Interpolate back to regular steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 5f);
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 250f);
                 }
             }
         }
