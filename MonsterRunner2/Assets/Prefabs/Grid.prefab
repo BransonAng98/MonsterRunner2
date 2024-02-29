@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 9011225774615534457}
   gridDistance: 100
+  GMscript: {fileID: 0}
 --- !u!1 &2484585300186784337
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 9011225774615534457}
   gridDistance: 100
+  GMscript: {fileID: 0}
 --- !u!1 &2943302076054297177
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,6 +182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 9011225774615534457}
   gridDistance: 100
+  GMscript: {fileID: 0}
 --- !u!1 &7802582555876709628
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 9011225774615534457}
   gridDistance: 100
+  GMscript: {fileID: 0}
 --- !u!1 &9011225774615534457
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridPrefab: {fileID: 9011225774615534457}
   gridDistance: 100
+  GMscript: {fileID: 0}
 --- !u!1 &9011225775629349172
 GameObject:
   m_ObjectHideFlags: 0

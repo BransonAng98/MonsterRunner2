@@ -6,15 +6,16 @@ public class GridSpawner : MonoBehaviour
 {
     public GameObject gridPrefab; // Reference to the prefab of the grid
     [SerializeField] private float gridDistance;
+    public GameManagerScript GMscript;
   
 
    
     // Start is called before the first frame update
     void Start()
     {
-
+        GMscript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
         // Get all colliders of the gridPrefab
-        gridPrefab = Resources.Load("Grid") as GameObject;
+       
 
     }
 
@@ -26,6 +27,7 @@ public class GridSpawner : MonoBehaviour
 
     private void SpawnNextGrid(Collider collider)
     {
+        GMscript.AddGridObject(gridPrefab);
         gridDistance = 130f;
         Vector3 spawnPosition = transform.position;
 
@@ -43,7 +45,10 @@ public class GridSpawner : MonoBehaviour
 
 
         Collider[] childColliders = nextGrid.GetComponentsInChildren<Collider>();
-
+        foreach (Collider childCollider in childColliders)
+        {
+            childCollider.enabled = true;
+        }
         // Disable the appropriate collider(s) based on the collider that triggered the spawn
         foreach (Collider childCollider in childColliders)
         {
@@ -62,8 +67,8 @@ public class GridSpawner : MonoBehaviour
     {
         if (other.transform.parent != null && other.transform.parent.CompareTag("Player"))
         {
-            Debug.Log("PlayerDetected");
             SpawnNextGrid(this.transform.parent.GetComponent<Collider>());
+            Debug.Log("PlayerDetected");
             GetComponent<Collider>().enabled = false; // Disable the collider associated with this GridSpawner
         }
     }
