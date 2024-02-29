@@ -111,7 +111,7 @@ public class DemoPlayer : MonoBehaviour
 
                 // Check if the joystick input exceeds a threshold for initiating drift
                 float driftThreshold = 0.95f; // Adjust as needed
-                float driftBuffer = 0.1f; // Add a buffer zone around the drift threshold
+                float driftBuffer = 0.05f; // Add a buffer zone around the drift threshold
 
                 // Determine if drifting should be initiated or ended
                 bool shouldDrift = isMovingFast && Mathf.Abs(steerInput) > driftThreshold;
