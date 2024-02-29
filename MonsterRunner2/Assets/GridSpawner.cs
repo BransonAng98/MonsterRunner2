@@ -28,7 +28,7 @@ public class GridSpawner : MonoBehaviour
     private void SpawnNextGrid(Collider collider)
     {
         GMscript.AddGridObject(gridPrefab);
-        gridDistance = 130f;
+        gridDistance = 120f;
         Vector3 spawnPosition = transform.position;
 
         if (this.CompareTag("TopCollider"))

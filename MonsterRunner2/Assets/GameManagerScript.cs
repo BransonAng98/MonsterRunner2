@@ -25,7 +25,7 @@ public class GameManagerScript : MonoBehaviour
         if (gridCount > 2)
         {
 
-            if(gridObjects[0].name == "Grid")
+            if(gridObjects[0].name == "TestGrid")
             {
                 GameObject objectToRemove = gridObjects[0]; // Remove the first object for simplicity, you can change this logic as per your requirement
                 //gridObjects[0].SetActive(false); // Disable the first grid object if its name is "Grid"
