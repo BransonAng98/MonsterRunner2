@@ -19791,6 +19791,7 @@ Transform:
   - {fileID: 1972653871}
   - {fileID: 1850930247}
   - {fileID: 548991518}
+  - {fileID: 948454244}
   - {fileID: 105100250}
   - {fileID: 988528258}
   - {fileID: 1849236625}
@@ -19803,7 +19804,6 @@ Transform:
   - {fileID: 553257063}
   - {fileID: 1309160617}
   - {fileID: 2117070944}
-  - {fileID: 948454244}
   - {fileID: 67116032}
   - {fileID: 1724975543}
   - {fileID: 837827839}
@@ -24786,7 +24786,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 775793049}
-  m_RootOrder: 124
+  m_RootOrder: 112
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!64 &948454245
 MeshCollider:
@@ -27302,8 +27302,8 @@ MonoBehaviour:
   m_Follow: {fileID: 751716999}
   m_Lens:
     FieldOfView: 117.3
-    OrthographicSize: 28
-    NearClipPlane: -40
+    OrthographicSize: 32
+    NearClipPlane: -60
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 1
@@ -29370,11 +29370,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -40
+  near clip plane: -60
   far clip plane: 1000
   field of view: 117.3
   orthographic: 1
-  orthographic size: 28
+  orthographic size: 32
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
