@@ -40,11 +40,12 @@ public class DemoPlayer : MonoBehaviour
     public List<Wheel> wheels;
 
     public Joystick joystick;
+    public SteeringWheel steeringWheel;
 
     float moveInput;
     float steerInput;
 
-    [SerializeField] bool isDrifting;
+    public bool isDrifting;
 
     Rigidbody rb;
     // Start is called before the first frame update
@@ -70,7 +71,7 @@ public class DemoPlayer : MonoBehaviour
     void GetInput()
     {
         moveInput = Input.GetAxis("Vertical");
-        steerInput = joystick.Horizontal;
+        steerInput = steeringWheel.GetClampedValue();
     }
 
     void Move()
@@ -100,7 +101,7 @@ public class DemoPlayer : MonoBehaviour
                 else
                 {
                     // Use a fixed torque for drifting to keep it consistent
-                    float driftTorque = maxAcceleration * 0.5f;
+                    float driftTorque = maxAcceleration * 1.5f;
                     wheel.wheelColliderl.motorTorque = driftTorque;
                 }
             }
@@ -109,10 +110,6 @@ public class DemoPlayer : MonoBehaviour
 
     void Steer()
     {
-        // Check if the vehicle is moving at high speed before allowing drift
-        float highSpeedThreshold = 10f; // Adjust this threshold as needed
-        bool isMovingFast = rb.velocity.magnitude > highSpeedThreshold;
-
         foreach (var wheel in wheels)
         {
             if (wheel.axel == Axel.Front)
@@ -120,44 +117,13 @@ public class DemoPlayer : MonoBehaviour
                 // Calculate the target steer angle based on joystick input
                 float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
 
-                // Check if the joystick input exceeds a threshold for initiating drift
-                float driftThreshold = 0.95f; // Adjust as needed
-                float driftBuffer = 0.05f; // Add a buffer zone around the drift threshold
+                // Reset sideways friction stiffness to default
+                WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                sidewaysFriction.stiffness = 4f; // Reset stiffness to default
+                wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
-                // Determine if drifting should be initiated or ended
-                bool shouldDrift = isMovingFast && Mathf.Abs(steerInput) > driftThreshold;
-                bool shouldEndDrift = !isMovingFast || Mathf.Abs(steerInput) < driftThreshold - driftBuffer;
-
-                // Smoothly transition between regular steering and drifting
-                if (shouldDrift)
-                {
-                    isDrifting = true;
-                    // Calculate drift steer angle
-                    float driftMultiplier = 2f; // Adjust multiplier for stronger drift
-                    float driftSteerAngle = steerAngle * driftMultiplier;
-
-                    // Interpolate between current steer angle and drift steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, driftSteerAngle, Time.deltaTime * 15f);
-
-                    // Increase sideways friction to tighten drift radius
-                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 10f; // Increase stiffness for tighter drifting
-                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
-
-                    // Apply braking force to decrease speed during drift
-                    rb.AddForce(-rb.velocity * 5f, ForceMode.Force);
-                }
-                else if (shouldEndDrift)
-                {
-                    isDrifting = false;
-                    // Reset sideways friction stiffness to default
-                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 4f; // Reset stiffness to default
-                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
-
-                    // Interpolate back to regular steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 375f);
-                }
+                // Interpolate back to regular steer angle
+                wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 50f);
             }
         }
     }

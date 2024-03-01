@@ -7,7 +7,8 @@ public class GridSpawner : MonoBehaviour
     public GameObject gridPrefab; // Reference to the prefab of the grid
     [SerializeField] private float gridDistance;
     public GameManagerScript GMscript;
-  
+    public GameObject gridChecker;
+    public Vector3 spawnPosition;
 
    
     // Start is called before the first frame update
@@ -15,7 +16,7 @@ public class GridSpawner : MonoBehaviour
     {
         GMscript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
         // Get all colliders of the gridPrefab
-       
+        
 
     }
 
@@ -28,38 +29,40 @@ public class GridSpawner : MonoBehaviour
     private void SpawnNextGrid(Collider collider)
     {
         GMscript.AddGridObject(gridPrefab);
-        gridDistance = 120f;
-        Vector3 spawnPosition = transform.position;
+        const float gridDistance = 175f;
+         spawnPosition = transform.position;
 
-        if (this.CompareTag("TopCollider"))
-            spawnPosition += Vector3.forward * gridDistance; // Move forward in the z-axis
-        else if (this.CompareTag("BottomCollider"))
-            spawnPosition -= Vector3.forward * gridDistance; // Move backward in the z-axis
-        else if (this.CompareTag("LeftCollider"))
-            spawnPosition -= Vector3.right * gridDistance; // Move left in the x-axis
-        else if (this.CompareTag("RightCollider"))
-            spawnPosition += Vector3.right * gridDistance; // Move right in the x-axis
+        if (CompareTag("TopCollider"))
+            spawnPosition += Vector3.forward * gridDistance;
+        else if (CompareTag("BottomCollider"))
+            spawnPosition -= Vector3.forward * gridDistance;
+        else if (CompareTag("LeftCollider"))
+            spawnPosition -= Vector3.right * gridDistance;
+        else if (CompareTag("RightCollider"))
+            spawnPosition += Vector3.right * gridDistance;
 
-        // Spawn the next grid
-        GameObject nextGrid = Instantiate(gridPrefab, spawnPosition, Quaternion.identity);
+        gridChecker = Instantiate(gridChecker, spawnPosition, Quaternion.identity);
+        GridDetection gridScript = gridChecker.GetComponent<GridDetection>();
+        gridScript.SetSpawner(this);
 
+        // Destroy(gridChecker); // Consider whether to enable this line
+    }
 
+    public void SpawnGridPrefab(GameObject prefab, Vector3 position)
+    {
+        GameObject nextGrid = Instantiate(prefab, position, Quaternion.identity);
         Collider[] childColliders = nextGrid.GetComponentsInChildren<Collider>();
+
         foreach (Collider childCollider in childColliders)
         {
             childCollider.enabled = true;
-        }
-        // Disable the appropriate collider(s) based on the collider that triggered the spawn
-        foreach (Collider childCollider in childColliders)
-        {
-            if (this.CompareTag("TopCollider") && childCollider.CompareTag("BottomCollider"))
-                childCollider.enabled = false; // Disable the bottom collider of the new grid
-            else if (this.CompareTag("BottomCollider") && childCollider.CompareTag("TopCollider"))
-                childCollider.enabled = false; // Disable the top collider of the new grid
-            else if (this.CompareTag("LeftCollider") && childCollider.CompareTag("RightCollider"))
-                childCollider.enabled = false; // Disable the right collider of the new grid
-            else if (this.CompareTag("RightCollider") && childCollider.CompareTag("LeftCollider"))
-                childCollider.enabled = false; // Disable the left collider of the new grid
+            if ((CompareTag("TopCollider") && childCollider.CompareTag("BottomCollider")) ||
+                (CompareTag("BottomCollider") && childCollider.CompareTag("TopCollider")) ||
+                (CompareTag("LeftCollider") && childCollider.CompareTag("RightCollider")) ||
+                (CompareTag("RightCollider") && childCollider.CompareTag("LeftCollider")))
+            {
+                childCollider.enabled = false;
+            }
         }
     }
 
