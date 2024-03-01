@@ -18,29 +18,17 @@ public class GameManagerScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-       
-        if (gridCount > 2)
+        if (gridCount > 4)
         {
 
-            if(gridObjects[0].name == "TestGrid")
-            {
-                GameObject objectToRemove = gridObjects[0]; // Remove the first object for simplicity, you can change this logic as per your requirement
-                //gridObjects[0].SetActive(false); // Disable the first grid object if its name is "Grid"
-                gridObjects.Remove(objectToRemove);
-                gridCount--;
-            }
-            else
-            {
-                Debug.Log("Delete Grid");
-                GameObject objectToRemove = gridObjects[0]; // Remove the first object for simplicity, you can change this logic as per your requirement
-                gridObjects.Remove(objectToRemove);
-                Destroy(objectToRemove);
-                gridCount--;
-            }
-            
+            GameObject objectToRemove = gridObjects[0];
+            gridObjects.Remove(objectToRemove);
+            Destroy(objectToRemove);
+            gridCount--;
+            //gridObjects.RemoveAt(0);
+          
         }
     }
     void TurnMonsterOn()
