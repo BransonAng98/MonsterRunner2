@@ -45,7 +45,9 @@ public class DemoPlayer : MonoBehaviour
     float steerInput;
 
     public bool isDrifting;
-
+    public float driftIntensity = 1f;
+    public float driftSteerSmoothTime;
+    public float smoothDriftSteerVelocity = 0f;
     Rigidbody rb;
     // Start is called before the first frame update
     void Start()
@@ -99,7 +101,7 @@ public class DemoPlayer : MonoBehaviour
                 else
                 {
                     // Use a fixed torque for drifting to keep it consistent
-                    float driftTorque = maxAcceleration * 1000f;
+                    float driftTorque = maxAcceleration * 100f;
                     wheel.wheelColliderl.motorTorque = driftTorque;
                 }
             }
@@ -115,13 +117,30 @@ public class DemoPlayer : MonoBehaviour
                 // Calculate the target steer angle based on joystick input
                 float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
 
-                // Reset sideways friction stiffness to default
-                WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                sidewaysFriction.stiffness = 4f; // Reset stiffness to default
-                wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+                if (!isDrifting)
+                {
+                    // Reset sideways friction stiffness to default
+                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                    sidewaysFriction.stiffness = 4f; // Reset stiffness to default
+                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
-                // Interpolate back to regular steer angle
-                wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 50f);
+                    // Interpolate back to regular steer angle
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 50f);
+                }
+                else
+                {
+                    // Adjust steer angle for drifting
+                    float driftSteerAngle = steerAngle * driftIntensity;
+
+                    // Smoothly apply the drift steer angle
+                    wheel.wheelColliderl.steerAngle = Mathf.SmoothDamp(wheel.wheelColliderl.steerAngle, driftSteerAngle, ref smoothDriftSteerVelocity, driftSteerSmoothTime);
+
+
+                    // Reset sideways friction stiffness to default
+                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                    sidewaysFriction.stiffness = 2.5f; // Reset stiffness to default
+                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+                }
             }
         }
     }

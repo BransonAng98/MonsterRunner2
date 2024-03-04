@@ -126,7 +126,6 @@ public class SteeringWheel : MonoBehaviour
         // Check if the angle difference is within the drift threshold range
         if (angleDifference <= driftThreshold)
         {
-            Debug.Log("Drifting detected!");
             player.isDrifting = true;
         }
         else
@@ -144,7 +143,7 @@ public class SteeringWheel : MonoBehaviour
 
         // Make sure wheel angle never exceeds maximumSteeringAngle
         wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
-
+        Debug.Log(wheelAngle);
         // Update the previous angle for the next frame
         wheelPrevAngle = wheelNewAngle;
     }

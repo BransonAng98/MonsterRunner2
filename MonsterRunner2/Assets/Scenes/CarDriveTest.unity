@@ -446,7 +446,7 @@ MonoBehaviour:
   wheelReleasedSpeed: 275
   angularVelocityThreshold: 75
   minimumAngularVelocity: 10
-  driftThreshold: 75
+  driftThreshold: 60
 --- !u!1 &66909873
 GameObject:
   m_ObjectHideFlags: 0
@@ -15077,6 +15077,9 @@ MonoBehaviour:
   joystick: {fileID: 1256622754}
   steeringWheel: {fileID: 0}
   isDrifting: 0
+  driftIntensity: 1
+  driftSteerSmoothTime: 0
+  smoothDriftSteerVelocity: 0
 --- !u!1 &1365425273
 GameObject:
   m_ObjectHideFlags: 0
@@ -15785,9 +15788,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
+      propertyPath: maxThrottle
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 26144505}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: throttleInput
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: driftIntensity
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: driftStiffness
@@ -15802,6 +15820,26 @@ PrefabInstance:
         type: 3}
       propertyPath: maxSteeringAngle
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: driftSteerSmoothTime
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: driftSidewaysStiffness
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: driftingThrottleModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: driftingSidewaysStiffness
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
@@ -15881,7 +15919,7 @@ PrefabInstance:
     - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 3.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
@@ -15926,7 +15964,7 @@ PrefabInstance:
     - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 3.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
@@ -21909,6 +21947,9 @@ MonoBehaviour:
   joystick: {fileID: 1256622754}
   steeringWheel: {fileID: 0}
   isDrifting: 0
+  driftIntensity: 1
+  driftSteerSmoothTime: 0
+  smoothDriftSteerVelocity: 0
 --- !u!54 &1972610418491178876
 Rigidbody:
   m_ObjectHideFlags: 0
