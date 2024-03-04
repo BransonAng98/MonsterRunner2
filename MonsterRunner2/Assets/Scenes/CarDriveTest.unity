@@ -444,7 +444,9 @@ MonoBehaviour:
   player: {fileID: 0}
   maximumSteeringAngle: 200
   wheelReleasedSpeed: 275
-  driftThreshold: 0.6
+  angularVelocityThreshold: 75
+  minimumAngularVelocity: 10
+  driftThreshold: 75
 --- !u!1 &66909873
 GameObject:
   m_ObjectHideFlags: 0
@@ -15778,9 +15780,19 @@ PrefabInstance:
       objectReference: {fileID: 1256622754}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
+      propertyPath: driftTorque
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 26144505}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: driftStiffness
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: turnSensitivity
