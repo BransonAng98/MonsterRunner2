@@ -14,6 +14,8 @@ public class SteeringWheel : MonoBehaviour
 
     public float maximumSteeringAngle = 200f;
     public float wheelReleasedSpeed = 200f;
+    public float angularVelocityThreshold = 50f;
+    public float minimumAngularVelocity = 10f;
 
     public float driftThreshold;
 
@@ -114,24 +116,30 @@ public class SteeringWheel : MonoBehaviour
 
     public void DragEvent(BaseEventData eventData)
     {
-        // Executed when mouse/finger is dragged over the steering wheel
         Vector2 pointerPos = ((PointerEventData)eventData).position;
 
         float wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
 
-        // Calculate the difference in angles
-        float angleDifference = Mathf.Abs(wheelNewAngle - wheelPrevAngle);
-        Debug.Log(angleDifference);
-        // Check if the difference exceeds the threshold for drifting detection
-        //bool isDrifting = (angleDifference > driftThreshold) ? player.isDrifting = true : player.isDrifting = false;
+        // Calculate the absolute angle difference between the current wheel angle and the maximum steering angle
+        float angleDifference = Mathf.Abs(wheelNewAngle - maximumSteeringAngle);
+
+        // Check if the angle difference is within the drift threshold range
+        if (angleDifference <= driftThreshold)
+        {
+            Debug.Log("Drifting detected!");
+            player.isDrifting = true;
+        }
+        else
+        {
+            player.isDrifting = false;
+        }
 
         // Do nothing if the pointer is too close to the center of the wheel
         if (Vector2.Distance(pointerPos, centerPoint) > 20f)
         {
-            if (pointerPos.x > centerPoint.x)
-                wheelAngle += wheelNewAngle - wheelPrevAngle;
-            else
-                wheelAngle -= wheelNewAngle - wheelPrevAngle;
+            // Update the wheel angle based on the direction of rotation
+            float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
+            wheelAngle += (wheelNewAngle - wheelPrevAngle) * rotationDirection;
         }
 
         // Make sure wheel angle never exceeds maximumSteeringAngle
@@ -139,7 +147,6 @@ public class SteeringWheel : MonoBehaviour
 
         // Update the previous angle for the next frame
         wheelPrevAngle = wheelNewAngle;
-
     }
 
     public void ReleaseEvent(BaseEventData eventData)
@@ -147,7 +154,7 @@ public class SteeringWheel : MonoBehaviour
         // Executed when mouse/finger stops touching the steering wheel
         // Performs one last DragEvent, just in case
         DragEvent(eventData);
-
+        player.isDrifting = false;
         wheelBeingHeld = false;
     }
 }

@@ -42,7 +42,6 @@ public class DemoPlayer : MonoBehaviour
     public Joystick joystick;
     public SteeringWheel steeringWheel;
 
-    float moveInput;
     float steerInput;
 
     public bool isDrifting;
@@ -70,7 +69,6 @@ public class DemoPlayer : MonoBehaviour
 
     void GetInput()
     {
-        moveInput = Input.GetAxis("Vertical");
         steerInput = steeringWheel.GetClampedValue();
     }
 
@@ -101,7 +99,7 @@ public class DemoPlayer : MonoBehaviour
                 else
                 {
                     // Use a fixed torque for drifting to keep it consistent
-                    float driftTorque = maxAcceleration * 1.5f;
+                    float driftTorque = maxAcceleration * 1000f;
                     wheel.wheelColliderl.motorTorque = driftTorque;
                 }
             }
