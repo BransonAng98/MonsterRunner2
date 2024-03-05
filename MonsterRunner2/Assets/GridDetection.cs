@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GridDetection : MonoBehaviour
 {
+    public GameManagerScript GMscript;
     public int entitiesDetected;
     private Collider _collider;
     [SerializeField] private GridSpawner _spawner;
@@ -16,6 +17,7 @@ public class GridDetection : MonoBehaviour
 
     private void Start()
     {
+        GMscript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
         shouldResetEntities = true;
         hasSpawnedGrid = false;
         entitiesDetected = -1; // Initialize to 0
@@ -40,6 +42,7 @@ public class GridDetection : MonoBehaviour
         {
           
             _spawner.SpawnGridPrefab(_spawner.gridPrefab, _spawner.spawnPosition); //spawnGrid
+            GMscript.AddtoGridCount();
             Debug.Log("SpawnGrid");
             hasSpawnedGrid = true; // Set the flag to true to prevent further calls
             shouldResetEntities = false; // Stop resetting entities since grid has been spawned
