@@ -181,7 +181,7 @@ public class DemoPlayer : MonoBehaviour
                 Quaternion rot;
                 Vector3 pos;
                 wheel.wheelColliderl.GetWorldPose(out pos, out rot);
-                wheel.wheelModel.transform.position = pos;
+                //wheel.wheelModel.transform.position = pos;
                 wheel.wheelModel.transform.rotation = rot;
             }
         }
