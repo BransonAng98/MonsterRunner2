@@ -14,8 +14,6 @@ public class SteeringWheel : MonoBehaviour
 
     public float maximumSteeringAngle = 200f;
     public float wheelReleasedSpeed = 200f;
-    public float angularVelocityThreshold = 50f;
-    public float minimumAngularVelocity = 10f;
 
     public float driftThreshold;
 
@@ -120,11 +118,14 @@ public class SteeringWheel : MonoBehaviour
 
         float wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
 
+
         // Calculate the absolute angle difference between the current wheel angle and the maximum steering angle
         float angleDifference = Mathf.Abs(wheelNewAngle - maximumSteeringAngle);
 
+        angleDifference = (angleDifference + 360f) % 360f;
+
         // Check if the angle difference is within the drift threshold range
-        if (angleDifference <= driftThreshold)
+        if (angleDifference <= driftThreshold && angleDifference >= 0)
         {
             player.isDrifting = true;
         }
@@ -143,7 +144,6 @@ public class SteeringWheel : MonoBehaviour
 
         // Make sure wheel angle never exceeds maximumSteeringAngle
         wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
-        Debug.Log(wheelAngle);
         // Update the previous angle for the next frame
         wheelPrevAngle = wheelNewAngle;
     }

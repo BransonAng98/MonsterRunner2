@@ -425,8 +425,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 400
-  turnSensitivity: 7
-  maxSteeringAngle: 5
+  turnSensitivity: 1.5
+  maxSteeringAngle: 8
   maxSpeed: 20
   centerOfMass: {x: 0, y: 0, z: 0.3}
   wheels:
@@ -765,7 +765,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 2
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -827,13 +827,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 0
+    m_Stiffness: 8
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &8712887060836448215
 GameObject:
@@ -951,11 +951,11 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 0
+    m_Stiffness: 8
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_Enabled: 1
