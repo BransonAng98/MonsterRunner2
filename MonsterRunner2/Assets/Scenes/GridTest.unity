@@ -647,6 +647,7 @@ MonoBehaviour:
   gridCount: 0
   gridObjects:
   - {fileID: 1503618217}
+  furthestGrid: {fileID: 0}
 --- !u!1 &1122745128
 GameObject:
   m_ObjectHideFlags: 3
@@ -946,6 +947,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4080991975633575056, guid: 847626ac864ed0744b8ad4647e221e05,
+        type: 3}
+      propertyPath: maxPrefabs
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4080991975633575056, guid: 847626ac864ed0744b8ad4647e221e05,
+        type: 3}
+      propertyPath: minPrefabs
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 9011225774615534457, guid: 847626ac864ed0744b8ad4647e221e05,
         type: 3}
       propertyPath: m_Name

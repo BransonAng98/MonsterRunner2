@@ -268,6 +268,7 @@ GameObject:
   - component: {fileID: 9011225774615534462}
   - component: {fileID: 9011225774615534463}
   - component: {fileID: 9011225774615534456}
+  - component: {fileID: 2909077723959603203}
   m_Layer: 0
   m_Name: TestGrid
   m_TagString: Grid
@@ -355,6 +356,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2909077723959603203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9011225774615534457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0dd9133680a04542a9532bfded83760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 5347007842401563257, guid: ddbe1602bc1744246a22c76ca114eb79, type: 3}
+  minPrefabs: 1
+  maxPrefabs: 5
+  minXRange: -100
+  maxXRange: 100
+  minZRange: -100
+  maxZRange: 100
+  minDistance: 5
 --- !u!1 &9011225775629349172
 GameObject:
   m_ObjectHideFlags: 0

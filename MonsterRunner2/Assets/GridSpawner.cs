@@ -61,7 +61,7 @@ public class GridSpawner : MonoBehaviour
                 (CompareTag("LeftCollider") && childCollider.CompareTag("RightCollider")) ||
                 (CompareTag("RightCollider") && childCollider.CompareTag("LeftCollider")))
             {
-                childCollider.enabled = false;
+                //childCollider.enabled = false;
             }
         }
     }

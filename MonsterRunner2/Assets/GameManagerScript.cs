@@ -59,6 +59,10 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    public void AddtoGridCount()
+    {
+        gridCount++;
+    }
     void TurnMonsterOn()
     {
         //boss.gameObject.SetActive(true);
@@ -67,7 +71,7 @@ public class GameManagerScript : MonoBehaviour
     public void AddGridObject(GameObject gridObject)
     {
         gridObjects.Add(gridObject);
-        gridCount++;
+        //gridCount++;
     }
 
     
