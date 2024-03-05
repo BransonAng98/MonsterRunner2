@@ -125,7 +125,7 @@ public class DemoPlayer : MonoBehaviour
                     wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Interpolate back to regular steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 50f);
+                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 1000f);
                 }
                 else
                 {
