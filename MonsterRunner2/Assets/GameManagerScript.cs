@@ -7,7 +7,7 @@ public class GameManagerScript : MonoBehaviour
     //public BossEnemyScript boss;
     [SerializeField] private int gridCount;
     [SerializeField] private List<GameObject> gridObjects = new List<GameObject>();
-   
+    [SerializeField] private GameObject furthestGrid;
 
     void Start()
     {
@@ -20,17 +20,45 @@ public class GameManagerScript : MonoBehaviour
 
     void Update()
     {
-        if (gridCount > 4)
+        if (gridCount > 10)
         {
+            // Find the player's position
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) // Check if player GameObject exists
+            {
+                Vector3 playerPosition = player.transform.position;
 
-            GameObject objectToRemove = gridObjects[0];
-            gridObjects.Remove(objectToRemove);
-            Destroy(objectToRemove);
-            gridCount--;
-            //gridObjects.RemoveAt(0);
-          
+                // Remove null references from the list
+                gridObjects.RemoveAll(item => item == null);
+
+                // Initialize variables to track the furthest grid object and its distance
+                furthestGrid = null;
+                float maxDistance = 0f;
+
+                // Iterate through each grid object to find the furthest one from the player
+                foreach (GameObject gridObject in gridObjects)
+                {
+                    // Calculate the distance between the grid object and the player
+                    float distance = Vector3.Distance(gridObject.transform.position, playerPosition);
+
+                    // Update the furthest grid object if necessary
+                    if (distance > maxDistance)
+                    {
+                        maxDistance = distance;
+                        furthestGrid = gridObject;
+                    }
+                }
+
+                if (furthestGrid != null)
+                {
+                    gridObjects.Remove(furthestGrid);
+                    (furthestGrid).SetActive(false);
+                    gridCount--;
+                }
+            }
         }
     }
+
     void TurnMonsterOn()
     {
         //boss.gameObject.SetActive(true);

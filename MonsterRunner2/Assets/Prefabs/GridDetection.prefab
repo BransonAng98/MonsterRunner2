@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3625592187533524831}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 250, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -46,7 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0785e39abb6b4e9468dc9ca6fb483512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TileNotOccupied: 0
+  entitiesDetected: 0
+  _spawner: {fileID: 0}
+  hasSpawnedGrid: 0
+  hasCollidedwithSomething: 0
+  shouldResetEntities: 1
 --- !u!65 &7972439776954610281
 BoxCollider:
   m_ObjectHideFlags: 0

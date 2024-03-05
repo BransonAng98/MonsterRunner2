@@ -446,7 +446,7 @@ MonoBehaviour:
   wheelReleasedSpeed: 275
   angularVelocityThreshold: 75
   minimumAngularVelocity: 10
-  driftThreshold: 75
+  driftThreshold: 60
 --- !u!1 &66909873
 GameObject:
   m_ObjectHideFlags: 0
@@ -15077,6 +15077,9 @@ MonoBehaviour:
   joystick: {fileID: 1256622754}
   steeringWheel: {fileID: 0}
   isDrifting: 0
+  driftIntensity: 1
+  driftSteerSmoothTime: 0
+  smoothDriftSteerVelocity: 0
 --- !u!1 &1365425273
 GameObject:
   m_ObjectHideFlags: 0
@@ -15780,29 +15783,9 @@ PrefabInstance:
       objectReference: {fileID: 1256622754}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
-      propertyPath: driftTorque
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 26144505}
-    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: driftStiffness
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: turnSensitivity
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: maxSteeringAngle
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_RootOrder
@@ -15857,96 +15840,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887059802735027, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887059802735027, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887059802735027, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_AsymptoteSlip
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_AsymptoteSlip
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_ExtremumValue
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060577313679, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_AsymptoteValue
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060836448217, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060836448217, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060836448217, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_AsymptoteSlip
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_ForwardFriction.m_Stiffness
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_Stiffness
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_ExtremumSlip
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_AsymptoteSlip
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_ExtremumValue
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060947061933, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_SidewaysFriction.m_AsymptoteValue
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6b5ff033ddefdf46840f7d3652f29a5, type: 3}
@@ -21909,6 +21802,9 @@ MonoBehaviour:
   joystick: {fileID: 1256622754}
   steeringWheel: {fileID: 0}
   isDrifting: 0
+  driftIntensity: 1
+  driftSteerSmoothTime: 0
+  smoothDriftSteerVelocity: 0
 --- !u!54 &1972610418491178876
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class GridSpawner : MonoBehaviour
     private void SpawnNextGrid(Collider collider)
     {
         GMscript.AddGridObject(gridPrefab);
-        const float gridDistance = 175f;
+        const float gridDistance = 162.5f;
          spawnPosition = transform.position;
 
         if (CompareTag("TopCollider"))
@@ -45,7 +45,7 @@ public class GridSpawner : MonoBehaviour
         GridDetection gridScript = gridChecker.GetComponent<GridDetection>();
         gridScript.SetSpawner(this);
 
-        // Destroy(gridChecker); // Consider whether to enable this line
+        //Destroy(gridChecker); // Consider whether to enable this line
     }
 
     public void SpawnGridPrefab(GameObject prefab, Vector3 position)
@@ -72,7 +72,7 @@ public class GridSpawner : MonoBehaviour
         {
             SpawnNextGrid(this.transform.parent.GetComponent<Collider>());
             Debug.Log("PlayerDetected");
-            GetComponent<Collider>().enabled = false; // Disable the collider associated with this GridSpawner
+            //GetComponent<Collider>().enabled = false; // Disable the collider associated with this GridSpawner
         }
     }
 }
