@@ -10,7 +10,7 @@ public class GridDetection : MonoBehaviour
     [SerializeField] private bool hasSpawnedGrid = false;
     
     [SerializeField] private bool hasCollidedwithSomething;
-    private float resetDelay = 1f; // Adjust as needed
+    private float resetDelay = 0.5f; // Adjust as needed
     private WaitForSeconds waitTime;
     [SerializeField]private bool shouldResetEntities = true;
 
@@ -22,6 +22,7 @@ public class GridDetection : MonoBehaviour
         _collider = GetComponent<Collider>();
         waitTime = new WaitForSeconds(resetDelay);
         StartCoroutine(ResetEntitiesDetected());
+        //DestroySelf();
     }
 
     public void SetSpawner(GridSpawner spawner)
@@ -29,6 +30,10 @@ public class GridDetection : MonoBehaviour
         _spawner = spawner;
     }
 
+    public void DestroySelf()
+    {
+        Destroy(gameObject, 3f);
+    }
     public void Update()
     {
         if (entitiesDetected == 0 && !hasSpawnedGrid)

@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721463087379068822}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalPosition: {x: 3.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 10}
+  m_Size: {x: 5, y: 1, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1845738789
 MonoBehaviour:
@@ -63,6 +63,7 @@ MonoBehaviour:
   GMscript: {fileID: 0}
   gridChecker: {fileID: 3625592187533524831, guid: 95518681d15b5324c8a9165f0709a37c,
     type: 3}
+  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2484585300186784337
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +90,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2484585300186784337}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalPosition: {x: -3.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,7 +108,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 10}
+  m_Size: {x: 5, y: 1, z: 12}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1476285985
 MonoBehaviour:
@@ -126,6 +127,7 @@ MonoBehaviour:
   GMscript: {fileID: 0}
   gridChecker: {fileID: 3625592187533524831, guid: 95518681d15b5324c8a9165f0709a37c,
     type: 3}
+  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &2943302076054297177
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2943302076054297177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -170,7 +172,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 4}
+  m_Size: {x: 12, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &379496927
 MonoBehaviour:
@@ -189,6 +191,7 @@ MonoBehaviour:
   GMscript: {fileID: 0}
   gridChecker: {fileID: 3625592187533524831, guid: 95518681d15b5324c8a9165f0709a37c,
     type: 3}
+  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &7802582555876709628
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7802582555876709628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalPosition: {x: 0, y: 0, z: -3.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -233,7 +236,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 4}
+  m_Size: {x: 12, y: 1, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1569735995
 MonoBehaviour:
@@ -252,6 +255,7 @@ MonoBehaviour:
   GMscript: {fileID: 0}
   gridChecker: {fileID: 3625592187533524831, guid: 95518681d15b5324c8a9165f0709a37c,
     type: 3}
+  spawnPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &9011225774615534457
 GameObject:
   m_ObjectHideFlags: 0

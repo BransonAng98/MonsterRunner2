@@ -7,7 +7,7 @@ public class GameManagerScript : MonoBehaviour
     //public BossEnemyScript boss;
     [SerializeField] private int gridCount;
     [SerializeField] private List<GameObject> gridObjects = new List<GameObject>();
-   
+    [SerializeField] private GameObject furthestGrid;
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class GameManagerScript : MonoBehaviour
 
     void Update()
     {
-        if (gridCount > 4)
+        if (gridCount > 10)
         {
             // Find the player's position
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -32,7 +32,7 @@ public class GameManagerScript : MonoBehaviour
                 gridObjects.RemoveAll(item => item == null);
 
                 // Initialize variables to track the furthest grid object and its distance
-                GameObject furthestGrid = null;
+                furthestGrid = null;
                 float maxDistance = 0f;
 
                 // Iterate through each grid object to find the furthest one from the player
@@ -52,7 +52,7 @@ public class GameManagerScript : MonoBehaviour
                 if (furthestGrid != null)
                 {
                     gridObjects.Remove(furthestGrid);
-                    Destroy(furthestGrid);
+                    (furthestGrid).SetActive(false);
                     gridCount--;
                 }
             }
