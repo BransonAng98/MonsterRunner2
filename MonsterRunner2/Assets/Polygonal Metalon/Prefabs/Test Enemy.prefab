@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02c08f447ce85f499b2cb9ab1ec9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  speed: 5
   rotationSpeed: 110
   rb: {fileID: 0}
   player: {fileID: 0}

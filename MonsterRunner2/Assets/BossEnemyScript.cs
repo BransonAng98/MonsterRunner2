@@ -164,7 +164,7 @@ public class BossEnemyScript : MonoBehaviour
             {
                 // Apply a force to the player to fling it away
                 float forceMagnitude = 20f; // Adjust this value as needed
-                float upwardForce = 100f; // Adjust this value to control the height of the arc
+                float upwardForce = 150f; // Adjust this value to control the height of the arc
                 Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
                 playerRigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 Debug.Log("Player Fling");
