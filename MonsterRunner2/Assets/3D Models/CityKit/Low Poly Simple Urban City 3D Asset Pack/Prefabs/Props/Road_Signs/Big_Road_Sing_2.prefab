@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7187461683370805648}
   - component: {fileID: 6057664500688176693}
   - component: {fileID: 8355816188132176639}
-  - component: {fileID: 2040946976}
   - component: {fileID: 5706186977131435073}
+  - component: {fileID: 1890267993}
   m_Layer: 0
   m_Name: Big_Road_Sing_2
   m_TagString: Untagged
@@ -85,7 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &2040946976
+--- !u!65 &5706186977131435073
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7563002815023158058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.68552953, y: 6.9410152, z: 0.693751}
+  m_Center: {x: -0.0041042566, y: 3.4705076, z: -0.0000076293945}
+--- !u!54 &1890267993
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,16 +114,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5706186977131435073
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7563002815023158058}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.68552953, y: 6.9410152, z: 0.693751}
-  m_Center: {x: -0.0041042566, y: 3.4705076, z: -0.0000076293945}

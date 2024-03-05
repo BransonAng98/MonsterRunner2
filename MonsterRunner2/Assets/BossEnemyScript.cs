@@ -18,6 +18,8 @@ public class BossEnemyScript : MonoBehaviour
     [SerializeField] private float distanceToPlayer;
     public bool CanMove;
 
+    public float detectionRadius; // Radius within which the enemy detects the player
+
     public float attackCooldown = 2f; // Cooldown period between attacks
     private float lastAttackTime; // Time when the last attack occurred
 
@@ -28,7 +30,7 @@ public class BossEnemyScript : MonoBehaviour
         groundLayer = LayerMask.GetMask("Ground");
         animator = GetComponent<Animator>();
         lastAttackTime = -attackCooldown; // Set initial value to allow immediate attack
-        CanMove = true;
+        CanMove = false; // Initially, don't move until player is detected
     }
 
     void Update()
@@ -38,24 +40,22 @@ public class BossEnemyScript : MonoBehaviour
             CheckGrounded();
             if (isGrounded)
             {
-                checkRotation();
-                RotateMonster();
                 if (CanMove)
                 {
+                    checkRotation();
+                    RotateMonster();
                     MoveMonster();
                 }
 
                 distanceToPlayer = Vector3.Distance(transform.position, player.position);
-                if (distanceToPlayer < 8)
+                if (distanceToPlayer < detectionRadius)
                 {
-                    CanMove = false;
+                    CanMove = true; // Start chasing the player
                     if (Time.time - lastAttackTime > attackCooldown)
                     {
                         AttackPlayer();
                         lastAttackTime = Time.time; // Update last attack time
-                        
                     }
-                    StartCoroutine(EnableMovementAfterDelay(1f)); // Enable movement after x seconds
                 }
             }
         }
@@ -63,7 +63,6 @@ public class BossEnemyScript : MonoBehaviour
 
     void RotateMonster()
     {
-        speed = 0f;
         // Calculate direction to player, ignoring the x-axis
         Vector3 directionToPlayer = player.position - transform.position;
         directionToPlayer.y = 0f;
@@ -94,19 +93,18 @@ public class BossEnemyScript : MonoBehaviour
 
     void AttackPlayer()
     {
-        speed = 0;
         animator.SetTrigger("Smash Attack");
         animator.SetBool("Walk Forward", false);
     }
 
     void MoveMonster()
     {
-        speed = 5;
         animator.SetBool("Walk Forward", true);
         Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
         Vector3 direction = (playerx - transform.position).normalized;
         rb.velocity = direction * speed;
     }
+
     void CheckGrounded()
     {
         // Perform a raycast downwards to check if the enemy is grounded
@@ -122,10 +120,17 @@ public class BossEnemyScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            CanMove = true; // Start chasing the player when player enters detection radius
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
-
         {
             AttackPlayer();
             CanMove = false;
@@ -148,7 +153,7 @@ public class BossEnemyScript : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
-              // Calculate direction from the monster to the player
+            // Calculate direction from the monster to the player
             Vector3 direction = collision.transform.position - transform.position;
             direction.Normalize(); // Normalize the direction vector
 
@@ -159,12 +164,12 @@ public class BossEnemyScript : MonoBehaviour
             {
                 // Apply a force to the player to fling it away
                 float forceMagnitude = 20f; // Adjust this value as needed
-                float upwardForce = 350f; // Adjust this value to control the height of the arc
+                float upwardForce = 100f; // Adjust this value to control the height of the arc
                 Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
                 playerRigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 Debug.Log("Player Fling");
             }
-        
+
         }
     }
 
@@ -184,5 +189,11 @@ public class BossEnemyScript : MonoBehaviour
         yield return new WaitForSeconds(delay);
         CanMove = true;
     }
-}
 
+    // Visualize detection radius in the editor
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+}
