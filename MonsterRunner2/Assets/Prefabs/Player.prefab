@@ -425,8 +425,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 400
-  turnSensitivity: 7
-  maxSteeringAngle: 5
+  turnSensitivity: 1.5
+  maxSteeringAngle: 8
   maxSpeed: 20
   centerOfMass: {x: 0, y: 0, z: 0.3}
   wheels:
@@ -445,8 +445,7 @@ MonoBehaviour:
   joystick: {fileID: 0}
   steeringWheel: {fileID: 0}
   isDrifting: 0
-  driftIntensity: 20
-  driftSteerSmoothTime: 400
+  driftIntensity: 1.5
   smoothDriftSteerVelocity: 0
 --- !u!96 &7172679666250642589
 TrailRenderer:
@@ -750,7 +749,7 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8712887059802735025}
-  m_Center: {x: -0.1, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.3
   m_SuspensionSpring:
     spring: 8000
@@ -765,7 +764,7 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 2
+    m_Stiffness: 1
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 1
@@ -827,13 +826,13 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 0
+    m_Stiffness: 8
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_Enabled: 1
 --- !u!1 &8712887060836448215
 GameObject:
@@ -874,7 +873,7 @@ WheelCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8712887060836448215}
-  m_Center: {x: -0.1, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.3
   m_SuspensionSpring:
     spring: 8000
@@ -951,11 +950,11 @@ WheelCollider:
     m_ExtremumValue: 1
     m_AsymptoteSlip: 0.5
     m_AsymptoteValue: 1
-    m_Stiffness: 0
+    m_Stiffness: 8
   m_SidewaysFriction:
     m_ExtremumSlip: 0.2
     m_ExtremumValue: 2.5
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
-    m_Stiffness: 1.5
+    m_Stiffness: 2
   m_Enabled: 1

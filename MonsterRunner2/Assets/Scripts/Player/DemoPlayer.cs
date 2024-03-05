@@ -46,7 +46,6 @@ public class DemoPlayer : MonoBehaviour
 
     public bool isDrifting;
     public float driftIntensity = 1f;
-    public float driftSteerSmoothTime;
     public float smoothDriftSteerVelocity = 0f;
     Rigidbody rb;
     // Start is called before the first frame update
@@ -82,6 +81,7 @@ public class DemoPlayer : MonoBehaviour
             {
                 if (!isDrifting)
                 {
+                    smoothDriftSteerVelocity = 0f;
                     // Check if current speed is less than max speed
                     if (rb.velocity.magnitude < maxSpeed)
                     {
@@ -101,7 +101,7 @@ public class DemoPlayer : MonoBehaviour
                 else
                 {
                     // Use a fixed torque for drifting to keep it consistent
-                    float driftTorque = maxAcceleration * 100f;
+                    float driftTorque = maxAcceleration * 2f;
                     wheel.wheelColliderl.motorTorque = driftTorque;
                 }
             }
@@ -129,17 +129,44 @@ public class DemoPlayer : MonoBehaviour
                 }
                 else
                 {
-                    // Adjust steer angle for drifting
+                    WheelFrictionCurve fFriction = wheel.wheelColliderl.forwardFriction;
+                    float forwardFriction = 1f;
+                    fFriction.asymptoteValue = forwardFriction;
+
+                    WheelFrictionCurve sFriction = wheel.wheelColliderl.sidewaysFriction;
+                    float sidewayFriction = 0.3f;
+                    sFriction.asymptoteValue = sidewayFriction;
+
+                    // Interpolate back to drift steer angle
+
                     float driftSteerAngle = steerAngle * driftIntensity;
+                    // Interpolate back to regular steer angle
+                    wheel.wheelColliderl.steerAngle = Mathf.SmoothDamp(wheel.wheelColliderl.steerAngle, driftSteerAngle, ref smoothDriftSteerVelocity, Time.deltaTime * 0.5f);
+                }
+            }
 
-                    // Smoothly apply the drift steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.SmoothDamp(wheel.wheelColliderl.steerAngle, driftSteerAngle, ref smoothDriftSteerVelocity, driftSteerSmoothTime);
+            if(wheel.axel == Axel.Rear)
+            {
+                if (isDrifting)
+                {
+                    WheelFrictionCurve forwardFriction = wheel.wheelColliderl.forwardFriction;
+                    forwardFriction.stiffness = Mathf.SmoothDamp(forwardFriction.stiffness, 2f, ref smoothDriftSteerVelocity, Time.deltaTime * 2f);
+                    wheel.wheelColliderl.forwardFriction = forwardFriction;
 
+                    WheelFrictionCurve sidewayFriction = wheel.wheelColliderl.sidewaysFriction;
+                    sidewayFriction.stiffness = Mathf.SmoothDamp(sidewayFriction.stiffness, 1.5f, ref smoothDriftSteerVelocity, Time.deltaTime * 2f);
+                    wheel.wheelColliderl.sidewaysFriction = sidewayFriction;
+                }
 
-                    // Reset sideways friction stiffness to default
-                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 2.5f; // Reset stiffness to default
-                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+                else
+                {
+                    WheelFrictionCurve forwardStiff = wheel.wheelColliderl.forwardFriction;
+                    forwardStiff.stiffness = 8f;
+                    wheel.wheelColliderl.forwardFriction = forwardStiff;
+
+                    WheelFrictionCurve sideStiff = wheel.wheelColliderl.sidewaysFriction;
+                    sideStiff.stiffness = 2f;
+                    wheel.wheelColliderl.sidewaysFriction = sideStiff;
                 }
             }
         }
@@ -154,7 +181,7 @@ public class DemoPlayer : MonoBehaviour
                 Quaternion rot;
                 Vector3 pos;
                 wheel.wheelColliderl.GetWorldPose(out pos, out rot);
-                wheel.wheelModel.transform.position = pos;
+                //wheel.wheelModel.transform.position = pos;
                 wheel.wheelModel.transform.rotation = rot;
             }
         }
