@@ -118,9 +118,19 @@ public class SteeringWheel : MonoBehaviour
 
         float wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
 
+        // Do nothing if the pointer is too close to the center of the wheel
+        if (Vector2.Distance(pointerPos, centerPoint) > 20f)
+        {
+            // Update the wheel angle based on the direction of rotation
+            float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
+            wheelAngle += (wheelNewAngle - wheelPrevAngle) * rotationDirection;
+        }
+
+        // Make sure wheel angle never exceeds maximumSteeringAngle
+        wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
 
         // Calculate the absolute angle difference between the current wheel angle and the maximum steering angle
-        float angleDifference = Mathf.Abs(wheelNewAngle - maximumSteeringAngle);
+        float angleDifference = Mathf.Abs(wheelAngle - maximumSteeringAngle);
 
         angleDifference = (angleDifference + 360f) % 360f;
 
@@ -134,16 +144,6 @@ public class SteeringWheel : MonoBehaviour
             player.isDrifting = false;
         }
 
-        // Do nothing if the pointer is too close to the center of the wheel
-        if (Vector2.Distance(pointerPos, centerPoint) > 20f)
-        {
-            // Update the wheel angle based on the direction of rotation
-            float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
-            wheelAngle += (wheelNewAngle - wheelPrevAngle) * rotationDirection;
-        }
-
-        // Make sure wheel angle never exceeds maximumSteeringAngle
-        wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
         // Update the previous angle for the next frame
         wheelPrevAngle = wheelNewAngle;
     }
