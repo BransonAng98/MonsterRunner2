@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 400
-  turnSensitivity: 1.5
+  turnSensitivity: 2
   maxSteeringAngle: 8
   maxSpeed: 20
   centerOfMass: {x: 0, y: 0, z: 0.3}
