@@ -449,6 +449,7 @@ MonoBehaviour:
   driftIntensity: 1.5
   smoothDriftSteerVelocity: 0
   knockBack: 1
+  minimumKnockBack: 4000
 --- !u!96 &7172679666250642589
 TrailRenderer:
   serializedVersion: 2
