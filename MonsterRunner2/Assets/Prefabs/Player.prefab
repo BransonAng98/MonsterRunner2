@@ -445,6 +445,7 @@ MonoBehaviour:
   joystick: {fileID: 0}
   steeringWheel: {fileID: 0}
   isDrifting: 0
+  endHardDrift: 0
   driftIntensity: 1.5
   smoothDriftSteerVelocity: 0
 --- !u!96 &7172679666250642589
