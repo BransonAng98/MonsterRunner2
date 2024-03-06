@@ -15079,6 +15079,7 @@ MonoBehaviour:
   driftIntensity: 1
   smoothDriftSteerVelocity: 0
   knockBack: 0
+  minimumKnockBack: 0
 --- !u!1 &1365425273
 GameObject:
   m_ObjectHideFlags: 0
@@ -15785,6 +15786,11 @@ PrefabInstance:
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 26144505}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: minimumKnockBack
+      value: 4000
+      objectReference: {fileID: 0}
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_RootOrder
@@ -21805,6 +21811,7 @@ MonoBehaviour:
   driftIntensity: 1
   smoothDriftSteerVelocity: 0
   knockBack: 0
+  minimumKnockBack: 0
 --- !u!54 &1972610418491178876
 Rigidbody:
   m_ObjectHideFlags: 0

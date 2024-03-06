@@ -49,6 +49,7 @@ public class DemoPlayer : MonoBehaviour
     public float driftIntensity = 1f;
     public float smoothDriftSteerVelocity = 0f;
     public float knockBack;
+    public float minimumKnockBack;
 
     Rigidbody rb;
 
@@ -71,6 +72,9 @@ public class DemoPlayer : MonoBehaviour
 
             // Calculate knockback force based on collision impact force
             float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
+
+            // If knockback force is less than the minimum, use the minimum force instead
+            knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
 
             // Apply knockback force
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
