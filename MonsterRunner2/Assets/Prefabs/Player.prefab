@@ -448,6 +448,7 @@ MonoBehaviour:
   endHardDrift: 0
   driftIntensity: 1.5
   smoothDriftSteerVelocity: 0
+  knockBack: 1
 --- !u!96 &7172679666250642589
 TrailRenderer:
   serializedVersion: 2

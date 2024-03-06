@@ -48,7 +48,10 @@ public class DemoPlayer : MonoBehaviour
     public bool endHardDrift;
     public float driftIntensity = 1f;
     public float smoothDriftSteerVelocity = 0f;
+    public float knockBack;
+
     Rigidbody rb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,14 +61,19 @@ public class DemoPlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Collided");
-            Vector3 knockbackDirection = -transform.forward;
+
+            // Calculate knockback direction based on collision point
+            Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
+            knockbackDirection.Normalize();
+
+            // Calculate knockback force based on collision impact force
+            float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
 
             // Apply knockback force
-            float knockbackForce = 45f; // Adjust the force as needed
-            rb.AddForce(knockbackDirection * knockbackForce * 100f, ForceMode.Impulse);
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
         }
     }
 

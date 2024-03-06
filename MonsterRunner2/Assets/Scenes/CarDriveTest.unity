@@ -2890,7 +2890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 311524333}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.74, z: 31.86}
+  m_LocalPosition: {x: -8.29, y: 1.74, z: 31.86}
   m_LocalScale: {x: 1.5392, y: 3.5521657, z: 1.5392}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15075,8 +15075,10 @@ MonoBehaviour:
   joystick: {fileID: 1256622754}
   steeringWheel: {fileID: 0}
   isDrifting: 0
+  endHardDrift: 0
   driftIntensity: 1
   smoothDriftSteerVelocity: 0
+  knockBack: 0
 --- !u!1 &1365425273
 GameObject:
   m_ObjectHideFlags: 0
@@ -15783,11 +15785,6 @@ PrefabInstance:
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 26144505}
-    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: driftIntensity
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_RootOrder
@@ -15841,16 +15838,6 @@ PrefabInstance:
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887059802735027, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8712887060836448217, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: m_Center.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -21814,8 +21801,10 @@ MonoBehaviour:
   joystick: {fileID: 1256622754}
   steeringWheel: {fileID: 0}
   isDrifting: 0
+  endHardDrift: 0
   driftIntensity: 1
   smoothDriftSteerVelocity: 0
+  knockBack: 0
 --- !u!54 &1972610418491178876
 Rigidbody:
   m_ObjectHideFlags: 0
