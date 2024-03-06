@@ -16,11 +16,13 @@ public class BossEnemyScript : MonoBehaviour
     [SerializeField] private bool isTurningLeft; // Indicates if the enemy is turning left
     [SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
     [SerializeField] private float distanceToPlayer;
+    [SerializeField] private float cooldownDuration = 3f; // Duration of cooldown after colliding with player
     public bool CanMove;
+    private bool isCooldown; // Flag to indicate if the enemy is in cooldown
 
     public float detectionRadius; // Radius within which the enemy detects the player
 
-    public float attackCooldown = 2f; // Cooldown period between attacks
+    public float attackCooldown = 6f; // Cooldown period between attacks
     private float lastAttackTime; // Time when the last attack occurred
 
     void Start()
@@ -40,7 +42,7 @@ public class BossEnemyScript : MonoBehaviour
             CheckGrounded();
             if (isGrounded)
             {
-                if (CanMove)
+                if (CanMove && !isCooldown) // Only move if not in cooldown
                 {
                     checkRotation();
                     RotateMonster();
@@ -153,6 +155,7 @@ public class BossEnemyScript : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Player"))
         {
+            StartCoroutine(EnterCooldown(cooldownDuration));
             // Calculate direction from the monster to the player
             Vector3 direction = collision.transform.position - transform.position;
             direction.Normalize(); // Normalize the direction vector
@@ -163,8 +166,8 @@ public class BossEnemyScript : MonoBehaviour
             if (playerRigidbody != null)
             {
                 // Apply a force to the player to fling it away
-                float forceMagnitude = 20f; // Adjust this value as needed
-                float upwardForce = 150f; // Adjust this value to control the height of the arc
+                float forceMagnitude = 60f; // Adjust this value as needed
+                float upwardForce = 80f; // Adjust this value to control the height of the arc
                 Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
                 playerRigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 Debug.Log("Player Fling");
@@ -179,7 +182,7 @@ public class BossEnemyScript : MonoBehaviour
         yield return new WaitForSeconds(delay); // Change the delay time as needed
 
         float forceMagnitude = 500f;
-        float upwardForce = 400f; // Adjust this value to control the height of the arc
+        float upwardForce = 700f; // Adjust this value to control the height of the arc
         Vector3 forceDirection = direction + Vector3.up * upwardForce; // Add an upward component to the direction
         rigidbody.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
     }
@@ -195,5 +198,15 @@ public class BossEnemyScript : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    }
+
+
+    private IEnumerator EnterCooldown(float duration)
+    {
+        isCooldown = true; // Set cooldown flag to true
+        CanMove = false; // Stop movement
+        yield return new WaitForSeconds(duration);
+        isCooldown = false; // Reset cooldown flag
+        CanMove = true; // Resume movement
     }
 }
