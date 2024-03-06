@@ -138,86 +138,94 @@ public class DemoPlayer : MonoBehaviour
             {
                 // Calculate the target steer angle based on joystick input
                 float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
+                // Reset sideways friction stiffness to default
+                WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                sidewaysFriction.stiffness = 4f; // Reset stiffness to default
+                wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
-                if (!isDrifting)
-                {
-                    // Reset sideways friction stiffness to default
-                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 4f; // Reset stiffness to default
-                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+                // Interpolate back to regular steer angle
+                //wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 1000f);
+                wheel.wheelColliderl.steerAngle = steerAngle;
 
-                    // Interpolate back to regular steer angle
-                    //wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 1000f);
-                    wheel.wheelColliderl.steerAngle = steerAngle;
-                }
-                else
-                {
-                    WheelFrictionCurve fFriction = wheel.wheelColliderl.forwardFriction;
-                    float forwardFriction = 1f;
-                    fFriction.asymptoteValue = forwardFriction;
+                //if (!isDrifting)
+                //{
+                //    // Reset sideways friction stiffness to default
+                //    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                //    sidewaysFriction.stiffness = 4f; // Reset stiffness to default
+                //    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
-                    WheelFrictionCurve sFriction = wheel.wheelColliderl.sidewaysFriction;
-                    float sidewayFriction = 0.3f;
-                    sFriction.asymptoteValue = sidewayFriction;
+                //    // Interpolate back to regular steer angle
+                //    //wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 1000f);
+                //    wheel.wheelColliderl.steerAngle = steerAngle;
+                //}
+                //else
+                //{
+                //    WheelFrictionCurve fFriction = wheel.wheelColliderl.forwardFriction;
+                //    float forwardFriction = 1f;
+                //    fFriction.asymptoteValue = forwardFriction;
 
-                    // Interpolate back to drift steer angle
+                //    WheelFrictionCurve sFriction = wheel.wheelColliderl.sidewaysFriction;
+                //    float sidewayFriction = 0.3f;
+                //    sFriction.asymptoteValue = sidewayFriction;
 
-                    float driftSteerAngle = steerAngle * driftIntensity;
-                    // Interpolate back to regular steer angle
+                //    // Interpolate back to drift steer angle
 
-                    if (!endHardDrift)
-                    {
-                        wheel.wheelColliderl.steerAngle = Mathf.SmoothDamp(wheel.wheelColliderl.steerAngle, driftSteerAngle, ref smoothDriftSteerVelocity, Time.deltaTime * 0.5f);
-                    }
+                //    float driftSteerAngle = steerAngle * driftIntensity;
+                //    // Interpolate back to regular steer angle
 
-                    else
-                    {
-                        float newDriftSteerAngle = steerAngle * 2.5f;
-                        wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, newDriftSteerAngle, Time.deltaTime * 5f);
-                    }
-                }
+                //    if (!endHardDrift)
+                //    {
+                //        wheel.wheelColliderl.steerAngle = Mathf.SmoothDamp(wheel.wheelColliderl.steerAngle, driftSteerAngle, ref smoothDriftSteerVelocity, Time.deltaTime * 0.5f);
+                //    }
+
+                //    else
+                //    {
+                //        float newDriftSteerAngle = steerAngle * 2.5f;
+                //        wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, newDriftSteerAngle, Time.deltaTime * 5f);
+                //    }
+                //}
             }
 
-            if(wheel.axel == Axel.Rear)
-            {
-                if (isDrifting)
-                {
-                    if(rb.velocity.magnitude >= 11f && !endHardDrift)
-                    {
-                        WheelFrictionCurve forwardFriction = wheel.wheelColliderl.forwardFriction;
-                        forwardFriction.stiffness = Mathf.SmoothDamp(forwardFriction.stiffness, 2f, ref smoothDriftSteerVelocity, Time.deltaTime * 2f);
-                        wheel.wheelColliderl.forwardFriction = forwardFriction;
+            //if(wheel.axel == Axel.Rear)
+            //{
+            //    if (isDrifting)
+            //    {
+            //        if(rb.velocity.magnitude >= 11f && !endHardDrift)
+            //        {
+            //            WheelFrictionCurve forwardFriction = wheel.wheelColliderl.forwardFriction;
+            //            forwardFriction.stiffness = Mathf.SmoothDamp(forwardFriction.stiffness, 2f, ref smoothDriftSteerVelocity, Time.deltaTime * 2f);
+            //            wheel.wheelColliderl.forwardFriction = forwardFriction;
 
-                        WheelFrictionCurve sidewayFriction = wheel.wheelColliderl.sidewaysFriction;
-                        sidewayFriction.stiffness = Mathf.SmoothDamp(sidewayFriction.stiffness, 1.6f, ref smoothDriftSteerVelocity, Time.deltaTime * 2f);
-                        wheel.wheelColliderl.sidewaysFriction = sidewayFriction;
-                    }
+            //            WheelFrictionCurve sidewayFriction = wheel.wheelColliderl.sidewaysFriction;
+            //            sidewayFriction.stiffness = Mathf.SmoothDamp(sidewayFriction.stiffness, 1.6f, ref smoothDriftSteerVelocity, Time.deltaTime * 2f);
+            //            wheel.wheelColliderl.sidewaysFriction = sidewayFriction;
+            //        }
 
-                    else
-                    {
-                        endHardDrift = true;
-                        WheelFrictionCurve forwardFriction = wheel.wheelColliderl.forwardFriction;
-                        forwardFriction.stiffness = 5f;
-                        wheel.wheelColliderl.forwardFriction = forwardFriction;
+            //        else
+            //        {
+            //            endHardDrift = true;
+            //            WheelFrictionCurve forwardFriction = wheel.wheelColliderl.forwardFriction;
+            //            forwardFriction.stiffness = 5f;
+            //            wheel.wheelColliderl.forwardFriction = forwardFriction;
 
-                        WheelFrictionCurve sidewayFriction = wheel.wheelColliderl.sidewaysFriction;
-                        sidewayFriction.stiffness = 3f;
-                        wheel.wheelColliderl.sidewaysFriction = sidewayFriction;
-                    }
-                }
+            //            WheelFrictionCurve sidewayFriction = wheel.wheelColliderl.sidewaysFriction;
+            //            sidewayFriction.stiffness = 3f;
+            //            wheel.wheelColliderl.sidewaysFriction = sidewayFriction;
+            //        }
+            //    }
 
-                else
-                {
-                    endHardDrift = false;
-                    WheelFrictionCurve forwardStiff = wheel.wheelColliderl.forwardFriction;
-                    forwardStiff.stiffness = 8f;
-                    wheel.wheelColliderl.forwardFriction = forwardStiff;
+            //    else
+            //    {
+            //        endHardDrift = false;
+            //        WheelFrictionCurve forwardStiff = wheel.wheelColliderl.forwardFriction;
+            //        forwardStiff.stiffness = 8f;
+            //        wheel.wheelColliderl.forwardFriction = forwardStiff;
 
-                    WheelFrictionCurve sideStiff = wheel.wheelColliderl.sidewaysFriction;
-                    sideStiff.stiffness = 2f;
-                    wheel.wheelColliderl.sidewaysFriction = sideStiff;
-                }
-            }
+            //        WheelFrictionCurve sideStiff = wheel.wheelColliderl.sidewaysFriction;
+            //        sideStiff.stiffness = 2f;
+            //        wheel.wheelColliderl.sidewaysFriction = sideStiff;
+            //    }
+            //}
         }
     }
 
