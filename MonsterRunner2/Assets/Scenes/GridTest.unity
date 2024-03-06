@@ -145,6 +145,11 @@ PrefabInstance:
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 568998275}
+    - target: {fileID: 7172679666250642588, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_RootOrder
@@ -240,12 +245,12 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 747722239}
   m_Lens:
-    FieldOfView: 117.3
+    FieldOfView: 90.83
     OrthographicSize: 18
-    NearClipPlane: -40
+    NearClipPlane: 1.62
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 1
+    ModeOverride: 2
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
@@ -264,15 +269,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55142727}
-  m_LocalRotation: {x: 0.31598538, y: 0.3596048, z: -0.13088542, w: 0.8681629}
-  m_LocalPosition: {x: 0, y: 17.23, z: 0}
+  m_LocalRotation: {x: 0.11555589, y: 0, z: 0, w: 0.99330103}
+  m_LocalPosition: {x: 0, y: 21.779999, z: -9.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1122745129}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 40, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.27, y: 0, z: 0}
 --- !u!1 &289479025
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,10 +328,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -40
+  near clip plane: 1.62
   far clip plane: 1000
-  field of view: 117.3
-  orthographic: 1
+  field of view: 90.83
+  orthographic: 0
   orthographic size: 18
   m_Depth: -1
   m_CullingMask:
@@ -350,8 +355,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289479025}
-  m_LocalRotation: {x: 0.31598538, y: 0.3596048, z: -0.13088542, w: 0.8681629}
-  m_LocalPosition: {x: 0, y: 17.23, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 21.779999, z: -9.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -579,8 +584,6 @@ MonoBehaviour:
   player: {fileID: 787305445}
   maximumSteeringAngle: 200
   wheelReleasedSpeed: 200
-  angularVelocityThreshold: 50
-  minimumAngularVelocity: 10
   driftThreshold: 0
 --- !u!4 &747722239 stripped
 Transform:
@@ -730,10 +733,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1122745128}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
+  m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Damping: 0
+  Damping: {x: 0.1, y: 0.5, z: 0.3}
+  ShoulderOffset: {x: 0, y: 4.15, z: -8.54}
+  VerticalArmLength: 0.4
+  CameraSide: 1
+  CameraDistance: 1.1
+  CameraCollisionFilter:
+    serializedVersion: 2
+    m_Bits: 0
+  IgnoreTag: 
+  CameraRadius: 0.2
+  DampingIntoCollision: 0
+  DampingFromCollision: 2
 --- !u!1 &1503618217 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9011225774615534457, guid: 847626ac864ed0744b8ad4647e221e05,
