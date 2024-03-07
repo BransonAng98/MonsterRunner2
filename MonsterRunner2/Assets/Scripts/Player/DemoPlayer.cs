@@ -39,7 +39,6 @@ public class DemoPlayer : MonoBehaviour
 
     public List<Wheel> wheels;
 
-    public Joystick joystick;
     public SteeringWheel steeringWheel;
 
     float steerInput;

@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 7172679666250642588}
   - component: {fileID: 7172679666250642586}
   - component: {fileID: 7172679666250642589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ MonoBehaviour:
   maxAcceleration: 400
   turnSensitivity: 4
   maxSteeringAngle: 8
-  maxSpeed: 20
+  maxSpeed: 35
   centerOfMass: {x: 0, y: 0, z: 0.3}
   wheels:
   - wheelModel: {fileID: 199816021381903277}
@@ -442,7 +442,6 @@ MonoBehaviour:
   - wheelModel: {fileID: 476307993883427816}
     wheelColliderl: {fileID: 8712887060947061933}
     axel: 1
-  joystick: {fileID: 0}
   steeringWheel: {fileID: 0}
   inputSteer: 0
   knockBack: 1
