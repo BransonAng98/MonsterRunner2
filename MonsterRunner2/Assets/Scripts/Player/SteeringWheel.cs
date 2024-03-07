@@ -16,6 +16,7 @@ public class SteeringWheel : MonoBehaviour
     public float wheelReleasedSpeed = 200f;
 
     public float driftThreshold;
+    public float deadzoneThreshold;
 
     float wheelAngle = 0f;
     float wheelPrevAngle = 0f;
@@ -124,20 +125,27 @@ public class SteeringWheel : MonoBehaviour
             // Update the wheel angle based on the direction of rotation
             float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
             wheelAngle += (wheelNewAngle - wheelPrevAngle) * rotationDirection;
+
+            // Apply deadzone
+            if (Mathf.Abs(wheelAngle) < deadzoneThreshold)
+            {
+                player.inputSteer = false;
+            }
+
+            else
+            {
+                player.inputSteer = true;
+            }
         }
 
         // Make sure wheel angle never exceeds maximumSteeringAngle
         wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
 
-        // Calculate the absolute angle difference between the current wheel angle and the maximum steering angle
-        float angleDifference = Mathf.Abs(wheelAngle - maximumSteeringAngle);
-
-        angleDifference = (angleDifference + 360f) % 360f;
-
         // Check if the angle difference is within the drift threshold range
-        if (angleDifference <= driftThreshold && angleDifference >= 0)
+        if (Mathf.Abs(wheelAngle) >= driftThreshold)
         {
             player.isDrifting = true;
+            Debug.Log(wheelAngle);
         }
         else
         {
@@ -154,6 +162,7 @@ public class SteeringWheel : MonoBehaviour
         // Performs one last DragEvent, just in case
         DragEvent(eventData);
         player.isDrifting = false;
+        player.inputSteer = false;
         wheelBeingHeld = false;
     }
 }
