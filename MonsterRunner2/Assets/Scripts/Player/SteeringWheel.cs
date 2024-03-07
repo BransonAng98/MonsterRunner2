@@ -140,18 +140,6 @@ public class SteeringWheel : MonoBehaviour
 
         // Make sure wheel angle never exceeds maximumSteeringAngle
         wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
-
-        // Check if the angle difference is within the drift threshold range
-        if (Mathf.Abs(wheelAngle) >= driftThreshold)
-        {
-            player.isDrifting = true;
-            Debug.Log(wheelAngle);
-        }
-        else
-        {
-            player.isDrifting = false;
-        }
-
         // Update the previous angle for the next frame
         wheelPrevAngle = wheelNewAngle;
     }
@@ -161,8 +149,7 @@ public class SteeringWheel : MonoBehaviour
         // Executed when mouse/finger stops touching the steering wheel
         // Performs one last DragEvent, just in case
         DragEvent(eventData);
-        player.isDrifting = false;
-        player.inputSteer = false;
+        player.releaseWheel();
         wheelBeingHeld = false;
     }
 }
