@@ -15673,11 +15673,6 @@ PrefabInstance:
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 26144505}
-    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-        type: 3}
-      propertyPath: turnSensitivity
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: m_RootOrder
