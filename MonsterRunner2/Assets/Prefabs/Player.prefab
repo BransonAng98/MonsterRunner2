@@ -425,7 +425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 400
-  turnSensitivity: 4
+  turnSensitivity: 2.5
   maxSteeringAngle: 8
   maxSpeed: 20
   centerOfMass: {x: 0, y: 0, z: 0.3}
@@ -444,7 +444,11 @@ MonoBehaviour:
     axel: 1
   joystick: {fileID: 0}
   steeringWheel: {fileID: 0}
+  isDrifting: 0
   inputSteer: 0
+  endHardDrift: 0
+  driftIntensity: 1.5
+  smoothDriftSteerVelocity: 0
   knockBack: 1
   minimumKnockBack: 4000
 --- !u!96 &7172679666250642589
