@@ -368,25 +368,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0dd9133680a04542a9532bfded83760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabsInfo:
-  - prefab: {fileID: 5347007842401563257, guid: ddbe1602bc1744246a22c76ca114eb79,
-      type: 3}
-    minSpawnCount: 3
-    maxSpawnCount: 7
-    minScale: 4
-    maxScale: 16
-  - prefab: {fileID: 1309530018849821247, guid: be9af9c4922cd0e478de74a132760b13,
-      type: 3}
-    minSpawnCount: 1
-    maxSpawnCount: 2
-    minScale: 1
-    maxScale: 1
+  prefabs:
+  - {fileID: 5347007842401563257, guid: ddbe1602bc1744246a22c76ca114eb79, type: 3}
+  minPrefabs: 1
+  maxPrefabs: 5
   minXRange: -100
   maxXRange: 100
   minZRange: -100
   maxZRange: 100
-  minDistance: 50
-  instantiatedPositions: []
+  minDistance: 5
 --- !u!1 &9011225775629349172
 GameObject:
   m_ObjectHideFlags: 0
