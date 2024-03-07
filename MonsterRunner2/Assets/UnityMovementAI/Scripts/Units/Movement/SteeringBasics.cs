@@ -92,7 +92,8 @@ namespace UnityMovementAI
         /// </summary>
         public void LookWhereYoureGoing()
         {
-            Vector3 direction = rb.Velocity;
+            // Get the direction from the current position to the next position
+            Vector3 direction = rb.Velocity.normalized;
 
             if (smoothing)
             {
@@ -113,7 +114,11 @@ namespace UnityMovementAI
                 direction /= velocitySamples.Count;
             }
 
-            LookAtDirection(direction);
+            // Check if the velocity is not zero before adjusting the orientation
+            if (rb.Velocity.magnitude > 0.1f)
+            {
+                LookAtDirection(direction);
+            }
         }
 
         public void LookAtDirection(Vector3 direction)
@@ -300,9 +305,6 @@ namespace UnityMovementAI
             }
         }
 
-        /// <summary>
-        /// Creates a debug cross at the given position in the scene view to help with debugging.
-        /// </summary>
         public static void DebugCross(Vector3 position, float size = 0.5f, Color color = default(Color), float duration = 0f, bool depthTest = true)
         {
             Vector3 xStart = position + Vector3.right * size * 0.5f;
