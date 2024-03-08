@@ -86,44 +86,61 @@ public class DemoPlayer : MonoBehaviour
     {
         foreach (var wheel in wheels)
         {
+
             if (wheel.axel == Axel.Rear)
             {
-                if (!inputSteer)
+                // Check if current speed is less than max speed
+                if (rb.velocity.magnitude < maxSpeed)
                 {
-                    // Check if current speed is less than max speed
-                    if (rb.velocity.magnitude < maxSpeed)
-                    {
-                        // Apply forward torque with increased acceleration until max speed is reached
-                        float forwardTorque = maxAcceleration; // Increased base torque
-                        wheel.wheelColliderl.motorTorque = forwardTorque;
+                    // Apply forward torque with increased acceleration until max speed is reached
+                    float forwardTorque = maxAcceleration; // Increased base torque
+                    wheel.wheelColliderl.motorTorque = forwardTorque;
 
-                        // Update current torque for next frame
-                        currentTorque = forwardTorque;
-                    }
-                    else
-                    {
-                        // Once max speed is reached, stop applying torque
-                        wheel.wheelColliderl.motorTorque = 0f;
-                    }
+                    // Update current torque for next frame
+                    currentTorque = forwardTorque;
                 }
                 else
                 {
-                    // Check if current speed is less than max speed
-                    if (rb.velocity.magnitude < maxSpeed * 0.65f)
-                    {
-                        // Apply forward torque with increased acceleration until max speed is reached
-                        float forwardTorque = maxAcceleration * 0.5f; // Increased base torque
-                        wheel.wheelColliderl.motorTorque = forwardTorque;
-
-                        // Update current torque for next frame
-                        currentTorque = forwardTorque;
-                    }
-                    else
-                    {
-                        // Once max speed is reached, stop applying torque
-                        wheel.wheelColliderl.motorTorque = 0f;
-                    }
+                    // Once max speed is reached, stop applying torque
+                    wheel.wheelColliderl.motorTorque = 0f;
                 }
+
+                //if (!inputSteer)
+                //{
+                //    // Check if current speed is less than max speed
+                //    if (rb.velocity.magnitude < maxSpeed)
+                //    {
+                //        // Apply forward torque with increased acceleration until max speed is reached
+                //        float forwardTorque = maxAcceleration; // Increased base torque
+                //        wheel.wheelColliderl.motorTorque = forwardTorque;
+
+                //        // Update current torque for next frame
+                //        currentTorque = forwardTorque;
+                //    }
+                //    else
+                //    {
+                //        // Once max speed is reached, stop applying torque
+                //        wheel.wheelColliderl.motorTorque = 0f;
+                //    }
+                //}
+                //else
+                //{
+                //    // Check if current speed is less than max speed
+                //    if (rb.velocity.magnitude < maxSpeed * 0.65f)
+                //    {
+                //        // Apply forward torque with increased acceleration until max speed is reached
+                //        float forwardTorque = maxAcceleration * 0.5f; // Increased base torque
+                //        wheel.wheelColliderl.motorTorque = forwardTorque;
+
+                //        // Update current torque for next frame
+                //        currentTorque = forwardTorque;
+                //    }
+                //    else
+                //    {
+                //        // Once max speed is reached, stop applying torque
+                //        wheel.wheelColliderl.motorTorque = 0f;
+                //    }
+                //}
             }
         }
     }
@@ -139,13 +156,18 @@ public class DemoPlayer : MonoBehaviour
                     // Calculate the target steer angle based on joystick input
                     float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
 
-                    // Reset sideways friction stiffness to default
-                    WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    sidewaysFriction.stiffness = 4f; // Reset stiffness to default
-                    wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
+                    //// Reset sideways friction stiffness to default
+                    //WheelFrictionCurve forwardF = wheel.wheelColliderl.forwardFriction;
+                    //forwardF.stiffness = 4f; // Reset stiffness to default
+                    //wheel.wheelColliderl.sidewaysFriction = forwardF;
+
+                    //// Reset sideways friction stiffness to default
+                    //WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
+                    //sidewaysFriction.stiffness = 3f; // Reset stiffness to default
+                    //wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
 
                     // Interpolate back to regular steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, Time.deltaTime * 1000f);
+                    wheel.wheelColliderl.steerAngle = steerAngle;
                 }
             }
         }
