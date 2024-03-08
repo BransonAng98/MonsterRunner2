@@ -120,7 +120,7 @@ public class SteeringWheel : MonoBehaviour
         float wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
 
         // Do nothing if the pointer is too close to the center of the wheel
-        if (Vector2.Distance(pointerPos, centerPoint) > 20f)
+        if (Vector2.Distance(pointerPos, centerPoint) > 60f)
         {
             // Update the wheel angle based on the direction of rotation
             float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
