@@ -1,0 +1,34 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class GameMenuManager : MonoBehaviour
+{
+    public int currentScene;
+    public GameObject startScreen;
+    // Start is called before the first frame update
+    void Start()
+    {
+        Time.timeScale = 0f;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void StartGame()
+    {
+        Time.timeScale = 1f;
+        startScreen.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentScene);
+    }
+}
