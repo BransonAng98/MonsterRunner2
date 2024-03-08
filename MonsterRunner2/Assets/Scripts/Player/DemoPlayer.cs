@@ -19,12 +19,25 @@ public class DemoPlayer : MonoBehaviour
         Death, 
     }
 
+    public enum TrailType
+    {
+        skid,
+        smoke,
+    }
+
     [Serializable]
     public struct Wheel
     {
         public GameObject wheelModel;
         public WheelCollider wheelColliderl;
         public Axel axel;
+    }
+    
+    [Serializable]
+    public struct Trail
+    {
+        public TrailRenderer renderer;
+        public TrailType trail;
     }
 
     public float maxAcceleration;
@@ -38,6 +51,8 @@ public class DemoPlayer : MonoBehaviour
     public Vector3 centerOfMass;
 
     public List<Wheel> wheels;
+
+    public List<Trail> trails;
 
     public SteeringWheel steeringWheel;
 
@@ -141,6 +156,31 @@ public class DemoPlayer : MonoBehaviour
                 //        wheel.wheelColliderl.motorTorque = 0f;
                 //    }
                 //}
+            }
+
+            if(wheel.axel == Axel.Rear)
+            {
+                if (inputSteer)
+                {
+                    foreach(var trail in trails)
+                    {
+                        if(trail.trail == TrailType.skid)
+                        {
+                            trail.renderer.emitting = true;
+                        }
+                    }
+                }
+
+                else
+                {
+                    foreach (var trail in trails)
+                    {
+                        if (trail.trail == TrailType.skid)
+                        {
+                            trail.renderer.emitting = false;
+                        }
+                    }
+                }
             }
         }
     }
