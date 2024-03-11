@@ -10,6 +10,7 @@ TagManager:
   - LeftCollider
   - RightCollider
   - Grid
+  - Enemy
   layers:
   - Default
   - TransparentFX
