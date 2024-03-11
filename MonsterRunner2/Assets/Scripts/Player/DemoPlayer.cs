@@ -40,13 +40,15 @@ public class DemoPlayer : MonoBehaviour
         public TrailType trail;
     }
 
-    public float maxAcceleration;
+    public PlayerSO playerData;
+    [SerializeField] float health;
+    [SerializeField] float maxAcceleration;
+    [SerializeField] float maxSpeed;
 
     float currentTorque;
 
     public float turnSensitivity;
     public float maxSteeringAngle;
-    public float maxSpeed;
 
     public Vector3 centerOfMass;
 
@@ -69,6 +71,9 @@ public class DemoPlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass;
+        health = playerData.health;
+        maxAcceleration = playerData.acceleration;
+        maxSpeed = playerData.maxSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -233,6 +238,28 @@ public class DemoPlayer : MonoBehaviour
                 wheel.wheelModel.transform.rotation = rot;
             }
         }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        if(health >= 0)
+        {
+            Death();
+        }
+    }
+
+    void Death()
+    {
+        //Unparents all the wheels with the body
+        for (int i = 0; i <= transform.childCount; i++)
+        {
+            transform.GetChild(1).gameObject.transform.parent = null;
+        }
+
+        //Disables the demoplayer code so it stops moving and everything else
+        this.GetComponent<DemoPlayer>().enabled = false;
     }
 
     public void releaseWheel()
