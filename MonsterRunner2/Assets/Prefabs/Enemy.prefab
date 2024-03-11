@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02c08f447ce85f499b2cb9ab1ec9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 12
   rotationSpeed: 2
   rb: {fileID: 0}
   player: {fileID: 0}
@@ -145,4 +145,4 @@ MonoBehaviour:
   bloodSplatter: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}
   CanMove: 0
   detectionRadius: 50
-  minDistanceBetweenEnemies: 2
+  deadMaterial: {fileID: 2100000, guid: 5b758c2e6d5af4248a238bae543d372b, type: 2}

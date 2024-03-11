@@ -23,16 +23,7 @@ public class EnemyScript : MonoBehaviour
     public bool CanMove;
     public float detectionRadius; // Radius within which the enemy detects the player
 
-    // Minimum distance between enemies
-    public float minDistanceBetweenEnemies = 2f;
-
-    // Obstacle avoidance
-    public float avoidDistance = 3f; // Distance to check for obstacles
-    public float avoidForce = 10f; // Force to avoid obstacles
-
-    // List to store nearby enemies
-    private List<Transform> nearbyEnemies = new List<Transform>();
-
+    public Material deadMaterial;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,16 +34,21 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        if (player != null)
+        // If player is null or the enemy is dead, return early
+        if (player == null || isDead)
+            return;
+        else
         {
             CheckGrounded();
 
+            // Check distance to player and if the enemy is alive before moving
             distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distanceToPlayer < detectionRadius && !isDead) // Check if the enemy is alive before moving
+            if (distanceToPlayer < detectionRadius)
             {
                 CanMove = true; // Start chasing the player
             }
 
+            // Only move if the enemy is grounded, can move, and is alive
             if (isGrounded && CanMove)
             {
                 CheckRotation();
@@ -60,9 +56,7 @@ public class EnemyScript : MonoBehaviour
                 MoveMonster();
             }
         }
-
-        // Update the list of nearby enemies
-        UpdateNearbyEnemies();
+        
     }
 
     void RotateMonster()
@@ -97,28 +91,9 @@ public class EnemyScript : MonoBehaviour
 
     void MoveMonster()
     {
-        // Apply avoidance behavior
-        Vector3 avoidanceMove = Vector3.zero;
-        foreach (Transform enemy in nearbyEnemies)
-        {
-            if (enemy != transform)
-            {
-                if (Vector3.Distance(enemy.position, transform.position) < minDistanceBetweenEnemies)
-                {
-                    avoidanceMove += transform.position - enemy.position;
-                }
-            }
-        }
-
-        // Apply obstacle avoidance
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, avoidDistance))
-        {
-            avoidanceMove += hit.normal * avoidForce;
-        }
 
         Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
-        Vector3 direction = (playerx - transform.position + avoidanceMove).normalized;
+        Vector3 direction = (playerx - transform.position).normalized;
         rb.velocity = direction * speed;
     }
 
@@ -137,18 +112,6 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void UpdateNearbyEnemies()
-    {
-        nearbyEnemies.Clear();
-        Collider[] colliders = Physics.OverlapSphere(transform.position, minDistanceBetweenEnemies);
-        foreach (Collider collider in colliders)
-        {
-            if (collider.gameObject.CompareTag("Enemy") && collider.transform != transform)
-            {
-                nearbyEnemies.Add(collider.transform);
-            }
-        }
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -164,7 +127,7 @@ public class EnemyScript : MonoBehaviour
     void DeathEffect()
     {
         Instantiate(bloodSplatter, transform.position, Quaternion.identity);
-        Destroy(gameObject);
+        Destroy(gameObject,3f);
     }
 
     void Die()
@@ -172,6 +135,13 @@ public class EnemyScript : MonoBehaviour
         DeathEffect();
         isDead = true; // Set the enemy as dead
         CanMove = false; // Stop the enemy's movement
+
+        // Change material to deadMaterial
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null && deadMaterial != null)
+        {
+            renderer.material = deadMaterial;
+        }
     }
 
     private void OnDrawGizmosSelected()
