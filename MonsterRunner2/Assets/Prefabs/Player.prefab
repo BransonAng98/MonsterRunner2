@@ -457,10 +457,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAcceleration: 1000
-  turnSensitivity: 5
-  maxSteeringAngle: 8
+  turnSensitivity: 6
+  maxSteeringAngle: 9
   maxSpeed: 15
-  centerOfMass: {x: 0, y: 0, z: 0.3}
+  centerOfMass: {x: 0, y: 0, z: -0.3}
   wheels:
   - wheelModel: {fileID: 199816021381903277}
     wheelColliderl: {fileID: 8712887060836448217}
@@ -482,7 +482,7 @@ MonoBehaviour:
   steeringWheel: {fileID: 0}
   inputSteer: 0
   knockBack: 1
-  minimumKnockBack: 8000
+  minimumKnockBack: 6000
 --- !u!96 &7172679666250642589
 TrailRenderer:
   serializedVersion: 2
@@ -802,7 +802,7 @@ WheelCollider:
     m_AsymptoteValue: 1
     m_Stiffness: 4
   m_SidewaysFriction:
-    m_ExtremumSlip: 3.5
+    m_ExtremumSlip: 3
     m_ExtremumValue: 4
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
@@ -865,7 +865,7 @@ WheelCollider:
     m_AsymptoteValue: 1
     m_Stiffness: 4
   m_SidewaysFriction:
-    m_ExtremumSlip: 3.5
+    m_ExtremumSlip: 3
     m_ExtremumValue: 4
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
@@ -1035,7 +1035,7 @@ WheelCollider:
     m_AsymptoteValue: 1
     m_Stiffness: 4
   m_SidewaysFriction:
-    m_ExtremumSlip: 3.5
+    m_ExtremumSlip: 3
     m_ExtremumValue: 4
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
@@ -1098,7 +1098,7 @@ WheelCollider:
     m_AsymptoteValue: 1
     m_Stiffness: 4
   m_SidewaysFriction:
-    m_ExtremumSlip: 3.5
+    m_ExtremumSlip: 3
     m_ExtremumValue: 4
     m_AsymptoteSlip: 0.4
     m_AsymptoteValue: 2
