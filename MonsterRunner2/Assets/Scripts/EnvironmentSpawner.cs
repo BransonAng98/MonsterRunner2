@@ -8,8 +8,8 @@ public class EnvironmentSpawner : MonoBehaviour
     public GameObject[] Stones; // Array of stone prefabs to instantiate
     public GameObject[] Houses; // Array of house prefabs to instantiate
 
-    public int minTreePrefabs = 300; // Minimum number of tree prefabs to instantiate
-    public int maxTreePrefabs = 300; // Maximum number of tree prefabs to instantiate
+    public int minTreePrefabs = 150; // Minimum number of tree prefabs to instantiate
+    public int maxTreePrefabs = 150; // Maximum number of tree prefabs to instantiate
     public int minStonePrefabs = 20; // Minimum number of stone prefabs to instantiate
     public int maxStonePrefabs = 30; // Maximum number of stone prefabs to instantiate
     public int minHousePrefabs = 8; // Minimum number of house prefabs to instantiate
@@ -20,7 +20,7 @@ public class EnvironmentSpawner : MonoBehaviour
     private float maxXRange = 300f; // Maximum spawning width for the x-axis
     private float minZRange = -220f; // Minimum spawning width for the z-axis
     private float maxZRange = 220f; // Maximum spawning width for the z-axis
-    private float minTreeDistance = 0.85f; // Minimum distance between tree prefabs
+    private float minTreeDistance = 10f; // Minimum distance between tree prefabs
     private float minStoneDistance = 1.0f; // Minimum distance between stone prefabs
     private float minHouseDistance = 2.0f; // Minimum distance between house prefabs
 
