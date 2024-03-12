@@ -8,12 +8,12 @@ public class EnvironmentSpawner : MonoBehaviour
     public GameObject[] Stones; // Array of stone prefabs to instantiate
     public GameObject[] Houses; // Array of house prefabs to instantiate
 
-    public int minTreePrefabs = 150; // Minimum number of tree prefabs to instantiate
-    public int maxTreePrefabs = 150; // Maximum number of tree prefabs to instantiate
-    public int minStonePrefabs = 20; // Minimum number of stone prefabs to instantiate
-    public int maxStonePrefabs = 30; // Maximum number of stone prefabs to instantiate
-    public int minHousePrefabs = 8; // Minimum number of house prefabs to instantiate
-    public int maxHousePrefabs = 12; // Maximum number of house prefabs to instantiate
+    public int minTreePrefabs; // Minimum number of tree prefabs to instantiate
+    public int maxTreePrefabs; // Maximum number of tree prefabs to instantiate
+    public int minStonePrefabs; // Minimum number of stone prefabs to instantiate
+    public int maxStonePrefabs; // Maximum number of stone prefabs to instantiate
+    public int minHousePrefabs; // Minimum number of house prefabs to instantiate
+    public int maxHousePrefabs; // Maximum number of house prefabs to instantiate
     private int minScale = 1; // Minimum scale for prefabs
     private int maxScale = 1; // Maximum scale for prefabs
     private float minXRange = -300f; // Minimum spawning width for the x-axis
