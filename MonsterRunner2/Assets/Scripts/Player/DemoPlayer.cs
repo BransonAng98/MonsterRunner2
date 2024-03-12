@@ -47,8 +47,8 @@ public class DemoPlayer : MonoBehaviour
     [Serializable]
     public struct Smoke
     {
-        public Renderer smokeRenderer;
-        public SmokeType smokeTrail;
+        public ParticleSystem smokeRenderer;
+        public SmokeType smoke;
     }
 
     public PlayerSO playerData;
@@ -191,13 +191,14 @@ public class DemoPlayer : MonoBehaviour
                     }
                     foreach (var smoke in smokes)
                     {
-                        if (smoke.smokeTrail == SmokeType.drift)
+                        if (smoke.smoke == SmokeType.drift)
                         {
-                            smoke.smokeRenderer.gameObject.SetActive(true);
+                            smoke.smokeRenderer.enableEmission = true;
+                            Debug.Log("Play drift smoke");
                         }
                         else
                         {
-                            smoke.smokeRenderer.gameObject.SetActive(false);
+                            smoke.smokeRenderer.enableEmission = false;
                         }
                     }
                 }
@@ -214,13 +215,14 @@ public class DemoPlayer : MonoBehaviour
 
                     foreach (var smoke in smokes)
                     {
-                        if (smoke.smokeTrail == SmokeType.drift)
+                        if (smoke.smoke == SmokeType.drift)
                         {
-                            smoke.smokeRenderer.gameObject.SetActive(false);
+                            smoke.smokeRenderer.enableEmission = false;
+                            Debug.Log("Stop drift smoke");
                         }
                         else
                         {
-                            smoke.smokeRenderer.gameObject.SetActive(true);
+                            smoke.smokeRenderer.enableEmission = true;
                         }
                     }
  
@@ -296,6 +298,8 @@ public class DemoPlayer : MonoBehaviour
         {
             transform.GetChild(1).gameObject.transform.parent = null;
         }
+
+        //Add force when the car explodes
 
         //Disables the demoplayer code so it stops moving and everything else
         this.GetComponent<DemoPlayer>().enabled = false;

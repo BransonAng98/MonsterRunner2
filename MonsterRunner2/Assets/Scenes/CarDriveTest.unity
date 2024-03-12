@@ -15245,10 +15245,22 @@ MonoBehaviour:
     wheelColliderl: {fileID: 8706808775118100895}
     axel: 1
   trails: []
+  smokes: []
   steeringWheel: {fileID: 0}
   inputSteer: 0
   knockBack: 0
   minimumKnockBack: 0
+  quest:
+    isActive: 0
+    title: 
+    description: 
+    repairReward: 
+    goal:
+      goaltype: 0
+      requiredAmount: 0
+      currentAmount: 0
+      DestinationReached: 0
+      destination: {fileID: 0}
 --- !u!1 &1365425273
 GameObject:
   m_ObjectHideFlags: 0
@@ -15974,6 +15986,16 @@ PrefabInstance:
         type: 3}
       propertyPath: minimumKnockBack
       value: 6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: smokes.Array.data[0].smoke
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: smokes.Array.data[1].smoke
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7548501968457117219, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
@@ -22080,10 +22102,22 @@ MonoBehaviour:
     wheelColliderl: {fileID: 2067203917}
     axel: 1
   trails: []
+  smokes: []
   steeringWheel: {fileID: 0}
   inputSteer: 0
   knockBack: 0
   minimumKnockBack: 0
+  quest:
+    isActive: 0
+    title: 
+    description: 
+    repairReward: 
+    goal:
+      goaltype: 0
+      requiredAmount: 0
+      currentAmount: 0
+      DestinationReached: 0
+      destination: {fileID: 0}
 --- !u!54 &1972610418491178876
 Rigidbody:
   m_ObjectHideFlags: 0
