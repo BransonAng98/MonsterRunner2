@@ -23,14 +23,17 @@ public class ObjectiveIndicator : MonoBehaviour
     //Trigger the arrow on or off
     public void UpdateObjective(bool active, Transform objLoc)
     {
+        //When player has accepted a request
         if (active)
         {
             objectiveLoc = objLoc;
             arrowImage.enabled = true;
         }
 
+        //When player has failed the request
         else
         {
+            objectiveLoc = objLoc;
             arrowImage.enabled = false;
         }
     }
@@ -53,7 +56,7 @@ public class ObjectiveIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (arrowImage.isActiveAndEnabled)
+        if (objectiveLoc != null)
         {
             RotateAroundPlayer();
         }
