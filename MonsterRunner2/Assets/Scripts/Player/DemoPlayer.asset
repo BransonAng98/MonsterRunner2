@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f811ceeba0b66754cb98bd69e0f4a100, type: 3}
   m_Name: DemoPlayer
   m_EditorClassIdentifier: 
-  health: 3
+  health: 1000
   maxSpeed: 15
   acceleration: 1000
   damage: 5
