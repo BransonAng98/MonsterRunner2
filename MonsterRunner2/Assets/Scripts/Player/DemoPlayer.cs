@@ -22,7 +22,11 @@ public class DemoPlayer : MonoBehaviour
     public enum TrailType
     {
         skid,
-        smoke,
+    }   
+    public enum SmokeType
+    {
+       normal,
+       drift,
     }
 
     [Serializable]
@@ -40,6 +44,13 @@ public class DemoPlayer : MonoBehaviour
         public TrailType trail;
     }
 
+    [Serializable]
+    public struct Smoke
+    {
+        public Renderer smokeRenderer;
+        public SmokeType smokeTrail;
+    }
+
     public PlayerSO playerData;
     [SerializeField] float health;
     [SerializeField] float maxAcceleration;
@@ -55,6 +66,8 @@ public class DemoPlayer : MonoBehaviour
     public List<Wheel> wheels;
 
     public List<Trail> trails;
+
+    public List<Smoke> smokes;
 
     public SteeringWheel steeringWheel;
 
@@ -176,6 +189,17 @@ public class DemoPlayer : MonoBehaviour
                             trail.renderer.emitting = true;
                         }
                     }
+                    foreach (var smoke in smokes)
+                    {
+                        if (smoke.smokeTrail == SmokeType.drift)
+                        {
+                            smoke.smokeRenderer.gameObject.SetActive(true);
+                        }
+                        else
+                        {
+                            smoke.smokeRenderer.gameObject.SetActive(false);
+                        }
+                    }
                 }
 
                 else
@@ -187,6 +211,19 @@ public class DemoPlayer : MonoBehaviour
                             trail.renderer.emitting = false;
                         }
                     }
+
+                    foreach (var smoke in smokes)
+                    {
+                        if (smoke.smokeTrail == SmokeType.drift)
+                        {
+                            smoke.smokeRenderer.gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            smoke.smokeRenderer.gameObject.SetActive(true);
+                        }
+                    }
+ 
                 }
             }
         }
