@@ -29,6 +29,15 @@ public class DemoPlayer : MonoBehaviour
        drift,
     }
 
+    public enum Health
+    {
+        normal,
+        whiteSmoke,
+        blackSmoke,
+        fire,
+        death,
+    }
+
     [Serializable]
     public struct Wheel
     {
@@ -51,8 +60,16 @@ public class DemoPlayer : MonoBehaviour
         public SmokeType smoke;
     }
 
+    [Serializable]
+    public struct HealthState
+    {
+        public ParticleSystem carSmoke;
+        public Health playerHealth;
+    }
+
     public PlayerSO playerData;
     [SerializeField] float health;
+    [SerializeField] float maxHealth;
     [SerializeField] float maxAcceleration;
     [SerializeField] float maxSpeed;
     public LayerMask enemyLayer;
@@ -73,6 +90,8 @@ public class DemoPlayer : MonoBehaviour
 
     public List<Smoke> smokes;
 
+    public List<HealthState> healthSmoke;
+
     public SteeringWheel steeringWheel;
 
     float steerInput;
@@ -85,14 +104,19 @@ public class DemoPlayer : MonoBehaviour
 
     Rigidbody rb;
 
+    private void Awake()
+    {
+        health = playerData.health;
+        maxHealth = playerData.health;
+        maxAcceleration = playerData.acceleration;
+        maxSpeed = playerData.maxSpeed;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass;
-        health = playerData.health;
-        maxAcceleration = playerData.acceleration;
-        maxSpeed = playerData.maxSpeed;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -161,7 +185,6 @@ public class DemoPlayer : MonoBehaviour
                         if (smoke.smoke == SmokeType.drift)
                         {
                             smoke.smokeRenderer.enableEmission = true;
-                            Debug.Log("Play drift smoke");
                         }
                         else
                         {
@@ -185,7 +208,6 @@ public class DemoPlayer : MonoBehaviour
                         if (smoke.smoke == SmokeType.drift)
                         {
                             smoke.smokeRenderer.enableEmission = false;
-                            Debug.Log("Stop drift smoke");
                         }
                         else
                         {
@@ -251,10 +273,77 @@ public class DemoPlayer : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-
-        if(health >= 0)
+        if (health >= 0)
         {
             Death();
+        }
+    }
+
+    void CheckHealthState()
+    {
+        float healthPercentage = (health / maxHealth) * 100f;
+
+        foreach (var smoke in healthSmoke)
+        {
+            if (healthPercentage <= 100f && healthPercentage > 75f)
+            {
+                if (smoke.playerHealth == Health.death)
+                {
+                    smoke.carSmoke.gameObject.SetActive(false);
+                }
+                else
+                {
+                    smoke.carSmoke.enableEmission = false;
+                }
+            }
+            if (healthPercentage <= 75f && healthPercentage > 45f)
+            {
+                if(smoke.playerHealth == Health.whiteSmoke)
+                {
+                    smoke.carSmoke.enableEmission = true;
+                    Debug.Log("Play white smoke");
+                }
+                else
+                {
+                    smoke.carSmoke.enableEmission = false;
+                }
+            }
+            if (healthPercentage <= 45f && healthPercentage > 10)
+            {
+                if(smoke.playerHealth == Health.blackSmoke)
+                {
+                    smoke.carSmoke.enableEmission = true;
+                    Debug.Log("Play black smoke");
+                }
+                else
+                {
+                    smoke.carSmoke.enableEmission = false;
+                }
+            }
+            if (healthPercentage <= 10f && healthPercentage > 0)
+            {
+                if(smoke.playerHealth == Health.fire)
+                {
+                    smoke.carSmoke.enableEmission = true;
+                    Debug.Log("Play fire");
+                }
+                else
+                {
+                    smoke.carSmoke.enableEmission = false;
+                }
+            }
+            if (healthPercentage < 0)
+            {
+                if(smoke.playerHealth == Health.death)
+                {
+                    smoke.carSmoke.gameObject.SetActive(true);
+                    Debug.Log("Play explosion");
+                }
+                else
+                {
+                    smoke.carSmoke.gameObject.SetActive(false);
+                }
+            }
         }
     }
 
@@ -303,6 +392,7 @@ public class DemoPlayer : MonoBehaviour
     {
         GetInput();
         AnimateWheels();
+        CheckHealthState();
     }
 
     private void LateUpdate()
