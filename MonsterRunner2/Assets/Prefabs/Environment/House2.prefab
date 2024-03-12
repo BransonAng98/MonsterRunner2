@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7177399498277376914}
   - component: {fileID: 5308688403393603814}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: House2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

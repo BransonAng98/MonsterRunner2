@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeSpawner : MonoBehaviour
+public class EnvironmentSpawner : MonoBehaviour
 {
     public GameObject[] Trees; // Array of tree prefabs to instantiate
     public GameObject[] Stones; // Array of stone prefabs to instantiate
@@ -28,8 +28,11 @@ public class TreeSpawner : MonoBehaviour
     [SerializeField] private List<Vector3> instantiatedStonePositions = new List<Vector3>(); // List to store positions of instantiated stones
     [SerializeField] private List<Vector3> instantiatedHousePositions = new List<Vector3>(); // List to store positions of instantiated houses
 
+
+    public missionManagerScript missionManager;
     void Start()
     {
+        missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         // Spawn trees
         int numTreesToSpawn = Random.Range(minTreePrefabs, maxTreePrefabs + 1);
         for (int i = 0; i < numTreesToSpawn; i++)
@@ -50,6 +53,8 @@ public class TreeSpawner : MonoBehaviour
         {
             SpawnPrefab(Houses, instantiatedHousePositions, minHouseDistance);
         }
+
+        missionManager.FindBuildingObjects();
     }
 
     void SpawnPrefab(GameObject[] prefabs, List<Vector3> instantiatedPositions, float minDistance)

@@ -7,11 +7,19 @@ public class QuestGiver : MonoBehaviour
 {
     public Quest quest;
     public DemoPlayer player;
-
+    public Transform destination;
     public GameObject questWindow;
     public Text titleText;
     public Text descriptionText;
     public Text rewardText;
+    public missionManagerScript missionManager; public List<GameObject> buildingObjects;
+
+    private void Awake()
+    {
+        missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
+        buildingObjects = GameObject.FindObjectOfType<missionManagerScript>().buildingObjectsList;
+      
+    }
 
     public void OpenQuestWindow()
     {
@@ -27,5 +35,16 @@ public class QuestGiver : MonoBehaviour
         questWindow.SetActive(false);
         quest.isActive = true;
         player.quest = quest;
+    }
+
+    public void GetDestination()
+    {
+        if (buildingObjects.Count > 0)
+        {
+            GameObject randomBuilding = buildingObjects[Random.Range(0, buildingObjects.Count)];
+            Transform randomTransform = randomBuilding.transform;
+            // Set the randomly chosen transform as the destination
+            destination = randomTransform;
+        }
     }
 }
