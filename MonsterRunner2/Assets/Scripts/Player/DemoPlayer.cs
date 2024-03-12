@@ -64,6 +64,8 @@ public class DemoPlayer : MonoBehaviour
     public float knockBack;
     public float minimumKnockBack;
 
+    public Quest quest; // might need to change this to a list if you want to add quest in runtime. 
+
     Rigidbody rb;
 
     // Start is called before the first frame update

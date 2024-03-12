@@ -11,6 +11,7 @@ TagManager:
   - RightCollider
   - Grid
   - Enemy
+  - Spawner
   layers:
   - Default
   - TransparentFX
