@@ -130,6 +130,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5963375579817030100}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1334269774792777826
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774332685494422661}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: -0.38, y: 0.81690794, z: 0.42}
+  m_Center: {x: 0, y: 0.4043285, z: 0}
 --- !u!114 &2264824516557579751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,24 +162,13 @@ MonoBehaviour:
     repairReward: 
     goal:
       goaltype: 0
-      requiredAmount: 0
-      currentAmount: 0
       DestinationReached: 0
+      destination: {fileID: 0}
   player: {fileID: 0}
+  destination: {fileID: 0}
   questWindow: {fileID: 0}
   titleText: {fileID: 0}
   descriptionText: {fileID: 0}
   rewardText: {fileID: 0}
---- !u!65 &1334269774792777826
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774332685494422661}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  missionManager: {fileID: 0}
+  buildingObjects: []

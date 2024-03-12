@@ -466,6 +466,11 @@ MonoBehaviour:
   health: 0
   maxAcceleration: 0
   maxSpeed: 0
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  explosionForce: 1000
+  explosionRadius: 5
   turnSensitivity: 6
   maxSteeringAngle: 9
   centerOfMass: {x: 0, y: 0, z: -0.3}
@@ -489,9 +494,9 @@ MonoBehaviour:
     trail: 0
   smokes:
   - smokeRenderer: {fileID: 2372705448825235444}
-    smokeTrail: 1
+    smoke: 1
   - smokeRenderer: {fileID: 6290903357534137667}
-    smokeTrail: 1
+    smoke: 1
   steeringWheel: {fileID: 0}
   inputSteer: 0
   knockBack: 1
@@ -1363,7 +1368,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19885000, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19953682, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
@@ -1515,7 +1524,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19885000, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
       propertyPath: playOnAwake
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19953682, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7bf18dd20422304ea868e95c3518f19, type: 3}

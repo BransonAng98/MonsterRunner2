@@ -6,21 +6,21 @@ using UnityEngine;
 public class QuestGoal
 {
     public GoalType goaltype;
-    public int requiredAmount;
-    public int currentAmount;
+    //public int requiredAmount;
+    //public int currentAmount;
     public bool DestinationReached;
     public Transform destination;
-    public bool isReached()
+    //public bool isReached()
 
-    {
-        return (currentAmount >= requiredAmount);
-    }
+    //{
+    //    return (currentAmount >= requiredAmount);
+    //}
 
     public void EnemyKilled()
     {
         if(goaltype == GoalType.Kill)
         {
-            currentAmount++;
+            //currentAmount++;
         }
        
     }

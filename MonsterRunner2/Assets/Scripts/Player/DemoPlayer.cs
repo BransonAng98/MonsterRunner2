@@ -55,6 +55,10 @@ public class DemoPlayer : MonoBehaviour
     [SerializeField] float health;
     [SerializeField] float maxAcceleration;
     [SerializeField] float maxSpeed;
+    public LayerMask enemyLayer;
+
+    public float explosionForce = 1000f; // Force of the explosion
+    public float explosionRadius = 5f; // Radius of the explosion
 
     float currentTorque;
 
@@ -139,43 +143,6 @@ public class DemoPlayer : MonoBehaviour
                     // Once max speed is reached, stop applying torque
                     wheel.wheelColliderl.motorTorque = 0f;
                 }
-
-                //if (!inputSteer)
-                //{
-                //    // Check if current speed is less than max speed
-                //    if (rb.velocity.magnitude < maxSpeed)
-                //    {
-                //        // Apply forward torque with increased acceleration until max speed is reached
-                //        float forwardTorque = maxAcceleration; // Increased base torque
-                //        wheel.wheelColliderl.motorTorque = forwardTorque;
-
-                //        // Update current torque for next frame
-                //        currentTorque = forwardTorque;
-                //    }
-                //    else
-                //    {
-                //        // Once max speed is reached, stop applying torque
-                //        wheel.wheelColliderl.motorTorque = 0f;
-                //    }
-                //}
-                //else
-                //{
-                //    // Check if current speed is less than max speed
-                //    if (rb.velocity.magnitude < maxSpeed * 0.65f)
-                //    {
-                //        // Apply forward torque with increased acceleration until max speed is reached
-                //        float forwardTorque = maxAcceleration * 0.5f; // Increased base torque
-                //        wheel.wheelColliderl.motorTorque = forwardTorque;
-
-                //        // Update current torque for next frame
-                //        currentTorque = forwardTorque;
-                //    }
-                //    else
-                //    {
-                //        // Once max speed is reached, stop applying torque
-                //        wheel.wheelColliderl.motorTorque = 0f;
-                //    }
-                //}
             }
 
             if(wheel.axel == Axel.Rear)
@@ -300,9 +267,30 @@ public class DemoPlayer : MonoBehaviour
         }
 
         //Add force when the car explodes
+        Explode();
 
         //Disables the demoplayer code so it stops moving and everything else
         this.GetComponent<DemoPlayer>().enabled = false;
+    }
+
+    void Explode()
+    {
+        // Find all colliders within the explosion radius
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayer);
+
+        // Apply explosion force to each enemy
+        foreach (Collider collider in colliders)
+        {
+            Rigidbody rb = collider.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // Calculate the direction away from the explosion point
+                Vector3 direction = (collider.transform.position - transform.position).normalized;
+
+                // Apply the explosion force
+                rb.AddForce(direction * explosionForce, ForceMode.Impulse);
+            }
+        }
     }
 
     public void releaseWheel()

@@ -4,15 +4,29 @@ using UnityEngine;
 
 public class missionManagerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    // List to hold all objects under the "building" layer
+    public List<GameObject> buildingObjectsList = new List<GameObject>();
+    
+
     void Start()
     {
-        
+       
     }
 
-    // Update is called once per frame
-    void Update()
+    public void FindBuildingObjects()
     {
-        
+        // Find all objects with the layer named "building"
+        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.layer == LayerMask.NameToLayer("Buildings"))
+            {
+                // Add object to the list if it's under the "building" layer
+                buildingObjectsList.Add(obj);
+            }
+        }
+
+        // Print the count of building objects found
+        Debug.Log("Total building objects found: " + buildingObjectsList.Count);
     }
 }
