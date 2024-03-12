@@ -29,7 +29,7 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
         groundLayer = LayerMask.GetMask("Ground");
-        CanMove = false; // Initially, don't move until player is detected
+        CanMove = true;
     }
 
     void Update()
@@ -41,22 +41,14 @@ public class EnemyScript : MonoBehaviour
         {
             CheckGrounded();
 
-            // Check distance to player and if the enemy is alive before moving
-            distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distanceToPlayer < detectionRadius)
-            {
-                CanMove = true; // Start chasing the player
-            }
-
             // Only move if the enemy is grounded, can move, and is alive
             if (isGrounded && CanMove)
             {
-                CheckRotation();
                 RotateMonster();
                 MoveMonster();
             }
         }
-        
+
     }
 
     void RotateMonster()
