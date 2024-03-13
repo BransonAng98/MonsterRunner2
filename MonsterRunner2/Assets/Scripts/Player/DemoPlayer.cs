@@ -103,6 +103,8 @@ public class DemoPlayer : MonoBehaviour
     public Quest quest; // might need to change this to a list if you want to add quest in runtime. 
     public GameObject destination;
     public GameObject passenger;
+    public GameObject impactVFX;
+
     [SerializeField]private float distance;
     public float distanceThreshold = 30f; // Adjust this value as needed
 
@@ -133,6 +135,8 @@ public class DemoPlayer : MonoBehaviour
 
             // Calculate knockback direction based on collision point
             Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
+            Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
+            Instantiate(impactVFX, spawnPos, Quaternion.identity);
             knockbackDirection.Normalize();
 
             // Calculate knockback force based on collision impact force
@@ -143,6 +147,7 @@ public class DemoPlayer : MonoBehaviour
 
             // Apply knockback force
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+
         }
 
 
