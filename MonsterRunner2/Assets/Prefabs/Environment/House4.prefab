@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5003461248301057116}
   - component: {fileID: 8491678882767183680}
+  - component: {fileID: 7979519699240376949}
   m_Layer: 6
   m_Name: House4
   m_TagString: Obstacle
@@ -30,6 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8101938350232071680}
+  - {fileID: 306576272432639513}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,6 +51,101 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7979519699240376949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7574374317313724504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e9bbc3d4ca7d645af7c7c17283aaf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IndicatorVFX: {fileID: 306576272432639974}
+  missionManager: {fileID: 0}
+--- !u!1001 &6351582706602951822
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5003461248301057116}
+    m_Modifications:
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657577743107779432, guid: cd6eb37807c7f484a8586378036f9d4b,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_PickUp_Glow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cd6eb37807c7f484a8586378036f9d4b, type: 3}
+--- !u!4 &306576272432639513 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6351582706602951822}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &306576272432639974 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6657577743107779432, guid: cd6eb37807c7f484a8586378036f9d4b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6351582706602951822}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8639425249215973867
 PrefabInstance:
   m_ObjectHideFlags: 0
