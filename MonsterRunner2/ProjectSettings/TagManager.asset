@@ -12,6 +12,7 @@ TagManager:
   - Grid
   - Enemy
   - Spawner
+  - Passenger
   layers:
   - Default
   - TransparentFX

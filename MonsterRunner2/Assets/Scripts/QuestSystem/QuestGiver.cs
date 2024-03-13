@@ -7,7 +7,7 @@ public class QuestGiver : MonoBehaviour
 {
     public Quest quest;
     public DemoPlayer player;
-    public Transform destination;
+    public GameObject destination;
     public GameObject questWindow;
     public Text titleText;
     public Text descriptionText;
@@ -42,9 +42,9 @@ public class QuestGiver : MonoBehaviour
         if (buildingObjects.Count > 0)
         {
             GameObject randomBuilding = buildingObjects[Random.Range(0, buildingObjects.Count)];
-            Transform randomTransform = randomBuilding.transform;
+         
             // Set the randomly chosen transform as the destination
-            destination = randomTransform;
+            destination = randomBuilding;
         }
     }
 }

@@ -101,7 +101,12 @@ public class DemoPlayer : MonoBehaviour
     public float minimumKnockBack;
 
     public Quest quest; // might need to change this to a list if you want to add quest in runtime. 
+    public GameObject destination;
+    public GameObject passenger;
+    [SerializeField]private float distance;
+    public float distanceThreshold = 30f; // Adjust this value as needed
 
+    public PlayerCollider playercollider;
     Rigidbody rb;
 
     private void Awake()
@@ -110,6 +115,7 @@ public class DemoPlayer : MonoBehaviour
         maxHealth = playerData.health;
         maxAcceleration = playerData.acceleration;
         maxSpeed = playerData.maxSpeed;
+        playercollider = GetComponentInChildren<PlayerCollider>();
     }
 
     // Start is called before the first frame update
@@ -138,6 +144,8 @@ public class DemoPlayer : MonoBehaviour
             // Apply knockback force
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
         }
+
+
     }
 
     void GetInput()
@@ -347,6 +355,10 @@ public class DemoPlayer : MonoBehaviour
         }
     }
 
+    public void GetDestination()
+    {
+
+    }
     void Death()
     {
         //Unparents all the wheels with the body
@@ -393,6 +405,25 @@ public class DemoPlayer : MonoBehaviour
         GetInput();
         AnimateWheels();
         CheckHealthState();
+        if (destination != null)
+        {
+            distance = Vector3.Distance(transform.position, destination.transform.position);
+            if (distance < distanceThreshold)
+            {
+                // Call your function here
+                DestinationReached();
+            }
+        }
+    }
+
+    public void DestinationReached()
+    {
+        if (passenger != null)
+        {
+            passenger.SetActive(true);
+            passenger.transform.parent = null;
+            Debug.Log("Passenger unparented.");
+        }
     }
 
     private void LateUpdate()

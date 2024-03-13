@@ -28,6 +28,17 @@ public class PlayerCollider : MonoBehaviour
                 player.TakeDamage(damage);
             }
         }
+
+        if(other.CompareTag("Passenger"))
+        {
+            player.passenger = other.gameObject;
+            QuestGiver questGiver = other.transform.parent.GetComponentInChildren<QuestGiver>();
+
+            if (questGiver != null && questGiver.destination != null)
+            {
+                player.destination = questGiver.destination;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
