@@ -7,6 +7,7 @@ public class PassengerController : MonoBehaviour
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
+    public bool Pickedup;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,8 @@ public class PassengerController : MonoBehaviour
     {
         if (collision.gameObject.tag==("Player"))
         {
+            Pickedup = true;
+            idleVFX.SetActive(false);
             Instantiate(PickupVFX, transform.position, Quaternion.identity);
             questgiver.AcceptQuest();
             Collider[] passengerCollider = GetComponentsInChildren<Collider>();
@@ -46,5 +49,15 @@ public class PassengerController : MonoBehaviour
 
             gameObject.SetActive(false);
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
+
+    public void DestroyPassenger()
+    {
+        Destroy(gameObject);
     }
 }

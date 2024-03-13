@@ -20,5 +20,9 @@ public class HouseScript : MonoBehaviour
         {
             IndicatorVFX.SetActive(true);
         }
+        else
+        {
+            IndicatorVFX.SetActive(false);
+        }
     }
 }

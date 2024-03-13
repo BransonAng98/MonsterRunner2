@@ -31,13 +31,14 @@ public class PlayerCollider : MonoBehaviour
 
         if(other.CompareTag("Passenger"))
         {
-            player.passenger = other.gameObject;
-            QuestGiver questGiver = other.transform.parent.GetComponentInChildren<QuestGiver>();
+            player.GetDestination();
+            //player.passenger = other.gameObject;
+            //QuestGiver questGiver = other.transform.parent.GetComponentInChildren<QuestGiver>();
 
-            if (questGiver != null && questGiver.destination != null)
-            {
-                player.destination = questGiver.destination;
-            }
+            //if (questGiver != null && questGiver.destination != null)
+            //{   questGiver.GetDestination();
+            //    player.destination = questGiver.destination;
+            //}
         }
     }
 

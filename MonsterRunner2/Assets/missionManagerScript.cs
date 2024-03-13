@@ -7,14 +7,26 @@ public class missionManagerScript : MonoBehaviour
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
     public QuestGiver questgiverEnitity;
-    public GameObject destination; 
-    
-
+    public GameObject destination;
+    public GameObject passengerPrefab;
+    [SerializeField] private int passengerCount;
+    private float minXRange = -300f; // Minimum spawning width for the x-axis
+    private float maxXRange = 300f; // Maximum spawning width for the x-axis
+    private float minZRange = -220f; // Minimum spawning width for the z-axis
+    private float maxZRange = 220f; // Maximum spawning width for the z-axis
     void Start()
     {
         questgiverEnitity = GameObject.FindGameObjectWithTag("Passenger").GetComponentInChildren<QuestGiver>();
+        passengerCount = 0;
     }
 
+    private void Update()
+    {
+        if(passengerCount == 0)
+        {
+            CreatePassenger();
+        }
+    }
     public void FindBuildingObjects()
     {
         // Find all objects with the layer named "building"
@@ -38,5 +50,20 @@ public class missionManagerScript : MonoBehaviour
         {
             destination = questgiverEnitity.destination;
         }
+    }
+
+    Vector3 GetRandomPrefabPosition()
+    {
+        Vector3 spawnPosition = transform.position;
+        float randomXOffset = Random.Range(minXRange, maxXRange);
+        float randomZOffset = Random.Range(minZRange, maxZRange);
+        return spawnPosition + new Vector3(randomXOffset, 0f, randomZOffset);
+    }
+
+    public void CreatePassenger()
+    {
+            Vector3 spawnPosition = GetRandomPrefabPosition();
+            Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
+            passengerCount++;
     }
 }

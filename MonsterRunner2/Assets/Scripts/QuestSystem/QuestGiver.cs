@@ -19,6 +19,7 @@ public class QuestGiver : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
         missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         buildingObjects = GameObject.FindObjectOfType<missionManagerScript>().buildingObjectsList;
+        GetDestination();
       
     }
 

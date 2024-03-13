@@ -362,7 +362,7 @@ public class DemoPlayer : MonoBehaviour
 
     public void GetDestination()
     {
-
+        QuestGiver questGiver = gameObject.GetComponentInChildren<QuestGiver>();
     }
     void Death()
     {
