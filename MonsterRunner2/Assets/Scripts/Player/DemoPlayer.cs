@@ -420,6 +420,7 @@ public class DemoPlayer : MonoBehaviour
     {
         if (passenger != null)
         {
+            quest.Complete();
             passenger.SetActive(true);
             passenger.transform.parent = null;
             Debug.Log("Passenger unparented.");
