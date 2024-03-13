@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PassengerController : MonoBehaviour
 {
+    public QuestGiver questgiver;
     // Start is called before the first frame update
     void Start()
     {
-        
+        questgiver = GetComponentInChildren<QuestGiver>();
     }
 
     // Update is called once per frame
@@ -22,10 +23,15 @@ public class PassengerController : MonoBehaviour
     {
         if (collision.gameObject.tag==("Player"))
         {
-            Collider passengerCollider = GetComponent<Collider>();
+            questgiver.AcceptQuest();
+            Collider[] passengerCollider = GetComponentsInChildren<Collider>();
             if (passengerCollider != null)
             {
-                passengerCollider.enabled = false;
+
+                foreach (Collider collider in passengerCollider)
+                {
+                    collider.enabled = false;
+                }
             }
             Debug.Log("PassengerPickedUp");
             transform.SetParent(collision.transform);

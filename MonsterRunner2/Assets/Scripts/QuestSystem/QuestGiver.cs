@@ -16,6 +16,7 @@ public class QuestGiver : MonoBehaviour
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
         missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         buildingObjects = GameObject.FindObjectOfType<missionManagerScript>().buildingObjectsList;
       
@@ -32,7 +33,7 @@ public class QuestGiver : MonoBehaviour
     public void AcceptQuest()
     {
         // give quest to player
-        questWindow.SetActive(false);
+        //questWindow.SetActive(false);
         quest.isActive = true;
         player.quest = quest;
     }
