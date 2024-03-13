@@ -6,11 +6,13 @@ public class missionManagerScript : MonoBehaviour
 {
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
+    public QuestGiver questgiverEnitity;
+    public GameObject destination; 
     
 
     void Start()
     {
-       
+        questgiverEnitity = GameObject.FindGameObjectWithTag("Passenger").GetComponentInChildren<QuestGiver>();
     }
 
     public void FindBuildingObjects()
@@ -28,5 +30,13 @@ public class missionManagerScript : MonoBehaviour
 
         // Print the count of building objects found
         Debug.Log("Total building objects found: " + buildingObjectsList.Count);
+    }
+
+    public void GetDestination()
+    {
+        if(questgiverEnitity != null)
+        {
+            destination = questgiverEnitity.destination;
+        }
     }
 }

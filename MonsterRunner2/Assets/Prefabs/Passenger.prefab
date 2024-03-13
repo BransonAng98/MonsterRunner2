@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3932362229380496523}
   - component: {fileID: 5675965656846748322}
-  - component: {fileID: 9004851039193755392}
+  - component: {fileID: 1162302778}
+  - component: {fileID: 298592860242041281}
   m_Layer: 0
   m_Name: Passenger
   m_TagString: Passenger
@@ -31,6 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6145323336525600319}
+  - {fileID: 2230594769260699296}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,19 +52,131 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &9004851039193755392
-BoxCollider:
+--- !u!114 &1162302778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880511610574658448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af006058c16a654cb322df0b1438d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questgiver: {fileID: 0}
+  idleVFX: {fileID: 2230594769260699487}
+  PickupVFX: {fileID: 8213002756312529545, guid: a592cfbe01fb3314a92736d7024e9fdc,
+    type: 3}
+--- !u!135 &298592860242041281
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6880511610574658448}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 1, z: 3}
-  m_Center: {x: 0, y: 0.37, z: 0}
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &1493095032651872094
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3932362229380496523}
+    m_Modifications:
+    - target: {fileID: 742003337447974913, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_Name
+      value: FX_PassengerPickup_Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fdc7b0f4b3695784782c2aa9d182de22, type: 3}
+--- !u!4 &2230594769260699296 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
+    type: 3}
+  m_PrefabInstance: {fileID: 1493095032651872094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2230594769260699487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 742003337447974913, guid: fdc7b0f4b3695784782c2aa9d182de22,
+    type: 3}
+  m_PrefabInstance: {fileID: 1493095032651872094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5963375579817030100
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -144,19 +258,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5963375579817030100}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1334269774792777826
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6774332685494422661}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: -0.38, y: 0.81690794, z: 0.42}
-  m_Center: {x: 0, y: 0.4043285, z: 0}
 --- !u!114 &2264824516557579751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,11 +272,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   quest:
     isActive: 0
-    title: 
-    description: 
-    repairReward: 
+    title: Deliver Me
+    description: Deliver Me
+    repairReward: Thanks
     goal:
-      goaltype: 0
+      goaltype: 1
       DestinationReached: 0
       destination: {fileID: 0}
   player: {fileID: 0}

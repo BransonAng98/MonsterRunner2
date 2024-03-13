@@ -28,6 +28,9 @@ public class EnvironmentSpawner : MonoBehaviour
     [SerializeField] private List<Vector3> instantiatedStonePositions = new List<Vector3>(); // List to store positions of instantiated stones
     [SerializeField] private List<Vector3> instantiatedHousePositions = new List<Vector3>(); // List to store positions of instantiated houses
 
+    public GameObject treeParent; // Parent object for trees
+    public GameObject stoneParent; // Parent object for stones
+    public GameObject houseParent; // Parent object for houses
 
     public missionManagerScript missionManager;
     void Start()
@@ -38,6 +41,7 @@ public class EnvironmentSpawner : MonoBehaviour
         for (int i = 0; i < numTreesToSpawn; i++)
         {
             SpawnPrefab(Trees, instantiatedTreePositions, minTreeDistance);
+
         }
 
         // Spawn stones

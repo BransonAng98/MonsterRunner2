@@ -5,6 +5,8 @@ using UnityEngine;
 public class PassengerController : MonoBehaviour
 {
     public QuestGiver questgiver;
+    public GameObject idleVFX;
+    public GameObject PickupVFX;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class PassengerController : MonoBehaviour
     {
         if (collision.gameObject.tag==("Player"))
         {
+            Instantiate(PickupVFX, transform.position, Quaternion.identity);
             questgiver.AcceptQuest();
             Collider[] passengerCollider = GetComponentsInChildren<Collider>();
             if (passengerCollider != null)
