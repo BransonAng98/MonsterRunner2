@@ -5,12 +5,14 @@ using UnityEngine;
 public class HouseScript : MonoBehaviour
 {
     public GameObject IndicatorVFX;
+    public GameObject ReachedVFX;
     // Start is called before the first frame update
     public missionManagerScript missionManager;
     void Start()
     {
         missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         IndicatorVFX.SetActive(false);
+      
     }
 
     // Update is called once per frame
@@ -27,5 +29,10 @@ public class HouseScript : MonoBehaviour
     public void TurnOffVFX()
     {
         IndicatorVFX.SetActive(false);
+    }
+
+    public void CreateReachedVFX()
+    {
+        Instantiate(ReachedVFX, transform.position, Quaternion.identity);
     }
 }

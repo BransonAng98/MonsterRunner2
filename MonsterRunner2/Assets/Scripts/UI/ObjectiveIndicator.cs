@@ -5,52 +5,52 @@ using UnityEngine.UI;
 
 public class ObjectiveIndicator : MonoBehaviour
 {
-    public Image arrowImage;
+    public MeshRenderer arrowImage;
     public float rotationSpeed;
 
     [SerializeField] Transform objectiveLoc;
+    public Transform passengerLoc;
     [SerializeField] Transform playerTransform;
-    [SerializeField] bool showArrow;
 
     // Start is called before the first frame update
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        arrowImage.GetComponent<Image>();
-        arrowImage.enabled = false;
+        arrowImage.GetComponent<MeshRenderer>();
     }
 
     //Trigger the arrow on or off
-    public void UpdateObjective(bool active, Transform objLoc)
+    public void UpdateObjective(int state, Transform objLoc)
     {
-        //When player has accepted a request
-        if (active)
+        switch (state)
         {
-            objectiveLoc = objLoc;
-            arrowImage.enabled = true;
-        }
+            //Update passenger detail
+            case 0:
+                passengerLoc = objLoc;
+                arrowImage.enabled = true;
+                break;
 
-        //When player has failed the request
-        else
-        {
-            objectiveLoc = objLoc;
-            arrowImage.enabled = false;
+            //Remove passenger detail
+            case 1:
+                passengerLoc = objLoc;
+                break;
+
+            //Update location detail
+            case 2:
+                objectiveLoc = objLoc;
+                arrowImage.enabled = true;
+                break;
+
+            //Remove location detail
+            case 3:
+                objectiveLoc = objLoc;
+                arrowImage.enabled = false;
+                break;
         }
     }
-
-    void RotateAroundPlayer()
+    void RotateUIElement(Transform goal)
     {
-        // Get the direction from the player to the objective
-        Vector3 directionToObjective = (objectiveLoc.position - playerTransform.position).normalized;
-
-        // Calculate the angle between the forward direction of the arrow and the direction to the objective
-        float angle = Mathf.Atan2(directionToObjective.y, directionToObjective.x) * Mathf.Rad2Deg - 90f;
-
-        // Create a Quaternion representing the rotation around the Z-axis
-        Quaternion targetRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-        // Smoothly rotate the arrow towards the objective
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(goal.position - transform.position), rotationSpeed * Time.deltaTime);
     }
 
     // Update is called once per frame
@@ -58,9 +58,12 @@ public class ObjectiveIndicator : MonoBehaviour
     {
         if (objectiveLoc != null)
         {
-            RotateAroundPlayer();
+            RotateUIElement(objectiveLoc);
         }
-
-        else { return; }
+        
+        if(passengerLoc != null)
+        {
+            RotateUIElement(passengerLoc);
+        }
     }
 }

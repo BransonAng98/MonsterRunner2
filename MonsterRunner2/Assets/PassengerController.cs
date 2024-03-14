@@ -7,18 +7,21 @@ public class PassengerController : MonoBehaviour
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
+    public ObjectiveIndicator arrow;
+
     public missionManagerScript missionmanager;
     public bool Pickedup;
     public GameObject passengerDestination;
     private HouseScript houseScript;
-    private float moveSpeed = 5f;
+    private float moveSpeed = 30f;
 
     // Start is called before the first frame update
     void Start()
     {
         missionmanager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         questgiver = GetComponentInChildren<QuestGiver>();
-       
+        arrow.UpdateObjective(2, passengerDestination.transform);
+        arrow.UpdateObjective(0, this.transform);
     }
 
     void TriggerHouse(bool trigger)
@@ -28,13 +31,17 @@ public class PassengerController : MonoBehaviour
         if (trigger)
         {
             selectedHouse.TurnOnVFX();
+            arrow.UpdateObjective(2, selectedHouse.gameObject.transform);
         }
         else
         {
+            selectedHouse.CreateReachedVFX();
             selectedHouse.TurnOffVFX();
+            arrow.UpdateObjective(3, null);
         }
     }
 
+   
     // Update is called once per frame
     void Update()
     {
@@ -60,17 +67,19 @@ public class PassengerController : MonoBehaviour
             if (distanceToDestination < 0.5f) // Adjust the threshold as needed
             {
                 Debug.Log("ReachedHome");
+                
                 TriggerHouse(false);
+               
                 DestroyPassenger();
             }
         }
     }
 
-   
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag==("Player"))
+        if (other.CompareTag("Player"))
         {
             TriggerHouse(true);
             Pickedup = true;
@@ -80,30 +89,23 @@ public class PassengerController : MonoBehaviour
             Collider[] passengerCollider = GetComponentsInChildren<Collider>();
             if (passengerCollider != null)
             {
-
                 foreach (Collider collider in passengerCollider)
                 {
                     collider.enabled = false;
                 }
             }
             Debug.Log("PassengerPickedUp");
-            transform.SetParent(collision.transform);
+            transform.SetParent(other.transform);
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.isKinematic = true;
             }
-
+            arrow.UpdateObjective(1, null);
             gameObject.SetActive(false);
         }
-
-      
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
 
     public void DestroyPassenger()
     {

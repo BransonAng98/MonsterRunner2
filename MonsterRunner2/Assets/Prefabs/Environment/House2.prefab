@@ -64,6 +64,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IndicatorVFX: {fileID: 8639462472969858451}
+  ReachedVFX: {fileID: 8734376389421900958, guid: d9447b6bf6f91204abe6a18f68896d90,
+    type: 3}
   missionManager: {fileID: 0}
 --- !u!1001 &3135067154547984123
 PrefabInstance:
@@ -80,7 +82,7 @@ PrefabInstance:
     - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.3
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
         type: 3}
@@ -90,7 +92,7 @@ PrefabInstance:
     - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.99
+      value: 0.17
       objectReference: {fileID: 0}
     - target: {fileID: 6657577743107779223, guid: cd6eb37807c7f484a8586378036f9d4b,
         type: 3}
