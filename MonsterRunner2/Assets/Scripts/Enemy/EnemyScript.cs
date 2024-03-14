@@ -4,31 +4,46 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] private float speed; // Adjust this to control the speed of the enemy
     public float rotationSpeed;
     public Rigidbody rb;
     public Transform player;
-    public LayerMask groundLayer; // Define the ground layer in the Unity Editor
+    public LayerMask groundLayer;
+  
+    public GameObject bloodSplatter;
+    public Material deadMaterial;
+
     public bool isGrounded;
+    public bool CanMove;
+
+    public EnemySO enemyData;
+
+    [SerializeField] float health;
+    [SerializeField] float speed;
+    [SerializeField] float attackCD;
+    [SerializeField] float attackDmg;
+    [SerializeField] float weight;
 
     [SerializeField] private float targetRotationAngle;
     [SerializeField] private bool isTurningRight; // Indicates if the enemy is turning right 
     [SerializeField] private bool isTurningLeft; // Indicates if the enemy is turning left
-    [SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
+    //[SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
     [SerializeField] private bool isDead = false; // Flag to track if the enemy is dead
     [SerializeField] private float distanceToPlayer;
-    [SerializeField] private float cooldownDuration = 3f; // Duration of cooldown after colliding with player
+    //[SerializeField] private float cooldownDuration = 3f; // Duration of cooldown after colliding with playerr
 
-    public GameObject bloodSplatter;
-    public bool CanMove;
-
-    public Material deadMaterial;
-    void Start()
+    private Coroutine slowDownCoroutine;
+    private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
         groundLayer = LayerMask.GetMask("Ground");
         CanMove = true;
+
+        health = enemyData.health;
+        speed = enemyData.speed;
+        attackCD = enemyData.attackCD;
+        attackDmg = enemyData.attackDmg;
+        weight = enemyData.weight;
     }
 
     void Update()
@@ -75,7 +90,7 @@ public class EnemyScript : MonoBehaviour
         isTurningLeft = cross.y < 0;
         if (targetRotationAngle == 0)
         {
-            walkingStraight = true;
+            //walkingStraight = true;
             isTurningLeft = false;
             isTurningRight = false;
         }
@@ -86,7 +101,7 @@ public class EnemyScript : MonoBehaviour
 
         Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
         Vector3 direction = (playerx - transform.position).normalized;
-        rb.velocity = direction * speed;
+        rb.velocity = direction * enemyData.speed;
     }
 
     void CheckGrounded()
@@ -136,9 +151,44 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if(health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            if (slowDownCoroutine == null)
+            {
+                slowDownCoroutine = StartCoroutine(SlowDown());
+                Debug.Log(slowDownCoroutine);
+            }
+        }
+    }
+
+    IEnumerator SlowDown()
+    {
+        // Reduce speed by half
+        speed *= 0.5f;
+
+        // Wait for a duration
+        yield return new WaitForSeconds(2f);
+
+        // Restore original speed
+        speed /= 0.5f;
+
+        // Reset the coroutine reference
+        slowDownCoroutine = null;
+    }
+
     //private void OnDrawGizmosSelected()
     //{
     //    Gizmos.color = Color.red;
     //    Gizmos.DrawWireSphere(transform.position, detectionRadius);
     //}
 }
+
+
+

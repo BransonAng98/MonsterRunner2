@@ -127,22 +127,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a02c08f447ce85f499b2cb9ab1ec9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
   rotationSpeed: 2
   rb: {fileID: 0}
   player: {fileID: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  bloodSplatter: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}
+  deadMaterial: {fileID: 2100000, guid: 5b758c2e6d5af4248a238bae543d372b, type: 2}
   isGrounded: 0
+  CanMove: 0
+  enemyData: {fileID: 11400000, guid: 07833be25de27bf41bb9b7bf3f8ff8f4, type: 2}
+  health: 0
+  speed: 12
+  attackCD: 0
+  attackDmg: 0
+  weight: 0
   targetRotationAngle: 0
   isTurningRight: 0
   isTurningLeft: 0
-  walkingStraight: 0
   isDead: 0
   distanceToPlayer: 0
-  cooldownDuration: 3
-  bloodSplatter: {fileID: 194062, guid: 8c27aeead6d968e4ba986702d6b84335, type: 3}
-  CanMove: 0
-  detectionRadius: 50
-  deadMaterial: {fileID: 2100000, guid: 5b758c2e6d5af4248a238bae543d372b, type: 2}
