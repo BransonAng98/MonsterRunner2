@@ -20,6 +20,7 @@ public class PassengerController : MonoBehaviour
     {
         missionmanager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         questgiver = GetComponentInChildren<QuestGiver>();
+        arrow = GameObject.Find("ObjectiveArrow").GetComponent<ObjectiveIndicator>();
         arrow.UpdateObjective(2, passengerDestination.transform);
         arrow.UpdateObjective(0, this.transform);
     }
@@ -100,8 +101,8 @@ public class PassengerController : MonoBehaviour
             if (rb != null)
             {
                 rb.isKinematic = true;
-            }
-            arrow.UpdateObjective(1, null);
+                }
+                arrow.UpdateObjective(1, null);
             gameObject.SetActive(false);
         }
     }
