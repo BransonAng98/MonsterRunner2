@@ -263,7 +263,7 @@ public class DemoPlayer : MonoBehaviour
         {
             foreach(var wheel in wheels)
             {
-                wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, 0f, 3f);
+                wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, 0f, 0.3f);
             }
         }
     }
