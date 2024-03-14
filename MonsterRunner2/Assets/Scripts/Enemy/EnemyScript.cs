@@ -149,6 +149,14 @@ public class EnemyScript : MonoBehaviour
         {
             renderer.material = deadMaterial;
         }
+
+        // Disable collider and change layer to a designated one for dead enemies
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            gameObject.layer = LayerMask.NameToLayer("DeadEnemy"); // Change layer to DeadEnemy
+
+        }
     }
 
     public void TakeDamage(int damage)
