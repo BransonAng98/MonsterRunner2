@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 1877852910402122613}
   m_Layer: 0
   m_Name: body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -466,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: a451df625a04c1e4bb7786e4d8059fb2, type: 2}
   health: 0
+  maxHealth: 0
   maxAcceleration: 0
   maxSpeed: 0
   enemyLayer:
@@ -499,6 +500,7 @@ MonoBehaviour:
     smoke: 1
   - smokeRenderer: {fileID: 6290903357534137667}
     smoke: 1
+  healthSmoke: []
   steeringWheel: {fileID: 0}
   inputSteer: 0
   knockBack: 1
@@ -512,6 +514,12 @@ MonoBehaviour:
       goaltype: 0
       DestinationReached: 0
       destination: {fileID: 0}
+  destination: {fileID: 0}
+  passenger: {fileID: 0}
+  impactVFX: {fileID: 0}
+  distance: 0
+  distanceThreshold: 30
+  playercollider: {fileID: 0}
 --- !u!96 &7172679666250642589
 TrailRenderer:
   serializedVersion: 2
@@ -1305,6 +1313,8 @@ MonoBehaviour:
     m_Bits: 128
   playerData: {fileID: 11400000, guid: a451df625a04c1e4bb7786e4d8059fb2, type: 2}
   enemyList: []
+  colliderpassenger: {fileID: 0}
+  colliderDestinatnion: {fileID: 0}
   damage: 0
   player: {fileID: 0}
 --- !u!1001 &175143188732746606

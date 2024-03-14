@@ -12,7 +12,7 @@ public class PassengerController : MonoBehaviour
     public bool Pickedup;
     public GameObject passengerDestination;
     private HouseScript houseScript;
-    private float moveSpeed = 10f;
+    private float moveSpeed = 30f;
 
     // Start is called before the first frame update
     void Start()
