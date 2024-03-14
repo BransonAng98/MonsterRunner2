@@ -47,7 +47,7 @@ public class QuestGiver : MonoBehaviour
          
             // Set the randomly chosen transform as the destination
             destination = randomBuilding;
-            missionManager.GetDestination();
+            //missionManager.GetDestination();
         }
     }
 }

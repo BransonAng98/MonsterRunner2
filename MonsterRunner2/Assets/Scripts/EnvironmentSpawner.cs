@@ -22,7 +22,7 @@ public class EnvironmentSpawner : MonoBehaviour
     private float maxZRange = 220f; // Maximum spawning width for the z-axis
     private float minTreeDistance = 10f; // Minimum distance between tree prefabs
     private float minStoneDistance = 1.0f; // Minimum distance between stone prefabs
-    private float minHouseDistance = 2.0f; // Minimum distance between house prefabs
+    private float minHouseDistance = 20.0f; // Minimum distance between house prefabs
 
     [SerializeField] private List<Vector3> instantiatedTreePositions = new List<Vector3>(); // List to store positions of instantiated trees
     [SerializeField] private List<Vector3> instantiatedStonePositions = new List<Vector3>(); // List to store positions of instantiated stones

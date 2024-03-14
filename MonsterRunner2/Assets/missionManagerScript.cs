@@ -9,14 +9,14 @@ public class missionManagerScript : MonoBehaviour
     public QuestGiver questgiverEnitity;
     public GameObject destination;
     public GameObject passengerPrefab;
-    [SerializeField] private int passengerCount;
+    [SerializeField] public int passengerCount;
     private float minXRange = -300f; // Minimum spawning width for the x-axis
     private float maxXRange = 300f; // Maximum spawning width for the x-axis
     private float minZRange = -220f; // Minimum spawning width for the z-axis
     private float maxZRange = 220f; // Maximum spawning width for the z-axis
     void Start()
     {
-        questgiverEnitity = GameObject.FindGameObjectWithTag("Passenger").GetComponentInChildren<QuestGiver>();
+       
         passengerCount = 0;
     }
 
@@ -44,6 +44,11 @@ public class missionManagerScript : MonoBehaviour
         Debug.Log("Total building objects found: " + buildingObjectsList.Count);
     }
 
+    public void GetCurrentPassenger()
+    {
+        questgiverEnitity = GameObject.FindGameObjectWithTag("Passenger").GetComponentInChildren<QuestGiver>();
+    }
+
     public void GetDestination()
     {
         if(questgiverEnitity != null)
@@ -62,8 +67,10 @@ public class missionManagerScript : MonoBehaviour
 
     public void CreatePassenger()
     {
-            Vector3 spawnPosition = GetRandomPrefabPosition();
-            Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
-            passengerCount++;
+        Vector3 spawnPosition = GetRandomPrefabPosition();
+        Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
+        passengerCount++;
+        GetCurrentPassenger();
+        GetDestination();
     }
 }
