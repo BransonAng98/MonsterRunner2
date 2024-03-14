@@ -8,6 +8,8 @@ public class PlayerCollider : MonoBehaviour
     public PlayerSO playerData;
     public List<Transform> enemyList = new List<Transform>();
 
+    public GameObject colliderpassenger;
+    public GameObject colliderDestinatnion;
     [SerializeField] float damage;
     [SerializeField] DemoPlayer player;
 
@@ -31,14 +33,16 @@ public class PlayerCollider : MonoBehaviour
 
         if(other.CompareTag("Passenger"))
         {
-            player.GetDestination();
-            //player.passenger = other.gameObject;
-            //QuestGiver questGiver = other.transform.parent.GetComponentInChildren<QuestGiver>();
+            //player.GetDestination();
+           colliderpassenger = other.gameObject;
+           player.passenger = other.gameObject;
+           QuestGiver questGiver = other.transform.GetComponentInChildren<QuestGiver>();
 
-            //if (questGiver != null && questGiver.destination != null)
-            //{   questGiver.GetDestination();
-            //    player.destination = questGiver.destination;
-            //}
+           if (questGiver != null && questGiver.destination != null) 
+           {   //questGiver.GetDestination();
+                colliderDestinatnion = questGiver.destination;
+                player.destination = questGiver.destination;
+           }
         }
     }
 

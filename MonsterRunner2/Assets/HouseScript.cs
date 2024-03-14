@@ -16,13 +16,16 @@ public class HouseScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameObject == missionManager.destination)
-        {
-            IndicatorVFX.SetActive(true);
-        }
-        else
-        {
-            IndicatorVFX.SetActive(false);
-        }
+       
+    }
+
+    public void TurnOnVFX()
+    {
+        IndicatorVFX.SetActive(true);
+    }
+
+    public void TurnOffVFX()
+    {
+        IndicatorVFX.SetActive(false);
     }
 }
