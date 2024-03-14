@@ -7,6 +7,7 @@ public class PassengerController : MonoBehaviour
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
+    public ObjectiveIndicator arrow;
 
     public missionManagerScript missionmanager;
     public bool Pickedup;
@@ -19,7 +20,8 @@ public class PassengerController : MonoBehaviour
     {
         missionmanager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         questgiver = GetComponentInChildren<QuestGiver>();
-       
+        arrow.UpdateObjective(2, passengerDestination.transform);
+        arrow.UpdateObjective(0, this.transform);
     }
 
     void TriggerHouse(bool trigger)
@@ -29,11 +31,13 @@ public class PassengerController : MonoBehaviour
         if (trigger)
         {
             selectedHouse.TurnOnVFX();
+            arrow.UpdateObjective(2, selectedHouse.gameObject.transform);
         }
         else
         {
             selectedHouse.CreateReachedVFX();
             selectedHouse.TurnOffVFX();
+            arrow.UpdateObjective(3, null);
         }
     }
 
@@ -97,7 +101,7 @@ public class PassengerController : MonoBehaviour
             {
                 rb.isKinematic = true;
             }
-
+            arrow.UpdateObjective(1, null);
             gameObject.SetActive(false);
         }
     }
