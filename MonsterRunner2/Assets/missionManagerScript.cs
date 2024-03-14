@@ -14,9 +14,12 @@ public class missionManagerScript : MonoBehaviour
     private float maxXRange = 300f; // Maximum spawning width for the x-axis
     private float minZRange = -220f; // Minimum spawning width for the z-axis
     private float maxZRange = 220f; // Maximum spawning width for the z-axis
+
+    public GameObject player; // Reference to the player GameObject
+    public float spawnRadius = 40f; // Radius around the player for spawning passengers
     void Start()
     {
-       
+        player = GameObject.FindGameObjectWithTag("Player");
         passengerCount = 0;
     }
 
@@ -59,12 +62,51 @@ public class missionManagerScript : MonoBehaviour
 
     Vector3 GetRandomPrefabPosition()
     {
-        Vector3 spawnPosition = transform.position;
-        float randomXOffset = Random.Range(minXRange, maxXRange);
-        float randomZOffset = Random.Range(minZRange, maxZRange);
-        return spawnPosition + new Vector3(randomXOffset, 0f, randomZOffset);
-    }
+        Vector3 playerPosition = player.transform.position;
 
+        RaycastHit hitGround = new RaycastHit();
+        RaycastHit hitObstacle;
+        Vector3 randomOffset = Vector3.zero;
+        bool validSpawnPosition = false;
+
+        // Try to find a valid spawn position within the spawn radius
+        int attempts = 0;
+        while (!validSpawnPosition && attempts < 10) // Limit the number of attempts to prevent infinite loops
+        {
+            // Generate random offsets within the spawn radius
+            float randomXOffset = Random.Range(-spawnRadius, spawnRadius);
+            float randomZOffset = Random.Range(-spawnRadius, spawnRadius);
+
+            randomOffset = new Vector3(randomXOffset, 0f, randomZOffset);
+
+            // Calculate spawn position around the player
+            Vector3 spawnPosition = playerPosition + randomOffset;
+
+            // Raycast down from the player's position to check if the spawn position is on the ground layer
+            if (Physics.Raycast(spawnPosition, Vector3.down, out hitGround, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                // Raycast up from the hit ground position to check for obstacles
+                if (!Physics.Raycast(hitGround.point, Vector3.up, out hitObstacle, Mathf.Infinity, LayerMask.GetMask("Obstacles")))
+                {
+                    // If no obstacles are hit, set the spawn position and exit the loop
+                    validSpawnPosition = true;
+                }
+            }
+
+            attempts++;
+        }
+
+        // If a valid spawn position is found, return it; otherwise, return a random position within the radius
+        if (validSpawnPosition)
+        {
+            return hitGround.point;
+        }
+        else
+        {
+            Debug.LogWarning("Unable to find a valid spawn position. Using random position within the radius.");
+            return playerPosition + randomOffset;
+        }
+    }
     public void CreatePassenger()
     {
         Vector3 spawnPosition = GetRandomPrefabPosition();

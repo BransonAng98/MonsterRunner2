@@ -7,11 +7,12 @@ public class PassengerController : MonoBehaviour
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
+
     public missionManagerScript missionmanager;
     public bool Pickedup;
     public GameObject passengerDestination;
     private HouseScript houseScript;
-    private float moveSpeed = 5f;
+    private float moveSpeed = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -31,10 +32,12 @@ public class PassengerController : MonoBehaviour
         }
         else
         {
+            selectedHouse.CreateReachedVFX();
             selectedHouse.TurnOffVFX();
         }
     }
 
+   
     // Update is called once per frame
     void Update()
     {
@@ -60,17 +63,19 @@ public class PassengerController : MonoBehaviour
             if (distanceToDestination < 0.5f) // Adjust the threshold as needed
             {
                 Debug.Log("ReachedHome");
+                
                 TriggerHouse(false);
+               
                 DestroyPassenger();
             }
         }
     }
 
-   
 
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag==("Player"))
+        if (other.CompareTag("Player"))
         {
             TriggerHouse(true);
             Pickedup = true;
@@ -80,14 +85,13 @@ public class PassengerController : MonoBehaviour
             Collider[] passengerCollider = GetComponentsInChildren<Collider>();
             if (passengerCollider != null)
             {
-
                 foreach (Collider collider in passengerCollider)
                 {
                     collider.enabled = false;
                 }
             }
             Debug.Log("PassengerPickedUp");
-            transform.SetParent(collision.transform);
+            transform.SetParent(other.transform);
             Rigidbody rb = GetComponent<Rigidbody>();
             if (rb != null)
             {
@@ -96,14 +100,8 @@ public class PassengerController : MonoBehaviour
 
             gameObject.SetActive(false);
         }
-
-      
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
 
     public void DestroyPassenger()
     {
