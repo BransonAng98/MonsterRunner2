@@ -23,7 +23,7 @@ TagManager:
   - Buildings
   - Monster
   - Player
-  - 
+  - DeadEnemy
   - 
   - 
   - PostProcessing
