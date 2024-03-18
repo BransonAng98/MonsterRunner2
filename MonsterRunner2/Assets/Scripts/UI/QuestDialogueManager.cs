@@ -30,7 +30,7 @@ public class QuestDialogueManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(TypeReward());
+            StartCoroutine(TypeReward(index));
         }
     }
 
@@ -45,7 +45,7 @@ public class QuestDialogueManager : MonoBehaviour
         Invoke("CloseWindow", 3f);
     }
 
-    IEnumerator TypeReward()
+    IEnumerator TypeReward(int index)
     {
         foreach (char letter in questText[index].ToCharArray())
         {
