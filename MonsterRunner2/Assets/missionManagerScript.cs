@@ -17,10 +17,13 @@ public class missionManagerScript : MonoBehaviour
 
     public GameObject player; // Reference to the player GameObject
     public float spawnRadius = 40f; // Radius around the player for spawning passengers
+
+    public GameObject buildingHolder;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         passengerCount = 0;
+        buildingHolder = GameObject.Find("Buildings");
     }
 
     private void Update()
@@ -32,19 +35,24 @@ public class missionManagerScript : MonoBehaviour
     }
     public void FindBuildingObjects()
     {
-        // Find all objects with the layer named "building"
-        GameObject[] allObjects = GameObject.FindObjectsOfType<GameObject>();
-        foreach (GameObject obj in allObjects)
+        // Find the holder object named "Building"
+        buildingHolder = GameObject.Find("Buildings");
+        if (buildingHolder == null)
         {
-            if (obj.layer == LayerMask.NameToLayer("Buildings"))
-            {
-                // Add object to the list if it's under the "building" layer
-                buildingObjectsList.Add(obj);
-            }
+            Debug.LogWarning("Building holder object not found!");
+            return;
         }
 
-        // Print the count of building objects found
-        Debug.Log("Total building objects found: " + buildingObjectsList.Count);
+        // Find all objects with the layer named "Buildings" under the "Building" holder object
+        Transform[] buildingChildren = buildingHolder.GetComponentsInChildren<Transform>();
+        foreach (Transform child in buildingChildren)
+        {
+            if (child.gameObject.layer == LayerMask.NameToLayer("Buildings"))
+            {
+                // Add the child object to the list if it's under the "Buildings" layer
+                buildingObjectsList.Add(child.gameObject);
+            }
+        }
     }
 
     public void GetCurrentPassenger()

@@ -17,8 +17,8 @@ public class EnvironmentSpawner : MonoBehaviour
     public int maxHousePrefabs; // Maximum number of house prefabs to instantiate
     public int minEnemySpawnerPrefabs;
     public int maxEnemySpawnerPrefabs;
-    private int minScale = 1; // Minimum scale for prefabs
-    private int maxScale = 1; // Maximum scale for prefabs
+    //private int minScale = 1; // Minimum scale for prefabs
+   // private int maxScale = 1; // Maximum scale for prefabs
     private float minXRange = -300f; // Minimum spawning width for the x-axis
     private float maxXRange = 300f; // Maximum spawning width for the x-axis
     private float minZRange = -220f; // Minimum spawning width for the z-axis
@@ -36,6 +36,7 @@ public class EnvironmentSpawner : MonoBehaviour
     public GameObject treeParent; // Parent object for trees
     public GameObject stoneParent; // Parent object for stones
     public GameObject houseParent; // Parent object for houses
+    public GameObject enemyspawnerHolder;
 
     public missionManagerScript missionManager;
     public GameController gamecontrollerScript;
@@ -47,35 +48,37 @@ public class EnvironmentSpawner : MonoBehaviour
         int numTreesToSpawn = Random.Range(minTreePrefabs, maxTreePrefabs + 1);
         for (int i = 0; i < numTreesToSpawn; i++)
         {
-            SpawnPrefab(Trees, instantiatedTreePositions, minTreeDistance);
-
+            SpawnPrefab(Trees, instantiatedTreePositions, minTreeDistance, treeParent);
         }
 
         // Spawn stones
         int numStonesToSpawn = Random.Range(minStonePrefabs, maxStonePrefabs + 1);
         for (int i = 0; i < numStonesToSpawn; i++)
         {
-            SpawnPrefab(Stones, instantiatedStonePositions, minStoneDistance);
+            SpawnPrefab(Stones, instantiatedStonePositions, minStoneDistance, stoneParent);
         }
 
         // Spawn houses
         int numHousesToSpawn = Random.Range(minHousePrefabs, maxHousePrefabs + 1);
         for (int i = 0; i < numHousesToSpawn; i++)
         {
-            SpawnPrefab(Houses, instantiatedHousePositions, minHouseDistance);
+            SpawnPrefab(Houses, instantiatedHousePositions, minHouseDistance, houseParent);
         }
 
+        // Spawn enemy spawners
         int numofSpawnersToSpawn = Random.Range(minEnemySpawnerPrefabs, maxEnemySpawnerPrefabs + 1);
         for (int i = 0; i < numofSpawnersToSpawn; i++)
         {
-            SpawnPrefab(enemySpawner, instantiatedSpawnerPositions, minenemySpawnerDistance);
+            SpawnPrefab(enemySpawner, instantiatedSpawnerPositions, minenemySpawnerDistance, enemyspawnerHolder);
+            // Note: In this case, no specific parent is assigned to the enemy spawners.
         }
+
 
         missionManager.FindBuildingObjects();
         gamecontrollerScript.LocateSpawners();
     }
 
-    void SpawnPrefab(GameObject[] prefabs, List<Vector3> instantiatedPositions, float minDistance)
+    void SpawnPrefab(GameObject[] prefabs, List<Vector3> instantiatedPositions, float minDistance, GameObject parentObject)
     {
         Vector3 spawnPosition = GetRandomPrefabPosition();
 
@@ -89,9 +92,8 @@ public class EnvironmentSpawner : MonoBehaviour
         GameObject prefabToSpawn = prefabs[Random.Range(0, prefabs.Length)];
         GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
 
-        // Randomize scale
-        float randomScale = Random.Range(minScale, maxScale);
-        spawnedObject.transform.localScale = new Vector3(randomScale, randomScale, randomScale);
+        // Set the parent of the instantiated object
+        spawnedObject.transform.parent = parentObject.transform;
 
         // Randomize rotation around the y-axis
         float randomYRotation = Random.Range(0f, 360f);
