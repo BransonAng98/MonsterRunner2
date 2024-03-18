@@ -7,6 +7,7 @@ public class EnvironmentSpawner : MonoBehaviour
     public GameObject[] Trees; // Array of tree prefabs to instantiate
     public GameObject[] Stones; // Array of stone prefabs to instantiate
     public GameObject[] Houses; // Array of house prefabs to instantiate
+    public GameObject[] enemySpawner;
 
     public int minTreePrefabs; // Minimum number of tree prefabs to instantiate
     public int maxTreePrefabs; // Maximum number of tree prefabs to instantiate
@@ -14,6 +15,8 @@ public class EnvironmentSpawner : MonoBehaviour
     public int maxStonePrefabs; // Maximum number of stone prefabs to instantiate
     public int minHousePrefabs; // Minimum number of house prefabs to instantiate
     public int maxHousePrefabs; // Maximum number of house prefabs to instantiate
+    public int minEnemySpawnerPrefabs;
+    public int maxEnemySpawnerPrefabs;
     private int minScale = 1; // Minimum scale for prefabs
     private int maxScale = 1; // Maximum scale for prefabs
     private float minXRange = -300f; // Minimum spawning width for the x-axis
@@ -23,19 +26,23 @@ public class EnvironmentSpawner : MonoBehaviour
     private float minTreeDistance = 10f; // Minimum distance between tree prefabs
     private float minStoneDistance = 1.0f; // Minimum distance between stone prefabs
     private float minHouseDistance = 20.0f; // Minimum distance between house prefabs
+    private float minenemySpawnerDistance = 100.0f; // Minimum distance between house prefabs
 
     [SerializeField] private List<Vector3> instantiatedTreePositions = new List<Vector3>(); // List to store positions of instantiated trees
     [SerializeField] private List<Vector3> instantiatedStonePositions = new List<Vector3>(); // List to store positions of instantiated stones
     [SerializeField] private List<Vector3> instantiatedHousePositions = new List<Vector3>(); // List to store positions of instantiated houses
+    [SerializeField] private List<Vector3> instantiatedSpawnerPositions = new List<Vector3>(); // List to store positions of instantiated houses
 
     public GameObject treeParent; // Parent object for trees
     public GameObject stoneParent; // Parent object for stones
     public GameObject houseParent; // Parent object for houses
 
     public missionManagerScript missionManager;
+    public GameController gamecontrollerScript;
     void Start()
     {
         missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
+        gamecontrollerScript = GameObject.Find("GameManager").GetComponent<GameController>();
         // Spawn trees
         int numTreesToSpawn = Random.Range(minTreePrefabs, maxTreePrefabs + 1);
         for (int i = 0; i < numTreesToSpawn; i++)
@@ -58,7 +65,14 @@ public class EnvironmentSpawner : MonoBehaviour
             SpawnPrefab(Houses, instantiatedHousePositions, minHouseDistance);
         }
 
+        int numofSpawnersToSpawn = Random.Range(minEnemySpawnerPrefabs, maxEnemySpawnerPrefabs + 1);
+        for (int i = 0; i < numofSpawnersToSpawn; i++)
+        {
+            SpawnPrefab(enemySpawner, instantiatedSpawnerPositions, minenemySpawnerDistance);
+        }
+
         missionManager.FindBuildingObjects();
+        gamecontrollerScript.LocateSpawners();
     }
 
     void SpawnPrefab(GameObject[] prefabs, List<Vector3> instantiatedPositions, float minDistance)
