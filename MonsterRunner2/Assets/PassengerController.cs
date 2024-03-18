@@ -21,13 +21,14 @@ public class PassengerController : MonoBehaviour
         missionmanager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         questgiver = GetComponentInChildren<QuestGiver>();
         arrow = GameObject.Find("ObjectiveArrow").GetComponent<ObjectiveIndicator>();
-        arrow.UpdateObjective(2, passengerDestination.transform);
+      
         arrow.UpdateObjective(0, this.transform);
+        passengerDestination = questgiver.destination;
     }
 
     void TriggerHouse(bool trigger)
     {
-        passengerDestination = questgiver.destination;
+        
         HouseScript selectedHouse = passengerDestination.GetComponent<HouseScript>();
         if (trigger)
         {

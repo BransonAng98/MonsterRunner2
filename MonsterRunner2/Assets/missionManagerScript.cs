@@ -64,7 +64,7 @@ public class missionManagerScript : MonoBehaviour
     {
         Vector3 playerPosition = player.transform.position;
 
-        RaycastHit hitGround = new RaycastHit();
+        RaycastHit hitGround = new RaycastHit(); // Initialize with default value
         RaycastHit hitObstacle;
         Vector3 randomOffset = Vector3.zero;
         bool validSpawnPosition = false;
@@ -82,13 +82,13 @@ public class missionManagerScript : MonoBehaviour
             // Calculate spawn position around the player
             Vector3 spawnPosition = playerPosition + randomOffset;
 
-            // Raycast down from the player's position to check if the spawn position is on the ground layer
+            // Raycast down from the spawn position to check if it's on the "Ground" layer
             if (Physics.Raycast(spawnPosition, Vector3.down, out hitGround, Mathf.Infinity, LayerMask.GetMask("Ground")))
             {
-                // Raycast up from the hit ground position to check for obstacles
-                if (!Physics.Raycast(hitGround.point, Vector3.up, out hitObstacle, Mathf.Infinity, LayerMask.GetMask("Obstacles")))
+                // Check if there's an obstacle within 5 units of the spawn position
+                if (!Physics.SphereCast(spawnPosition, 5f, Vector3.up, out hitObstacle, 0f, LayerMask.GetMask("Obstacles")))
                 {
-                    // If no obstacles are hit, set the spawn position and exit the loop
+                    // If no obstacles are found within 5 units, set the spawn position and exit the loop
                     validSpawnPosition = true;
                 }
             }
