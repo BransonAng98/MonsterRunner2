@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public Rigidbody rb;
     public Transform player;
     public LayerMask groundLayer;
-  
+
     public GameObject bloodSplatter;
     public Material deadMaterial;
 
@@ -29,6 +29,7 @@ public class EnemyScript : MonoBehaviour
     //[SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
     [SerializeField] private bool isDead = false; // Flag to track if the enemy is dead
     [SerializeField] private float distanceToPlayer;
+    [SerializeField] private float currentAttackTimer;
     //[SerializeField] private float cooldownDuration = 3f; // Duration of cooldown after colliding with playerr
 
     private Coroutine slowDownCoroutine;
@@ -131,10 +132,51 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (currentAttackTimer > 0f)
+            {
+                currentAttackTimer -= Time.deltaTime;
+                Debug.Log("Counting down");
+            }
+            else
+            {
+                Attack(other.gameObject);
+                currentAttackTimer = attackCD;
+                Debug.Log("Commencing attack");
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //currentAttackTimer = 0f;
+        }
+    }
+
+    void Attack(GameObject entity)
+    {
+        DemoPlayer targetPlayer = entity.GetComponentInParent<DemoPlayer>();
+
+        if (targetPlayer != null)
+        {
+            targetPlayer.GetComponent<DemoPlayer>().TakeDamage(attackDmg);
+            Debug.Log("Player taking damage");
+        }
+        else
+        {
+            Debug.Log("Unable to locate player");
+        }
+    }
+
     void DeathEffect()
     {
         Instantiate(bloodSplatter, transform.position, Quaternion.identity);
-        Destroy(gameObject,3f);
+        Destroy(gameObject, 3f);
     }
 
     void Die()
@@ -162,7 +204,7 @@ public class EnemyScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if(health <= 0)
+        if (health <= 0)
         {
             Die();
         }

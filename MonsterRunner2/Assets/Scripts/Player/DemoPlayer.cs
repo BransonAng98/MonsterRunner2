@@ -149,8 +149,6 @@ public class DemoPlayer : MonoBehaviour
             rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
 
         }
-
-
     }
 
     void GetInput()
@@ -286,7 +284,7 @@ public class DemoPlayer : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health >= 0)
+        if (health <= 0)
         {
             Death();
         }
@@ -345,7 +343,7 @@ public class DemoPlayer : MonoBehaviour
                     smoke.carSmoke.enableEmission = false;
                 }
             }
-            if (healthPercentage < 0)
+            if (healthPercentage <= 0f)
             {
                 if(smoke.playerHealth == Health.death)
                 {
@@ -367,9 +365,9 @@ public class DemoPlayer : MonoBehaviour
     void Death()
     {
         //Unparents all the wheels with the body
-        for (int i = 0; i <= transform.childCount; i++)
+        foreach(var wheel in wheels)
         {
-            transform.GetChild(1).gameObject.transform.parent = null;
+            wheel.wheelColliderl.gameObject.transform.parent = null;
         }
 
         //Add force when the car explodes

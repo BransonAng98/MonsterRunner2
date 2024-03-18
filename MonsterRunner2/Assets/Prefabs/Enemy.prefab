@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8399788647773550618}
   - component: {fileID: 8399788647773550630}
   - component: {fileID: 8399788647773550629}
+  - component: {fileID: 6521054397447799369}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -148,3 +149,17 @@ MonoBehaviour:
   isTurningLeft: 0
   isDead: 0
   distanceToPlayer: 0
+  currentAttackTimer: 0
+--- !u!135 &6521054397447799369
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8399788647773550628}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.2
+  m_Center: {x: 0, y: 0, z: 0}
