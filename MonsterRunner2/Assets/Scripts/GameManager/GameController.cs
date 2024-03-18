@@ -18,10 +18,10 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LocateSpawners();
+        //LocateSpawners();
     }
 
-    void LocateSpawners()
+    public void LocateSpawners()
     {
         GameObject[] entities = GameObject.FindGameObjectsWithTag("Spawner");
         foreach (var entity in entities)
