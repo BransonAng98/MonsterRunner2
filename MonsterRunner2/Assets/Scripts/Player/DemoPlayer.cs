@@ -343,18 +343,6 @@ public class DemoPlayer : MonoBehaviour
                     smoke.carSmoke.enableEmission = false;
                 }
             }
-            if (healthPercentage <= 0f)
-            {
-                if(smoke.playerHealth == Health.death)
-                {
-                    smoke.carSmoke.gameObject.SetActive(true);
-                    Debug.Log("Play explosion");
-                }
-                else
-                {
-                    smoke.carSmoke.gameObject.SetActive(false);
-                }
-            }
         }
     }
 
@@ -368,6 +356,19 @@ public class DemoPlayer : MonoBehaviour
         foreach(var wheel in wheels)
         {
             wheel.wheelColliderl.gameObject.transform.parent = null;
+        }
+
+        foreach (var smoke in healthSmoke)
+        {
+            if (smoke.playerHealth == Health.death)
+            {
+                smoke.carSmoke.gameObject.SetActive(true);
+                Debug.Log("Play explosion");
+            }
+            else
+            {
+                smoke.carSmoke.gameObject.SetActive(false);
+            }
         }
 
         //Add force when the car explodes
