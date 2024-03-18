@@ -8,21 +8,30 @@ public class GameMenuManager : MonoBehaviour
 {
     public int currentScene;
     public GameObject startScreen;
+    [SerializeField] bool hasStarted;
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 0f;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (hasStarted)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void LoadLevel()
     {
         SceneManager.LoadScene("TestLevel");
+        hasStarted = true;
     }
 
 
