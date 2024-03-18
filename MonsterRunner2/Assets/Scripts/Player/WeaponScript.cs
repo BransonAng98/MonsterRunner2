@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponScript : MonoBehaviour
 {
     public WeaponSO weaponData; // Reference to the ScriptableObject
     public LineRenderer lineRenderer;
     public Transform firePoint;
+
+    public Slider slider;
 
     private float nextFireTime;
     private int shotsInBurst;
@@ -24,6 +27,8 @@ public class WeaponScript : MonoBehaviour
         weaponRange = weaponData.weaponRange;
         reloadTime = weaponData.reloadTime;
         magzineSize = weaponData.magzineSize;
+        slider.maxValue = magzineSize;
+        slider.value = magzineSize;
     }
 
     void Update()
@@ -77,6 +82,7 @@ public class WeaponScript : MonoBehaviour
 
             // Increment the number of shots in the current burst
             shotsInBurst++;
+            DisplayRoundsLeft();
 
             // Check if the burst is complete
             if (shotsInBurst >= weaponData.magzineSize)
@@ -86,6 +92,9 @@ public class WeaponScript : MonoBehaviour
 
                 // Reset burst count
                 shotsInBurst = 0;
+
+                //Refills the bar during reload
+                StartCoroutine(FillSliderCoroutine());
             }
             else
             {
@@ -96,6 +105,37 @@ public class WeaponScript : MonoBehaviour
             // Disable line renderer after a short duration
             StartCoroutine(DisableLineRendererAfterDelay(0.1f));
         }
+    }
+
+    IEnumerator FillSliderCoroutine()
+    {
+        float timer = 0f;
+        float currentValue;
+        while (timer < weaponData.reloadTime)
+        {
+            // Calculate the progress based on the current time and the fill duration
+            float progress = timer / weaponData.reloadTime;
+
+            // Use Mathf.Lerp to smoothly interpolate between the current value and the max value
+            currentValue = Mathf.Lerp(slider.value, slider.maxValue, progress);
+
+            // Update the slider value
+            slider.value = currentValue;
+
+            // Increment the timer
+            timer += Time.deltaTime;
+
+            yield return null;
+        }
+
+        // Ensure the slider reaches its maximum value exactly
+        slider.value = magzineSize;
+    }
+
+    void DisplayRoundsLeft()
+    {
+        float currentRoundValue = (magzineSize - shotsInBurst);
+        slider.value = currentRoundValue;
     }
 
     IEnumerator DisableLineRendererAfterDelay(float delay)
