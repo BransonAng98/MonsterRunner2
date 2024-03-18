@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+
 
 public class QuestGiver : MonoBehaviour
 {
@@ -9,9 +11,9 @@ public class QuestGiver : MonoBehaviour
     public DemoPlayer player;
     public GameObject destination;
     public GameObject questWindow;
-    public Text titleText;
-    public Text descriptionText;
-    public Text rewardText;
+    public TextMeshProUGUI titleText;
+    public TextMeshProUGUI descriptionText;
+    public TextMeshProUGUI rewardText;
     public missionManagerScript missionManager; public List<GameObject> buildingObjects;
 
     private void Awake()
@@ -20,15 +22,16 @@ public class QuestGiver : MonoBehaviour
         missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         buildingObjects = GameObject.FindObjectOfType<missionManagerScript>().buildingObjectsList;
         GetDestination();
-      
+
+        questWindow = GameObject.Find("ObjectiveDisplay");
+        titleText = questWindow.transform.Find("ObjectiveText").GetComponent<TextMeshProUGUI>();
     }
 
     public void OpenQuestWindow()
     {
         questWindow.SetActive(true);
-        titleText.text = quest.title;
-        descriptionText.text = quest.description;
-        rewardText.text = quest.repairReward;
+        titleText.text = quest.title.ToString();
+        
     }
 
     public void AcceptQuest()
