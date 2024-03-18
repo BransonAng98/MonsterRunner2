@@ -109,7 +109,11 @@ public class DemoPlayer : MonoBehaviour
     public float distanceThreshold = 30f; // Adjust this value as needed
 
     public PlayerCollider playercollider;
+    public QuestDialogueManager questdialogueScript;
     Rigidbody rb;
+
+    public bool destinationReached; // Flag to track if destination has been reached
+
 
     private void Awake()
     {
@@ -118,6 +122,7 @@ public class DemoPlayer : MonoBehaviour
         maxAcceleration = playerData.acceleration;
         maxSpeed = playerData.maxSpeed;
         playercollider = GetComponentInChildren<PlayerCollider>();
+        questdialogueScript = GameObject.Find("MissionManager").GetComponent<QuestDialogueManager>();
     }
 
     // Start is called before the first frame update
@@ -409,13 +414,15 @@ public class DemoPlayer : MonoBehaviour
         GetInput();
         AnimateWheels();
         CheckHealthState();
-        if (destination != null)
+
+        if (!destinationReached && destination != null) // Check if destination has not been reached and destination is not null
         {
             distance = Vector3.Distance(transform.position, destination.transform.position);
+
             if (distance < distanceThreshold)
             {
-                // Call your function here
                 DestinationReached();
+                destinationReached = true; // Set the flag to true to indicate that the destination has been reached
             }
         }
     }
@@ -424,6 +431,8 @@ public class DemoPlayer : MonoBehaviour
     {
         if (passenger != null)
         {
+            int index = UnityEngine.Random.Range(0, 1);
+            questdialogueScript.TypeText(false, index);
             quest.Complete();
             passenger.SetActive(true);
             passenger.transform.parent = null;
