@@ -20,6 +20,12 @@ public class GameMenuManager : MonoBehaviour
         
     }
 
+    public void LoadLevel()
+    {
+        SceneManager.LoadScene("TestLevel");
+    }
+
+
     public void StartGame()
     {
         Time.timeScale = 1f;
