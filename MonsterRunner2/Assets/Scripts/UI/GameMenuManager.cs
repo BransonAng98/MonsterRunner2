@@ -8,11 +8,19 @@ public class GameMenuManager : MonoBehaviour
 {
     public int currentScene;
     public GameObject startScreen;
+    public GameObject defeatScreen;
     [SerializeField] bool hasStarted;
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-
+        if(defeatScreen != null)
+        {
+            defeatScreen.SetActive(false);
+        }
+        else
+        {
+            return;
+        }
     }
 
     // Update is called once per frame
@@ -56,4 +64,5 @@ public class GameMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
 }

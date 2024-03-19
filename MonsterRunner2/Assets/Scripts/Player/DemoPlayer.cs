@@ -110,6 +110,7 @@ public class DemoPlayer : MonoBehaviour
 
     public PlayerCollider playercollider;
     public QuestDialogueManager questdialogueScript;
+    public GameMenuManager menuManager;
     Rigidbody rb;
 
     public bool destinationReached; // Flag to track if destination has been reached
@@ -123,6 +124,8 @@ public class DemoPlayer : MonoBehaviour
         maxSpeed = playerData.maxSpeed;
         playercollider = GetComponentInChildren<PlayerCollider>();
         questdialogueScript = GameObject.Find("MissionManager").GetComponent<QuestDialogueManager>();
+        menuManager = GameObject.Find("GameManager").GetComponent<GameMenuManager>();
+
     }
 
     // Start is called before the first frame update
@@ -382,6 +385,8 @@ public class DemoPlayer : MonoBehaviour
         //Disables the demoplayer code so it stops moving and everything else
         this.GetComponent<DemoPlayer>().enabled = false;
         this.GetComponent<WeaponScript>().enabled = false;
+
+        Invoke(nameof(OpenDefeatScreen), 1.5f);
     }
 
     void Explode()
@@ -402,6 +407,11 @@ public class DemoPlayer : MonoBehaviour
                 rb.AddForce(direction * explosionForce, ForceMode.Impulse);
             }
         }
+    }
+
+    void OpenDefeatScreen()
+    {
+        menuManager.defeatScreen.SetActive(true);
     }
 
     public void releaseWheel()
