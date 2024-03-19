@@ -72,6 +72,7 @@ public class DemoPlayer : MonoBehaviour
     [SerializeField] float maxHealth;
     [SerializeField] float maxAcceleration;
     [SerializeField] float maxSpeed;
+    [SerializeField] float crashDamage;
     public LayerMask enemyLayer;
 
     public float explosionForce = 1000f; // Force of the explosion
@@ -122,10 +123,10 @@ public class DemoPlayer : MonoBehaviour
         maxHealth = playerData.health;
         maxAcceleration = playerData.acceleration;
         maxSpeed = playerData.maxSpeed;
+        crashDamage = 150f - playerData.crashResistance;
         playercollider = GetComponentInChildren<PlayerCollider>();
         questdialogueScript = GameObject.Find("MissionManager").GetComponent<QuestDialogueManager>();
         menuManager = GameObject.Find("GameManager").GetComponent<GameMenuManager>();
-
     }
 
     // Start is called before the first frame update
@@ -139,23 +140,24 @@ public class DemoPlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("Collided");
+            //// Calculate knockback direction based on collision point
+            //Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
+            //Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
+            //Instantiate(impactVFX, spawnPos, Quaternion.identity);
+            //knockbackDirection.Normalize();
 
-            // Calculate knockback direction based on collision point
-            Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
-            Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
-            Instantiate(impactVFX, spawnPos, Quaternion.identity);
-            knockbackDirection.Normalize();
+            //// Calculate knockback force based on collision impact force
+            //float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
 
-            // Calculate knockback force based on collision impact force
-            float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
+            //// If knockback force is less than the minimum, use the minimum force instead
+            //knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
 
-            // If knockback force is less than the minimum, use the minimum force instead
-            knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
+            //// Apply knockback force
+            //rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
 
-            // Apply knockback force
-            rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-
+            EnvoCollision trigger = collision.gameObject.GetComponentInChildren<EnvoCollision>();
+            TakeDamage(crashDamage);
+            trigger.Collided();
         }
     }
 

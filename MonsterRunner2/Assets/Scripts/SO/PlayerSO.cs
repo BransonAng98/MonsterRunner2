@@ -9,4 +9,5 @@ public class PlayerSO : ScriptableObject
     public float maxSpeed;
     public float acceleration;
     public float damage;
+    public float crashResistance;
 }

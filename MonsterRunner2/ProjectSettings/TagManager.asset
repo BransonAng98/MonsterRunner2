@@ -24,7 +24,7 @@ TagManager:
   - Monster
   - Player
   - DeadEnemy
-  - 
+  - Untouchable
   - 
   - PostProcessing
   - 
