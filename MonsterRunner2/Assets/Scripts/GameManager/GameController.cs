@@ -99,7 +99,7 @@ public class GameController : MonoBehaviour
 
         if(currentGameTime >= spawnInterval && !delayedSpawn)
         {
-            spawnAmt += 5;
+           // spawnAmt += 5;
             if (!delayedSpawn)
             {
                 TriggerSpawn();

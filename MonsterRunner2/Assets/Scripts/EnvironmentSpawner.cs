@@ -83,9 +83,9 @@ public class EnvironmentSpawner : MonoBehaviour
         Vector3 spawnPosition = GetRandomPrefabPosition();
 
         // Check if the spawn position is too close to previously instantiated objects
-        while (IsTooClose(spawnPosition, instantiatedPositions, minDistance))
+        while (IsTooClose(spawnPosition, instantiatedPositions, minDistance) || IsTooCloseToTrees(spawnPosition, instantiatedTreePositions, 5f))
         {
-            // If too close, get a new position
+            // If too close to any existing object or tree, get a new position
             spawnPosition = GetRandomPrefabPosition();
         }
 
@@ -110,6 +110,17 @@ public class EnvironmentSpawner : MonoBehaviour
         return spawnPosition + new Vector3(randomXOffset, 0f, randomZOffset);
     }
 
+    bool IsTooCloseToTrees(Vector3 position, List<Vector3> treePositions, float minDistance)
+    {
+        foreach (Vector3 treePosition in treePositions)
+        {
+            if (Vector3.Distance(position, treePosition) < minDistance)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     bool IsTooClose(Vector3 position, List<Vector3> instantiatedPositions, float minDistance)
     {
         foreach (Vector3 instantiatedPosition in instantiatedPositions)

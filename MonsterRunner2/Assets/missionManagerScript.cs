@@ -19,7 +19,7 @@ public class missionManagerScript : MonoBehaviour
 
     public GameObject player; // Reference to the player GameObject
     public float spawnRadius = 40f; // Radius around the player for spawning passengers
-
+    private float minimumObstacleDistance = 20f;
     public GameObject buildingHolder;
     void Start()
     {
@@ -107,8 +107,26 @@ public class missionManagerScript : MonoBehaviour
         // Ensure that the y-component is always 0
         spawnPosition.y = 0f;
 
+        // Check for obstacles within a certain radius
+        Collider[] colliders = Physics.OverlapSphere(spawnPosition, minimumObstacleDistance);
+        foreach (Collider collider in colliders)
+        {
+            // If the collider is tagged as an obstacle
+            if (collider.CompareTag("Obstacle"))
+            {
+                // Adjust spawn position to be at least minimumObstacleDistance away from the obstacle
+                Vector3 directionToObstacle = spawnPosition - collider.transform.position;
+                float distanceToObstacle = directionToObstacle.magnitude;
+                if (distanceToObstacle < minimumObstacleDistance)
+                {
+                    spawnPosition += directionToObstacle.normalized * (minimumObstacleDistance - distanceToObstacle);
+                }
+            }
+        }
+
         return spawnPosition;
     }
+
     public void CreatePassenger()
     {
         Vector3 spawnPosition = GetRandomPrefabPosition();

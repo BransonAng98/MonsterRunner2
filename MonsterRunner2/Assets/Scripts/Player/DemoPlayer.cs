@@ -442,6 +442,7 @@ public class DemoPlayer : MonoBehaviour
     {
         if (passenger != null)
         {
+            RestoreHealth();
             int index = UnityEngine.Random.Range(0, 1);
             questdialogueScript.TypeText(false, index);
             quest.Complete();
@@ -451,6 +452,23 @@ public class DemoPlayer : MonoBehaviour
         }
     }
 
+    public void RestoreHealth()
+    {
+        // Calculate the amount of health to restore
+        float healthToAdd = 150;
+
+        // Check if adding the health will exceed the maximum health
+        if (health + healthToAdd > maxHealth)
+        {
+            // If it will exceed, set the health to the maximum value
+            health = maxHealth;
+        }
+        else
+        {
+            // Otherwise, add the health
+            health += healthToAdd;
+        }
+    }
     private void LateUpdate()
     {
         Move();
