@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - Spawner
   - Passenger
+  - GameManager
   layers:
   - Default
   - TransparentFX

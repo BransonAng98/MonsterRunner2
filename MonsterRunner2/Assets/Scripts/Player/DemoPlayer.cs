@@ -135,6 +135,7 @@ public class DemoPlayer : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass;
+        this.GetComponent<WeaponScript>().enabled = false;
     }
 
     private void OnCollisionEnter(Collision collision)

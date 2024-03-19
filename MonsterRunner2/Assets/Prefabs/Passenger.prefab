@@ -47,10 +47,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af006058c16a654cb322df0b1438d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunType: 1
   questgiver: {fileID: 0}
   idleVFX: {fileID: 2230594769260699487}
   PickupVFX: {fileID: 8213002756312529545, guid: a592cfbe01fb3314a92736d7024e9fdc,
     type: 3}
+  arrow: {fileID: 0}
+  gunSystem: {fileID: 0}
   missionmanager: {fileID: 0}
   Pickedup: 0
   passengerDestination: {fileID: 0}
@@ -259,17 +262,12 @@ MonoBehaviour:
   quest:
     isActive: 0
     title: Deliver Me
-    description: Deliver Me
-    repairReward: Thanks
     goal:
       goaltype: 1
       DestinationReached: 0
       destination: {fileID: 0}
   player: {fileID: 0}
   destination: {fileID: 0}
-  questWindow: {fileID: 0}
-  titleText: {fileID: 0}
-  descriptionText: {fileID: 0}
-  rewardText: {fileID: 0}
+  questDialogue: {fileID: 0}
   missionManager: {fileID: 0}
   buildingObjects: []
