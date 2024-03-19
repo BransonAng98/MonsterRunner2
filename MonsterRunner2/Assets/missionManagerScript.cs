@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class missionManagerScript : MonoBehaviour
 {
+    public GameObject groundObject;
+
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
     public QuestGiver questgiverEnitity;
@@ -21,6 +23,7 @@ public class missionManagerScript : MonoBehaviour
     public GameObject buildingHolder;
     void Start()
     {
+        groundObject = GameObject.Find("Ground");
         player = GameObject.FindGameObjectWithTag("Player");
         passengerCount = 0;
         buildingHolder = GameObject.Find("Buildings");
@@ -71,49 +74,40 @@ public class missionManagerScript : MonoBehaviour
     Vector3 GetRandomPrefabPosition()
     {
         Vector3 playerPosition = player.transform.position;
+        Vector3 randomOffset = Random.insideUnitSphere * (spawnRadius - 10f); // Subtract 10 units from the spawn radius
 
-        RaycastHit hitGround = new RaycastHit(); // Initialize with default value
-        RaycastHit hitObstacle;
-        Vector3 randomOffset = Vector3.zero;
-        bool validSpawnPosition = false;
-
-        // Try to find a valid spawn position within the spawn radius
-        int attempts = 0;
-        while (!validSpawnPosition && attempts < 10) // Limit the number of attempts to prevent infinite loops
+        // Ensure that the random offset is within the bounds of the ground object
+        Vector3 spawnPosition = playerPosition + randomOffset;
+        if (groundObject != null)
         {
-            // Generate random offsets within the spawn radius
-            float randomXOffset = Random.Range(-spawnRadius, spawnRadius);
-            float randomZOffset = Random.Range(-spawnRadius, spawnRadius);
-
-            randomOffset = new Vector3(randomXOffset, 0f, randomZOffset);
-
-            // Calculate spawn position around the player
-            Vector3 spawnPosition = playerPosition + randomOffset;
-
-            // Raycast down from the spawn position to check if it's on the "Ground" layer
-            if (Physics.Raycast(spawnPosition, Vector3.down, out hitGround, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            Renderer groundRenderer = groundObject.GetComponent<Renderer>();
+            if (groundRenderer != null)
             {
-                // Check if there's an obstacle within 5 units of the spawn position
-                if (!Physics.SphereCast(spawnPosition, 5f, Vector3.up, out hitObstacle, 0f, LayerMask.GetMask("Obstacles")))
-                {
-                    // If no obstacles are found within 5 units, set the spawn position and exit the loop
-                    validSpawnPosition = true;
-                }
+                Bounds groundBounds = groundRenderer.bounds;
+                // Adjust the bounds by 10 units
+                float minX = groundBounds.min.x + 10f;
+                float maxX = groundBounds.max.x - 10f;
+                float minZ = groundBounds.min.z + 10f;
+                float maxZ = groundBounds.max.z - 10f;
+
+                // Clamp the spawn position within the adjusted bounds
+                spawnPosition.x = Mathf.Clamp(spawnPosition.x, minX, maxX);
+                spawnPosition.z = Mathf.Clamp(spawnPosition.z, minZ, maxZ);
             }
-
-            attempts++;
-        }
-
-        // If a valid spawn position is found, return it; otherwise, return a random position within the radius
-        if (validSpawnPosition)
-        {
-            return hitGround.point;
+            else
+            {
+                Debug.LogWarning("Ground object does not have a Renderer component!");
+            }
         }
         else
         {
-            Debug.LogWarning("Unable to find a valid spawn position. Using random position within the radius.");
-            return playerPosition + randomOffset;
+            Debug.LogWarning("Ground object reference is null!");
         }
+
+        // Ensure that the y-component is always 0
+        spawnPosition.y = 0f;
+
+        return spawnPosition;
     }
     public void CreatePassenger()
     {
