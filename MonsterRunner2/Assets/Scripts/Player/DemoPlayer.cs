@@ -419,7 +419,7 @@ public class DemoPlayer : MonoBehaviour
         {
             distance = Vector3.Distance(transform.position, destination.transform.position);
 
-            if (distance < distanceThreshold)
+            if (distance <= distanceThreshold)
             {
                 DestinationReached();
                 destinationReached = true; // Set the flag to true to indicate that the destination has been reached

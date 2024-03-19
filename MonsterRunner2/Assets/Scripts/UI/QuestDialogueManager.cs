@@ -6,12 +6,14 @@ using TMPro;
 
 public class QuestDialogueManager : MonoBehaviour
 {
+
     public GameObject questWindow;
     public TextMeshProUGUI descriptionText;
     public string[] questText;
     public string[] rewardText;
 
     public float textSpd;
+    public bool isAccepting; // Public variable declaration
 
     // Start is called before the first frame update
     private void Awake()
@@ -23,6 +25,8 @@ public class QuestDialogueManager : MonoBehaviour
     {
         questWindow.SetActive(true);
         descriptionText.text = string.Empty;
+
+        this.isAccepting = isAccepting; // Assigning the passed value to the public variable
 
         if (isAccepting)
         {
@@ -47,7 +51,7 @@ public class QuestDialogueManager : MonoBehaviour
 
     IEnumerator TypeReward(int index)
     {
-        foreach (char letter in questText[index].ToCharArray())
+        foreach (char letter in rewardText[index].ToCharArray()) // Changed to rewardText
         {
             descriptionText.text += letter;
             yield return new WaitForSeconds(textSpd); // Adjust speed here
