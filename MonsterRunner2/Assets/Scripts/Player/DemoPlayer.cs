@@ -82,6 +82,7 @@ public class DemoPlayer : MonoBehaviour
 
     public float turnSensitivity;
     public float maxSteeringAngle;
+    public bool isDead;
 
     public Vector3 centerOfMass;
 
@@ -296,6 +297,7 @@ public class DemoPlayer : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            isDead = true;
             Death();
         }
     }

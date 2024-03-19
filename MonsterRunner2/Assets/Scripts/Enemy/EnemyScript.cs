@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour
     public float rotationSpeed;
     public Rigidbody rb;
     public Transform player;
+    public DemoPlayer playerData;
     public LayerMask groundLayer;
 
     public GameObject bloodSplatter;
@@ -37,6 +38,7 @@ public class EnemyScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
+        playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
         groundLayer = LayerMask.GetMask("Ground");
         CanMove = true;
 
@@ -50,7 +52,7 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         // If player is null or the enemy is dead, return early
-        if (player == null || isDead)
+        if (player == null || isDead || playerData.isDead)
             return;
         else
         {
