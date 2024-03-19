@@ -52,6 +52,16 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
+        if(playerData == null)
+        {
+            Debug.LogError("Player not found");
+        }
+
+        else
+        {
+            return;
+        }
+
         // If player is null or the enemy is dead, return early
         if (player == null || isDead || playerData.isDead)
             return;

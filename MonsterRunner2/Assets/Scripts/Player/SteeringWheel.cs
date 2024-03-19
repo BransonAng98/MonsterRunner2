@@ -142,6 +142,11 @@ public class SteeringWheel : MonoBehaviour
         wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
         // Update the previous angle for the next frame
         wheelPrevAngle = wheelNewAngle;
+
+        if(player == null)
+        {
+            Debug.LogError();
+        }
     }
 
     public void ReleaseEvent(BaseEventData eventData)
