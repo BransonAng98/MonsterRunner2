@@ -10,6 +10,8 @@ public class WeaponScript : MonoBehaviour
     public Transform firePoint;
 
     public Slider slider;
+    public Image sliderImage;
+    public Image sliderFillImage;
 
     private float nextFireTime;
     private int shotsInBurst;
@@ -28,7 +30,7 @@ public class WeaponScript : MonoBehaviour
         reloadTime = weaponData.reloadTime;
         magzineSize = weaponData.magzineSize;
         slider.maxValue = magzineSize;
-        slider.value = magzineSize;
+        slider.value = 0f;
     }
 
     void Update()
@@ -82,7 +84,6 @@ public class WeaponScript : MonoBehaviour
 
             // Increment the number of shots in the current burst
             shotsInBurst++;
-            DisplayRoundsLeft();
 
             // Check if the burst is complete
             if (shotsInBurst >= weaponData.magzineSize)
@@ -92,7 +93,8 @@ public class WeaponScript : MonoBehaviour
 
                 // Reset burst count
                 shotsInBurst = 0;
-
+                slider.value = 0;
+                StartCoroutine(FadeImage(sliderImage, sliderFillImage, sliderImage.color.a, 1f, reloadTime));
                 //Refills the bar during reload
                 StartCoroutine(FillSliderCoroutine());
             }
@@ -105,6 +107,22 @@ public class WeaponScript : MonoBehaviour
             // Disable line renderer after a short duration
             StartCoroutine(DisableLineRendererAfterDelay(0.1f));
         }
+    }
+
+    IEnumerator FadeImage(Image image1, Image image2, float startAlpha, float targetAlpha, float duration)
+    {
+        float startTime = Time.time;
+        while (Time.time < startTime + duration)
+        {
+            Color newColor = image1.color;
+            newColor.a = Mathf.Lerp(startAlpha, targetAlpha, (Time.time - startTime) / duration);
+            image1.color = newColor;
+            yield return null;
+        }
+        Color finalColor = image1.color;
+        finalColor.a = targetAlpha;
+        image1.color = finalColor;
+        image2.color = finalColor;
     }
 
     IEnumerator FillSliderCoroutine()
@@ -130,12 +148,7 @@ public class WeaponScript : MonoBehaviour
 
         // Ensure the slider reaches its maximum value exactly
         slider.value = magzineSize;
-    }
-
-    void DisplayRoundsLeft()
-    {
-        float currentRoundValue = (magzineSize - shotsInBurst);
-        slider.value = currentRoundValue;
+        StartCoroutine(FadeImage(sliderImage, sliderFillImage, sliderImage.color.a, 0f, 0.3f));
     }
 
     IEnumerator DisableLineRendererAfterDelay(float delay)
