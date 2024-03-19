@@ -16,3 +16,4 @@ MonoBehaviour:
   maxSpeed: 15
   acceleration: 1000
   damage: 5
+  crashResistance: 30

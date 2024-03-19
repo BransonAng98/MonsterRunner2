@@ -22,7 +22,18 @@ public class WeaponScript : MonoBehaviour
     [SerializeField] float reloadTime;
     [SerializeField] int magzineSize;
 
-    private void Awake()
+    //private void Awake()
+    //{
+    //    fireRate = weaponData.fireRate;
+    //    maxOffsetDistance = weaponData.maxOffsetDistance;
+    //    weaponRange = weaponData.weaponRange;
+    //    reloadTime = weaponData.reloadTime;
+    //    magzineSize = weaponData.magzineSize;
+    //    slider.maxValue = magzineSize;
+    //    slider.value = 0f;
+    //}
+
+    public void AssignValues()
     {
         fireRate = weaponData.fireRate;
         maxOffsetDistance = weaponData.maxOffsetDistance;

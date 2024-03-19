@@ -163,3 +163,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.41, y: 2.0380418, z: 0.37}
   m_Center: {x: -0.016879678, y: 1.0190209, z: 0}
+--- !u!114 &2719000923067219603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8956208313681169011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efb6430a2082e9b4d9f5b488a18995e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDestroyed: 0
+  isBox: 1
+  layerData: 
+  renderer: {fileID: 0}
+  collider: {fileID: 0}
+  distanceThreshold: 30

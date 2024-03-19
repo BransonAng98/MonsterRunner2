@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PassengerController : MonoBehaviour
 {
+    public int gunType;
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
     public ObjectiveIndicator arrow;
-
+    public GunSystem gunSystem;
     public missionManagerScript missionmanager;
     public bool Pickedup;
     public GameObject passengerDestination;
@@ -21,7 +22,7 @@ public class PassengerController : MonoBehaviour
         missionmanager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         questgiver = GetComponentInChildren<QuestGiver>();
         arrow = GameObject.Find("ObjectiveArrow").GetComponent<ObjectiveIndicator>();
-      
+        gunSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GunSystem>();
         arrow.UpdateObjective(0, this.transform);
         passengerDestination = questgiver.destination;
     }
@@ -71,7 +72,7 @@ public class PassengerController : MonoBehaviour
                 Debug.Log("ReachedHome");
                 
                 TriggerHouse(false);
-               
+                gunSystem.UpdateGunInfo(0);
                 DestroyPassenger();
             }
         }
@@ -81,6 +82,7 @@ public class PassengerController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            gunSystem.UpdateGunInfo(gunType);
             TriggerHouse(true);
             Pickedup = true;
             idleVFX.SetActive(false);

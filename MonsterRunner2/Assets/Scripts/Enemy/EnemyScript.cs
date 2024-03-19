@@ -7,8 +7,9 @@ public class EnemyScript : MonoBehaviour
     public float rotationSpeed;
     public Rigidbody rb;
     public Transform player;
+    public DemoPlayer playerData;
     public LayerMask groundLayer;
-
+    public GameController gameController;
     public GameObject bloodSplatter;
     public Material deadMaterial;
 
@@ -37,6 +38,8 @@ public class EnemyScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
+        playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
+        gameController = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameController>();
         groundLayer = LayerMask.GetMask("Ground");
         CanMove = true;
 
@@ -50,7 +53,7 @@ public class EnemyScript : MonoBehaviour
     void Update()
     {
         // If player is null or the enemy is dead, return early
-        if (player == null || isDead)
+        if (player == null || isDead || playerData.isDead)
             return;
         else
         {
@@ -184,7 +187,6 @@ public class EnemyScript : MonoBehaviour
         DeathEffect();
         isDead = true; // Set the enemy as dead
         CanMove = false; // Stop the enemy's movement
-
         // Change material to deadMaterial
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null && deadMaterial != null)
@@ -206,6 +208,7 @@ public class EnemyScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            gameController.UpdateEnemyList(this.gameObject);
             Die();
         }
         else
