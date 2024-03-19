@@ -381,6 +381,7 @@ public class DemoPlayer : MonoBehaviour
 
         //Disables the demoplayer code so it stops moving and everything else
         this.GetComponent<DemoPlayer>().enabled = false;
+        this.GetComponent<WeaponScript>().enabled = false;
     }
 
     void Explode()

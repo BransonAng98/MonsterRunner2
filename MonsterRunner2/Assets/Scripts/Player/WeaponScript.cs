@@ -94,7 +94,6 @@ public class WeaponScript : MonoBehaviour
                 // Reset burst count
                 shotsInBurst = 0;
                 slider.value = 0;
-                StartCoroutine(FadeImage(sliderImage, sliderFillImage, sliderImage.color.a, 1f, reloadTime));
                 //Refills the bar during reload
                 StartCoroutine(FillSliderCoroutine());
             }
@@ -117,6 +116,7 @@ public class WeaponScript : MonoBehaviour
             Color newColor = image1.color;
             newColor.a = Mathf.Lerp(startAlpha, targetAlpha, (Time.time - startTime) / duration);
             image1.color = newColor;
+            image2.color = newColor;
             yield return null;
         }
         Color finalColor = image1.color;
@@ -127,12 +127,13 @@ public class WeaponScript : MonoBehaviour
 
     IEnumerator FillSliderCoroutine()
     {
+        StartCoroutine(FadeImage(sliderImage, sliderFillImage, sliderImage.color.a, 1f, 0.5f));
         float timer = 0f;
         float currentValue;
-        while (timer < weaponData.reloadTime)
+        while (timer < reloadTime - 0.5f)
         {
             // Calculate the progress based on the current time and the fill duration
-            float progress = timer / weaponData.reloadTime;
+            float progress = timer / reloadTime - 0.5f;
 
             // Use Mathf.Lerp to smoothly interpolate between the current value and the max value
             currentValue = Mathf.Lerp(slider.value, slider.maxValue, progress);
@@ -148,7 +149,7 @@ public class WeaponScript : MonoBehaviour
 
         // Ensure the slider reaches its maximum value exactly
         slider.value = magzineSize;
-        StartCoroutine(FadeImage(sliderImage, sliderFillImage, sliderImage.color.a, 0f, 0.3f));
+        StartCoroutine(FadeImage(sliderImage, sliderFillImage, sliderImage.color.a, 0f, 0.2f));
     }
 
     IEnumerator DisableLineRendererAfterDelay(float delay)
