@@ -39,7 +39,7 @@ public class SteeringWheel : MonoBehaviour
     {
         rectT = UI_Element.rectTransform;
         InitEventsSystem();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
+        //player = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
     }
 
     void Update()
@@ -145,7 +145,7 @@ public class SteeringWheel : MonoBehaviour
 
         if(player == null)
         {
-            Debug.LogError();
+            Debug.LogError("Player Not Found");
         }
     }
 
