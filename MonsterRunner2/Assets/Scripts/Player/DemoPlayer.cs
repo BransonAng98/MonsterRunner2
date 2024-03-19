@@ -99,6 +99,7 @@ public class DemoPlayer : MonoBehaviour
     float steerInput;
 
     public bool inputSteer;
+    public bool isTriggered;
     public float knockBack;
     public float minimumKnockBack;
 
@@ -138,6 +139,17 @@ public class DemoPlayer : MonoBehaviour
         this.GetComponent<WeaponScript>().enabled = false;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        EnvoCollision trigger = other.gameObject.GetComponentInChildren<EnvoCollision>();
+        trigger.Collided();
+        if (!isTriggered)
+        {
+            isTriggered = true;
+            TakeDamage(crashDamage);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
@@ -157,9 +169,9 @@ public class DemoPlayer : MonoBehaviour
             //// Apply knockback force
             //rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
 
-            EnvoCollision trigger = collision.gameObject.GetComponentInChildren<EnvoCollision>();
-            TakeDamage(crashDamage);
-            trigger.Collided();
+            //EnvoCollision trigger = collision.gameObject.GetComponentInChildren<EnvoCollision>();
+            //TakeDamage(crashDamage);
+            //trigger.Collided();
         }
     }
 
@@ -391,7 +403,7 @@ public class DemoPlayer : MonoBehaviour
         this.GetComponent<DemoPlayer>().enabled = false;
         this.GetComponent<WeaponScript>().enabled = false;
 
-        Invoke(nameof(OpenDefeatScreen), 1.5f);
+        Invoke(nameof(OpenDefeatScreen), 4.5f);
     }
 
     void Explode()

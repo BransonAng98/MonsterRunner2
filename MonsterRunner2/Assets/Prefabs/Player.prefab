@@ -468,13 +468,16 @@ MonoBehaviour:
   maxHealth: 0
   maxAcceleration: 0
   maxSpeed: 0
+  crashDamage: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 0
+  collisionVFX: {fileID: 0}
   explosionForce: 1000
   explosionRadius: 5
   turnSensitivity: 6
   maxSteeringAngle: 9
+  isDead: 0
   centerOfMass: {x: 0, y: 0, z: -0.3}
   wheels:
   - wheelModel: {fileID: 199816021381903277}

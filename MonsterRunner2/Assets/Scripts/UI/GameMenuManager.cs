@@ -21,19 +21,14 @@ public class GameMenuManager : MonoBehaviour
         {
             return;
         }
+
+        Time.timeScale = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (hasStarted)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            return;
-        }
+
     }
 
     public void LoadLevel()

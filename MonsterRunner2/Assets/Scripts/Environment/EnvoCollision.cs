@@ -6,36 +6,35 @@ public class EnvoCollision : MonoBehaviour
 {
     public bool isDestroyed;
     public bool isBox;
-    public string layerData;
     public MeshRenderer renderer;
     public Collider collider;
     public float distanceThreshold;
-
+    public ParticleSystem collisionVFX;
     private Transform player;
     // Start is called before the first frame update
     void Start()
     {
-        layerData = this.gameObject.layer.ToString();
         renderer = GetComponent<MeshRenderer>();
 
-        if (isBox)
-        {
-            collider = GetComponent<BoxCollider>();
-        }
-        else
-        {
-            collider = GetComponent<MeshCollider>();
-        }
+        //if (isBox)
+        //{
+        //    collider = GetComponent<BoxCollider>();
+        //}
+        //else
+        //{
+        //    collider = GetComponent<MeshCollider>();
+        //}
 
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     public void Collided()
     {
+        collider.enabled = false;
+        collisionVFX.Play();
         isDestroyed = true;
-        gameObject.layer = LayerMask.NameToLayer("Untouchable");
-        GetComponent<Collider>().isTrigger = true;
         renderer.enabled = false;
+        player.GetComponent<DemoPlayer>().isTriggered = false;
     }
 
     private bool DistanceBetween()
@@ -52,8 +51,7 @@ public class EnvoCollision : MonoBehaviour
             if (DistanceBetween())
             {
                 //Player is x distance away of this gameobject
-                gameObject.layer = LayerMask.NameToLayer(layerData);
-                GetComponent<Collider>().isTrigger = false;
+                collider.enabled = true;
                 renderer.enabled = true;
             }
 
