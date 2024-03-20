@@ -13,7 +13,15 @@ public class EnemySpawner : MonoBehaviour
     {
         for(int i = 0; i < amt; i++)
         {
-            Instantiate(enemyPf, transform.position, Quaternion.identity);
+            GameObject spawnedEnemy = Instantiate(enemyPf, transform.position, Quaternion.identity);
+            EnemyScript enemyScript = spawnedEnemy.GetComponent<EnemyScript>();
+
+            if(enemyScript != null)
+            {
+                enemyScript.player = playerPos;
+                enemyScript.playerData = playerData;
+                enemyScript.gameController = gameController;
+            }
         }   
     }
 }

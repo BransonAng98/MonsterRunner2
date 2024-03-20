@@ -15,7 +15,6 @@ public class EnvoCollision : MonoBehaviour
     void Start()
     {
         renderer = GetComponent<MeshRenderer>();
-
     }
 
     public void Collided()
