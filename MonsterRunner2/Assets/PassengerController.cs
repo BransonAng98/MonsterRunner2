@@ -5,7 +5,8 @@ using UnityEngine;
 public class PassengerController : MonoBehaviour
 {
     public int gunType;
-    
+
+    public DemoPlayer playerscript;
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
@@ -13,6 +14,7 @@ public class PassengerController : MonoBehaviour
     public ObjectiveIndicator arrow;
     public GunSystem gunSystem;
     public missionManagerScript missionmanager;
+
     
     public bool pickedUp;
     private float moveSpeed = 30f;
@@ -68,7 +70,7 @@ public class PassengerController : MonoBehaviour
             if (distanceToDestination < 0.5f) // Adjust the threshold as needed
             {
                 Debug.Log("ReachedHome");
-                
+                playerscript.RestoreHealth();
                 TriggerHouse(false);
                 gunSystem.UpdateGunInfo(0);
                 DestroyPassenger();

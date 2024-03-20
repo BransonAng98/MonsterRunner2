@@ -13,6 +13,7 @@ public class missionManagerScript : MonoBehaviour
     public ObjectiveIndicator objectiveIndicator;
     public GunSystem gunSystem;
     public QuestDialogueManager questDialogue;
+    public DemoPlayer demoPlayer;
 
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
@@ -129,6 +130,7 @@ public class missionManagerScript : MonoBehaviour
 
         if (passengerController != null)
         {
+            passengerController.playerscript = demoPlayer;
             passengerController.arrow = objectiveIndicator;
             passengerController.gunSystem = gunSystem;
             passengerController.missionmanager = this.GetComponent<missionManagerScript>();

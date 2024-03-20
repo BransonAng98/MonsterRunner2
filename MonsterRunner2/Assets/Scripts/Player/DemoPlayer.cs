@@ -469,7 +469,7 @@ public class DemoPlayer : MonoBehaviour
     {
         if (passenger != null)
         {
-            RestoreHealth();
+            //RestoreHealth();
             int index = UnityEngine.Random.Range(0, 1);
             questdialogueScript.TypeText(false, index);
             quest.Complete();
