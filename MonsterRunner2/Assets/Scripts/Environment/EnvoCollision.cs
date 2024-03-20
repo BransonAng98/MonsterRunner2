@@ -11,6 +11,8 @@ public class EnvoCollision : MonoBehaviour
     public float distanceThreshold;
     public ParticleSystem collisionVFX;
     public Transform player;
+
+    public float baseCrashDamage;
     // Start is called before the first frame update
     void Start()
     {

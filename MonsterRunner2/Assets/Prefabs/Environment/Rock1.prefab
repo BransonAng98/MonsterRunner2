@@ -298,6 +298,7 @@ MonoBehaviour:
   distanceThreshold: 60
   collisionVFX: {fileID: 2787588313857139679}
   player: {fileID: 0}
+  baseCrashDamage: 200
 --- !u!4 &7696502689921906329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ef56b9ef9c3c0884ba1887cf1c9b0d0f,

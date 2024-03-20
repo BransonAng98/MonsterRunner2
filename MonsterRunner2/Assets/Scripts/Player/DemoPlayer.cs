@@ -72,7 +72,7 @@ public class DemoPlayer : MonoBehaviour
     [SerializeField] float maxHealth;
     [SerializeField] float maxAcceleration;
     [SerializeField] float maxSpeed;
-    [SerializeField] float crashDamage;
+    [SerializeField] float crashResistance;
     public LayerMask enemyLayer;
 
     public float explosionForce = 1000f; // Force of the explosion
@@ -127,7 +127,7 @@ public class DemoPlayer : MonoBehaviour
         maxHealth = playerData.health;
         maxAcceleration = playerData.acceleration;
         maxSpeed = playerData.maxSpeed;
-        crashDamage = 150f - playerData.crashResistance;
+        crashResistance = playerData.crashResistance;
     }
 
     // Start is called before the first frame update
@@ -149,6 +149,7 @@ public class DemoPlayer : MonoBehaviour
             if (!isTriggered)
             {
                 isTriggered = true;
+                float crashDamage = trigger.baseCrashDamage - crashResistance;
                 TakeDamage(crashDamage);
             }
         }
@@ -318,6 +319,7 @@ public class DemoPlayer : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
+
         if (health <= 0)
         {
             isDead = true;
