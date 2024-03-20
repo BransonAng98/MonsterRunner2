@@ -23,7 +23,7 @@ public class EnvironmentSpawner : MonoBehaviour
     private float maxXRange = 300f; // Maximum spawning width for the x-axis
     private float minZRange = -220f; // Minimum spawning width for the z-axis
     private float maxZRange = 220f; // Maximum spawning width for the z-axis
-    private float minTreeDistance = 0.2f; // Minimum distance between tree prefabs
+    private float minTreeDistance = 0.1f; // Minimum distance between tree prefabs
     private float minStoneDistance = 1.0f; // Minimum distance between stone prefabs
     private float minHouseDistance = 20.0f; // Minimum distance between house prefabs
     private float minenemySpawnerDistance = 100.0f; // Minimum distance between house prefabs
