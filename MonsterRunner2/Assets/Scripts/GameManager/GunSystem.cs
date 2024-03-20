@@ -28,7 +28,7 @@ public class GunSystem : MonoBehaviour
 
     private void Start()
     {
-        weaponScript = GameObject.FindGameObjectWithTag("Player").GetComponent<WeaponScript>();
+       
         gunIcon.gameObject.SetActive(false);
     }
 

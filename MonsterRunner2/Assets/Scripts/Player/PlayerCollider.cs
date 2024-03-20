@@ -16,7 +16,6 @@ public class PlayerCollider : MonoBehaviour
     private void Start()
     {
         damage = playerData.damage;
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
     }
 
     private void OnTriggerEnter(Collider other)

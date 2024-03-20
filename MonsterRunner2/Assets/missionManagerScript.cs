@@ -4,29 +4,28 @@ using UnityEngine;
 
 public class missionManagerScript : MonoBehaviour
 {
-    public GameObject groundObject;
+    public GameObject actualGround;
+    public GameObject buildingHolder;
+    public GameObject player; // Reference to the player GameObject
+    public GameObject passengerPrefab;
+    public GameObject destination;
+    public QuestGiver questgiverEntity;
+    public ObjectiveIndicator objectiveIndicator;
+    public GunSystem gunSystem;
 
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
-    public QuestGiver questgiverEnitity;
-    public GameObject destination;
-    public GameObject passengerPrefab;
     [SerializeField] public int passengerCount;
+    public float spawnRadius = 40f; // Radius around the player for spawning passengers
     private float minXRange = -300f; // Minimum spawning width for the x-axis
     private float maxXRange = 300f; // Maximum spawning width for the x-axis
     private float minZRange = -220f; // Minimum spawning width for the z-axis
     private float maxZRange = 220f; // Maximum spawning width for the z-axis
-
-    public GameObject player; // Reference to the player GameObject
-    public float spawnRadius = 40f; // Radius around the player for spawning passengers
     private float minimumObstacleDistance = 20f;
-    public GameObject buildingHolder;
+    
     void Start()
     {
-        groundObject = GameObject.Find("Ground");
-        player = GameObject.FindGameObjectWithTag("Player");
         passengerCount = 0;
-        buildingHolder = GameObject.Find("Buildings");
     }
 
     private void Update()
@@ -39,7 +38,6 @@ public class missionManagerScript : MonoBehaviour
     public void FindBuildingObjects()
     {
         // Find the holder object named "Building"
-        buildingHolder = GameObject.Find("Buildings");
         if (buildingHolder == null)
         {
             Debug.LogWarning("Building holder object not found!");
@@ -58,16 +56,11 @@ public class missionManagerScript : MonoBehaviour
         }
     }
 
-    public void GetCurrentPassenger()
-    {
-        questgiverEnitity = GameObject.FindGameObjectWithTag("Passenger").GetComponentInChildren<QuestGiver>();
-    }
-
     public void GetDestination()
     {
-        if(questgiverEnitity != null)
+        if(questgiverEntity != null)
         {
-            destination = questgiverEnitity.destination;
+            destination = questgiverEntity.destination;
         }
     }
 
@@ -78,9 +71,9 @@ public class missionManagerScript : MonoBehaviour
 
         // Ensure that the random offset is within the bounds of the ground object
         Vector3 spawnPosition = playerPosition + randomOffset;
-        if (groundObject != null)
+        if (actualGround != null)
         {
-            Renderer groundRenderer = groundObject.GetComponent<Renderer>();
+            Renderer groundRenderer = actualGround.GetComponent<Renderer>();
             if (groundRenderer != null)
             {
                 Bounds groundBounds = groundRenderer.bounds;
@@ -130,9 +123,19 @@ public class missionManagerScript : MonoBehaviour
     public void CreatePassenger()
     {
         Vector3 spawnPosition = GetRandomPrefabPosition();
-        Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
+        GameObject passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
+        PassengerController passengerController = passenger.GetComponent<PassengerController>();
+        
+        if(passengerController != null)
+        {
+            passengerController.arrow = objectiveIndicator;
+            passengerController.gunSystem = gunSystem;
+            passengerController.missionmanager = this.GetComponent<missionManagerScript>();
+            questgiverEntity = passengerController.GetComponent<QuestGiver>();
+        }
+
         passengerCount++;
-        GetCurrentPassenger();
         GetDestination();
     }
+
 }

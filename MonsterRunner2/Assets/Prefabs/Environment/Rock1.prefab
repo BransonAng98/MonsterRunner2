@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7230162006960761648}
-  - component: {fileID: 7511943422036474654}
   m_Layer: 0
   m_Name: Rock1
   m_TagString: Obstacle
@@ -34,22 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &7511943422036474654
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885795594384480917}
-  serializedVersion: 2
-  m_Mass: 10000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &3423396420586385767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -258,6 +241,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: rocks
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ef56b9ef9c3c0884ba1887cf1c9b0d0f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ef56b9ef9c3c0884ba1887cf1c9b0d0f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef56b9ef9c3c0884ba1887cf1c9b0d0f, type: 3}
 --- !u!1 &7026926894328212515 stripped
@@ -311,6 +304,23 @@ MonoBehaviour:
   collider: {fileID: 6505386471105987732}
   distanceThreshold: 60
   collisionVFX: {fileID: 3428039122566629451}
+  player: {fileID: 0}
+--- !u!54 &1553969444824586134
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7026926894328212515}
+  serializedVersion: 2
+  m_Mass: 10000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!4 &7696502689921906329 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ef56b9ef9c3c0884ba1887cf1c9b0d0f,

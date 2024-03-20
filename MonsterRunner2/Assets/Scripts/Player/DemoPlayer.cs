@@ -141,12 +141,16 @@ public class DemoPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        EnvoCollision trigger = other.gameObject.GetComponentInChildren<EnvoCollision>();
-        trigger.Collided();
-        if (!isTriggered)
+        if (other.gameObject.CompareTag("Obstacle"))
         {
-            isTriggered = true;
-            TakeDamage(crashDamage);
+            Debug.Log("Collided");
+            EnvoCollision trigger = other.gameObject.GetComponentInChildren<EnvoCollision>();
+            trigger.Collided();
+            if (!isTriggered)
+            {
+                isTriggered = true;
+                TakeDamage(crashDamage);
+            }
         }
     }
 

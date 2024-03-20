@@ -5,24 +5,22 @@ using UnityEngine;
 public class PassengerController : MonoBehaviour
 {
     public int gunType;
+    
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
+    public GameObject passengerDestination;
     public ObjectiveIndicator arrow;
     public GunSystem gunSystem;
     public missionManagerScript missionmanager;
-    public bool Pickedup;
-    public GameObject passengerDestination;
-    private HouseScript houseScript;
+    
+    public bool pickedUp;
     private float moveSpeed = 30f;
 
     // Start is called before the first frame update
     void Start()
     {
-        missionmanager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
         questgiver = GetComponentInChildren<QuestGiver>();
-        arrow = GameObject.Find("ObjectiveArrow").GetComponent<ObjectiveIndicator>();
-        gunSystem = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GunSystem>();
         arrow.UpdateObjective(0, this.transform);
         passengerDestination = questgiver.destination;
     }
@@ -30,7 +28,7 @@ public class PassengerController : MonoBehaviour
     void TriggerHouse(bool trigger)
     {
         
-        HouseScript selectedHouse = passengerDestination.GetComponent<HouseScript>();
+        HouseScript selectedHouse = passengerDestination.GetComponentInChildren<HouseScript>();
         if (trigger)
         {
             selectedHouse.TurnOnVFX();
@@ -48,7 +46,7 @@ public class PassengerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Pickedup)
+        if (pickedUp)
         {
             Debug.Log("Take Me Home");
             
@@ -84,7 +82,7 @@ public class PassengerController : MonoBehaviour
         {
             gunSystem.UpdateGunInfo(gunType);
             TriggerHouse(true);
-            Pickedup = true;
+            pickedUp = true;
             idleVFX.SetActive(false);
             Instantiate(PickupVFX, transform.position, Quaternion.identity);
             questgiver.AcceptQuest();
