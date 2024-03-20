@@ -37,9 +37,9 @@ public class EnemyScript : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
-        playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
-        gameController = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameController>();
+        //player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
+        //playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
+        //gameController = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameController>();
         groundLayer = LayerMask.GetMask("Ground");
         CanMove = true;
 

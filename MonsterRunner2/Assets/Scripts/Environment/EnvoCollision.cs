@@ -10,22 +10,12 @@ public class EnvoCollision : MonoBehaviour
     public Collider collider;
     public float distanceThreshold;
     public ParticleSystem collisionVFX;
-    private Transform player;
+    public Transform player;
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<MeshRenderer>();
 
-        //if (isBox)
-        //{
-        //    collider = GetComponent<BoxCollider>();
-        //}
-        //else
-        //{
-        //    collider = GetComponent<MeshCollider>();
-        //}
-
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 
     public void Collided()

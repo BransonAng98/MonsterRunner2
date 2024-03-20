@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPf;
+    public Transform playerPos;
+    public DemoPlayer playerData;
+    public GameController gameController;
 
     public void SpawnEnemy(int amt)
     {

@@ -40,10 +40,16 @@ public class EnvironmentSpawner : MonoBehaviour
 
     public missionManagerScript missionManager;
     public GameController gamecontrollerScript;
+    public Transform player;
     void Start()
     {
-        missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
-        gamecontrollerScript = GameObject.Find("GameManager").GetComponent<GameController>();
+        SpawnEnvironment();
+        missionManager.FindBuildingObjects();
+        gamecontrollerScript.LocateSpawners();
+    }
+
+    void SpawnEnvironment()
+    {
         // Spawn trees
         int numTreesToSpawn = Random.Range(minTreePrefabs, maxTreePrefabs + 1);
         for (int i = 0; i < numTreesToSpawn; i++)
@@ -73,10 +79,9 @@ public class EnvironmentSpawner : MonoBehaviour
             // Note: In this case, no specific parent is assigned to the enemy spawners.
         }
 
-
-        missionManager.FindBuildingObjects();
-        gamecontrollerScript.LocateSpawners();
     }
+
+
 
     void SpawnPrefab(GameObject[] prefabs, List<Vector3> instantiatedPositions, float minDistance, GameObject parentObject)
     {
@@ -94,6 +99,9 @@ public class EnvironmentSpawner : MonoBehaviour
 
         // Set the parent of the instantiated object
         spawnedObject.transform.parent = parentObject.transform;
+
+        EnvoCollision collision = spawnedObject.GetComponentInChildren<EnvoCollision>();
+        collision.player = player;
 
         // Randomize rotation around the y-axis
         float randomYRotation = Random.Range(0f, 360f);
