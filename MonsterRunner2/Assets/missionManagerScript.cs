@@ -12,6 +12,7 @@ public class missionManagerScript : MonoBehaviour
     public QuestGiver questgiverEntity;
     public ObjectiveIndicator objectiveIndicator;
     public GunSystem gunSystem;
+    public QuestDialogueManager questDialogue;
 
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
@@ -124,14 +125,21 @@ public class missionManagerScript : MonoBehaviour
     {
         Vector3 spawnPosition = GetRandomPrefabPosition();
         GameObject passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
-        PassengerController passengerController = passenger.GetComponent<PassengerController>();
-        
-        if(passengerController != null)
+        PassengerController passengerController = passenger.GetComponentInChildren<PassengerController>();
+
+        if (passengerController != null)
         {
             passengerController.arrow = objectiveIndicator;
             passengerController.gunSystem = gunSystem;
             passengerController.missionmanager = this.GetComponent<missionManagerScript>();
-            questgiverEntity = passengerController.GetComponent<QuestGiver>();
+            questgiverEntity = passengerController.GetComponentInChildren<QuestGiver>();
+
+            if (questgiverEntity != null)
+            {
+                questgiverEntity.player = player.GetComponent<DemoPlayer>();
+                questgiverEntity.missionManager = this.GetComponent<missionManagerScript>();
+                questgiverEntity.questDialogue = questDialogue;
+            }
         }
 
         passengerCount++;

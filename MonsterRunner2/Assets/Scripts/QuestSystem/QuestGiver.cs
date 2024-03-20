@@ -11,15 +11,13 @@ public class QuestGiver : MonoBehaviour
 
     public QuestDialogueManager questDialogue;
 
-    public missionManagerScript missionManager; public List<GameObject> buildingObjects;
+    public missionManagerScript missionManager; 
+    public List<GameObject> buildingObjects;
 
-    private void Awake()
+
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
-        missionManager = GameObject.Find("MissionManager").GetComponent<missionManagerScript>();
-        buildingObjects = GameObject.FindObjectOfType<missionManagerScript>().buildingObjectsList;
-        questDialogue = GameObject.Find("MissionManager").GetComponent<QuestDialogueManager>();
-        
+        buildingObjects = missionManager.buildingObjectsList;
         GetDestination();
     }
 

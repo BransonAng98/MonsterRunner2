@@ -126,9 +126,6 @@ public class DemoPlayer : MonoBehaviour
         maxAcceleration = playerData.acceleration;
         maxSpeed = playerData.maxSpeed;
         crashDamage = 150f - playerData.crashResistance;
-        playercollider = GetComponentInChildren<PlayerCollider>();
-        questdialogueScript = GameObject.Find("MissionManager").GetComponent<QuestDialogueManager>();
-        menuManager = GameObject.Find("GameManager").GetComponent<GameMenuManager>();
     }
 
     // Start is called before the first frame update

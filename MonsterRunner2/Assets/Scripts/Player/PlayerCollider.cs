@@ -36,7 +36,7 @@ public class PlayerCollider : MonoBehaviour
            player.destinationReached = false;
            colliderpassenger = other.gameObject;
            player.passenger = other.gameObject;
-           QuestGiver questGiver = other.transform.GetComponentInChildren<QuestGiver>();
+           QuestGiver questGiver = other.transform.GetComponent<QuestGiver>();
            colliderDestinatnion = questGiver.destination;
            player.destination = questGiver.destination;
            

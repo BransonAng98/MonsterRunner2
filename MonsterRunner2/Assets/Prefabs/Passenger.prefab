@@ -9,11 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3932362229380496523}
-  - component: {fileID: 1162302778}
-  - component: {fileID: 8970155763936694401}
   m_Layer: 0
   m_Name: Passenger
-  m_TagString: Passenger
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6880511610574658448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.08097, y: -0, z: 16.491959}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -35,41 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1162302778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880511610574658448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5af006058c16a654cb322df0b1438d3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gunType: 1
-  questgiver: {fileID: 0}
-  idleVFX: {fileID: 2230594769260699487}
-  PickupVFX: {fileID: 8213002756312529545, guid: a592cfbe01fb3314a92736d7024e9fdc,
-    type: 3}
-  arrow: {fileID: 0}
-  gunSystem: {fileID: 0}
-  missionmanager: {fileID: 0}
-  Pickedup: 0
-  passengerDestination: {fileID: 0}
---- !u!65 &8970155763936694401
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6880511610574658448}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 0.76, z: 10}
-  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!1001 &1493095032651872094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,6 +196,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: character-vampire
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 21e53c5edbf665e4a8c5e8beb93cdc83,
+        type: 3}
+      propertyPath: m_TagString
+      value: Passenger
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e53c5edbf665e4a8c5e8beb93cdc83, type: 3}
 --- !u!4 &6145323336525600319 stripped
@@ -247,6 +215,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5963375579817030100}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &8801410066235890911
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774332685494422661}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 0.76, z: 10}
+  m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!114 &2264824516557579751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,3 +252,25 @@ MonoBehaviour:
   questDialogue: {fileID: 0}
   missionManager: {fileID: 0}
   buildingObjects: []
+--- !u!114 &8531397326050997151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6774332685494422661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af006058c16a654cb322df0b1438d3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunType: 1
+  questgiver: {fileID: 0}
+  idleVFX: {fileID: 2230594769260699487}
+  PickupVFX: {fileID: 8213002756312529545, guid: a592cfbe01fb3314a92736d7024e9fdc,
+    type: 3}
+  passengerDestination: {fileID: 0}
+  arrow: {fileID: 0}
+  gunSystem: {fileID: 0}
+  missionmanager: {fileID: 0}
+  pickedUp: 0

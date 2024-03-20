@@ -575,9 +575,19 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
+      propertyPath: menuManager
+      value: 
+      objectReference: {fileID: 754238777}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
       propertyPath: steeringWheel
       value: 
       objectReference: {fileID: 6918289769783780123}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: playercollider
+      value: 
+      objectReference: {fileID: 774068357}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: turnSensitivity
@@ -588,6 +598,11 @@ PrefabInstance:
       propertyPath: maxSteeringAngle
       value: 3.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: questdialogueScript
+      value: 
+      objectReference: {fileID: 171047680}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: healthSmoke.Array.size
@@ -1010,6 +1025,7 @@ MonoBehaviour:
   questgiverEntity: {fileID: 0}
   objectiveIndicator: {fileID: 1463803437}
   gunSystem: {fileID: 754238778}
+  questDialogue: {fileID: 171047680}
   buildingObjectsList: []
   passengerCount: 0
   spawnRadius: 240
@@ -1454,7 +1470,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754238774}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1635,6 +1651,18 @@ Transform:
   m_Father: {fileID: 14121144}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &774068357 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7572403320484836912, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+    type: 3}
+  m_PrefabInstance: {fileID: 87629307}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b914cef978e0cba41b9682f47a2b2dfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &799882635
 MonoBehaviour:
   m_ObjectHideFlags: 0
