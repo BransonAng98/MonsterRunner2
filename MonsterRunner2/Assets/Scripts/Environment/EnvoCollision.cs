@@ -19,8 +19,8 @@ public class EnvoCollision : MonoBehaviour
 
     public void Collided()
     {
-        collider.enabled = false;
         collisionVFX.Play();
+        collider.enabled = false;
         isDestroyed = true;
         renderer.enabled = false;
         player.GetComponent<DemoPlayer>().isTriggered = false;
