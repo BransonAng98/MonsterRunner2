@@ -14,6 +14,8 @@ TagManager:
   - Spawner
   - Passenger
   - GameManager
+  - FxTemporaire
+  - Border
   layers:
   - Default
   - TransparentFX

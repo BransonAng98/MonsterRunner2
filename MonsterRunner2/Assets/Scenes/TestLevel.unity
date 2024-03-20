@@ -587,7 +587,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playercollider
       value: 
-      objectReference: {fileID: 774068357}
+      objectReference: {fileID: 0}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
       propertyPath: turnSensitivity
@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 96567216}
   m_Layer: 0
   m_Name: Cube (30)
-  m_TagString: Obstacle
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1348,7 +1348,7 @@ GameObject:
   - component: {fileID: 621603712}
   m_Layer: 0
   m_Name: Cube (32)
-  m_TagString: Obstacle
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1651,18 +1651,6 @@ Transform:
   m_Father: {fileID: 14121144}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &774068357 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7572403320484836912, guid: c6b5ff033ddefdf46840f7d3652f29a5,
-    type: 3}
-  m_PrefabInstance: {fileID: 87629307}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b914cef978e0cba41b9682f47a2b2dfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &799882635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2168,7 +2156,7 @@ GameObject:
   - component: {fileID: 1318457868}
   m_Layer: 0
   m_Name: Cube (31)
-  m_TagString: Obstacle
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2296,7 +2284,7 @@ GameObject:
   - component: {fileID: 1432160874}
   m_Layer: 0
   m_Name: Cube (29)
-  m_TagString: Obstacle
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

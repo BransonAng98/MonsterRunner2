@@ -163,26 +163,22 @@ public class DemoPlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Border"))
         {
-            //// Calculate knockback direction based on collision point
-            //Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
-            //Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
-            //Instantiate(impactVFX, spawnPos, Quaternion.identity);
-            //knockbackDirection.Normalize();
+            // Calculate knockback direction based on collision point
+            Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
+            Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
+            Instantiate(impactVFX, spawnPos, Quaternion.identity);
+            knockbackDirection.Normalize();
 
-            //// Calculate knockback force based on collision impact force
-            //float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
+            // Calculate knockback force based on collision impact force
+            float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
 
-            //// If knockback force is less than the minimum, use the minimum force instead
-            //knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
+            // If knockback force is less than the minimum, use the minimum force instead
+            knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
 
-            //// Apply knockback force
-            //rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
-
-            //EnvoCollision trigger = collision.gameObject.GetComponentInChildren<EnvoCollision>();
-            //TakeDamage(crashDamage);
-            //trigger.Collided();
+            // Apply knockback force
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
         }
     }
 
