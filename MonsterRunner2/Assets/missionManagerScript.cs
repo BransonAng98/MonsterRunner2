@@ -79,10 +79,10 @@ public class missionManagerScript : MonoBehaviour
             {
                 Bounds groundBounds = groundRenderer.bounds;
                 // Adjust the bounds by 10 units
-                float minX = groundBounds.min.x + 10f;
-                float maxX = groundBounds.max.x - 10f;
-                float minZ = groundBounds.min.z + 10f;
-                float maxZ = groundBounds.max.z - 10f;
+                float minX = groundBounds.min.x + 25f;
+                float maxX = groundBounds.max.x - 25f;
+                float minZ = groundBounds.min.z + 25f;
+                float maxZ = groundBounds.max.z - 25f;
 
                 // Clamp the spawn position within the adjusted bounds
                 spawnPosition.x = Mathf.Clamp(spawnPosition.x, minX, maxX);

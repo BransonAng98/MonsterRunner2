@@ -141,7 +141,7 @@ public class DemoPlayer : MonoBehaviour
         if (other.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Collided");
-            EnvoCollision trigger = other.gameObject.GetComponentInChildren<EnvoCollision>();
+            EnvoCollision trigger = other.gameObject.GetComponent<EnvoCollision>();
             trigger.Collided();
             if (!isTriggered)
             {
@@ -473,6 +473,12 @@ public class DemoPlayer : MonoBehaviour
             passenger.SetActive(true);
             passenger.transform.parent = null;
             Debug.Log("Passenger unparented.");
+            passenger = null;
+        }
+
+        else
+        {
+            Debug.Log("No Passenger Found");
         }
     }
 
