@@ -357,6 +357,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8639425249215973867}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &7063580732268235179
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8873233299720516794}
+  serializedVersion: 2
+  m_Mass: 10000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!64 &4699973863974882572
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -371,20 +387,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 3530178972427403163, guid: b2eb5453f3454214b8aa727b4a135344, type: 3}
---- !u!136 &8395344684905851282
-CapsuleCollider:
+--- !u!114 &7808017459373050024
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8873233299720516794}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.58
-  m_Height: 1.85
-  m_Direction: 0
-  m_Center: {x: 0.61, y: 0.36874998, z: 0.45799997}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e9bbc3d4ca7d645af7c7c17283aaf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IndicatorVFX: {fileID: 306576272432639974}
+  ReachedVFX: {fileID: 8734376389421900958, guid: d9447b6bf6f91204abe6a18f68896d90,
+    type: 3}
+  missionManager: {fileID: 0}
 --- !u!114 &8431926931613319172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,35 +422,3 @@ MonoBehaviour:
   distanceThreshold: 60
   collisionVFX: {fileID: 1045505114103121534}
   player: {fileID: 0}
---- !u!54 &7063580732268235179
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8873233299720516794}
-  serializedVersion: 2
-  m_Mass: 10000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &7808017459373050024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8873233299720516794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e9bbc3d4ca7d645af7c7c17283aaf4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  IndicatorVFX: {fileID: 306576272432639974}
-  ReachedVFX: {fileID: 8734376389421900958, guid: d9447b6bf6f91204abe6a18f68896d90,
-    type: 3}
-  missionManager: {fileID: 0}
