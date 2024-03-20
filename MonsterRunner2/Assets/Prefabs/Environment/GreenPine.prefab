@@ -292,4 +292,3 @@ MonoBehaviour:
   distanceThreshold: 60
   collisionVFX: {fileID: 1037712669538697210}
   player: {fileID: 0}
-  baseCrashDamage: 100
