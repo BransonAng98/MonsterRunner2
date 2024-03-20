@@ -96,6 +96,8 @@ public class DemoPlayer : MonoBehaviour
 
     public SteeringWheel steeringWheel;
 
+    public ParticleSystem healingVFX;
+
     float steerInput;
 
     public bool inputSteer;
@@ -134,6 +136,7 @@ public class DemoPlayer : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass;
         this.GetComponent<WeaponScript>().enabled = false;
+        healingVFX.Stop();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -486,7 +489,8 @@ public class DemoPlayer : MonoBehaviour
     {
         // Calculate the amount of health to restore
         float healthToAdd = 150;
-
+        healingVFX.Play();
+        Invoke("TurnOffVFX", 0.3f);
         // Check if adding the health will exceed the maximum health
         if (health + healthToAdd > maxHealth)
         {
@@ -499,6 +503,12 @@ public class DemoPlayer : MonoBehaviour
             health += healthToAdd;
         }
     }
+
+    void TurnOffVFX()
+    {
+        healingVFX.Stop();
+    }
+
     private void LateUpdate()
     {
         Move();
