@@ -1267,6 +1267,7 @@ MonoBehaviour:
   objectiveIndicator: {fileID: 1463803437}
   gunSystem: {fileID: 754238778}
   questDialogue: {fileID: 171047680}
+  demoPlayer: {fileID: 799882639}
   buildingObjectsList: []
   passengerCount: 0
   spawnRadius: 240
@@ -2142,7 +2143,7 @@ MonoBehaviour:
   m_Follow: {fileID: 751716999}
   m_Lens:
     FieldOfView: 117.3
-    OrthographicSize: 32
+    OrthographicSize: 26
     NearClipPlane: -60
     FarClipPlane: 1000
     Dutch: 0
@@ -2246,7 +2247,7 @@ Camera:
   far clip plane: 1000
   field of view: 117.3
   orthographic: 1
-  orthographic size: 32
+  orthographic size: 26
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

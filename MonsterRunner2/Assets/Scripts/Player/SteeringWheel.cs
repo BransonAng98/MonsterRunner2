@@ -119,34 +119,44 @@ public class SteeringWheel : MonoBehaviour
 
         float wheelNewAngle = Vector2.Angle(Vector2.up, pointerPos - centerPoint);
 
-        // Do nothing if the pointer is too close to the center of the wheel
-        if (Vector2.Distance(pointerPos, centerPoint) > 60f)
+        // Calculate the angular velocity
+        float deltaAngle = wheelNewAngle - wheelPrevAngle;
+        float angularVelocity = deltaAngle / Time.deltaTime;
+
+        // Update the wheel angle based on the direction of rotation
+        float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
+        wheelAngle += (wheelNewAngle - wheelPrevAngle) * rotationDirection;
+
+        // Apply deadzone
+        if (Mathf.Abs(wheelAngle) < deadzoneThreshold)
         {
-            // Update the wheel angle based on the direction of rotation
-            float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
-            wheelAngle += (wheelNewAngle - wheelPrevAngle) * rotationDirection;
-
-            // Apply deadzone
-            if (Mathf.Abs(wheelAngle) < deadzoneThreshold)
-            {
-                player.inputSteer = false;
-            }
-
-            else
-            {
-                player.inputSteer = true;
-            }
+            player.inputSteer = false;
+        }
+        else
+        {
+            player.inputSteer = true;
         }
 
         // Make sure wheel angle never exceeds maximumSteeringAngle
         wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
+
+        // Rotate the wheels based on the angular velocity
+        RotateWheels(-angularVelocity);
+
         // Update the previous angle for the next frame
         wheelPrevAngle = wheelNewAngle;
 
-        if(player == null)
+        if (player == null)
         {
             Debug.LogError("Player Not Found");
         }
+    }
+    void RotateWheels(float angularVelocity)
+    {
+        // Rotate the wheels based on the angular velocity
+        float wheelRotationAmount = angularVelocity * Time.deltaTime;
+        // Apply the rotation to your wheels here
+        // For example, transform.Rotate(Vector3.forward, wheelRotationAmount);
     }
 
     public void ReleaseEvent(BaseEventData eventData)
