@@ -111,7 +111,7 @@ public class DemoPlayer : MonoBehaviour
     [SerializeField]private float distance;
     public float distanceThreshold = 30f; // Adjust this value as needed
 
-    public PlayerCollider playercollider;
+    
     public QuestDialogueManager questdialogueScript;
     public GameMenuManager menuManager;
     Rigidbody rb;
@@ -148,6 +148,16 @@ public class DemoPlayer : MonoBehaviour
                 isTriggered = true;
                 TakeDamage(crashDamage);
             }
+        }
+
+        if (other.CompareTag("Passenger"))
+        {
+          
+            destinationReached = false;
+            passenger = other.gameObject;
+            QuestGiver questGiver = other.transform.GetComponent<QuestGiver>();
+            destination = questGiver.destination;
+
         }
     }
 
