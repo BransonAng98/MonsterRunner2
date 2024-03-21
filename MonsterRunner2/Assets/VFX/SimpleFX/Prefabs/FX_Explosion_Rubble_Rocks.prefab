@@ -4807,7 +4807,7 @@ GameObject:
   - component: {fileID: 1362961888458449883}
   - component: {fileID: 1362961888457530999}
   m_Layer: 0
-  m_Name: FX_Explosion_Rubble 2
+  m_Name: FX_Explosion_Rubble_Rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
