@@ -12,6 +12,7 @@ public class EnemyScript : MonoBehaviour
     public GameController gameController;
     public GameObject bloodSplatter;
     public Material deadMaterial;
+    public ScoreManagerScript scoreManager;
 
     public bool isGrounded;
     public bool CanMove;
@@ -185,6 +186,7 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {
+        scoreManager.enemiesKilled++;
         DeathEffect();
         isDead = true; // Set the enemy as dead
         CanMove = false; // Stop the enemy's movement

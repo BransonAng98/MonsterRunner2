@@ -14,6 +14,7 @@ public class PassengerController : MonoBehaviour
     public ObjectiveIndicator arrow;
     public GunSystem gunSystem;
     public missionManagerScript missionmanager;
+    public ScoreManagerScript scoreManager;
 
     
     public bool pickedUp;
@@ -69,10 +70,12 @@ public class PassengerController : MonoBehaviour
             float distanceToDestination = Vector3.Distance(transform.position, passengerDestination.transform.position);
             if (distanceToDestination < 0.5f) // Adjust the threshold as needed
             {
+
                 Debug.Log("ReachedHome");
                 playerscript.RestoreHealth();
                 TriggerHouse(false);
                 gunSystem.UpdateGunInfo(0);
+                scoreManager.missionsCompleted++;
                 DestroyPassenger();
             }
         }

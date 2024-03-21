@@ -42,7 +42,7 @@ public class EnvironmentSpawner : MonoBehaviour
     public Transform playerPos;
     public DemoPlayer playerData;
     public GameController gameController;
-
+    public ScoreManagerScript scoreManager;
     void Start()
     {
         SpawnEnvironment();
@@ -114,6 +114,7 @@ public class EnvironmentSpawner : MonoBehaviour
                 eSpawner.playerPos = playerPos;
                 eSpawner.playerData = playerData;
                 eSpawner.gameController = gameController;
+                eSpawner.scoreManager = scoreManager;
                 break;
         }
 

@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform playerPos;
     public DemoPlayer playerData;
     public GameController gameController;
+    public ScoreManagerScript scoreManager;
 
     public void SpawnEnemy(int amt)
     {
@@ -21,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
                 enemyScript.player = playerPos;
                 enemyScript.playerData = playerData;
                 enemyScript.gameController = gameController;
+                enemyScript.scoreManager = scoreManager;
             }
         }   
     }
