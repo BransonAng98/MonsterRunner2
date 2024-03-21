@@ -8,6 +8,7 @@ public class ScoreManagerScript : MonoBehaviour
     public int enemiesKilled;
     public int missionsCompleted;
     public float timeSurvived;
+    public TextMeshProUGUI activeCounter;
 
     void Start()
     {
@@ -17,8 +18,12 @@ public class ScoreManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timeSurvived += Time.deltaTime;
 
+        float minutes = Mathf.FloorToInt(timeSurvived / 60);
+        float seconds = Mathf.FloorToInt(timeSurvived % 60);
+
+        timeSurvived += Time.deltaTime;
+        activeCounter.text = string.Format("{0:00}:{1:00}", minutes, seconds);
 
     }
 

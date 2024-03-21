@@ -1493,12 +1493,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6918289769704437342}
-  m_RootOrder: 3
+  m_Father: {fileID: 6918289769640933921}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0.0000023841858, y: -104.5}
+  m_AnchoredPosition: {x: -0, y: -104.5}
   m_SizeDelta: {x: 223.31, y: 49.226074}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &422629127
@@ -2887,6 +2887,7 @@ MonoBehaviour:
   enemiesKilled: 0
   missionsCompleted: 0
   timeSurvived: 0
+  activeCounter: {fileID: 422629127}
 --- !u!114 &1308585602 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5216097740398365668, guid: 4121b3ed49a063c4f893ccfc2bd4533c,
@@ -4894,7 +4895,7 @@ RectTransform:
   m_Children:
   - {fileID: 3533489873344652827}
   m_Father: {fileID: 6918289769640933921}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6071,7 +6072,7 @@ RectTransform:
   - {fileID: 5819104870138525861}
   - {fileID: 6794204449848395620}
   m_Father: {fileID: 6918289769640933921}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -6742,6 +6743,7 @@ RectTransform:
   - {fileID: 14554445}
   - {fileID: 2564939664110351142}
   - {fileID: 6364769502218926388}
+  - {fileID: 422629126}
   - {fileID: 6918289769704437342}
   - {fileID: 6617582041210651797}
   - {fileID: 3533489874783636278}
@@ -6849,9 +6851,8 @@ RectTransform:
   - {fileID: 6918289770452346832}
   - {fileID: 1209011409291199240}
   - {fileID: 1209011409356009753}
-  - {fileID: 422629126}
   m_Father: {fileID: 6918289769640933921}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
