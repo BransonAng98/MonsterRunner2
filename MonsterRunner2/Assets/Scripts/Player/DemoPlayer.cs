@@ -152,7 +152,7 @@ public class DemoPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("Collided");
+           
             EnvoCollision trigger = other.gameObject.GetComponent<EnvoCollision>();
             trigger.Collided();
             if (!isTriggered)
@@ -215,10 +215,10 @@ public class DemoPlayer : MonoBehaviour
 
             // Smoothly rotate the character towards the target direction
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-            Debug.Log("Target Rotation is:" + targetRotation);
+           
 
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSensitivity);
-            Debug.Log("Current Rotation is:" + transform.rotation);
+        
 
             Vector3 targetVelocity = transform.forward * maxSpeed;
             rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, velocityLerpFactor); // Smoothly interpolate velocity
@@ -229,7 +229,7 @@ public class DemoPlayer : MonoBehaviour
             // If there's no input, maintain the last known velocity and rotation
             rb.velocity = lastKnownVector;
             rb.rotation = Quaternion.LookRotation(lastKnownVector);
-            Debug.Log("No input recorded");
+            
         }
     }
 

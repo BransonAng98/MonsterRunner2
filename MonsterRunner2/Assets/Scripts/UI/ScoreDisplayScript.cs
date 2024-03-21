@@ -19,47 +19,46 @@ public class ScoreDisplayScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-        enemiesKilled= scoreManager.enemiesKilled;
-        missionsCompleted = scoreManager.missionsCompleted;
-        timeSurvived = scoreManager.timeSurvived;
         StartCoroutine(LerpScores());
+      
 
     }
     private IEnumerator LerpScores()
     {
+        float initialEnemyScore = 0;
+        float initialMissionScore = 0;
+        float initialTimeScore = 0;
+
+        float targetEnemyScore = scoreManager.enemiesKilled;
+        float targetMissionScore = scoreManager.missionsCompleted;
+        float targetTimeScore = scoreManager.timeSurvived;
+
         float elapsedTime = 0f;
 
         while (elapsedTime < lerpDuration)
         {
             float t = elapsedTime / lerpDuration;
 
-            int enemyScore = Mathf.RoundToInt(Mathf.Lerp(0, scoreManager.enemiesKilled, t));
-            int missionScore = Mathf.RoundToInt(Mathf.Lerp(0, scoreManager.missionsCompleted, t));
-          
-            float timeScore = Mathf.RoundToInt(Mathf.Lerp(0, scoreManager.timeSurvived, t));
-            //formattedTime = clock.GetFormattedTime(timeScore);
-           
-
+            int enemyScore = Mathf.RoundToInt(Mathf.Lerp(initialEnemyScore, targetEnemyScore, t));
+            int missionScore = Mathf.RoundToInt(Mathf.Lerp(initialMissionScore, targetMissionScore, t));
+            float timeScore = Mathf.Lerp(initialTimeScore, targetTimeScore, t);
 
             UpdateScoreUI(enemyScore, missionScore, timeScore);
+
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        // Ensure the final scores match the actual values
         UpdateScoreUI(scoreManager.enemiesKilled, scoreManager.missionsCompleted, scoreManager.timeSurvived);
     }
 
     private void UpdateScoreUI(int killscore, int missionScore, float time)
     {
-        enemiesKilledText.text = "" + enemiesKilled;
-        missionsCompletedText.text = "" + missionsCompleted;
-        float minutes = Mathf.FloorToInt(timeSurvived / 60);
-        float seconds = Mathf.FloorToInt(timeSurvived % 60);
-
+        enemiesKilledText.text = killscore.ToString();
+        missionsCompletedText.text = missionScore.ToString();
+        float minutes = Mathf.FloorToInt(time / 60);
+        float seconds = Mathf.FloorToInt(time % 60);
         timeSurvivedText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
-    public void SetActiveScreen()
-    {
-
     }
 }
