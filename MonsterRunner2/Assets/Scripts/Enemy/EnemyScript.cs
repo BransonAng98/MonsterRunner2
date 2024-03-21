@@ -23,34 +23,26 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float attackCD;
     [SerializeField] float attackDmg;
     [SerializeField] float weight;
-    [SerializeField] float minDistanceFromOtherEnemy = 2f; // Minimum distance from other enemies
 
     [SerializeField] private float targetRotationAngle;
-    [SerializeField] private bool isTurningRight;
-    [SerializeField] private bool isTurningLeft;
-    [SerializeField] private bool isDead = false;
-    [SerializeField] private float currentAttackTimer;
+    [SerializeField] private bool isTurningRight; // Indicates if the enemy is turning right 
+    [SerializeField] private bool isTurningLeft; // Indicates if the enemy is turning left
+    //[SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
+    [SerializeField] private bool isDead = false; // Flag to track if the enemy is dead
     [SerializeField] private float distanceToPlayer;
+    [SerializeField] private float currentAttackTimer;
+    //[SerializeField] private float cooldownDuration = 3f; // Duration of cooldown after colliding with playerr
 
     private Coroutine slowDownCoroutine;
-    [SerializeField] private Transform leader; // Reference to the leader enemy
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        //player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
+        //playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
+        //gameController = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameController>();
         groundLayer = LayerMask.GetMask("Ground");
+        CanMove = true;
 
-        InitializeEnemyStats();
-
-        // Designate the first spawned enemy as the leader
-        if (gameController.IsFirstEnemy(gameObject.transform))
-        {
-            leader = transform;
-        }
-    }
-
-    private void InitializeEnemyStats()
-    {
         health = enemyData.health;
         speed = enemyData.speed;
         attackCD = enemyData.attackCD;
@@ -58,97 +50,157 @@ public class EnemyScript : MonoBehaviour
         weight = enemyData.weight;
     }
 
-    private void Update()
+    void Update()
     {
+      
+        // If player is null or the enemy is dead, return early
         if (player == null || isDead || playerData.isDead)
             return;
-
-        CheckGrounded();
-
-        if (isGrounded && CanMove)
+        else
         {
-            if (IsLeader())
+            CheckGrounded();
+
+            // Only move if the enemy is grounded, can move, and is alive
+            if (isGrounded && CanMove)
             {
                 RotateMonster();
                 MoveMonster();
                 CheckRotation();
             }
-            else
-            {
-                FollowLeader();
-            }
         }
+
     }
 
-    private bool IsLeader()
+    void RotateMonster()
     {
-        return leader == transform;
-    }
-
-    private void FollowLeader()
-    {
-        // Calculate direction towards the leader
-        Vector3 directionToLeader = leader.position - transform.position;
-        directionToLeader.y = 0f;
-
-        // Move towards the leader with some offset
-        Vector3 targetPosition = leader.position - directionToLeader.normalized * minDistanceFromOtherEnemy;
-        rb.velocity = (targetPosition - transform.position).normalized * speed;
-    }
-
-    private void RotateMonster()
-    {
+        // Calculate direction to player, ignoring the x-axis
         Vector3 directionToPlayer = player.position - transform.position;
         directionToPlayer.y = 0f;
+
+        // Calculate the rotation to look at the player
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+        // Smoothly rotate towards the player
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        // Calculate rotation angle
         targetRotationAngle = Quaternion.Angle(transform.rotation, targetRotation);
     }
 
-    private void CheckRotation()
+    void CheckRotation()
     {
+        // Determine if turning left or right
         Vector3 cross = Vector3.Cross(transform.forward, player.position - transform.position);
         isTurningRight = cross.y >= 0;
         isTurningLeft = cross.y < 0;
         if (targetRotationAngle == 0)
         {
+            //walkingStraight = true;
             isTurningLeft = false;
             isTurningRight = false;
         }
     }
 
-    private void MoveMonster()
+    void MoveMonster()
     {
+
         Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
         Vector3 direction = (playerx - transform.position).normalized;
         rb.velocity = direction * enemyData.speed;
     }
 
-    private void CheckGrounded()
+    void CheckGrounded()
     {
+        // Perform a raycast downwards to check if the enemy is grounded
         RaycastHit hit;
         float distanceToGround = GetComponent<Collider>().bounds.extents.y;
-        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, distanceToGround + 0.1f, groundLayer);
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit, distanceToGround + 0.1f, groundLayer))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (isDead)
+            return; // If the enemy is dead, ignore collisions
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Die();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (currentAttackTimer <= 0f)
+            if (currentAttackTimer > 0f)
+            {
+                currentAttackTimer -= Time.deltaTime;
+                Debug.Log("Counting down");
+            }
+            else
             {
                 Attack(other.gameObject);
                 currentAttackTimer = attackCD;
+                Debug.Log("Commencing attack");
             }
         }
     }
 
-    private void Attack(GameObject entity)
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //currentAttackTimer = 0f;
+        }
+    }
+
+    void Attack(GameObject entity)
     {
         DemoPlayer targetPlayer = entity.GetComponentInParent<DemoPlayer>();
+
         if (targetPlayer != null)
         {
-            targetPlayer.TakeDamage(attackDmg);
+            targetPlayer.GetComponent<DemoPlayer>().TakeDamage(attackDmg);
+            Debug.Log("Player taking damage");
+        }
+        else
+        {
+            Debug.Log("Unable to locate player");
+        }
+    }
+
+    void DeathEffect()
+    {
+        Instantiate(bloodSplatter, transform.position, Quaternion.identity);
+        Destroy(gameObject, 3f);
+    }
+
+    void Die()
+    {
+        DeathEffect();
+        isDead = true; // Set the enemy as dead
+        CanMove = false; // Stop the enemy's movement
+        // Change material to deadMaterial
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null && deadMaterial != null)
+        {
+            renderer.material = deadMaterial;
+        }
+
+        // Disable collider and change layer to a designated one for dead enemies
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            gameObject.layer = LayerMask.NameToLayer("DeadEnemy"); // Change layer to DeadEnemy
+
         }
     }
 
@@ -165,45 +217,31 @@ public class EnemyScript : MonoBehaviour
             if (slowDownCoroutine == null)
             {
                 slowDownCoroutine = StartCoroutine(SlowDown());
+                Debug.Log(slowDownCoroutine);
             }
         }
     }
 
-    private void Die()
+    IEnumerator SlowDown()
     {
-        DeathEffect();
-        isDead = true;
-        CanMove = false;
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer != null && deadMaterial != null)
-        {
-            renderer.material = deadMaterial;
-        }
-        Collider collider = GetComponent<Collider>();
-        if (collider != null)
-        {
-            gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
-        }
-
-        // If the leader dies, assign a new leader
-        if (IsLeader())
-        {
-            gameController.AssignNewLeader();
-        }
-    }
-    void DeathEffect()
-    {
-        Instantiate(bloodSplatter, transform.position, Quaternion.identity);
-        Destroy(gameObject, 3f);
-    }
-
-    private IEnumerator SlowDown()
-    {
+        // Reduce speed by half
         speed *= 0.5f;
+
+        // Wait for a duration
         yield return new WaitForSeconds(2f);
+
+        // Restore original speed
         speed /= 0.5f;
+
+        // Reset the coroutine reference
         slowDownCoroutine = null;
     }
+
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, detectionRadius);
+    //}
 }
 
 
