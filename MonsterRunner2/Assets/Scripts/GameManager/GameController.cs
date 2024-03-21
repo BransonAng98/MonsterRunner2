@@ -15,12 +15,6 @@ public class GameController : MonoBehaviour
     public List<GameObject> spawners = new List<GameObject>();
     private EnemySpawner spawner;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //LocateSpawners();
-    }
-
     public void LocateSpawners()
     {
         GameObject[] entities = GameObject.FindGameObjectsWithTag("Spawner");

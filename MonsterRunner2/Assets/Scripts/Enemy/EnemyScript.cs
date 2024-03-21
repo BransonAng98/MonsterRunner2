@@ -13,37 +13,32 @@ public class EnemyScript : MonoBehaviour
     public GameObject bloodSplatter;
     public Material deadMaterial;
     public ScoreManagerScript scoreManager;
-
-    public bool isGrounded;
-    public bool CanMove;
-
     public EnemySO enemyData;
 
-    [SerializeField] float health;
-    [SerializeField] float speed;
-    [SerializeField] float attackCD;
-    [SerializeField] float attackDmg;
-    [SerializeField] float weight;
+    private float health;
+    private float speed;
+    private float attackCD;
+    private float attackDmg;
+    private float weight;
 
-    [SerializeField] private float targetRotationAngle;
-    [SerializeField] private bool isTurningRight; // Indicates if the enemy is turning right 
-    [SerializeField] private bool isTurningLeft; // Indicates if the enemy is turning left
-    //[SerializeField] private bool walkingStraight; // Indicates if the enemy is turning left
-    [SerializeField] private bool isDead = false; // Flag to track if the enemy is dead
-    [SerializeField] private float distanceToPlayer;
-    [SerializeField] private float currentAttackTimer;
-    //[SerializeField] private float cooldownDuration = 3f; // Duration of cooldown after colliding with playerr
+    private bool isGrounded;
+    private bool CanMove = true;
+    private bool isDead = false;
+    private float targetRotationAngle;
+    private float currentAttackTimer;
 
     private Coroutine slowDownCoroutine;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //player = GameObject.FindGameObjectWithTag("Player").transform; // Assumes player has "Player" tag
-        //playerData = GameObject.FindGameObjectWithTag("Player").GetComponent<DemoPlayer>();
-        //gameController = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameController>();
         groundLayer = LayerMask.GetMask("Ground");
-        CanMove = true;
 
+        InitializeEnemyStats();
+    }
+
+    private void InitializeEnemyStats()
+    {
         health = enemyData.health;
         speed = enemyData.speed;
         attackCD = enemyData.attackCD;
@@ -51,80 +46,55 @@ public class EnemyScript : MonoBehaviour
         weight = enemyData.weight;
     }
 
-    void Update()
+    private void Update()
     {
-      
-        // If player is null or the enemy is dead, return early
         if (player == null || isDead || playerData.isDead)
             return;
-        else
+
+        CheckGrounded();
+
+        if (isGrounded && CanMove)
         {
-            CheckGrounded();
-
-            // Only move if the enemy is grounded, can move, and is alive
-            if (isGrounded && CanMove)
-            {
-                RotateMonster();
-                MoveMonster();
-                CheckRotation();
-            }
+            RotateMonster();
+            MoveMonster();
+            CheckRotation();
         }
-
     }
 
-    void RotateMonster()
+    private void RotateMonster()
     {
-        // Calculate direction to player, ignoring the x-axis
         Vector3 directionToPlayer = player.position - transform.position;
         directionToPlayer.y = 0f;
-
-        // Calculate the rotation to look at the player
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
-
-        // Smoothly rotate towards the player
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        // Calculate rotation angle
         targetRotationAngle = Quaternion.Angle(transform.rotation, targetRotation);
     }
 
-    void CheckRotation()
+    private void CheckRotation()
     {
-        // Determine if turning left or right
         Vector3 cross = Vector3.Cross(transform.forward, player.position - transform.position);
-        isTurningRight = cross.y >= 0;
-        isTurningLeft = cross.y < 0;
+        bool isTurningRight = cross.y >= 0;
+        bool isTurningLeft = cross.y < 0;
         if (targetRotationAngle == 0)
         {
-            //walkingStraight = true;
             isTurningLeft = false;
             isTurningRight = false;
         }
     }
 
-    void MoveMonster()
+    private void MoveMonster()
     {
-
         Vector3 playerx = new Vector3(player.transform.position.x, 0, player.transform.position.z);
         Vector3 direction = (playerx - transform.position).normalized;
         rb.velocity = direction * enemyData.speed;
     }
 
-    void CheckGrounded()
+    private void CheckGrounded()
     {
-        // Perform a raycast downwards to check if the enemy is grounded
         RaycastHit hit;
         float distanceToGround = GetComponent<Collider>().bounds.extents.y;
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit, distanceToGround + 0.1f, groundLayer))
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hit, distanceToGround + 0.1f, groundLayer);
     }
-
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -163,51 +133,39 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Attack(GameObject entity)
+    private void Attack(GameObject entity)
     {
         DemoPlayer targetPlayer = entity.GetComponentInParent<DemoPlayer>();
-
         if (targetPlayer != null)
         {
-            targetPlayer.GetComponent<DemoPlayer>().TakeDamage(attackDmg);
-            Debug.Log("Player taking damage");
-        }
-        else
-        {
-            Debug.Log("Unable to locate player");
+            targetPlayer.TakeDamage(attackDmg);
         }
     }
 
-    void DeathEffect()
+    private void Die()
     {
-        Instantiate(bloodSplatter, transform.position, Quaternion.identity);
-        Destroy(gameObject, 3f);
-    }
-
-    void Die()
-    {
-        scoreManager.enemiesKilled++;
         DeathEffect();
-        isDead = true; // Set the enemy as dead
-        CanMove = false; // Stop the enemy's movement
-        // Change material to deadMaterial
+
+        isDead = true;
+        CanMove = false;
+        scoreManager.enemiesKilled++;
+
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null && deadMaterial != null)
         {
             renderer.material = deadMaterial;
         }
 
-        // Disable collider and change layer to a designated one for dead enemies
         Collider collider = GetComponent<Collider>();
         if (collider != null)
         {
-            gameObject.layer = LayerMask.NameToLayer("DeadEnemy"); // Change layer to DeadEnemy
-
+            gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
         }
     }
 
     public void TakeDamage(int damage)
     {
+        Debug.Log("TakingDamager");
         health -= damage;
         if (health <= 0)
         {
@@ -219,32 +177,59 @@ public class EnemyScript : MonoBehaviour
             if (slowDownCoroutine == null)
             {
                 slowDownCoroutine = StartCoroutine(SlowDown());
-                Debug.Log(slowDownCoroutine);
             }
         }
     }
-
-    IEnumerator SlowDown()
+    void DeathEffect()
     {
-        // Reduce speed by half
-        speed *= 0.5f;
+        Instantiate(bloodSplatter, transform.position, Quaternion.identity);
 
-        // Wait for a duration
-        yield return new WaitForSeconds(2f);
-
-        // Restore original speed
-        speed /= 0.5f;
-
-        // Reset the coroutine reference
-        slowDownCoroutine = null;
+        StartCoroutine(DelayShrinkAndDestroy());
     }
 
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, detectionRadius);
-    //}
+    private IEnumerator DelayShrinkAndDestroy()
+    {
+        float delayTime = 5f;
+        yield return new WaitForSeconds(delayTime);
+
+        StartCoroutine(ShrinkAndDestroy());
+    }
+
+    private IEnumerator ShrinkAndDestroy()
+    {
+        float duration = 3f; // Duration of shrinking
+        float timer = 0f;
+
+        Vector3 initialScale = transform.localScale;
+        Vector3 targetScale = Vector3.zero;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(initialScale, targetScale, timer / duration);
+            yield return null;
+        }
+
+        // Ensure scale is exactly zero
+        transform.localScale = targetScale;
+
+        // Destroy the object
+        Destroy(gameObject);
+    }
+
+
+    private IEnumerator SlowDown()
+    {
+        speed *= 0.5f;
+        yield return new WaitForSeconds(2f);
+        speed /= 0.5f;
+        slowDownCoroutine = null;
+    }
 }
+
+
+
+ 
 
 
 
