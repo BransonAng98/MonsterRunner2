@@ -100,6 +100,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1362961888458447097, guid: 4e1d02223b40a344f990451baa72a8c5,
+        type: 3}
+      propertyPath: SizeModule.curve.scalar
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362961888458447097, guid: 4e1d02223b40a344f990451baa72a8c5,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1362961888458447097, guid: 4e1d02223b40a344f990451baa72a8c5,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1362961888458449883, guid: 4e1d02223b40a344f990451baa72a8c5,
         type: 3}
       propertyPath: InitialModule.startSpeed.scalar
