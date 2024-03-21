@@ -660,8 +660,18 @@ PrefabInstance:
       objectReference: {fileID: 6918289769783780123}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
+      propertyPath: explosionForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
       propertyPath: playercollider
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: explosionRadius
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}
@@ -672,6 +682,11 @@ PrefabInstance:
         type: 3}
       propertyPath: maxSteeringAngle
       value: 0.005
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
+        type: 3}
+      propertyPath: enemyLayer.m_Bits
+      value: 640
       objectReference: {fileID: 0}
     - target: {fileID: 7172679666250642586, guid: c6b5ff033ddefdf46840f7d3652f29a5,
         type: 3}

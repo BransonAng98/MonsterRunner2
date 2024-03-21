@@ -516,7 +516,7 @@ public class DemoPlayer : MonoBehaviour
         }
         else
         {
-            return;
+            rb.velocity = Vector3.zero;
         }
     }
 
