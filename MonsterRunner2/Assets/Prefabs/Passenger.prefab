@@ -25,8 +25,8 @@ Transform:
   m_GameObject: {fileID: 6880511610574658448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6145323336525600319}
   - {fileID: 2230594769260699296}
@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunType: 1
-  playerscript: {fileID: 0}
   questgiver: {fileID: 0}
   idleVFX: {fileID: 2230594769260699487}
   PickupVFX: {fileID: 8213002756312529545, guid: a592cfbe01fb3314a92736d7024e9fdc,
