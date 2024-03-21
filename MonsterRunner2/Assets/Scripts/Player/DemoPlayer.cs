@@ -73,6 +73,7 @@ public class DemoPlayer : MonoBehaviour
     [SerializeField] float maxAcceleration;
     [SerializeField] float maxSpeed;
     [SerializeField] float crashDamage;
+
     public LayerMask enemyLayer;
 
     public float explosionForce = 1000f; // Force of the explosion
@@ -95,6 +96,10 @@ public class DemoPlayer : MonoBehaviour
     public List<HealthState> healthSmoke;
 
     public SteeringWheel steeringWheel;
+    public Joystick joystick;
+    public Vector3 lastKnownVector;
+
+    public Vector2 joystickInput;
 
     public ParticleSystem healingVFX;
 
@@ -104,6 +109,7 @@ public class DemoPlayer : MonoBehaviour
     public bool isTriggered;
     public float knockBack;
     public float minimumKnockBack;
+    public float velocityLerpFactor;
 
     public Quest quest; // might need to change this to a list if you want to add quest in runtime. 
     public GameObject destination;
@@ -137,6 +143,9 @@ public class DemoPlayer : MonoBehaviour
         rb.centerOfMass = centerOfMass;
         this.GetComponent<WeaponScript>().enabled = false;
         healingVFX.Stop();
+
+        //Move the character without any input
+        lastKnownVector = transform.forward * maxSpeed;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -168,26 +177,60 @@ public class DemoPlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Border"))
         {
-            // Calculate knockback direction based on collision point
-            Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
-            Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
-            Instantiate(impactVFX, spawnPos, Quaternion.identity);
-            knockbackDirection.Normalize();
+            TakeDamage(1000);
+            //// Calculate knockback direction based on collision point
+            //Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
+            //Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
+            //Instantiate(impactVFX, spawnPos, Quaternion.identity);
+            //knockbackDirection.Normalize();
 
-            // Calculate knockback force based on collision impact force
-            float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
+            //// Calculate knockback force based on collision impact force
+            //float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
 
-            // If knockback force is less than the minimum, use the minimum force instead
-            knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
+            //// If knockback force is less than the minimum, use the minimum force instead
+            //knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
 
-            // Apply knockback force
-            rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+            //// Apply knockback force
+            //rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
         }
     }
 
     void GetInput()
     {
-        steerInput = steeringWheel.GetClampedValue();
+        //steerInput = steeringWheel.GetClampedValue();
+        // Get the joystick input
+        joystickInput = new Vector2(joystick.Horizontal, joystick.Vertical).normalized;
+    }
+
+    void NewMove()
+    {
+
+        // Transform the input direction to match the rotated view
+        Vector3 rotatedInputDirection = Quaternion.Euler(0, 45, 0) * new Vector3(joystickInput.x, 0, joystickInput.y);
+
+        if (rotatedInputDirection.magnitude >= maxSteeringAngle)
+        {
+            // Calculate the target direction based on the rotated joystick input
+            Vector3 targetDirection = rotatedInputDirection;
+
+            // Smoothly rotate the character towards the target direction
+            Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+            Debug.Log("Target Rotation is:" + targetRotation);
+
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSensitivity);
+            Debug.Log("Current Rotation is:" + transform.rotation);
+
+            Vector3 targetVelocity = transform.forward * maxSpeed;
+            rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, velocityLerpFactor); // Smoothly interpolate velocity
+            lastKnownVector = rb.velocity;
+        }
+        else
+        {
+            // If there's no input, maintain the last known velocity and rotation
+            rb.velocity = lastKnownVector;
+            rb.rotation = Quaternion.LookRotation(lastKnownVector);
+            Debug.Log("No input recorded");
+        }
     }
 
     void Move()
@@ -465,6 +508,18 @@ public class DemoPlayer : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (!isDead)
+        {
+            NewMove();
+        }
+        else
+        {
+            return;
+        }
+    }
+
     public void DestinationReached()
     {
         if (passenger != null)
@@ -511,7 +566,7 @@ public class DemoPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
-        Move();
-        Steer();
+        //Move();
+        //Steer();
     }
 }
