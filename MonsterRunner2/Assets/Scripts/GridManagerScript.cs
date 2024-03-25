@@ -2,13 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManagerScript : MonoBehaviour
+public class GridManagerScript : MonoBehaviour
 {
     //public BossEnemyScript boss;
     [SerializeField] private int gridCount;
     [SerializeField] private List<GameObject> gridObjects = new List<GameObject>();
     [SerializeField] private GameObject furthestGrid;
 
+    public GameObject treeParent; // Parent object for trees
+    public GameObject stoneParent; // Parent object for stones
+    public GameObject houseParent; // Parent object for houses
+    public GameObject enemyspawnerHolder;
+
+    public missionManagerScript missionManager;
+    public Transform playerPos;
+    public DemoPlayer playerData;
+    public GameController gameController;
+    public ScoreManagerScript scoreManager;
+    public GridManagerScript gridmanager;
     void Start()
     {
         //boss = GameObject.FindGameObjectWithTag("Monster").GetComponent<BossEnemyScript>();

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridDetection : MonoBehaviour
 {
-    public GameManagerScript GMscript;
+    public GridManagerScript GMscript;
     public int entitiesDetected;
     private Collider _collider;
     [SerializeField] private GridSpawner _spawner;
@@ -17,7 +17,7 @@ public class GridDetection : MonoBehaviour
 
     private void Start()
     {
-        GMscript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
+        GMscript = GameObject.Find("GridManager").GetComponent<GridManagerScript>();
         shouldResetEntities = true;
         hasSpawnedGrid = false;
         entitiesDetected = -1; // Initialize to 0

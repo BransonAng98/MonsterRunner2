@@ -6,7 +6,7 @@ public class GridSpawner : MonoBehaviour
 {
     public GameObject gridPrefab; // Reference to the prefab of the grid
     [SerializeField] private float gridDistance;
-    public GameManagerScript GMscript;
+    public GridManagerScript GMscript;
     public GameObject gridChecker;
     public Vector3 spawnPosition;
 
@@ -14,7 +14,7 @@ public class GridSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GMscript = GameObject.Find("GameManager").GetComponent<GameManagerScript>();
+        GMscript = GameObject.Find("GridManager").GetComponent<GridManagerScript>();
         // Get all colliders of the gridPrefab
         
 
@@ -51,6 +51,12 @@ public class GridSpawner : MonoBehaviour
     public void SpawnGridPrefab(GameObject prefab, Vector3 position)
     {
         GameObject nextGrid = Instantiate(prefab, position, Quaternion.identity);
+        EnvironmentSpawner gridenvironmentScript = prefab.GetComponent<EnvironmentSpawner>();
+
+        if(gridenvironmentScript != null)
+        {
+
+        }
         Collider[] childColliders = nextGrid.GetComponentsInChildren<Collider>();
 
         foreach (Collider childCollider in childColliders)

@@ -19,10 +19,10 @@ public class EnvironmentSpawner : MonoBehaviour
     public int maxEnemySpawnerPrefabs;
     //private int minScale = 1; // Minimum scale for prefabs
    // private int maxScale = 1; // Maximum scale for prefabs
-    private float minXRange = -300f; // Minimum spawning width for the x-axis
-    private float maxXRange = 300f; // Maximum spawning width for the x-axis
-    private float minZRange = -220f; // Minimum spawning width for the z-axis
-    private float maxZRange = 220f; // Maximum spawning width for the z-axis
+    private float minXRange = -100; // Minimum spawning width for the x-axis
+    private float maxXRange = 100; // Maximum spawning width for the x-axis
+    private float minZRange = -100; // Minimum spawning width for the z-axis
+    private float maxZRange = 100; // Maximum spawning width for the z-axis
     private float minTreeDistance = 0.1f; // Minimum distance between tree prefabs
     private float minStoneDistance = 1.0f; // Minimum distance between stone prefabs
     private float minHouseDistance = 20.0f; // Minimum distance between house prefabs
@@ -43,6 +43,7 @@ public class EnvironmentSpawner : MonoBehaviour
     public DemoPlayer playerData;
     public GameController gameController;
     public ScoreManagerScript scoreManager;
+    public GridManagerScript gridmanager;
     void Start()
     {
         SpawnEnvironment();
