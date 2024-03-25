@@ -452,11 +452,11 @@ public class DemoPlayer : MonoBehaviour
         //Add force when the car explodes
         Explode();
 
+        StartCoroutine(SlowDownVelocity());
+
         //Disables the demoplayer code so it stops moving and everything else
         this.GetComponent<DemoPlayer>().enabled = false;
         this.GetComponent<WeaponScript>().enabled = false;
-
-        Invoke(nameof(OpenDefeatScreen), 4.5f);
     }
 
     void Explode()
@@ -477,6 +477,34 @@ public class DemoPlayer : MonoBehaviour
                 rb.AddForce(direction * explosionForce, ForceMode.Impulse);
             }
         }
+    }
+
+    IEnumerator SlowDownVelocity()
+    {
+        float originalDrag = rb.drag; // Store the original drag value
+        float targetDrag = 5f; // Set the target drag value for braking
+        float dragLerpFactor = 0.1f; // Adjust the lerp factor for smooth transition
+
+        while (rb.velocity.magnitude > 0.1f || rb.angularVelocity.magnitude > 0.1f) // Continue until velocity is close to zero
+        {
+            // Gradually lerp the drag value towards the target
+            rb.drag = Mathf.Lerp(rb.drag, targetDrag, dragLerpFactor * Time.deltaTime);
+
+            yield return null;
+        }
+
+        // Ensure that the drag has reached the target
+        rb.drag = targetDrag;
+
+        if(rb.drag == targetDrag)
+        {
+            // Open the defeat screen
+            OpenDefeatScreen();
+
+        }
+
+        // Restore the original drag value
+        rb.drag = originalDrag;
     }
 
     void OpenDefeatScreen()
@@ -516,7 +544,7 @@ public class DemoPlayer : MonoBehaviour
         }
         else
         {
-            rb.velocity = Vector3.zero;
+            return;
         }
     }
 
