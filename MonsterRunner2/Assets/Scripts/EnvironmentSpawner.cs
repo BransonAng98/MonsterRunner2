@@ -19,12 +19,12 @@ public class EnvironmentSpawner : MonoBehaviour
     public int maxEnemySpawnerPrefabs;
     //private int minScale = 1; // Minimum scale for prefabs
    // private int maxScale = 1; // Maximum scale for prefabs
-    private float minXRange = -100; // Minimum spawning width for the x-axis
-    private float maxXRange = 100; // Maximum spawning width for the x-axis
-    private float minZRange = -100; // Minimum spawning width for the z-axis
-    private float maxZRange = 100; // Maximum spawning width for the z-axis
+    private float minXRange = -300; // Minimum spawning width for the x-axis
+    private float maxXRange = 300; // Maximum spawning width for the x-axis
+    private float minZRange = -230; // Minimum spawning width for the z-axis
+    private float maxZRange = 230; // Maximum spawning width for the z-axis
     private float minTreeDistance = 0.1f; // Minimum distance between tree prefabs
-    private float minStoneDistance = 1.0f; // Minimum distance between stone prefabs
+    private float minStoneDistance = 10.0f; // Minimum distance between stone prefabs
     private float minHouseDistance = 20.0f; // Minimum distance between house prefabs
     private float minenemySpawnerDistance = 100.0f; // Minimum distance between house prefabs
 
@@ -74,14 +74,27 @@ public class EnvironmentSpawner : MonoBehaviour
             SpawnPrefab(Houses, instantiatedHousePositions, minHouseDistance, houseParent, 0);
         }
 
-        // Spawn enemy spawners
+        SpawnEnemySpawners();
+
+    }
+    void SpawnEnemySpawners()
+    {
         int numofSpawnersToSpawn = Random.Range(minEnemySpawnerPrefabs, maxEnemySpawnerPrefabs + 1);
         for (int i = 0; i < numofSpawnersToSpawn; i++)
         {
-            SpawnPrefab(enemySpawner, instantiatedSpawnerPositions, minenemySpawnerDistance, enemyspawnerHolder, 1);
-            // Note: In this case, no specific parent is assigned to the enemy spawners.
+            Vector3 spawnPosition = GetRandomPositionForSpawner();
+            if (spawnPosition != Vector3.zero) // Assuming Vector3.zero is the indication of a failure to find a suitable location
+            {
+                GameObject spawnerPrefab = enemySpawner[Random.Range(0, enemySpawner.Length)];
+                GameObject spawnedSpawner = Instantiate(spawnerPrefab, spawnPosition, Quaternion.identity, enemyspawnerHolder.transform);
+                EnemySpawner enemyspawnerScript = spawnedSpawner.GetComponent<EnemySpawner>();
+                enemyspawnerScript.playerPos = playerPos;
+                enemyspawnerScript.playerData = playerData;
+                enemyspawnerScript.gameController = gameController;
+                enemyspawnerScript.scoreManager = scoreManager;
+                instantiatedSpawnerPositions.Add(spawnPosition);
+            }
         }
-
     }
 
 
@@ -111,13 +124,14 @@ public class EnvironmentSpawner : MonoBehaviour
         // Spawn the prefab at the found position
         GameObject prefabToSpawn = prefabs[Random.Range(0, prefabs.Length)];
         GameObject spawnedObject = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+        EnvoCollision envoCollision = spawnedObject.GetComponentInChildren<EnvoCollision>();
+
+        envoCollision.player = playerPos;
+        Debug.Log("AssignedCollision");
 
         // Additional setup (setting parent, adjusting rotation, etc.) remains unchanged
         spawnedObject.transform.parent = parentObject.transform;
-        switch (data)
-        {
-            // Case 0 and Case 1 logic remains unchanged
-        }
+       
 
         // Randomize rotation around the y-axis
         float randomYRotation = Random.Range(0f, 360f);
@@ -127,6 +141,27 @@ public class EnvironmentSpawner : MonoBehaviour
     }
 
     // Your existing helper methods (GetRandomPrefabPosition, IsTooClose, IsTooCloseToTrees) remain unchanged
+
+    Vector3 GetRandomPositionForSpawner()
+    {
+        const int maxAttempts = 100;
+        for (int attempts = 0; attempts < maxAttempts; attempts++)
+        {
+            Vector3 potentialPosition = GetRandomPrefabPosition();
+            if (IsValidSpawnerPosition(potentialPosition))
+            {
+                return potentialPosition;
+            }
+        }
+        return Vector3.zero; // Return Vector3.zero if no valid position is found after all attempts
+    }
+
+    bool IsValidSpawnerPosition(Vector3 position)
+    {
+        // Add your own conditions for what makes a position valid for a spawner.
+        // This example checks the position isn't too close to already placed spawners.
+        return !IsTooClose(position, instantiatedSpawnerPositions, minenemySpawnerDistance);
+    }
 
 
     Vector3 GetRandomPrefabPosition()

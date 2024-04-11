@@ -40,6 +40,7 @@ public class missionManagerScript : MonoBehaviour
     }
     public void FindBuildingObjects()
     {
+        Debug.Log("FindBuildings");
         // Find the holder object named "Building"
         if (buildingHolder == null)
         {
