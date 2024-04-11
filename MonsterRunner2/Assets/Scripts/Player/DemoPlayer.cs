@@ -201,7 +201,6 @@ public class DemoPlayer : MonoBehaviour
         // Get the joystick input
         joystickInput = new Vector2(joystick.Horizontal, joystick.Vertical).normalized;
     }
-
     void NewMove()
     {
 
@@ -215,21 +214,21 @@ public class DemoPlayer : MonoBehaviour
 
             // Smoothly rotate the character towards the target direction
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-           
-
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSensitivity);
-        
 
+            // Calculate target velocity only on x and z axes
             Vector3 targetVelocity = transform.forward * maxSpeed;
+            targetVelocity.y = rb.velocity.y; // Keep the y component of velocity unchanged
             rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, velocityLerpFactor); // Smoothly interpolate velocity
             lastKnownVector = rb.velocity;
         }
         else
         {
             // If there's no input, maintain the last known velocity and rotation
-            rb.velocity = lastKnownVector;
+            Vector3 targetVelocity = lastKnownVector;
+            targetVelocity.y = rb.velocity.y; // Keep the y component of velocity unchanged
+            rb.velocity = targetVelocity;
             rb.rotation = Quaternion.LookRotation(lastKnownVector);
-            
         }
     }
 
