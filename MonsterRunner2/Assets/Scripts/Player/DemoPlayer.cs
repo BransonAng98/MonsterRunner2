@@ -67,6 +67,15 @@ public class DemoPlayer : MonoBehaviour
         public Health playerHealth;
     }
 
+    [Serializable]
+    public struct VehicleData
+    {
+        public Mesh vehicleBody;
+        public AbilitySO ability1;
+        public AbilitySO ability2;
+    }
+
+
     public PlayerSO playerData;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
@@ -86,6 +95,10 @@ public class DemoPlayer : MonoBehaviour
     public bool isDead;
 
     public Vector3 centerOfMass;
+
+    public PlayerAbilityManager abilityManager;
+    public PlayerDataManager playerDataManager;
+    public VehicleData vehicleData;
 
     public List<Wheel> wheels;
 
@@ -148,6 +161,22 @@ public class DemoPlayer : MonoBehaviour
         lastKnownVector = transform.forward * maxSpeed;
     }
 
+    void InstantiateData()
+    {
+        //Change mesh in mesh renderer 
+        //Transfer saved ability data from system into player prefab
+        vehicleData.ability1 = playerDataManager.ab1;
+        if (playerDataManager.ab2 != null)
+        {
+            vehicleData.ability2 = playerDataManager.ab2;
+        }
+
+        else
+        {
+            vehicleData.ability2 = null;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Obstacle"))
@@ -192,6 +221,15 @@ public class DemoPlayer : MonoBehaviour
 
             //// Apply knockback force
             //rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+        }
+
+        if (collision.gameObject.CompareTag("AbilityToken"))
+        {
+            //Record which ability to trigger upon collision
+            abilityManager.abilityID = collision.gameObject.GetComponent<AbilityToken>().abilityID;
+
+            //Activates the ability in the AbilityManager
+            abilityManager.isTriggered = true;
         }
     }
 
