@@ -45,11 +45,21 @@ public class EnemyCarAI : MonoBehaviour
             }
             else
             {
-               
+                // Target behind
+                float reverseDistance = 25f;
+                if (distanceToTarget > reverseDistance)
+                {
+                    // Too far to reverse
+                    forwardAmount = 1f;
+                }
+                else
+                {
+                    forwardAmount = -1f;
+                }
             }
 
             float angleToDir = Vector3.SignedAngle(transform.forward, dirToMovePosition, Vector3.up);
-            if (angleToDir == 0 || (angleToDir < 10 && angleToDir > -10))
+            if (angleToDir == 0 || (angleToDir < 30 && angleToDir > -30))
             {
                 turnAmount = 0f; // Don't steer if angle is within -10 to 10 degrees or exactly 0 degrees
             }

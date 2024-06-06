@@ -16,6 +16,7 @@ TagManager:
   - GameManager
   - FxTemporaire
   - Border
+  - AbilityToken
   layers:
   - Default
   - TransparentFX
