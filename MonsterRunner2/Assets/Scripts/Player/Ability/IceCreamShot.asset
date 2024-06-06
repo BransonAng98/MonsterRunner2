@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: IceCreamShot
   m_EditorClassIdentifier: 
   abilityName: IceCreamShot
-  abilityCD: 0
-  abilityActive: 0
+  abilityCD: 3
+  abilityActive: 5
   bulletPf: {fileID: 0}

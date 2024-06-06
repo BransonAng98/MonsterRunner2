@@ -2498,13 +2498,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 353caa8b6727a3a43b1d43c576972eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vehicles: []
+  vehicles:
+  - vehicleBody: {fileID: 0}
+    vehicleID: 0
+    ability1: {fileID: 0}
+    ability2: {fileID: 0}
   vehicleID: 0
   abilityUnlocked: 0
   secondUnlocked: 0
   body: {fileID: 0}
   ab1: {fileID: 0}
-  ab2: {fileID: 11400000, guid: a79b127a00bcb9b46afcb7a95d226c1f, type: 2}
+  ab2: {fileID: 0}
 --- !u!1 &758302645
 GameObject:
   m_ObjectHideFlags: 0
