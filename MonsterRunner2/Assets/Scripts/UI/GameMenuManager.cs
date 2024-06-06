@@ -40,6 +40,7 @@ public class GameMenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("Start Game");
         Time.timeScale = 1f;
         startScreen.SetActive(false);
     }
