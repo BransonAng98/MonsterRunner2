@@ -6,8 +6,8 @@ public class enemyCarDriver : MonoBehaviour
 {
     #region Fields
     [SerializeField] private float speed;
-    private float speedMax = 18f;
-    private float speedMin = 9f;
+    public float speedMax = 18f;
+    public float speedMin = 9f;
     private float acceleration = 30f;
     private float brakeSpeed = 100f;
     private float reverseSpeed = 30f;
