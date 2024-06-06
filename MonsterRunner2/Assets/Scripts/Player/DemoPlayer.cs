@@ -230,6 +230,8 @@ public class DemoPlayer : MonoBehaviour
 
             //Activates the ability in the AbilityManager
             abilityManager.isTriggered = true;
+
+            GameObject token = collision.gameObject;
         }
     }
 
