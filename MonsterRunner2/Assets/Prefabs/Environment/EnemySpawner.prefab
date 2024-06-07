@@ -66,11 +66,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb4858560648f54ebd2f8e8cde356fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPf: {fileID: 8399788647773550628, guid: e83c308789ffe394791a13b89da48ac7, type: 3}
+  enemyType1Pf: {fileID: 2271412327364450842, guid: c14370a4750163d449c07e01655e66de,
+    type: 3}
+  enemyType2Pf: {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262,
+    type: 3}
   playerPos: {fileID: 0}
   playerData: {fileID: 0}
   gameController: {fileID: 0}
   scoreManager: {fileID: 0}
+  spawnRange: 10
 --- !u!33 &6668692295646606530
 MeshFilter:
   m_ObjectHideFlags: 0

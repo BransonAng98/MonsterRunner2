@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1563541337053854379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 496646055262577893}
+  - component: {fileID: 3761609746862323373}
+  m_Layer: 0
+  m_Name: DetectionCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &496646055262577893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563541337053854379}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2271412327364450791}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &3761609746862323373
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563541337053854379}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2271412327364450842
 GameObject:
   m_ObjectHideFlags: 0
@@ -35,6 +80,7 @@ Transform:
   m_Children:
   - {fileID: 1733626402941037592}
   - {fileID: 2271412328308955063}
+  - {fileID: 496646055262577893}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,6 +127,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPositionTranform: {fileID: 0}
   carDriver: {fileID: 2271412327364450843}
+  detectionColliderObject: {fileID: 0}
+  isAvoiding: 0
+  detectedObjects: []
 --- !u!114 &2271412327364450843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,7 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedMax: 15
+  speedMax: 16
   speedMin: 9
   isDead: 0
   forwardAmount: 0
@@ -114,11 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feeeb2c1d6e508a428266e399e3b7c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 10
+  detectionRange: 15
   raycastDuration: 2
   bulletPrefab: {fileID: 237641072566164663, guid: 797479135d5422d4bbe189290f33476b,
     type: 3}
   firePoint: {fileID: 2271412328308955063}
+  playerdata: {fileID: 0}
   lastKnownPosition: {x: 0, y: 0, z: 0}
   playerDetected: 0
 --- !u!1 &2271412328308955062

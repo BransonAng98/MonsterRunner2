@@ -1306,6 +1306,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
+      propertyPath: circleRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
+        type: 3}
       propertyPath: targetPositionTranform
       value: 
       objectReference: {fileID: 751716999}
@@ -1317,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039597518212396654, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
@@ -1971,6 +1976,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
+      propertyPath: circleRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
+        type: 3}
       propertyPath: targetPositionTranform
       value: 
       objectReference: {fileID: 751716999}
@@ -1982,7 +1992,7 @@ PrefabInstance:
     - target: {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039597518212396654, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
@@ -2446,12 +2456,12 @@ MonoBehaviour:
   - {fileID: 7574374317313724504, guid: 0463f6de990da9642a9c9ec7037d938e, type: 3}
   enemySpawner:
   - {fileID: 8527278158336687328, guid: 5ee77461bb45fd643add1757f36c3c59, type: 3}
-  minTreePrefabs: 150
-  maxTreePrefabs: 200
-  minStonePrefabs: 30
-  maxStonePrefabs: 50
-  minHousePrefabs: 12
-  maxHousePrefabs: 15
+  minTreePrefabs: 100
+  maxTreePrefabs: 120
+  minStonePrefabs: 0
+  maxStonePrefabs: 12
+  minHousePrefabs: 3
+  maxHousePrefabs: 6
   minEnemySpawnerPrefabs: 0
   maxEnemySpawnerPrefabs: 0
   instantiatedTreePositions: []
@@ -2690,6 +2700,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
+      propertyPath: circleRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
+        type: 3}
       propertyPath: targetPositionTranform
       value: 
       objectReference: {fileID: 751716999}
@@ -2701,7 +2716,12 @@ PrefabInstance:
     - target: {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039597518212396653, guid: a97911a79f45d1e47a5244bdb12b6262,
+        type: 3}
+      propertyPath: speedMin
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5039597518212396654, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
@@ -5994,6 +6014,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
+      propertyPath: circleRadius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5039597518212396642, guid: a97911a79f45d1e47a5244bdb12b6262,
+        type: 3}
       propertyPath: targetPositionTranform
       value: 
       objectReference: {fileID: 751716999}
@@ -6005,7 +6030,7 @@ PrefabInstance:
     - target: {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039597518212396654, guid: a97911a79f45d1e47a5244bdb12b6262,
         type: 3}

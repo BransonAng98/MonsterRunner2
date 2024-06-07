@@ -29,11 +29,7 @@ public class EnemyBulletScript : MonoBehaviour
     {
         playerdata = player;
     }
-    private void OnTriggerEnter(Collider other)
-    {
-       
-    }
-
+   
     private void OnCollisionEnter(Collision collision)
     {
         // Check if the bullet hits an enemy
@@ -44,6 +40,11 @@ public class EnemyBulletScript : MonoBehaviour
             // Destroy the bullet
             Destroy(gameObject);
         }
-        
+
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("destroy Bullet");
+            Destroy(gameObject);
+        }
     }
 }

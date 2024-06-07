@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class EnemyCarAI : MonoBehaviour
 {
-
-    [SerializeField] private Transform targetPositionTranform;
-
+    public Transform targetPositionTranform;
     public enemyCarDriver carDriver;
-    private Vector3 targetPosition;
+    public GameObject detectionColliderObject; // Reference to the GameObject with the trigger collider
 
-    private void Awake()
-    {
-       
-    }
+    private Vector3 targetPosition;
+    private const float reachedTargetDistance = 1f;
+    private const float stoppingDistance = 30f;
+    private const float stoppingSpeed = 40f;
+    private const float reverseDistance = 25f;
+    private const float minSpeedToReverse = 15f;
+    private const float avoidanceStrength = 15f;
+
+    [SerializeField] private bool isAvoiding;
+    [SerializeField] private List<GameObject> detectedObjects = new List<GameObject>(); // List to store detected objects
 
     private void Update()
     {
@@ -21,9 +25,8 @@ public class EnemyCarAI : MonoBehaviour
 
         float forwardAmount = 0f;
         float turnAmount = 0f;
-
-        float reachedTargetDistance = 1f;
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
+
         if (distanceToTarget > reachedTargetDistance)
         {
             // Still too far, keep going
@@ -35,8 +38,6 @@ public class EnemyCarAI : MonoBehaviour
                 // Target in front
                 forwardAmount = 1f;
 
-                float stoppingDistance = 30f;
-                float stoppingSpeed = 40f;
                 if (distanceToTarget < stoppingDistance && carDriver.GetSpeed() > stoppingSpeed)
                 {
                     // Within stopping distance and moving forward too fast
@@ -46,7 +47,6 @@ public class EnemyCarAI : MonoBehaviour
             else
             {
                 // Target behind
-                float reverseDistance = 25f;
                 if (distanceToTarget > reverseDistance)
                 {
                     // Too far to reverse
@@ -59,35 +59,39 @@ public class EnemyCarAI : MonoBehaviour
             }
 
             float angleToDir = Vector3.SignedAngle(transform.forward, dirToMovePosition, Vector3.up);
-            if (angleToDir == 0 || (angleToDir < 30 && angleToDir > -30))
+            if (Mathf.Abs(angleToDir) < 30)
             {
-                turnAmount = 0f; // Don't steer if angle is within -10 to 10 degrees or exactly 0 degrees
+                turnAmount = 0f; // Don't steer if angle is within -30 to 30 degrees
             }
             else
             {
-                if (angleToDir > 0)
+                isAvoiding = detectedObjects.Count > 0; // Set avoiding based on detected objects
+
+                if (isAvoiding)
                 {
-                    turnAmount = 1f;
+                    // Avoidance behavior based on detected objects
+                    // Example: Calculate avoidance direction and apply avoidance force
+                    Vector3 avoidanceDir = Vector3.zero;
+                    foreach (GameObject obj in detectedObjects)
+                    {
+                        // Example: Calculate avoidance direction based on obj position
+                        avoidanceDir += (transform.position - obj.transform.position).normalized;
+                    }
+                    turnAmount = Vector3.Dot(avoidanceDir.normalized, transform.right) * avoidanceStrength;
                 }
                 else
                 {
-                    turnAmount = -1f;
+                    // No obstacles or enemies detected, continue turning towards target
+                    turnAmount = angleToDir > 0 ? 1f : -1f;
                 }
             }
         }
-      else
-      {
-          // Reached target
-          if (carDriver.GetSpeed() > 15f)
-          {
-              forwardAmount = -1f;
-          }
-          else
-          {
-              forwardAmount = 0f;
-          }
-          turnAmount = 0f;
-      }
+        else
+        {
+            // Reached target
+            forwardAmount = carDriver.GetSpeed() > minSpeedToReverse ? -1f : 0f;
+            turnAmount = 0f;
+        }
 
         carDriver.SetInputs(forwardAmount, turnAmount);
     }
@@ -97,4 +101,22 @@ public class EnemyCarAI : MonoBehaviour
         this.targetPosition = targetPosition;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
+        {
+            detectedObjects.Add(other.gameObject);
+            isAvoiding = true;
+            Debug.Log("Avoid");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
+        {
+            detectedObjects.Remove(other.gameObject);
+            isAvoiding = detectedObjects.Count > 0;
+        }
+    }
 }
