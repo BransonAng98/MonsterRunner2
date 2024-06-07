@@ -227,15 +227,14 @@ public class DemoPlayer : MonoBehaviour
             TakeDamage(1000);
         }
 
-            if (collision.gameObject.CompareTag("AbilityToken"))
+        if (collision.gameObject.CompareTag("AbilityToken"))
         {
             //Record which ability to trigger upon collision
             abilityManager.abilityID = collision.gameObject.GetComponent<AbilityToken>().abilityID;
 
             //Activates the ability in the AbilityManager
             abilityManager.isTriggered = true;
-
-            
+            Destroy(collision.gameObject);
         }
     }
 

@@ -7,6 +7,7 @@ public class AbilityTokenManager : MonoBehaviour
     public GameObject powerUpType1Prefab; // First power-up prefab
     public GameObject powerUpType2Prefab; // Second power-up prefab
     public List<Transform> spawnLocations; // List of spawn locations
+    public List<GameObject> spawnedTokens;
     public bool spawnType2; // Flag to determine if the second power-up should be spawned
     private int nextSpawnLocationIndex; // Index of the next spawn location to be used
 
@@ -29,7 +30,8 @@ public class AbilityTokenManager : MonoBehaviour
             Transform spawnLocation = spawnLocations[i];
 
             // Spawn the first power-up at the current spawn location
-            Instantiate(powerUpType1Prefab, spawnLocation.position, Quaternion.identity);
+            GameObject token1 = Instantiate(powerUpType1Prefab, spawnLocation.position, Quaternion.identity);
+            spawnedTokens.Add(token1);
 
             // If spawnType2 is true and there are more spawn locations, spawn the second power-up at the next spawn location
             if (spawnType2 && i < spawnLocations.Count - 1)
@@ -39,7 +41,20 @@ public class AbilityTokenManager : MonoBehaviour
                 spawnLocation = spawnLocations[i];
 
                 // Spawn the second power-up at the next spawn location
-                Instantiate(powerUpType2Prefab, spawnLocation.position, Quaternion.identity);
+                GameObject token2 = Instantiate(powerUpType2Prefab, spawnLocation.position, Quaternion.identity);
+                spawnedTokens.Add(token2);
+            }
+        }
+    }
+
+    public void DespawnTokens()
+    {
+        if(spawnedTokens.Count > 0)
+        {
+            foreach (GameObject token in spawnedTokens)
+            {
+                Destroy(token);
+                spawnedTokens.Remove(token);
             }
         }
     }
