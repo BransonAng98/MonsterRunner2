@@ -9,7 +9,9 @@ public class GameMenuManager : MonoBehaviour
     public int currentScene;
     public GameObject startScreen;
     public GameObject defeatScreen;
+    public GameObject mainMenu;
     [SerializeField] bool hasStarted;
+    [SerializeField] GameObject currentMenu;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,6 +37,19 @@ public class GameMenuManager : MonoBehaviour
     {
         SceneManager.LoadScene("TestLevel");
         hasStarted = true;
+    }
+
+    public void OpenMenu(GameObject nextMenu)
+    {
+        currentMenu = nextMenu;
+        nextMenu.SetActive(true);
+        mainMenu.SetActive(false);
+    }
+
+    public void ReturnToMain()
+    {
+        currentMenu.SetActive(false);
+        mainMenu.SetActive(true);
     }
 
 
