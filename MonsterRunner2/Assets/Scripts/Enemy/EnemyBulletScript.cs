@@ -6,8 +6,14 @@ public class EnemyBulletScript : MonoBehaviour
 {
     public float speed = 20f;
     public float lifetime = 5f;
-   
+    public DemoPlayer playerdata;
 
+
+
+    private void Awake()
+    {
+       
+    }
     private void Start()
     {
         // Destroy the bullet after its lifetime expires
@@ -19,27 +25,25 @@ public class EnemyBulletScript : MonoBehaviour
         // Move the bullet forward
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
-
+    public  void AssignData(DemoPlayer player)
+    {
+        playerdata = player;
+    }
     private void OnTriggerEnter(Collider other)
     {
+       
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
         // Check if the bullet hits an enemy
-        if (other.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            // Apply damage to the enemy (assuming the enemy has a script with a TakeDamage method)
-         
-
-            // Instantiate an impact effect if one is assigned
-          
-
+            playerdata.DamagedByBullet();
+            Debug.Log("DamagedByBullet");
             // Destroy the bullet
             Destroy(gameObject);
         }
-        else
-        {
-            // Optional: handle other collisions, such as with walls or obstacles
-          
-            // Destroy the bullet
-            Destroy(gameObject);
-        }
+        
     }
 }
