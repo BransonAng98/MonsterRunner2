@@ -8,7 +8,7 @@ public class PlayerDataManager : MonoBehaviour
     [Serializable]
     public struct Vehicle
     {
-        public Mesh vehicleBody;
+        public MeshFilter vehicleBody;
         public int vehicleID;
         public AbilitySO ability1;
         public AbilitySO ability2;
@@ -18,7 +18,7 @@ public class PlayerDataManager : MonoBehaviour
     public int vehicleID;
     public int abilityUnlocked;
     public bool secondUnlocked;
-    public Mesh body;
+    public MeshFilter body;
     public AbilitySO ab1;
     public AbilitySO ab2;
 

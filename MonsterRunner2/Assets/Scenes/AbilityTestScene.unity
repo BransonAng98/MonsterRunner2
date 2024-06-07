@@ -2312,11 +2312,11 @@ GameObject:
   - component: {fileID: 754238775}
   - component: {fileID: 754238776}
   - component: {fileID: 754238777}
-  - component: {fileID: 754238778}
   - component: {fileID: 754238780}
-  - component: {fileID: 754238779}
   - component: {fileID: 754238781}
   - component: {fileID: 754238782}
+  - component: {fileID: 754238778}
+  - component: {fileID: 754238779}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -2469,6 +2469,7 @@ MonoBehaviour:
   - {fileID: 665693587}
   - {fileID: 2102464773}
   - {fileID: 378683117}
+  spawnedTokens: []
   spawnType2: 1
 --- !u!114 &754238781
 MonoBehaviour:
@@ -2499,10 +2500,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicles:
-  - vehicleBody: {fileID: 0}
-    vehicleID: 0
+  - vehicleBody: {fileID: 4306142438199868902, guid: e14adaf3afb638d488945d44f67b127c,
+      type: 3}
+    vehicleID: 1
     ability1: {fileID: 0}
     ability2: {fileID: 0}
+  - vehicleBody: {fileID: 4306142438199868902, guid: 5e26fce2d4b439c4a93a372104023bd4,
+      type: 3}
+    vehicleID: 2
+    ability1: {fileID: 0}
+    ability2: {fileID: 11400000, guid: a79b127a00bcb9b46afcb7a95d226c1f, type: 2}
   vehicleID: 0
   abilityUnlocked: 0
   secondUnlocked: 0

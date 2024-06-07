@@ -8,6 +8,7 @@ public class EnemyGunnerScript : MonoBehaviour
     public float raycastDuration = 0.5f; // Duration for which the raycast line stays active
     public GameObject bulletPrefab; // Reference to the bullet prefab
     public Transform firePoint; // Point from where the bullet will be instantiated
+    public DemoPlayer playerdata;
 
     [SerializeField]private Vector3 lastKnownPosition;
     [SerializeField] private bool playerDetected;
@@ -53,6 +54,7 @@ public class EnemyGunnerScript : MonoBehaviour
     {
         // Instantiate the bullet at the firePoint
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.GetComponent<EnemyBulletScript>().AssignData(playerdata);
 
         // Calculate the direction to the last known position
         Vector3 direction = (lastKnownPosition - firePoint.position).normalized;

@@ -4723,6 +4723,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2271412327364450784, guid: c14370a4750163d449c07e01655e66de,
+        type: 3}
+      propertyPath: playerdata
+      value: 
+      objectReference: {fileID: 799882639}
     - target: {fileID: 2271412327364450788, guid: c14370a4750163d449c07e01655e66de,
         type: 3}
       propertyPath: targetPositionTranform
@@ -4787,6 +4792,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GunPolice
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271412327364450842, guid: c14370a4750163d449c07e01655e66de,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c14370a4750163d449c07e01655e66de, type: 3}

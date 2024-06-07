@@ -23,6 +23,7 @@ public class enemyCarDriver : MonoBehaviour
     [SerializeField] private float forwardAmount;
     [SerializeField] private float turnAmount;
 
+   
     private Rigidbody carRigidbody;
     public float flingForce = 1f; // Adjust this value as needed
     public float drag = 1f; // Adjust drag as needed
@@ -184,6 +185,8 @@ public class enemyCarDriver : MonoBehaviour
             // Call Player Death Logic Here
         }
     }
+
+   
 
     public void CarDeath()
     {

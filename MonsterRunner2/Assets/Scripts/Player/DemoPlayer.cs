@@ -222,6 +222,10 @@ public class DemoPlayer : MonoBehaviour
             //// Apply knockback force
             //rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            TakeDamage(1000);
+        }
 
         if (collision.gameObject.CompareTag("AbilityToken"))
         {
@@ -230,8 +234,7 @@ public class DemoPlayer : MonoBehaviour
 
             //Activates the ability in the AbilityManager
             abilityManager.isTriggered = true;
-
-            
+            Destroy(collision.gameObject);
         }
     }
 
@@ -496,6 +499,11 @@ public class DemoPlayer : MonoBehaviour
         //Disables the demoplayer code so it stops moving and everything else
         this.GetComponent<DemoPlayer>().enabled = false;
         this.GetComponent<WeaponScript>().enabled = false;
+    }
+    
+    public void DamagedByBullet()
+    {
+        TakeDamage(200);
     }
 
     void Explode()
