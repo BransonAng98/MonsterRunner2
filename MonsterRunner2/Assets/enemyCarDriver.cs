@@ -36,7 +36,7 @@ public class enemyCarDriver : MonoBehaviour
     private void Awake()
     {
         isDead = false;
-        DeathExplosionVFX.SetActive(false);
+        //DeathExplosionVFX.SetActive(false);
         carRigidbody = GetComponent<Rigidbody>();
         
     }
@@ -210,18 +210,20 @@ public class enemyCarDriver : MonoBehaviour
             Vector3 torque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             carRigidbody.AddTorque(torque * flingForce, ForceMode.Impulse);
             gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
-            DestroyCar();
+            // DestroyCar();
         }
     }
 
     public void DestroyCar()
     {
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 10f);
     }
 
     public void TurnOnExplosion()
     {
-        DeathExplosionVFX.SetActive(true);
+        
+        Instantiate(DeathExplosionVFX, transform.position, Quaternion.identity);
+        Debug.Log("Police Explode");
     }
 }
 
