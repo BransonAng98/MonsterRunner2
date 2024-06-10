@@ -21,7 +21,7 @@ public class AbilityTokenManager : MonoBehaviour
     }
 
     // Method to spawn power-ups at alternating locations
-    private void SpawnPowerUps()
+    public void SpawnPowerUps()
     {
         // Iterate through each spawn location
         for (int i = 0; i < spawnLocations.Count; i++)
@@ -49,6 +49,7 @@ public class AbilityTokenManager : MonoBehaviour
 
     public void DespawnTokens()
     {
+        Debug.Log("Despawn Tokens");
         if(spawnedTokens.Count > 0)
         {
             foreach (GameObject token in spawnedTokens)

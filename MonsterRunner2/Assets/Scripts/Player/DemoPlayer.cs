@@ -139,6 +139,14 @@ public class DemoPlayer : MonoBehaviour
 
     public bool destinationReached; // Flag to track if destination has been reached
 
+    //Player data 
+    public MeshFilter meshFilter;
+    public MeshRenderer vehicleMaterial;
+    public MeshCollider meshCollider;
+    public AbilitySO ability1;
+    public AbilitySO ability2;
+    public ObjectiveIndicator questIndicator;
+    public Transform abillityOrigin;
 
     private void Awake()
     {
@@ -156,25 +164,9 @@ public class DemoPlayer : MonoBehaviour
         rb.centerOfMass = centerOfMass;
         this.GetComponent<WeaponScript>().enabled = false;
         healingVFX.Stop();
-
+        ability1.AssignVariables(abillityOrigin, this.transform);
         //Move the character without any input
         lastKnownVector = transform.forward * maxSpeed;
-    }
-
-    void InstantiateData()
-    {
-        //Change mesh in mesh renderer 
-        //Transfer saved ability data from system into player prefab
-        vehicleData.ability1 = playerDataManager.ab1;
-        if (playerDataManager.ab2 != null)
-        {
-            vehicleData.ability2 = playerDataManager.ab2;
-        }
-
-        else
-        {
-            vehicleData.ability2 = null;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -224,7 +216,25 @@ public class DemoPlayer : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            TakeDamage(1000);
+            if(collision.gameObject.layer != 9)
+            {
+                TakeDamage(1000);
+
+                // Calculate knockback direction based on collision point
+                Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
+                Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
+                Instantiate(impactVFX, spawnPos, Quaternion.identity);
+                knockbackDirection.Normalize();
+
+                // Calculate knockback force based on collision impact force
+                float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
+
+                // If knockback force is less than the minimum, use the minimum force instead
+                knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
+
+                // Apply knockback force
+                rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+            }
         }
 
         if (collision.gameObject.CompareTag("AbilityToken"))
@@ -234,7 +244,7 @@ public class DemoPlayer : MonoBehaviour
 
             //Activates the ability in the AbilityManager
             abilityManager.isTriggered = true;
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
     }
 
