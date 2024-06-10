@@ -18,27 +18,43 @@ public class enemyCarDriver : MonoBehaviour
     private float turnSpeedAcceleration = 300f;
     private float turnIdleSlowdown = 500f;
 
+    public DemoPlayer playerscript;
     [SerializeField] private bool isDead;
 
     [SerializeField] private float forwardAmount;
     [SerializeField] private float turnAmount;
 
-   
     private Rigidbody carRigidbody;
+
     public float flingForce = 1f; // Adjust this value as needed
     public float drag = 1f; // Adjust drag as needed
     public float angularDrag = 1f; // Adjust angular drag as needed
+
+    public GameObject DeathExplosionVFX;
     #endregion
 
     private void Awake()
     {
         isDead = false;
+        //DeathExplosionVFX.SetActive(false);
         carRigidbody = GetComponent<Rigidbody>();
+        
     }
 
     private void Update()
     {
-        if (isDead == false)
+        if (playerscript.isDead)
+        {
+            speed = Mathf.Lerp(speed, 0, Time.deltaTime * 2f); // Adjust the lerp speed as needed
+            turnSpeed = Mathf.Lerp(turnSpeed, 0, Time.deltaTime * 2f); // Adjust the lerp speed as needed
+
+            carRigidbody.velocity = transform.forward * speed;
+            carRigidbody.angularVelocity = new Vector3(0, turnSpeed * Mathf.Deg2Rad, 0);
+
+            return;
+        }
+
+        if (!isDead)
         {
             if (forwardAmount > 0)
             {
@@ -124,9 +140,7 @@ public class enemyCarDriver : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             }
         }
-     
     }
-
 
     public void SetInputs(float forwardAmount, float turnAmount)
     {
@@ -143,7 +157,6 @@ public class enemyCarDriver : MonoBehaviour
     {
         return speed;
     }
-
 
     public void SetSpeedMax(float speedMax)
     {
@@ -168,31 +181,25 @@ public class enemyCarDriver : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            isDead = true;
-            CarDeath();
-        }
-        if (collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
             isDead = true;
             CarDeath();
         }
 
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            
             // Call Player Death Logic Here
         }
     }
-
-   
 
     public void CarDeath()
     {
         if (carRigidbody != null)
         {
             speed = 0;
+            TurnOnExplosion();
+           
             carRigidbody.constraints = RigidbodyConstraints.None;
 
             // Apply an impulse force to fling the car
@@ -202,13 +209,21 @@ public class enemyCarDriver : MonoBehaviour
             // Apply torque force for rotation
             Vector3 torque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             carRigidbody.AddTorque(torque * flingForce, ForceMode.Impulse);
-            DestroyCar();
+            gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+            // DestroyCar();
         }
     }
 
     public void DestroyCar()
     {
-        Destroy(gameObject, 3f);
+        Destroy(gameObject, 10f);
+    }
+
+    public void TurnOnExplosion()
+    {
+        
+        Instantiate(DeathExplosionVFX, transform.position, Quaternion.identity);
+        Debug.Log("Police Explode");
     }
 }
 

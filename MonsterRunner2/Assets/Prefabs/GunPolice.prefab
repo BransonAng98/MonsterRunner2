@@ -43,7 +43,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2271412327364450842
 GameObject:
@@ -129,7 +129,6 @@ MonoBehaviour:
   carDriver: {fileID: 2271412327364450843}
   detectionColliderObject: {fileID: 0}
   isAvoiding: 0
-  detectedObjects: []
 --- !u!114 &2271412327364450843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,12 +144,14 @@ MonoBehaviour:
   speed: 0
   speedMax: 16
   speedMin: 9
+  playerscript: {fileID: 0}
   isDead: 0
   forwardAmount: 0
   turnAmount: 0
   flingForce: 1
   drag: 1
   angularDrag: 1
+  DeathExplosionVFX: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
 --- !u!114 &2271412327364450784
 MonoBehaviour:
   m_ObjectHideFlags: 0

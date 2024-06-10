@@ -21,12 +21,19 @@ public class EnemySpawner : MonoBehaviour
             GameObject enemyPf = GetRandomEnemyPrefab(); // Randomly select an enemy type to spawn
             GameObject spawnedEnemy = Instantiate(enemyPf, spawnPosition, Quaternion.identity);
             EnemyCarAI enemyAI = spawnedEnemy.GetComponent<EnemyCarAI>();
+            enemyCarDriver enemyDriverlogic = spawnedEnemy.GetComponent<enemyCarDriver>();
             EnemyGunnerScript enemyGunnerAI = spawnedEnemy.GetComponent<EnemyGunnerScript>();
 
             if (enemyAI != null)
             {
                 enemyAI.targetPositionTranform = playerPos;
+                
                 // Assign other necessary properties to enemyAI
+            }
+            if (enemyDriverlogic != null)
+            {
+                enemyDriverlogic.playerscript = playerData;
+                // Assign other necessary properties to enemyGunnerAI
             }
 
             if (enemyGunnerAI != null)
