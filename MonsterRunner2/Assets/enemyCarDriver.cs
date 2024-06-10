@@ -216,7 +216,7 @@ public class enemyCarDriver : MonoBehaviour
 
     public void DestroyCar()
     {
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 2f);
     }
 
     public void TurnOnExplosion()
