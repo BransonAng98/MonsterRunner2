@@ -43688,7 +43688,9 @@ MonoBehaviour:
   currentScene: 0
   startScreen: {fileID: 0}
   defeatScreen: {fileID: 6617582041210651798}
+  mainMenu: {fileID: 0}
   hasStarted: 0
+  currentMenu: {fileID: 0}
 --- !u!114 &754238778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57380,6 +57382,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 330339916}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8537673697885705002, guid: dca6cf054ebcb5349a8333d108c74279,
         type: 3}
       propertyPath: m_Name
@@ -102789,6 +102795,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7179147329642788022, guid: 00b78b03851cb0748b61d9005fb73b49,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8065558011071459954, guid: 00b78b03851cb0748b61d9005fb73b49,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8665731515836445018, guid: 00b78b03851cb0748b61d9005fb73b49,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00b78b03851cb0748b61d9005fb73b49, type: 3}
 --- !u!4 &1840087795 stripped
@@ -125646,7 +125667,9 @@ MonoBehaviour:
   currentScene: 0
   startScreen: {fileID: 6918289769704437343}
   defeatScreen: {fileID: 6617582041210651798}
+  mainMenu: {fileID: 0}
   hasStarted: 0
+  currentMenu: {fileID: 0}
 --- !u!224 &6918289769640933921
 RectTransform:
   m_ObjectHideFlags: 0
