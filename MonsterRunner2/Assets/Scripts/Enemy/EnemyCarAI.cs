@@ -14,10 +14,9 @@ public class EnemyCarAI : MonoBehaviour
     private const float stoppingSpeed = 40f;
     private const float reverseDistance = 25f;
     private const float minSpeedToReverse = 15f;
-    private const float avoidanceStrength = 15f;
+    //private const float avoidanceStrength = 15f;
 
     [SerializeField] private bool isAvoiding;
-    [SerializeField] private List<GameObject> detectedObjects = new List<GameObject>(); // List to store detected objects
 
     private void Update()
     {
@@ -40,8 +39,7 @@ public class EnemyCarAI : MonoBehaviour
 
                 if (distanceToTarget < stoppingDistance && carDriver.GetSpeed() > stoppingSpeed)
                 {
-                    // Within stopping distance and moving forward too fast
-                    //forwardAmount = -1f;
+                    forwardAmount = -1f; // Slow down when too fast and close to the target
                 }
             }
             else
@@ -65,19 +63,10 @@ public class EnemyCarAI : MonoBehaviour
             }
             else
             {
-                isAvoiding = detectedObjects.Count > 0; // Set avoiding based on detected objects
-
                 if (isAvoiding)
                 {
-                    // Avoidance behavior based on detected objects
-                    // Example: Calculate avoidance direction and apply avoidance force
-                    Vector3 avoidanceDir = Vector3.zero;
-                    foreach (GameObject obj in detectedObjects)
-                    {
-                        // Example: Calculate avoidance direction based on obj position
-                        avoidanceDir += (transform.position - obj.transform.position).normalized;
-                    }
-                    turnAmount = Vector3.Dot(avoidanceDir.normalized, transform.right) * avoidanceStrength;
+                    // Avoidance behavior
+                    turnAmount = angleToDir > 0 ? -1f : 1f; // Steer away from the obstacle
                 }
                 else
                 {
@@ -105,7 +94,6 @@ public class EnemyCarAI : MonoBehaviour
     {
         if (other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
         {
-            detectedObjects.Add(other.gameObject);
             isAvoiding = true;
             Debug.Log("Avoid");
         }
@@ -115,8 +103,7 @@ public class EnemyCarAI : MonoBehaviour
     {
         if (other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
         {
-            detectedObjects.Remove(other.gameObject);
-            isAvoiding = detectedObjects.Count > 0;
+            isAvoiding = false;
         }
     }
 }

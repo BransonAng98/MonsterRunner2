@@ -17,34 +17,37 @@ public class EnemyGunnerScript : MonoBehaviour
 
     private void Update()
     {
-        if (isRaycastActive)
+        if (playerdata != null && !playerdata.isDead)
         {
-            // Update the raycast timer
-            raycastTimer -= Time.deltaTime;
-            if (raycastTimer <= 0)
+            if (isRaycastActive)
             {
-                // Raycast duration expired, resume tracking
-                isRaycastActive = false;
-            }
-        }
-        else
-        {
-            // Check if the player is within the detection range
-            RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.forward, out hit, detectionRange))
-            {
-                if (hit.collider.CompareTag("Player"))
+                // Update the raycast timer
+                raycastTimer -= Time.deltaTime;
+                if (raycastTimer <= 0)
                 {
-                    playerDetected = true;
-                    lastKnownPosition = hit.collider.transform.position;
-                    Debug.Log("Player detected at " + lastKnownPosition);
+                    // Raycast duration expired, resume tracking
+                    isRaycastActive = false;
+                }
+            }
+            else
+            {
+                // Check if the player is within the detection range
+                RaycastHit hit;
+                if (Physics.Raycast(transform.position, transform.forward, out hit, detectionRange))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        playerDetected = true;
+                        lastKnownPosition = hit.collider.transform.position;
+                        Debug.Log("Player detected at " + lastKnownPosition);
 
-                    // Start the raycast line
-                    isRaycastActive = true;
-                    raycastTimer = raycastDuration;
+                        // Start the raycast line
+                        isRaycastActive = true;
+                        raycastTimer = raycastDuration;
 
-                    // Instantiate the bullet
-                    FireBullet();
+                        // Instantiate the bullet
+                        FireBullet();
+                    }
                 }
             }
         }
