@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 1923701770045679413}
   - component: {fileID: 3250902957672360080}
   - component: {fileID: 790786689844059226}
+  - component: {fileID: -1845866510097081495}
+  - component: {fileID: 999701869697739554}
+  - component: {fileID: 6632670488077437981}
   m_Layer: 0
   m_Name: School
   m_TagString: Untagged
@@ -83,3 +86,42 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-1845866510097081495
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295220564887911823}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.233402, y: 16.20454, z: 55.015762}
+  m_Center: {x: 9.604387, y: 8.100458, z: -18.686478}
+--- !u!65 &999701869697739554
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295220564887911823}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 20.17409, y: 16.20454, z: 17.796095}
+  m_Center: {x: -7.63404, y: 8.100458, z: -0.047390938}
+--- !u!65 &6632670488077437981
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1295220564887911823}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.144406, y: 5.0469804, z: 7.889656}
+  m_Center: {x: -0.033684254, y: 2.5216782, z: 12.696072}
