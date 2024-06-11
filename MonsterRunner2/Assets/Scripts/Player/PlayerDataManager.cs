@@ -45,7 +45,7 @@ public class PlayerDataManager : MonoBehaviour
         {
             if (vehicle.vehicleID == vehicleID)
             {
-                GameObject playerCar = Instantiate(vehicle.playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                GameObject playerCar = Instantiate(vehicle.playerPrefab, new Vector3(0, 2, 0), Quaternion.identity);
                 playerCar.transform.SetParent(entityHolder.transform);
                 DemoPlayer playerData = playerCar.GetComponent<DemoPlayer>();
 
@@ -65,6 +65,7 @@ public class PlayerDataManager : MonoBehaviour
             }
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {

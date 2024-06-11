@@ -52,10 +52,11 @@ public class AbilityTokenManager : MonoBehaviour
         Debug.Log("Despawn Tokens");
         if(spawnedTokens.Count > 0)
         {
-            foreach (GameObject token in spawnedTokens)
+            for (int i = spawnedTokens.Count - 1; i >= 0; i--)
             {
+                GameObject token = spawnedTokens[i];
+                spawnedTokens.RemoveAt(i);
                 Destroy(token);
-                spawnedTokens.Remove(token);
             }
         }
     }
