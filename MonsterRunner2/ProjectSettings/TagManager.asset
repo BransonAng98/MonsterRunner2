@@ -17,6 +17,7 @@ TagManager:
   - FxTemporaire
   - Border
   - AbilityToken
+  - Bullet
   layers:
   - Default
   - TransparentFX

@@ -155,6 +155,7 @@ public class DemoPlayer : MonoBehaviour
         maxAcceleration = playerData.acceleration;
         maxSpeed = playerData.maxSpeed;
         crashDamage = 150f - playerData.crashResistance;
+        ability1.AssignVariables(abillityOrigin, this.transform);
     }
 
     // Start is called before the first frame update
@@ -164,7 +165,6 @@ public class DemoPlayer : MonoBehaviour
         rb.centerOfMass = centerOfMass;
         this.GetComponent<WeaponScript>().enabled = false;
         healingVFX.Stop();
-        ability1.AssignVariables(abillityOrigin, this.transform);
         //Move the character without any input
         lastKnownVector = transform.forward * maxSpeed;
     }

@@ -25,17 +25,21 @@ public class missionManagerScript : MonoBehaviour
     private float minZRange = -220f; // Minimum spawning width for the z-axis
     private float maxZRange = 220f; // Maximum spawning width for the z-axis
     private float minimumObstacleDistance = 20f;
+
+    [SerializeField] private float survivalTime;
     
     void Start()
     {
-        passengerCount = 0;
+        //passengerCount = 0;
     }
 
     private void Update()
     {
+        GetSurvivalTime();
+
         if(passengerCount == 0)
         {
-            CreatePassenger();
+            //CreatePassenger();
         }
     }
     public void FindBuildingObjects()
@@ -66,6 +70,15 @@ public class missionManagerScript : MonoBehaviour
         {
             destination = questgiverEntity.destination;
         }
+    }
+
+    public void GetSurvivalTime()
+    {
+        if(questgiverEntity != null)
+        {
+            survivalTime = questgiverEntity.survivaltime;
+        }
+
     }
 
     Vector3 GetRandomPrefabPosition()

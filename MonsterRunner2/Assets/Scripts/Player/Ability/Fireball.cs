@@ -15,10 +15,10 @@ public class Fireball : AbilitySO
 
     private Vector3[] localDirections = new Vector3[]
     {
-        Vector3.forward,
-        Vector3.right,
-        Vector3.back,
-        Vector3.left,
+        Vector3.forward, // 0 - Forward
+        Vector3.right,   // 1 - Right
+        Vector3.back,    // 2 - Back
+        Vector3.left     // 3 - Left
     };
 
     public override void AssignVariables(Transform origin, Transform playerPos)
@@ -33,14 +33,25 @@ public class Fireball : AbilitySO
         if (shootingTimer >= shootingInterval)
         {
             shootingTimer = 0f;
-            // Determine the direction to shoot based on the switch
-            Vector3 shootDirection = bulletSpawnLoc.TransformDirection(localDirections[directionInput]);
+
+            // Determine the direction to shoot based on the player's orientation
+            Vector3 shootDirection = bulletSpawnLoc.TransformVector(localDirections[directionInput]);
 
             // Create the bullet
             GameObject bullet = Instantiate(bulletPf, bulletSpawnLoc.position, Quaternion.identity);
             Destroy(bullet, 8f);
+
             // Apply force to the bullet in the chosen direction
-            bullet.GetComponent<Rigidbody>().AddForce(shootDirection * bulletSpeed, ForceMode.VelocityChange);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = shootDirection.normalized * bulletSpeed; // Normalize the shoot direction
+            }
         }
+    }
+
+    public override void Deactive()
+    {
+
     }
 }
