@@ -148,7 +148,7 @@ public class EnemyScript : MonoBehaviour
 
         isDead = true;
         CanMove = false;
-        scoreManager.enemiesKilled++;
+        //scoreManager.enemiesKilled++;
 
         Renderer renderer = GetComponent<Renderer>();
         if (renderer != null && deadMaterial != null)

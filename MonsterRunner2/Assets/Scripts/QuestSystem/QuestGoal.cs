@@ -10,6 +10,9 @@ public class QuestGoal
     //public int currentAmount;
     public bool DestinationReached;
     public Transform destination;
+    [SerializeField]public float survivalTime;  // Time to survive in seconds
+    [SerializeField]private bool playerIsAlive; // To track player's status
+    
     //public bool isReached()
 
     //{
@@ -34,11 +37,23 @@ public class QuestGoal
 
     }
 
+    public void SurviveWave()
+    {
+        if(goaltype == GoalType.Survive)
+        {
+            Debug.Log("Survival Time");
+            float[] possibleTimes = { 60f, 120f, 180f };
+            survivalTime = possibleTimes[Random.Range(0, possibleTimes.Length)];
+            playerIsAlive = true;  // Assume player is alive initially
+          
+        }
+    }
 }
 
 public enum GoalType
 {
     Kill,
     Deliver,
-    Reach
+    Reach,
+    Survive
 }

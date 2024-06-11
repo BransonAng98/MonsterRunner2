@@ -8,6 +8,7 @@ public class Quest
 {
     public bool isActive;
     public string title;
+    public float goldReward; 
   
     public QuestGoal goal;
 
@@ -15,5 +16,11 @@ public class Quest
     {
         isActive = false;
         Debug.Log(title + "was Completed");
+    }
+
+    public void goldRewardAmt()
+    {
+        float[] possiblegoldAMT = { 60f, 70f, 80f, 90f, 100f };
+        goldReward = possiblegoldAMT[Random.Range(0, possiblegoldAMT.Length)];
     }
 }

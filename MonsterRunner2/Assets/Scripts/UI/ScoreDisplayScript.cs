@@ -6,11 +6,11 @@ using TMPro;
 
 public class ScoreDisplayScript : MonoBehaviour
 {
-    [SerializeField] private int enemiesKilled;
+    [SerializeField] private int goldEarned;
     [SerializeField] private int missionsCompleted;
     [SerializeField] private float timeSurvived;
 
-    public TextMeshProUGUI enemiesKilledText;
+    public TextMeshProUGUI goldEarnedText;
     public TextMeshProUGUI missionsCompletedText;
     public TextMeshProUGUI timeSurvivedText;
     private float lerpDuration = 2.0f;
@@ -29,9 +29,9 @@ public class ScoreDisplayScript : MonoBehaviour
         float initialMissionScore = 0;
         float initialTimeScore = 0;
 
-        float targetEnemyScore = scoreManager.enemiesKilled;
+        float targetEnemyScore = scoreManager.goldEarned;
         float targetMissionScore = scoreManager.missionsCompleted;
-        float targetTimeScore = scoreManager.timeSurvived;
+        float targetTimeScore = scoreManager.stopwatchTime;
 
         float elapsedTime = 0f;
 
@@ -50,12 +50,12 @@ public class ScoreDisplayScript : MonoBehaviour
         }
 
         // Ensure the final scores match the actual values
-        UpdateScoreUI(scoreManager.enemiesKilled, scoreManager.missionsCompleted, scoreManager.timeSurvived);
+        UpdateScoreUI(scoreManager.goldEarned, scoreManager.missionsCompleted, scoreManager.stopwatchTime);
     }
 
-    private void UpdateScoreUI(int killscore, int missionScore, float time)
+    private void UpdateScoreUI(float killscore, int missionScore, float time)
     {
-        enemiesKilledText.text = killscore.ToString();
+        goldEarnedText.text = killscore.ToString();
         missionsCompletedText.text = missionScore.ToString();
         float minutes = Mathf.FloorToInt(time / 60);
         float seconds = Mathf.FloorToInt(time % 60);
