@@ -857,6 +857,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Icons_Gun
       objectReference: {fileID: 0}
+    - target: {fileID: 2199160670645629910, guid: 4121b3ed49a063c4f893ccfc2bd4533c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3687949235178086600, guid: 4121b3ed49a063c4f893ccfc2bd4533c,
         type: 3}
       propertyPath: m_IsActive
@@ -11046,12 +11051,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questWindow: {fileID: 8288493320098780948}
   descriptionText: {fileID: 1234739532913108784}
+  introText:
+  - You're the decoy. Keep the cops busy while we clean out the banks.
+  - You're our cover. Create chaos, we'll handle the score.
+  - You're our diversion. Keep the heat off us while we make our move.
+  - You're the distraction. Draw their attention while we execute the plan.
   questText:
-  - Take me home
-  - Bring me here
+  - We're almost out! Keep the cops occupied!
+  - We're in the vault! Keep the cops busy!
+  - We've got the goods! Buy us some time!
+  - We need more time! Keep the cops off us!
+  - We've got the money! Keep the cops at bay!
   rewardText:
-  - Here have this
-  - Thanks
+  - Perfect decoy! Enjoy your cut.
+  - Nice driving! The crew got away clean.
+  - "Great job! Here\u2019s your gold."
+  - Masterful distraction! Time to cash in.
+  - You nailed it! The loot is yours.
+  - Smooth moves! The haul is yours
   textSpd: 0.05
   isAccepting: 0
 --- !u!114 &171047681
@@ -11079,6 +11096,9 @@ MonoBehaviour:
   player: {fileID: 799882639}
   destination: {fileID: 0}
   survivaltime: 0
+  questCooldownTime: 5
+  initialIntroDelay: 3
+  initialMissionDelay: 5
   questDialogue: {fileID: 171047680}
   scoreManager: {fileID: 1242281396}
   missionManager: {fileID: 171047678}
@@ -51403,13 +51423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ecfb485c46aad48b6da4fa6ac9fb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameTime: 0
-  numberThreshold: 5
-  enemyList: []
-  delayedSpawn: 0
-  spawnAmt: 3
-  spawnInterval: 10
-  spawners: []
 --- !u!114 &754238777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51535,7 +51548,6 @@ MonoBehaviour:
   questDManager: {fileID: 171047680}
   menuManager: {fileID: 754238777}
   mainCam: {fileID: 1039292050}
-  environmentSpawner: {fileID: 754238779}
   missionManager: {fileID: 171047678}
   abilityManager: {fileID: 754238781}
 --- !u!114 &754238781
@@ -145769,10 +145781,10 @@ RectTransform:
   m_Father: {fileID: 6364769502218926388}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 34}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 46.8396}
+  m_SizeDelta: {x: -100, y: -93.6793}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2355447655391685020
 CanvasRenderer:
@@ -147431,8 +147443,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000038147, y: 459}
-  m_SizeDelta: {x: 932.3459, y: 209.8682}
+  m_AnchoredPosition: {x: -0.0000038147, y: 716}
+  m_SizeDelta: {x: 932.3459, y: 284.3686}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &6500994627951103492
 RectTransform:
@@ -148912,7 +148924,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0.8235294}
+  m_Color: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 0.9411765}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

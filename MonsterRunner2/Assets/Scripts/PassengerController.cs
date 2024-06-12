@@ -90,7 +90,7 @@ public class PassengerController : MonoBehaviour
             pickedUp = true;
             idleVFX.SetActive(false);
             Instantiate(PickupVFX, transform.position, Quaternion.identity);
-            questgiver.AcceptQuest();
+            //questgiver.AcceptQuest();
             Collider[] passengerCollider = GetComponentsInChildren<Collider>();
             if (passengerCollider != null)
             {

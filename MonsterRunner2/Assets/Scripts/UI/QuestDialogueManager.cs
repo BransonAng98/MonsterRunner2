@@ -6,16 +6,17 @@ using TMPro;
 
 public class QuestDialogueManager : MonoBehaviour
 {
-
     public GameObject questWindow;
     public TextMeshProUGUI descriptionText;
+    public string[] introText;
     public string[] questText;
     public string[] rewardText;
 
     public float textSpd;
-    public bool isAccepting; // Public variable declaration
+    public bool isAccepting;
 
-    // Start is called before the first frame update
+    private Coroutine typingCoroutine; // Reference to the current coroutine
+
     private void Awake()
     {
         CloseWindow();
@@ -25,16 +26,23 @@ public class QuestDialogueManager : MonoBehaviour
     {
         questWindow.SetActive(true);
         descriptionText.text = string.Empty;
-
-        this.isAccepting = isAccepting; // Assigning the passed value to the public variable
+        this.isAccepting = isAccepting;
 
         if (isAccepting)
         {
-            StartCoroutine(TypeQuest(index));
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
+            }
+            typingCoroutine = StartCoroutine(TypeQuest(index));
         }
         else
         {
-            StartCoroutine(TypeReward(index));
+            if (typingCoroutine != null)
+            {
+                StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
+            }
+            typingCoroutine = StartCoroutine(TypeReward(index));
         }
     }
 
@@ -43,21 +51,53 @@ public class QuestDialogueManager : MonoBehaviour
         foreach (char letter in questText[index].ToCharArray())
         {
             descriptionText.text += letter;
-            yield return new WaitForSeconds(textSpd); // Adjust speed here
+            yield return new WaitForSeconds(textSpd);
         }
 
-        Invoke("CloseWindow", 3f);
+        typingCoroutine = null; // Reset coroutine reference
+        // Wait a bit longer before closing to ensure the player can read the text
+        yield return new WaitForSeconds(1f);
+        CloseWindow();
     }
 
     IEnumerator TypeReward(int index)
     {
-        foreach (char letter in rewardText[index].ToCharArray()) // Changed to rewardText
+        foreach (char letter in rewardText[index].ToCharArray())
         {
             descriptionText.text += letter;
-            yield return new WaitForSeconds(textSpd); // Adjust speed here
+            yield return new WaitForSeconds(textSpd);
         }
 
-        Invoke("CloseWindow", 3f);
+        typingCoroutine = null; // Reset coroutine reference
+        // Wait a bit longer before closing to ensure the player can read the text
+        yield return new WaitForSeconds(1f);
+        CloseWindow();
+    }
+
+    public void TypeIntro(int index)
+    {
+        questWindow.SetActive(true);
+        descriptionText.text = string.Empty;
+
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
+        }
+        typingCoroutine = StartCoroutine(TypeIntroInternal(index));
+    }
+
+    private IEnumerator TypeIntroInternal(int index)
+    {
+        foreach (char letter in introText[index].ToCharArray())
+        {
+            descriptionText.text += letter;
+            yield return new WaitForSeconds(textSpd);
+        }
+
+        typingCoroutine = null; // Reset coroutine reference
+        // Wait a bit longer before closing to ensure the player can read the text
+        yield return new WaitForSeconds(1f);
+        CloseWindow();
     }
 
     void CloseWindow()

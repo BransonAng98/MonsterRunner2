@@ -8,42 +8,48 @@ public class QuestGiver : MonoBehaviour
     public Quest quest;
     public DemoPlayer player;
     public GameObject destination;
-   
-    public float survivaltime; 
+
+    public float survivaltime;
+    public float questCooldownTime; // Cooldown duration between quests
+    public float initialIntroDelay; // Initial delay before showing intro dialogue
+    public float initialMissionDelay; // Delay after intro before starting the first mission
 
     public QuestDialogueManager questDialogue;
     public ScoreManagerScript scoreManager;
-
-    public missionManagerScript missionManager; 
+    public missionManagerScript missionManager;
     public List<GameObject> buildingObjects;
 
+    private bool isOnCooldown = false;
+    private bool isFirstQuest = true;
 
     private void Start()
     {
         buildingObjects = missionManager.buildingObjectsList;
-        //GetDestination();
-        quest.goal.SurviveWave();
-        quest.goldRewardAmt();
-        GetSurvivalTime();
+        StartCoroutine(StartGameSequence());
+    }
+
+    private IEnumerator StartGameSequence()
+    {
+        yield return new WaitForSeconds(initialIntroDelay);
+
+        // Display intro dialogue after initial delay if it's the first quest
+        if (isFirstQuest)
+        {
+            PrintIntroDialogue();
+            isFirstQuest = false; // Set isFirstQuest to false after displaying intro
+            yield return new WaitForSeconds(initialMissionDelay);
+        }
+
+        StartNewQuest();
     }
 
     private void Update()
     {
-        ReduceSurvivalTime();
-
-        if(survivaltime == 0 & player.isDead == false)
+        // Only reduce survival time if it's not on cooldown
+        if (!isOnCooldown)
         {
-            quest.Complete();
-            GetNewSurvivalTime();
+            ReduceSurvivalTime();
         }
-    }
-    public void AcceptQuest()
-    {
-        // give quest to player
-        quest.isActive = true;
-        player.quest = quest;
-        int index = Random.Range(0, 1);
-        questDialogue.TypeText(true , index);
     }
 
     private void ReduceSurvivalTime()
@@ -54,35 +60,67 @@ public class QuestGiver : MonoBehaviour
             if (survivaltime <= 0)
             {
                 survivaltime = 0;
-             
+                if (!player.isDead)
+                {
+                    quest.Complete();
+                    CompleteQuest();
+
+                    StartCoroutine(CooldownBeforeNextMission());
+                }
             }
         }
     }
 
-    public void GetNewSurvivalTime()
+    private IEnumerator CooldownBeforeNextMission()
+    {
+        isOnCooldown = true;
+        yield return new WaitForSeconds(questCooldownTime);
+        StartNewQuest();
+        isOnCooldown = false;
+    }
+
+    private void StartNewQuest()
+    {
+        quest.goal.SurviveWave();
+        quest.goldRewardAmt();
+        survivaltime = quest.goal.survivalTime;
+
+        PrintQuestDialogue();
+    }
+
+    public void CompleteQuest()
     {
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
-        quest.goldRewardAmt();
-        quest.goal.SurviveWave();
-        GetSurvivalTime();
+
+        PrintRewardDialogue();
     }
+
     public void GetDestination()
     {
         if (buildingObjects.Count > 0)
         {
             GameObject randomBuilding = buildingObjects[Random.Range(0, buildingObjects.Count)];
-         
-            // Set the randomly chosen transform as the destination
             destination = randomBuilding;
-            //missionManager.GetDestination();
         }
     }
 
-    public void GetSurvivalTime()
+    void PrintIntroDialogue()
     {
-       survivaltime = quest.goal.survivalTime;
+        int introIndex = Random.Range(0, questDialogue.introText.Length);
+        questDialogue.TypeIntro(introIndex);
+    }
+
+    void PrintQuestDialogue()
+    {
+        int index = Random.Range(0, questDialogue.questText.Length); //Show quest text when new quest is given
+        questDialogue.TypeText(true, index);
+    }
+
+    void PrintRewardDialogue()
+    {
+        int index = Random.Range(0, questDialogue.rewardText.Length);
+        questDialogue.TypeText(false, index); // Show reward text when quest is completed
     }
 }
-
 
