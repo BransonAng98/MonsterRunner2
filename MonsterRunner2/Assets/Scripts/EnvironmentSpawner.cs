@@ -48,7 +48,7 @@ public class EnvironmentSpawner : MonoBehaviour
     {
         SpawnEnvironment();
         missionManager.FindBuildingObjects();
-        gameController.LocateSpawners();
+       
     }
 
     void SpawnEnvironment()
@@ -88,10 +88,7 @@ public class EnvironmentSpawner : MonoBehaviour
                 GameObject spawnerPrefab = enemySpawner[Random.Range(0, enemySpawner.Length)];
                 GameObject spawnedSpawner = Instantiate(spawnerPrefab, spawnPosition, Quaternion.identity, enemyspawnerHolder.transform);
                 EnemySpawner enemyspawnerScript = spawnedSpawner.GetComponent<EnemySpawner>();
-                enemyspawnerScript.playerPos = playerPos;
-                enemyspawnerScript.playerData = playerData;
-                enemyspawnerScript.gameController = gameController;
-                enemyspawnerScript.scoreManager = scoreManager;
+             
                 instantiatedSpawnerPositions.Add(spawnPosition);
             }
         }

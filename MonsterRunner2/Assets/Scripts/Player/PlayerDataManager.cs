@@ -34,7 +34,7 @@ public class PlayerDataManager : MonoBehaviour
 
     //Scriptst that require player data
     public CinemachineVirtualCamera mainCam;
-    public EnvironmentSpawner environmentSpawner;
+ 
     public missionManagerScript missionManager;
     public PlayerAbilityManager abilityManager;
 
@@ -50,8 +50,7 @@ public class PlayerDataManager : MonoBehaviour
                 DemoPlayer playerData = playerCar.GetComponent<DemoPlayer>();
 
                 mainCam.Follow = playerCar.transform;
-                environmentSpawner.playerData = playerData;
-                environmentSpawner.playerPos = playerCar.transform;
+             
                 missionManager.demoPlayer = playerData;
                 missionManager.objectiveIndicator = playerData.questIndicator;
                 missionManager.player = playerCar;

@@ -169,7 +169,7 @@ public class EnemyScript : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            gameController.UpdateEnemyList(this.gameObject);
+           
             Die();
         }
         else
