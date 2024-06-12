@@ -81,6 +81,42 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+    public void SpawnSingleEnemy(int enemyType)
+    {
+        if (!threatLevelEnemies.ContainsKey(threatlvl))
+        {
+            Debug.LogError("Threat level not defined!");
+            return;
+        }
+
+        List<int> enemyCounts = threatLevelEnemies[threatlvl];
+
+        if (enemyType < 0 || enemyType >= enemyCounts.Count)
+        {
+            Debug.LogError("Invalid enemy type!");
+            return;
+        }
+
+        Vector3 spawnPosition = GetRandomSpawnPosition();
+        GameObject enemy = Instantiate(enemyTypesPrefabs[enemyType], spawnPosition, Quaternion.identity);
+        enemy.transform.LookAt(playerPos);
+        spawnedEnemies.Add(enemy);
+        AssignEnemyProperties(enemy);
+    }
+
+    public void RemoveEnemyFromList(GameObject enemyToRemove)
+    {
+        if (spawnedEnemies.Contains(enemyToRemove))
+        {
+            spawnedEnemies.Remove(enemyToRemove); // Remove the enemy car from the list
+            enemyCarDriver enemyAI = enemyToRemove.GetComponent<enemyCarDriver>();
+            if (enemyAI != null)
+            {
+                int enemyType = enemyAI.enemyType; // Assuming you have a property to get the enemy type
+                SpawnSingleEnemy(enemyType);
+            }
+        }
+    }
     private Vector3 GetRandomSpawnPosition()
     {
         float spawnRadius = 140f;
@@ -132,11 +168,13 @@ public class EnemySpawner : MonoBehaviour
         if (enemyAI != null)
         {
             enemyAI.targetPositionTranform = playerPos;
+          
             // Assign other necessary properties to enemyAI
         }
         if (enemyDriverlogic != null)
         {
             enemyDriverlogic.playerscript = playerData;
+            enemyDriverlogic.enemySpawnerScript = this;
             // Assign other necessary properties to enemyDriverlogic
         }
         if (enemyGunnerAI != null)

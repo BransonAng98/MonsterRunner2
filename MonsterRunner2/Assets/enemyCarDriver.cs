@@ -34,6 +34,8 @@ public class enemyCarDriver : MonoBehaviour
     public float angularDrag = 1f; // Adjust angular drag as needed
 
     public GameObject DeathExplosionVFX;
+    public EnemySpawner enemySpawnerScript;
+    public int enemyType;
     #endregion
 
     private void Awake()
@@ -225,6 +227,12 @@ public class enemyCarDriver : MonoBehaviour
     {
         if (carRigidbody != null)
         {
+            if (enemySpawnerScript != null)
+            {
+                enemySpawnerScript.RemoveEnemyFromList(gameObject); // Notify the spawner to remove this car from the list
+                                                                    // Implement a method to get the enemy type (e.g., based on a tag or component)
+               
+            }
             speed = 0;
             TurnOnExplosion();
            
@@ -245,6 +253,7 @@ public class enemyCarDriver : MonoBehaviour
     public void DestroyCar()
     {
         Destroy(gameObject, 2f);
+     
     }
 
     public void TurnOnExplosion()

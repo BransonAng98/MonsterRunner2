@@ -18,6 +18,7 @@ public class EnemyCarAI : MonoBehaviour
 
     [SerializeField] private bool isAvoiding;
 
+    
     private void Update()
     {
         SetTargetPosition(targetPositionTranform.position);
