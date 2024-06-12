@@ -27,8 +27,16 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI activeSkillLevelText;
     public TextMeshProUGUI lockedSkillLevelText;
 
+    public Button leftArrow;
+    public Button rightArrow;
+    public Button setActiveButton;
+    public Button activeIndicator;
+
     private Skill activeSkill;
     private Skill lockedSkill;
+
+    public PlayerCarDisplay carDisplay;
+    public JsonSystem json;
 
     void Start()
     {
@@ -41,7 +49,13 @@ public class UpgradeManager : MonoBehaviour
         upgradeActiveSkillButton.onClick.AddListener(() => UpgradeSkill(activeSkill));
         unlockSkillButton.onClick.AddListener(UnlockSkill);
         upgradeLockedSkillButton.onClick.AddListener(() => UpgradeSkill(lockedSkill));
+
+        setActiveButton.onClick.AddListener(SetActive);
+        //leftArrow.onClick.AddListener(() => SwitchCar(0));
+        //rightArrow.onClick.AddListener(() => SwitchCar(1));
         upgradeLockedSkillBtn.SetActive(false);
+
+        ActiveIconDisplay();
     }
 
     void GainCurrency()
@@ -59,6 +73,53 @@ public class UpgradeManager : MonoBehaviour
             skill.cost += 100; // Increase cost by x for each upgrade
             UpdateUI();
         }
+    }
+
+    public void SetActive()
+    {
+        carDisplay.activateID = carDisplay.selectedCarID;
+        carDisplay.UpdateCarSkin(carDisplay.activateID);
+        json.selectedVehicleData = carDisplay.cars[carDisplay.activateID].vehicleData;
+        ActiveIconDisplay();
+    }
+
+    void ActiveIconDisplay()
+    {
+        if (carDisplay.selectedCarID == carDisplay.activateID)
+        {
+            activeIndicator.interactable = false;
+        }
+
+        else
+        {
+            activeIndicator.interactable = true;
+        }
+    }
+
+    public void SwitchCar(int dir)
+    {
+        switch (dir)
+        {
+            //Selecting left car
+            case 0:
+                if(carDisplay.selectedCarID > 0)
+                {
+                    carDisplay.selectedCarID--;
+                    carDisplay.UpdateCarSkin(carDisplay.selectedCarID);
+                }
+                break;
+            
+            //Selecting right car
+            case 1:
+                if(carDisplay.selectedCarID < 1)
+                {
+                    carDisplay.selectedCarID++;
+                    carDisplay.UpdateCarSkin(carDisplay.selectedCarID);
+                }
+                break;
+        }
+
+        ActiveIconDisplay();
     }
 
     void UnlockSkill()

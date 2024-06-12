@@ -10,5 +10,6 @@ public class AbilitySO : ScriptableObject
     public virtual void AssignVariables(Transform origin, Transform player) { }
     public virtual void Activate() { }
 
+    public virtual void UpdateSkillLevel(VehicleData data) { }
     public virtual void Deactive() { }
 }
