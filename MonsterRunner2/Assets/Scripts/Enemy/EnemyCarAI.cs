@@ -14,7 +14,7 @@ public class EnemyCarAI : MonoBehaviour
     private const float stoppingSpeed = 40f;
     private const float reverseDistance = 25f;
     private const float minSpeedToReverse = 15f;
-    //private const float avoidanceStrength = 15f;
+    private const float avoidanceStrength = 180f; // Multiplier for avoidance steering
 
     [SerializeField] private bool isAvoiding;
 
@@ -65,8 +65,9 @@ public class EnemyCarAI : MonoBehaviour
             {
                 if (isAvoiding)
                 {
-                    // Avoidance behavior
-                    turnAmount = angleToDir > 0 ? -1f : 1f; // Steer away from the obstacle
+                    // Stronger avoidance behavior
+                    turnAmount = (angleToDir > 0 ? -1f : 1f) * avoidanceStrength; // Steer away from the obstacle more strongly
+                    forwardAmount *= 0.5f; // Reduce speed when avoiding
                 }
                 else
                 {
@@ -92,18 +93,18 @@ public class EnemyCarAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
+        if ( other.CompareTag("Enemy"))
         {
-            isAvoiding = true;
+            //isAvoiding = true;
             Debug.Log("Avoid");
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Obstacle") || other.CompareTag("Enemy"))
+        if ( other.CompareTag("Enemy"))
         {
-            isAvoiding = false;
+            //isAvoiding = false;
         }
     }
 }

@@ -5,11 +5,13 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public Transform playerPos;
-    [SerializeField] private int threatlvl;
+    [SerializeField] public int threatlvl;
     [SerializeField] private GameObject[] enemyTypesPrefabs;
     [SerializeField] private DemoPlayer playerData; // Assuming you have a PlayerData script to pass to enemies
 
-    private List<GameObject> spawnedEnemies = new List<GameObject>();
+    [SerializeField] private float Radius;
+
+    [SerializeField]private List<GameObject> spawnedEnemies = new List<GameObject>();
     private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
         { 1, new List<int> { 4, 0 } }, // 4 of type 1, 0 of type 2
@@ -35,8 +37,28 @@ public class EnemySpawner : MonoBehaviour
         SpawnEnemies();
     }
 
+    private void Update()
+    {
+        //change it when enemycardriver script is done. Instead of null change it to re
+        bool allNull = true;
+        foreach (var enemy in spawnedEnemies)
+        {
+            if (enemy != null)
+            {
+                allNull = false;
+                break;
+            }
+        }
+
+        if (allNull)
+        {
+            SpawnEnemies();
+        }
+    }
+
     private void SpawnEnemies()
     {
+        Debug.Log("Spawn Wave");
         spawnedEnemies.Clear();
 
         if (!threatLevelEnemies.ContainsKey(threatlvl))
@@ -59,28 +81,46 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-
     private Vector3 GetRandomSpawnPosition()
     {
-        float spawnRadius = 50f; // Adjust as needed
-        float minSpacing = 5f; // Adjust as needed
+        float spawnRadius = 140f;
+        float minSpacing = 30f;
+        float minDistanceFromPlayer = 50f; // Minimum distance from the player
 
-        Vector3 randomDirection = Random.insideUnitSphere * spawnRadius;
-        randomDirection += playerPos.position;
-        randomDirection.y = playerPos.position.y;
+        List<Vector3> validSpawnPositions = new List<Vector3>();
 
-        // Ensure minimum spacing between enemies
-        foreach (var pos in spawnedEnemies)
+        // Generate random directions until a valid spawn position is found
+        while (validSpawnPositions.Count == 0)
         {
-            while (Vector3.Distance(randomDirection, pos.transform.position) < minSpacing)
+            Vector3 randomDirection = Random.insideUnitSphere * spawnRadius;
+            randomDirection += playerPos.position;
+            randomDirection.y = 0f; // Set the Y position to 0
+
+            bool isValid = true;
+
+            // Check if the distance from the player is greater than the minimum distance
+            if (Vector3.Distance(randomDirection, playerPos.position) < minDistanceFromPlayer)
             {
-                randomDirection = Random.insideUnitSphere * spawnRadius;
-                randomDirection += playerPos.position;
-                randomDirection.y = playerPos.position.y;
+                isValid = false;
+            }
+
+            // Check if the distance from other spawned enemies is greater than the minimum spacing
+            foreach (var pos in spawnedEnemies)
+            {
+                if (Vector3.Distance(randomDirection, pos.transform.position) < minSpacing)
+                {
+                    isValid = false;
+                    break; // No need to check further, this position is invalid
+                }
+            }
+
+            if (isValid)
+            {
+                validSpawnPositions.Add(randomDirection);
             }
         }
 
-        return randomDirection;
+        return validSpawnPositions[0]; // Return the first valid spawn position
     }
 
     private void AssignEnemyProperties(GameObject spawnedEnemy)
@@ -105,4 +145,6 @@ public class EnemySpawner : MonoBehaviour
             // Assign other necessary properties to enemyGunnerAI
         }
     }
+
+
 }

@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 5039597518212396643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.93, y: 0, z: -28.497566}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4790288766496349243}
   - {fileID: 2706087433826488886}
@@ -79,16 +79,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedMax: 18
-  speedMin: 9
+  speedMax: 28
+  speedMin: 17
+  turnSpeed: 0
   playerscript: {fileID: 0}
   isDead: 0
+  isCCed: 0
+  ccDuration: 0
   forwardAmount: 0
   turnAmount: 0
-  flingForce: 2.5
+  flingForce: 4
   drag: 1
   angularDrag: 5
-  DeathExplosionVFX: {fileID: 191186, guid: 079954accd64b32419ec069129c81273, type: 3}
+  DeathExplosionVFX: {fileID: 4661394443100670, guid: 17f2e8586b0fe5e49b346dfadaf40476,
+    type: 3}
 --- !u!114 &5039597518212396642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,7 +152,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 3.5
+  m_Radius: 4.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5039597517276347344
 PrefabInstance:
