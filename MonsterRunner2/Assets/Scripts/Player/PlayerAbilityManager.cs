@@ -62,6 +62,7 @@ public class PlayerAbilityManager : MonoBehaviour
                 {
                     //When the ability has reached the end of its activation period transit the state to cooldown
                     abilityState = AbilityState.Cooldown;
+                    ability[abilityID].Deactive();
                     cooldown = ability[abilityID].abilityCD;
                 }
                 break;

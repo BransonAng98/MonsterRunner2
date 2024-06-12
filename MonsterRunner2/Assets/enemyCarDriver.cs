@@ -20,9 +20,12 @@ public class enemyCarDriver : MonoBehaviour
 
     public DemoPlayer playerscript;
     [SerializeField] private bool isDead;
+    public bool isCCed;
 
     [SerializeField] private float forwardAmount;
     [SerializeField] private float turnAmount;
+
+    [SerializeField] private float ccDuration;
 
     private Rigidbody carRigidbody;
 
@@ -54,7 +57,7 @@ public class enemyCarDriver : MonoBehaviour
             return;
         }
 
-        if (!isDead)
+        if (!isDead || !isCCed)
         {
             if (forwardAmount > 0)
             {
@@ -140,6 +143,27 @@ public class enemyCarDriver : MonoBehaviour
                 transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             }
         }
+
+        if (isCCed)
+        {
+            ccDuration -= Time.deltaTime;
+            if(ccDuration <= 0)
+            {
+                isCCed = false;
+            }
+        }
+    }
+
+    public void StartCCTimer(float duration)
+    {
+        isCCed = true;
+        ccDuration = duration;
+    }
+
+    public void RevertCCState()
+    {
+        isCCed = false;
+        ccDuration = 0f;
     }
 
     public void SetInputs(float forwardAmount, float turnAmount)

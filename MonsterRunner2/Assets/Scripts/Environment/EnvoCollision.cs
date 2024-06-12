@@ -23,35 +23,35 @@ public class EnvoCollision : MonoBehaviour
         collider.enabled = false;
         isDestroyed = true;
         renderer.enabled = false;
-        player.GetComponent<DemoPlayer>().isTriggered = false;
+        //player.GetComponent<DemoPlayer>().isTriggered = false;
     }
 
-    private bool DistanceBetween()
-    {
-        float distance = Vector3.Distance(this.transform.position, player.position);
-        return distance >= distanceThreshold;
-    }
+    //private bool DistanceBetween()
+    //{
+    //    float distance = Vector3.Distance(this.transform.position, player.position);
+    //    return distance >= distanceThreshold;
+    //}
 
     // Update is called once per frame
     void Update()
     {
-        if (isDestroyed)
-        {
-            if (DistanceBetween())
-            {
-                //Player is x distance away of this gameobject
-                collider.enabled = true;
-                renderer.enabled = true;
-            }
+        //if (isDestroyed)
+        //{
+        //    if (DistanceBetween())
+        //    {
+        //        //Player is x distance away of this gameobject
+        //        collider.enabled = true;
+        //        renderer.enabled = true;
+        //    }
 
-            else
-            {
-                return;
-            }
-        }
-        else
-        {
-            return;
-        }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //}
+        //else
+        //{
+        //    return;
+        //}
     }
 }
