@@ -19,6 +19,9 @@ public class AOESkill : AbilitySO
         DemoPlayer playerData = playerObj.GetComponent<DemoPlayer>();
 
         particleSys = playerData.particleSystem;
+        SlowScript ccSCript = particleSys.GetComponent<SlowScript>();
+        ccSCript.ccDuration = aoeDuration;
+
         particleSys.SetActive(false);
     }
 

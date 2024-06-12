@@ -2288,17 +2288,17 @@ PrefabInstance:
     - target: {fileID: 1196950356126046803, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1196950356126046803, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1196950356126046803, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1196950356126046803, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
         type: 3}
@@ -2415,7 +2415,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 6.77
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2502600041296237410
 MonoBehaviour:
@@ -2430,6 +2430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   affectedEnemyList: []
+  ccDuration: 0
   aoeRadius: {fileID: 1733089766402678864}
 --- !u!1001 &9163566531336423435
 PrefabInstance:
