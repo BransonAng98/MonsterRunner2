@@ -20,7 +20,7 @@ public class enemyCarDriver : MonoBehaviour
 
     public DemoPlayer playerscript;
     [SerializeField] private bool isDead;
-    public bool isCCed;
+    [SerializeField] public bool isCCed;
 
     [SerializeField] private float forwardAmount;
     [SerializeField] private float turnAmount;
@@ -57,7 +57,7 @@ public class enemyCarDriver : MonoBehaviour
             return;
         }
 
-        if (!isDead || !isCCed)
+        if (!isDead) //if im not dead or im not being crowd controlled
         {
             if (forwardAmount > 0)
             {
@@ -208,12 +208,8 @@ public class enemyCarDriver : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
             isDead = true;
+            
             CarDeath();
-        }
-
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            // Call Player Death Logic Here
         }
     }
 
@@ -234,7 +230,7 @@ public class enemyCarDriver : MonoBehaviour
             Vector3 torque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             carRigidbody.AddTorque(torque * flingForce, ForceMode.Impulse);
             gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
-            // DestroyCar();
+            DestroyCar();
         }
     }
 
