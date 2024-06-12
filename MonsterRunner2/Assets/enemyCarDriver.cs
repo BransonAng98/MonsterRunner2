@@ -8,14 +8,14 @@ public class enemyCarDriver : MonoBehaviour
     [SerializeField] private float speed;
     public float speedMax = 18f;
     public float speedMin = 9f;
-    private float acceleration = 30f;
+    private float acceleration = 10f;
     private float brakeSpeed = 100f;
     private float reverseSpeed = 30f;
     private float idleSlowdown = 10f;
 
-    private float turnSpeed;
-    private float turnSpeedMax = 300f;
-    private float turnSpeedAcceleration = 300f;
+    [SerializeField]private float turnSpeed;
+    private float turnSpeedMax = 500f;
+    private float turnSpeedAcceleration = 400f;
     private float turnIdleSlowdown = 500f;
 
     public DemoPlayer playerscript;
@@ -34,6 +34,8 @@ public class enemyCarDriver : MonoBehaviour
     public float angularDrag = 1f; // Adjust angular drag as needed
 
     public GameObject DeathExplosionVFX;
+    public EnemySpawner enemySpawnerScript;
+    public int enemyType;
     #endregion
 
     private void Awake()
@@ -41,7 +43,7 @@ public class enemyCarDriver : MonoBehaviour
         isDead = false;
         //DeathExplosionVFX.SetActive(false);
         carRigidbody = GetComponent<Rigidbody>();
-        
+        speed = Random.Range(6f, 10f); // Set the initial speed to a random value between 6 and 10
     }
 
     private void Update()
@@ -225,6 +227,12 @@ public class enemyCarDriver : MonoBehaviour
     {
         if (carRigidbody != null)
         {
+            if (enemySpawnerScript != null)
+            {
+                enemySpawnerScript.RemoveEnemyFromList(gameObject); // Notify the spawner to remove this car from the list
+                                                                    // Implement a method to get the enemy type (e.g., based on a tag or component)
+               
+            }
             speed = 0;
             TurnOnExplosion();
            
@@ -245,6 +253,7 @@ public class enemyCarDriver : MonoBehaviour
     public void DestroyCar()
     {
         Destroy(gameObject, 2f);
+     
     }
 
     public void TurnOnExplosion()
