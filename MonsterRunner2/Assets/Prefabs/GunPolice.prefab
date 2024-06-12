@@ -144,6 +144,7 @@ MonoBehaviour:
   speed: 0
   speedMax: 20
   speedMin: 14
+  turnSpeed: 0
   playerscript: {fileID: 0}
   isDead: 0
   isCCed: 0
@@ -155,6 +156,8 @@ MonoBehaviour:
   angularDrag: 1
   DeathExplosionVFX: {fileID: 4661394443100670, guid: 17f2e8586b0fe5e49b346dfadaf40476,
     type: 3}
+  enemySpawnerScript: {fileID: 0}
+  enemyType: 1
 --- !u!114 &2271412327364450784
 MonoBehaviour:
   m_ObjectHideFlags: 0

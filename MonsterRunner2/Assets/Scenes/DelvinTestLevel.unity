@@ -11046,6 +11046,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questWindow: {fileID: 8288493320098780948}
   descriptionText: {fileID: 1234739532913108784}
+  introText:
+  - Time to work
   questText:
   - Take me home
   - Bring me here
@@ -11079,6 +11081,9 @@ MonoBehaviour:
   player: {fileID: 799882639}
   destination: {fileID: 0}
   survivaltime: 0
+  questCooldownTime: 0
+  initialIntroDelay: 0
+  initialMissionDelay: 0
   questDialogue: {fileID: 171047680}
   scoreManager: {fileID: 1242281396}
   missionManager: {fileID: 171047678}
@@ -42459,7 +42464,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &629775589
 Transform:
   m_ObjectHideFlags: 0
@@ -51547,9 +51552,7 @@ MonoBehaviour:
     type: 3}
   powerUpType2Prefab: {fileID: 4589471017491921116, guid: eac2105e15a63ae4692e0c080a017054,
     type: 3}
-  spawnLocations:
-  - {fileID: 1778661550}
-  - {fileID: 629775589}
+  spawnLocations: []
   spawnedTokens: []
   spawnType2: 1
 --- !u!114 &754238783
@@ -51570,6 +51573,8 @@ MonoBehaviour:
   - {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262, type: 3}
   - {fileID: 2271412327364450842, guid: c14370a4750163d449c07e01655e66de, type: 3}
   playerData: {fileID: 799882639}
+  Radius: 0
+  spawnedEnemies: []
 --- !u!1001 &754252690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84696,6 +84701,7 @@ MonoBehaviour:
   stopwatchTime: 0
   activeCounter: {fileID: 422629127}
   questgiverScript: {fileID: 171047681}
+  enemySpawnerScript: {fileID: 754238783}
 --- !u!1001 &1242371476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -118699,7 +118705,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1778661550
 Transform:
   m_ObjectHideFlags: 0
