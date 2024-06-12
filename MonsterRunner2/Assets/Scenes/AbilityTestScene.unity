@@ -439,6 +439,7 @@ MonoBehaviour:
   buildingObjectsList: []
   passengerCount: 0
   spawnRadius: 240
+  survivalTime: 0
 --- !u!4 &171047679
 Transform:
   m_ObjectHideFlags: 0
@@ -1391,6 +1392,7 @@ GameObject:
   - component: {fileID: 754238782}
   - component: {fileID: 754238778}
   - component: {fileID: 754238779}
+  - component: {fileID: 754238783}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -1425,13 +1427,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77ecfb485c46aad48b6da4fa6ac9fb0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGameTime: 0
-  numberThreshold: 200
-  enemyList: []
-  delayedSpawn: 0
-  spawnAmt: 5
-  spawnInterval: 10
-  spawners: []
 --- !u!114 &754238777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,7 +1545,6 @@ MonoBehaviour:
   - {fileID: 2039083784}
   - {fileID: 2074378947}
   - {fileID: 1454140968}
-  - {fileID: 1394319417}
   spawnedTokens: []
   spawnType2: 1
 --- !u!114 &754238781
@@ -1605,9 +1599,26 @@ MonoBehaviour:
   questDManager: {fileID: 171047680}
   menuManager: {fileID: 754238777}
   mainCam: {fileID: 1039292050}
-  environmentSpawner: {fileID: 754238779}
   missionManager: {fileID: 171047678}
   abilityManager: {fileID: 754238781}
+--- !u!114 &754238783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754238774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb4858560648f54ebd2f8e8cde356fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPos: {fileID: 0}
+  threatlvl: 1
+  enemyTypesPrefabs:
+  - {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262, type: 3}
+  - {fileID: 2271412327364450842, guid: c14370a4750163d449c07e01655e66de, type: 3}
+  playerData: {fileID: 0}
 --- !u!1 &758302645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,10 +2190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934a2bd2e0cd2464e82c797f3267c6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesKilled: 0
+  goldEarned: 0
   missionsCompleted: 0
   timeSurvived: 0
+  stopwatchTime: 0
   activeCounter: {fileID: 422629127}
+  questgiverScript: {fileID: 0}
 --- !u!114 &1308585602 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5216097740398365668, guid: 4121b3ed49a063c4f893ccfc2bd4533c,
@@ -2420,37 +2433,6 @@ Transform:
   m_Father: {fileID: 14121144}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1394319416
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1394319417}
-  m_Layer: 0
-  m_Name: Loc11
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1394319417
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394319416}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.84, y: 1, z: 7.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1425800694}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1398300367
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,7 +2552,6 @@ Transform:
   - {fileID: 2039083784}
   - {fileID: 2074378947}
   - {fileID: 1454140968}
-  - {fileID: 1394319417}
   m_Father: {fileID: 14121144}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5524,10 +5505,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa61b2cb817eae144a50614e10cbc06f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesKilled: 0
+  goldEarned: 0
   missionsCompleted: 0
   timeSurvived: 0
-  enemiesKilledText: {fileID: 5565490917621014495}
+  goldEarnedText: {fileID: 0}
   missionsCompletedText: {fileID: 8866888030518258400}
   timeSurvivedText: {fileID: 9007960718129374534}
   scoreManager: {fileID: 1242281396}

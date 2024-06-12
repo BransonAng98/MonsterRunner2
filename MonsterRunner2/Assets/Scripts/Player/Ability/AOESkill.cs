@@ -5,26 +5,36 @@ using UnityEngine;
 [CreateAssetMenu]
 public class AOESkill : AbilitySO
 {
+    public Transform playerObj;
     public Transform aoeOrigin;
-    public ParticleSystem particleSys;
+    public GameObject particleSys;
 
+    public float aoeDuration;
     public float aoeTimer;
-    public float aoeInterval;
-
-    [SerializeField] List<enemyCarDriver> enemyList = new List<enemyCarDriver>();
 
     public override void AssignVariables(Transform origin, Transform player)
     {
+        aoeOrigin = origin;
+        playerObj = player;
+        DemoPlayer playerData = playerObj.GetComponent<DemoPlayer>();
 
+        particleSys = playerData.particleSystem;
+        SlowScript ccSCript = particleSys.GetComponent<SlowScript>();
+        ccSCript.ccDuration = aoeDuration;
+
+        particleSys.SetActive(false);
     }
 
     public override void Activate()
     {
-       
+        if (!particleSys.activeSelf)
+        {
+            particleSys.SetActive(true);
+        }
     }
 
     public override void Deactive()
     {
-
+        particleSys.SetActive(false);
     }
 }

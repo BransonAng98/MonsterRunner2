@@ -147,6 +147,7 @@ public class DemoPlayer : MonoBehaviour
     public AbilitySO ability2;
     public ObjectiveIndicator questIndicator;
     public Transform abillityOrigin;
+    public GameObject particleSystem;
 
     private void Awake()
     {
@@ -156,6 +157,7 @@ public class DemoPlayer : MonoBehaviour
         maxSpeed = playerData.maxSpeed;
         crashDamage = 150f - playerData.crashResistance;
         ability1.AssignVariables(abillityOrigin, this.transform);
+        ability2.AssignVariables(this.transform, this.transform);
     }
 
     // Start is called before the first frame update
@@ -173,9 +175,8 @@ public class DemoPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-           
-            EnvoCollision trigger = other.gameObject.GetComponent<EnvoCollision>();
-            trigger.Collided();
+            //EnvoCollision trigger = other.gameObject.GetComponent<EnvoCollision>();
+            //trigger.Collided();
             if (!isTriggered)
             {
                 isTriggered = true;

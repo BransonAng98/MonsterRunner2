@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: IceCreamShot
   abilityCD: 3
-  abilityActive: 10
+  abilityActive: 5
   bulletPf: {fileID: 5930397310813671280, guid: 0c7f03adf12ecf0409b4e3f594257cea,
     type: 3}
   bulletSpawnLoc: {fileID: 0}

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5930397310813671294}
   - component: {fileID: 5930397310813671295}
   - component: {fileID: 3096883572357576329}
+  - component: {fileID: 7822074255667719162}
   m_Layer: 10
   m_Name: IceCreamBullet
   m_TagString: Untagged
@@ -114,3 +115,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7822074255667719162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5930397310813671280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25bc12f403cc5c1449b16c7c30546992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
