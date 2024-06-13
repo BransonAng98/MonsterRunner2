@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedMax: 28
+  speedMax: 26
   speedMin: 17
   acceleration: 0
   turnSpeed: 0

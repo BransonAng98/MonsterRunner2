@@ -59829,6 +59829,7 @@ MonoBehaviour:
   missionManager: {fileID: 171047678}
   abilityManager: {fileID: 754238781}
   tokenManager: {fileID: 754238782}
+  questgiverManager: {fileID: 171047681}
   ability2Level: 0
 --- !u!114 &754238781
 MonoBehaviour:

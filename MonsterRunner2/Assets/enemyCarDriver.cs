@@ -88,7 +88,7 @@ public class enemyCarDriver : MonoBehaviour
                 }
 
                 // Gradually reduce speed when turning
-                float turnSpeedReductionRate = 3f;
+                float turnSpeedReductionRate = 5f;
                 // Adjust as needed for the desired speed reduction rate
                 if (turnAmount != 0)
                 {

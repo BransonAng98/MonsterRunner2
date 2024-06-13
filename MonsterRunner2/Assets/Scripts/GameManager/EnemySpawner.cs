@@ -204,7 +204,7 @@ public class EnemySpawner : MonoBehaviour
     {
         float spawnRadius = 140f;
         float minSpacing = 30f;
-        float minDistanceFromPlayer = 50f; // Minimum distance from the player
+        float minDistanceFromPlayer = 100f; // Minimum distance from the player
 
         List<Vector3> validSpawnPositions = new List<Vector3>();
         int attempts = 0;

@@ -36,7 +36,7 @@ public class PlayerDataManager : MonoBehaviour
     public missionManagerScript missionManager;
     public PlayerAbilityManager abilityManager;
     public AbilityTokenManager tokenManager;
-
+    public QuestGiver questgiverManager;
     private string vehicleDataFilePath;
     private string playerDataFilePath;
 
@@ -69,6 +69,7 @@ public class PlayerDataManager : MonoBehaviour
                 playerData.joystick = joystick;
                 playerData.questdialogueScript = questDManager;
                 playerData.menuManager = menuManager;
+                questgiverManager.player = playerData;
 
                 if(ab2 != 0)
                 {
