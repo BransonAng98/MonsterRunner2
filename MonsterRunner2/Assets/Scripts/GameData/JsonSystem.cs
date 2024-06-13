@@ -17,8 +17,9 @@ public class JsonSystem : MonoBehaviour
 
     private void Awake()
     {
-        vehicleDataFilePath = Path.Combine(Application.dataPath, "VehicleDataFile.json");
-        playerDataFilePath = Path.Combine(Application.dataPath, "PlayerDataFile.json");
+        vehicleDataFilePath = Path.Combine(Application.persistentDataPath, "VehicleDataFile.json");
+        playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
+        Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
         LoadFromJson();
     }
 
