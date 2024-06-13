@@ -59836,6 +59836,7 @@ MonoBehaviour:
   tokenManager: {fileID: 754238782}
   questgiverManager: {fileID: 171047681}
   ability2Level: 0
+  json: {fileID: 754238785}
 --- !u!114 &754238781
 MonoBehaviour:
   m_ObjectHideFlags: 0

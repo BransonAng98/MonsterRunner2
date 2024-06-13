@@ -41,13 +41,10 @@ public class PlayerDataManager : MonoBehaviour
     private string playerDataFilePath;
 
     [SerializeField] public int ability2Level;
-
+    public JsonSystem json;
     private void Awake()
     {
-        vehicleDataFilePath = Application.dataPath + "/VehicleDataFile.json";
-        playerDataFilePath = Application.dataPath + "/PlayerDataFile.json";
-        LoadFromJson();
-
+        json.LoadFromJson();
         //Checking along the list of registered vehicles in the lists
         foreach (Vehicle vehicle in vehicles)
         {
@@ -83,45 +80,6 @@ public class PlayerDataManager : MonoBehaviour
             }
         }
     }
-
-    public void LoadFromJson()
-    {
-        if (File.Exists(vehicleDataFilePath))
-        {
-            string json = File.ReadAllText(vehicleDataFilePath);
-            VehicleData[] dataArray = JsonHelper.FromJson<VehicleData>(json);
-
-            foreach (var data in dataArray)
-            {
-                PlayerSO vehicleData = ScriptableObject.CreateInstance<PlayerSO>();
-                vehicleData.vehicleName = data.vehicleName;
-                vehicleData.vehicleID = data.vehicleID;
-                vehicleData.maxSpeed = data.speed;
-                ab1 = data.ability1Level;
-                ab2 = data.ability2Level;
-            }
-        }
-        else
-        {
-            Debug.Log("VehicleDataFile.json not found");
-            return;
-        }
-
-        if (File.Exists(playerDataFilePath))
-        {
-            string playerJson = File.ReadAllText(playerDataFilePath);
-            playerInfoData = JsonUtility.FromJson<PlayerInfoData>(playerJson);
-            if (playerInfoData != null)
-            {
-                vehicleID = playerInfoData.selectedVehicleID;
-            }
-        }
-        else
-        {
-            Debug.Log("PlayerDataFile.json not found");
-        }
-    }
-
     // Start is called before the first frame update
     void Start()
     {
