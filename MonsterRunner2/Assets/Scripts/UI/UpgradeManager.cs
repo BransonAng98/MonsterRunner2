@@ -46,15 +46,14 @@ public class UpgradeManager : MonoBehaviour
         UpdateUI();
 
         gainCurrencyButton.onClick.AddListener(GainCurrency);
-        upgradeActiveSkillButton.onClick.AddListener(() => UpgradeSkill(activeSkill));
+        upgradeActiveSkillButton.onClick.AddListener(() => UpgradeSkill(activeSkill, 0));
         unlockSkillButton.onClick.AddListener(UnlockSkill);
-        upgradeLockedSkillButton.onClick.AddListener(() => UpgradeSkill(lockedSkill));
+        upgradeLockedSkillButton.onClick.AddListener(() => UpgradeSkill(lockedSkill, 1));
 
         setActiveButton.onClick.AddListener(SetActive);
         //leftArrow.onClick.AddListener(() => SwitchCar(0));
         //rightArrow.onClick.AddListener(() => SwitchCar(1));
         upgradeLockedSkillBtn.SetActive(false);
-
         ActiveIconDisplay();
     }
 
@@ -64,7 +63,7 @@ public class UpgradeManager : MonoBehaviour
         UpdateUI();
     }
 
-    void UpgradeSkill(Skill skill)
+    void UpgradeSkill(Skill skill, int abilityID)
     {
         if (skill.unlocked && skill.level < skill.maxLevel && currency >= skill.cost)
         {
@@ -72,6 +71,18 @@ public class UpgradeManager : MonoBehaviour
             skill.level++;
             skill.cost += 100; // Increase cost by x for each upgrade
             UpdateUI();
+
+            switch (abilityID)
+            {
+                //Upgrade first ability
+                case 0:
+                    carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability1Level++;
+                    break;
+
+                case 1:
+                    carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level++;
+                    break;
+            }
         }
     }
 
@@ -79,7 +90,6 @@ public class UpgradeManager : MonoBehaviour
     {
         carDisplay.activateID = carDisplay.selectedCarID;
         carDisplay.UpdateCarSkin(carDisplay.activateID);
-        json.selectedVehicleData = carDisplay.cars[carDisplay.activateID].vehicleData;
         ActiveIconDisplay();
     }
 
@@ -162,9 +172,9 @@ public class UpgradeManager : MonoBehaviour
             upgradeLockedSkillButton.interactable = currency >= lockedSkill.cost; // Make sure button is interactable if enough currency to unlock
         }
 
-        if (activeSkill.level < activeSkill.maxLevel)
+        if (carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability1Level < activeSkill.maxLevel)
         {
-            activeSkillLevelText.text = "Skill Level: " + activeSkill.level;
+            activeSkillLevelText.text = "Skill Level: " + carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability1Level;
             upgradeActiveSkillButton.interactable = currency >= activeSkill.cost;
         }
         else
@@ -173,9 +183,9 @@ public class UpgradeManager : MonoBehaviour
             activeSkillBtn.SetActive(false);
         }
 
-        if (lockedSkill.level < lockedSkill.maxLevel)
+        if (carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level < lockedSkill.maxLevel)
         {
-            lockedSkillLevelText.text = "Skill Level: " + lockedSkill.level;
+            lockedSkillLevelText.text = "Skill Level: " + carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level;
         }
         else
         {
