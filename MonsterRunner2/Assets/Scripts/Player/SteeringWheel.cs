@@ -127,15 +127,15 @@ public class SteeringWheel : MonoBehaviour
         float rotationDirection = Mathf.Sign(pointerPos.x - centerPoint.x);
         wheelAngle += (wheelNewAngle - wheelPrevAngle) * rotationDirection;
 
-        // Apply deadzone
-        if (Mathf.Abs(wheelAngle) < deadzoneThreshold)
-        {
-            player.inputSteer = false;
-        }
-        else
-        {
-            player.inputSteer = true;
-        }
+        //// Apply deadzone
+        //if (Mathf.Abs(wheelAngle) < deadzoneThreshold)
+        //{
+        //    player.inputSteer = false;
+        //}
+        //else
+        //{
+        //    player.inputSteer = true;
+        //}
 
         // Make sure wheel angle never exceeds maximumSteeringAngle
         wheelAngle = Mathf.Clamp(wheelAngle, -maximumSteeringAngle, maximumSteeringAngle);
@@ -164,7 +164,7 @@ public class SteeringWheel : MonoBehaviour
         // Executed when mouse/finger stops touching the steering wheel
         // Performs one last DragEvent, just in case
         DragEvent(eventData);
-        player.releaseWheel();
+        //player.releaseWheel();
         wheelBeingHeld = false;
     }
 }

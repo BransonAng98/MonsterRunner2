@@ -5,38 +5,11 @@ using UnityEngine;
 
 public class DemoPlayer : MonoBehaviour
 {
-    public enum Axel
-    {
-        Front,
-        Rear,
-    }
-
-    public enum CarState
-    {
-        Rev,
-        Driving,
-        Collision,
-        Death, 
-    }
-
-    public enum TrailType
-    {
-        skid,
-    }   
-    public enum SmokeType
-    {
-       normal,
-       drift,
-    }
-
-    public enum Health
-    {
-        normal,
-        whiteSmoke,
-        blackSmoke,
-        fire,
-        death,
-    }
+    public enum Axel { Front, Rear }
+    public enum CarState { Rev, Driving, Collision, Death }
+    public enum TrailType { skid }
+    public enum SmokeType { normal, drift }
+    public enum Health { normal, whiteSmoke, blackSmoke, fire, death }
 
     [Serializable]
     public struct Wheel
@@ -45,7 +18,7 @@ public class DemoPlayer : MonoBehaviour
         public WheelCollider wheelColliderl;
         public Axel axel;
     }
-    
+
     [Serializable]
     public struct Trail
     {
@@ -75,77 +48,64 @@ public class DemoPlayer : MonoBehaviour
         public AbilitySO ability2;
     }
 
-
     public PlayerSO playerData;
-    [SerializeField] float health;
-    [SerializeField] float maxHealth;
-    [SerializeField] float maxAcceleration;
-    [SerializeField] float maxSpeed;
-    [SerializeField] float crashDamage;
+    [SerializeField] private float health;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float crashDamage;
+    [SerializeField] private float distance;
 
     public LayerMask enemyLayer;
 
-    public float explosionForce = 1000f; // Force of the explosion
-    public float explosionRadius = 5f; // Radius of the explosion
-
-    float currentTorque;
-
+    public float explosionForce = 1000f;
+    public float explosionRadius = 5f;
     public float turnSensitivity;
     public float maxSteeringAngle;
-    public bool isDead;
-
-    public Vector3 centerOfMass;
-
-    public PlayerAbilityManager abilityManager;
-    public PlayerDataManager playerDataManager;
-    public VehicleData vehicleData;
-
-    public List<Wheel> wheels;
-
-    public List<Trail> trails;
-
-    public List<Smoke> smokes;
-
-    public List<HealthState> healthSmoke;
-
-    public SteeringWheel steeringWheel;
-    public Joystick joystick;
-    public Vector3 lastKnownVector;
-
-    public Vector2 joystickInput;
-
-    public ParticleSystem healingVFX;
-
-    float steerInput;
-
-    public bool inputSteer;
-    public bool isTriggered;
     public float knockBack;
     public float minimumKnockBack;
     public float velocityLerpFactor;
 
-    public Quest quest; // might need to change this to a list if you want to add quest in runtime. 
+    public bool isDead;
+    public bool isTriggered;
+
+    public Vector3 centerOfMass;
+    public PlayerAbilityManager abilityManager;
+    public PlayerDataManager playerDataManager;
+
+    public VehicleData vehicleData;
+    public List<Wheel> wheels;
+    public List<Trail> trails;
+    public List<Smoke> smokes;
+    public List<HealthState> healthSmoke;
+
+    public Joystick joystick;
+    public Vector3 lastKnownVector;
+    public Vector2 joystickInput;
+
+    public ParticleSystem healingVFX;
+
+    public Quest quest;
+    public QuestDialogueManager questdialogueScript;
+
     public GameObject destination;
     public GameObject passenger;
     public GameObject impactVFX;
 
-    [SerializeField]private float distance;
-    public float distanceThreshold = 30f; // Adjust this value as needed
+    public float distanceThreshold = 30f;
 
-    
-    public QuestDialogueManager questdialogueScript;
     public GameMenuManager menuManager;
-    Rigidbody rb;
+    private Rigidbody rb;
 
-    public bool destinationReached; // Flag to track if destination has been reached
+    public bool destinationReached;
 
-    //Player data 
     public MeshFilter meshFilter;
     public MeshRenderer vehicleMaterial;
     public MeshCollider meshCollider;
+
     public AbilitySO ability1;
     public AbilitySO ability2;
     public ObjectiveIndicator questIndicator;
+
     public Transform abillityOrigin;
     public GameObject particleSystem;
 
@@ -153,21 +113,18 @@ public class DemoPlayer : MonoBehaviour
     {
         health = playerData.health;
         maxHealth = playerData.health;
-        maxAcceleration = playerData.acceleration;
         maxSpeed = playerData.maxSpeed;
         crashDamage = 150f - playerData.crashResistance;
         ability1.AssignVariables(abillityOrigin, this.transform);
         ability2.AssignVariables(this.transform, this.transform);
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = centerOfMass;
-        this.GetComponent<WeaponScript>().enabled = false;
+        GetComponent<WeaponScript>().enabled = false;
         healingVFX.Stop();
-        //Move the character without any input
         lastKnownVector = transform.forward * maxSpeed;
     }
 
@@ -175,8 +132,6 @@ public class DemoPlayer : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Obstacle"))
         {
-            //EnvoCollision trigger = other.gameObject.GetComponent<EnvoCollision>();
-            //trigger.Collided();
             if (!isTriggered)
             {
                 isTriggered = true;
@@ -186,12 +141,10 @@ public class DemoPlayer : MonoBehaviour
 
         if (other.CompareTag("Passenger"))
         {
-          
             destinationReached = false;
             passenger = other.gameObject;
             QuestGiver questGiver = other.transform.GetComponent<QuestGiver>();
             destination = questGiver.destination;
-
         }
     }
 
@@ -200,214 +153,54 @@ public class DemoPlayer : MonoBehaviour
         if (collision.gameObject.CompareTag("Border"))
         {
             TakeDamage(1000);
-            //// Calculate knockback direction based on collision point
-            //Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
-            //Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
-            //Instantiate(impactVFX, spawnPos, Quaternion.identity);
-            //knockbackDirection.Normalize();
-
-            //// Calculate knockback force based on collision impact force
-            //float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
-
-            //// If knockback force is less than the minimum, use the minimum force instead
-            //knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
-
-            //// Apply knockback force
-            //rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
         }
+
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            if(collision.gameObject.layer != 9)
+            if (collision.gameObject.layer != 9)
             {
                 TakeDamage(1000);
-
-                // Calculate knockback direction based on collision point
                 Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
-                Vector3 spawnPos = collision.contacts[0].point; // Corrected variable name
+                Vector3 spawnPos = collision.contacts[0].point;
                 Instantiate(impactVFX, spawnPos, Quaternion.identity);
                 knockbackDirection.Normalize();
-
-                // Calculate knockback force based on collision impact force
-                float knockbackForce = collision.impulse.magnitude * knockBack; // Multiply by knockBack variable
-
-                // If knockback force is less than the minimum, use the minimum force instead
+                float knockbackForce = collision.impulse.magnitude * knockBack;
                 knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
-
-                // Apply knockback force
                 rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
             }
         }
 
         if (collision.gameObject.CompareTag("AbilityToken"))
         {
-            //Record which ability to trigger upon collision
             abilityManager.abilityID = collision.gameObject.GetComponent<AbilityToken>().abilityID;
-
-            //Activates the ability in the AbilityManager
             abilityManager.isTriggered = true;
-            //Destroy(collision.gameObject);
         }
     }
 
     void GetInput()
     {
-        //steerInput = steeringWheel.GetClampedValue();
-        // Get the joystick input
         joystickInput = new Vector2(joystick.Horizontal, joystick.Vertical).normalized;
     }
+
     void NewMove()
     {
-
-        // Transform the input direction to match the rotated view
         Vector3 rotatedInputDirection = Quaternion.Euler(0, 45, 0) * new Vector3(joystickInput.x, 0, joystickInput.y);
-
         if (rotatedInputDirection.magnitude >= maxSteeringAngle)
         {
-            // Calculate the target direction based on the rotated joystick input
             Vector3 targetDirection = rotatedInputDirection;
-
-            // Smoothly rotate the character towards the target direction
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSensitivity);
-
-            // Calculate target velocity only on x and z axes
             Vector3 targetVelocity = transform.forward * maxSpeed;
-            targetVelocity.y = rb.velocity.y; // Keep the y component of velocity unchanged
-            rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, velocityLerpFactor); // Smoothly interpolate velocity
+            targetVelocity.y = rb.velocity.y;
+            rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, velocityLerpFactor);
             lastKnownVector = rb.velocity;
         }
         else
         {
-            // If there's no input, maintain the last known velocity and rotation
             Vector3 targetVelocity = lastKnownVector;
-            targetVelocity.y = rb.velocity.y; // Keep the y component of velocity unchanged
+            targetVelocity.y = rb.velocity.y;
             rb.velocity = targetVelocity;
             rb.rotation = Quaternion.LookRotation(lastKnownVector);
-        }
-    }
-
-    void Move()
-    {
-        foreach (var wheel in wheels)
-        {
-
-            if (wheel.axel == Axel.Rear)
-            {
-                // Check if current speed is less than max speed
-                if (rb.velocity.magnitude < maxSpeed)
-                {
-                    // Apply forward torque with increased acceleration until max speed is reached
-                    float forwardTorque = maxAcceleration; // Increased base torque
-                    wheel.wheelColliderl.motorTorque = forwardTorque;
-
-                    // Update current torque for next frame
-                    currentTorque = forwardTorque;
-                }
-                else
-                {
-                    // Once max speed is reached, stop applying torque
-                    wheel.wheelColliderl.motorTorque = 0f;
-                }
-            }
-
-            if(wheel.axel == Axel.Rear)
-            {
-                if (inputSteer)
-                {
-                    foreach(var trail in trails)
-                    {
-                        if(trail.trail == TrailType.skid)
-                        {
-                            trail.renderer.emitting = true;
-                        }
-                    }
-                    foreach (var smoke in smokes)
-                    {
-                        if (smoke.smoke == SmokeType.drift)
-                        {
-                            smoke.smokeRenderer.enableEmission = true;
-                        }
-                        else
-                        {
-                            smoke.smokeRenderer.enableEmission = false;
-                        }
-                    }
-                }
-
-                else
-                {
-                    foreach (var trail in trails)
-                    {
-                        if (trail.trail == TrailType.skid)
-                        {
-                            trail.renderer.emitting = false;
-                        }
-                    }
-
-                    foreach (var smoke in smokes)
-                    {
-                        if (smoke.smoke == SmokeType.drift)
-                        {
-                            smoke.smokeRenderer.enableEmission = false;
-                        }
-                        else
-                        {
-                            smoke.smokeRenderer.enableEmission = true;
-                        }
-                    }
- 
-                }
-            }
-        }
-    }
-
-    void Steer()
-    {
-        if (inputSteer)
-        {
-            foreach (var wheel in wheels)
-            {
-                if (wheel.axel == Axel.Front)
-                {
-                    // Calculate the target steer angle based on joystick input
-                    float steerAngle = steerInput * turnSensitivity * maxSteeringAngle;
-
-                    //// Reset sideways friction stiffness to default
-                    //WheelFrictionCurve forwardF = wheel.wheelColliderl.forwardFriction;
-                    //forwardF.stiffness = 4f; // Reset stiffness to default
-                    //wheel.wheelColliderl.sidewaysFriction = forwardF;
-
-                    //// Reset sideways friction stiffness to default
-                    //WheelFrictionCurve sidewaysFriction = wheel.wheelColliderl.sidewaysFriction;
-                    //sidewaysFriction.stiffness = 3f; // Reset stiffness to default
-                    //wheel.wheelColliderl.sidewaysFriction = sidewaysFriction;
-
-                    // Interpolate back to regular steer angle
-                    wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, steerAngle, 1f);
-                }
-            }
-        }
-        else
-        {
-            foreach(var wheel in wheels)
-            {
-                wheel.wheelColliderl.steerAngle = Mathf.Lerp(wheel.wheelColliderl.steerAngle, 0f, 0.3f);
-            }
-        }
-    }
-
-    void AnimateWheels()
-    {
-        foreach(var wheel in wheels)
-        {
-            if(wheel.axel == Axel.Front)
-            {
-                Quaternion rot;
-                Vector3 pos;
-                wheel.wheelColliderl.GetWorldPose(out pos, out rot);
-                //wheel.wheelModel.transform.position = pos;
-                wheel.wheelModel.transform.rotation = rot;
-            }
         }
     }
 
@@ -440,10 +233,9 @@ public class DemoPlayer : MonoBehaviour
             }
             if (healthPercentage <= 75f && healthPercentage > 45f)
             {
-                if(smoke.playerHealth == Health.whiteSmoke)
+                if (smoke.playerHealth == Health.whiteSmoke)
                 {
                     smoke.carSmoke.enableEmission = true;
-                    Debug.Log("Play white smoke");
                 }
                 else
                 {
@@ -452,10 +244,9 @@ public class DemoPlayer : MonoBehaviour
             }
             if (healthPercentage <= 45f && healthPercentage > 10)
             {
-                if(smoke.playerHealth == Health.blackSmoke)
+                if (smoke.playerHealth == Health.blackSmoke)
                 {
                     smoke.carSmoke.enableEmission = true;
-                    Debug.Log("Play black smoke");
                 }
                 else
                 {
@@ -464,10 +255,9 @@ public class DemoPlayer : MonoBehaviour
             }
             if (healthPercentage <= 10f && healthPercentage > 0)
             {
-                if(smoke.playerHealth == Health.fire)
+                if (smoke.playerHealth == Health.fire)
                 {
                     smoke.carSmoke.enableEmission = true;
-                    Debug.Log("Play fire");
                 }
                 else
                 {
@@ -481,37 +271,13 @@ public class DemoPlayer : MonoBehaviour
     {
         QuestGiver questGiver = gameObject.GetComponentInChildren<QuestGiver>();
     }
+
     void Death()
     {
-        //Unparents all the wheels with the body
-        foreach(var wheel in wheels)
-        {
-            wheel.wheelColliderl.gameObject.transform.parent = null;
-        }
-
-        foreach (var smoke in healthSmoke)
-        {
-            if (smoke.playerHealth == Health.death)
-            {
-                smoke.carSmoke.gameObject.SetActive(true);
-                Debug.Log("Play explosion");
-            }
-            else
-            {
-                smoke.carSmoke.gameObject.SetActive(false);
-            }
-        }
-
-        //Add force when the car explodes
         Explode();
-
-        StartCoroutine(SlowDownVelocity());
-
-        //Disables the demoplayer code so it stops moving and everything else
-        this.GetComponent<DemoPlayer>().enabled = false;
-        this.GetComponent<WeaponScript>().enabled = false;
+        StartCoroutine(OpenResultScreenAfterDelay(3f));
     }
-    
+
     public void DamagedByBullet()
     {
         TakeDamage(200);
@@ -519,77 +285,36 @@ public class DemoPlayer : MonoBehaviour
 
     void Explode()
     {
-        // Find all colliders within the explosion radius
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius, enemyLayer);
-
-        // Apply explosion force to each enemy
         foreach (Collider collider in colliders)
         {
             Rigidbody rb = collider.GetComponent<Rigidbody>();
             if (rb != null)
             {
-                // Calculate the direction away from the explosion point
                 Vector3 direction = (collider.transform.position - transform.position).normalized;
-
-                // Apply the explosion force
                 rb.AddForce(direction * explosionForce, ForceMode.Impulse);
             }
         }
     }
 
-    IEnumerator SlowDownVelocity()
+    IEnumerator OpenResultScreenAfterDelay(float delay)
     {
-        float originalDrag = rb.drag; // Store the original drag value
-        float targetDrag = 5f; // Set the target drag value for braking
-        float dragLerpFactor = 0.1f; // Adjust the lerp factor for smooth transition
-
-        while (rb.velocity.magnitude > 0.1f || rb.angularVelocity.magnitude > 0.1f) // Continue until velocity is close to zero
-        {
-            // Gradually lerp the drag value towards the target
-            rb.drag = Mathf.Lerp(rb.drag, targetDrag, dragLerpFactor * Time.deltaTime);
-
-            yield return null;
-        }
-
-        // Ensure that the drag has reached the target
-        rb.drag = targetDrag;
-
-        if(rb.drag == targetDrag)
-        {
-            // Open the defeat screen
-            OpenDefeatScreen();
-
-        }
-
-        // Restore the original drag value
-        rb.drag = originalDrag;
+        yield return new WaitForSeconds(delay);
+        menuManager.resultScreen.SetActive(true);
     }
 
-    void OpenDefeatScreen()
-    {
-        menuManager.defeatScreen.SetActive(true);
-    }
-
-    public void releaseWheel()
-    {
-        inputSteer = false;
-    }
-
-    // Update is called once per frame
     void Update()
     {
         GetInput();
-        AnimateWheels();
         CheckHealthState();
 
-        if (!destinationReached && destination != null) // Check if destination has not been reached and destination is not null
+        if (!destinationReached && destination != null)
         {
             distance = Vector3.Distance(transform.position, destination.transform.position);
-
             if (distance <= distanceThreshold)
             {
                 DestinationReached();
-                destinationReached = true; // Set the flag to true to indicate that the destination has been reached
+                destinationReached = true;
             }
         }
     }
@@ -600,47 +325,32 @@ public class DemoPlayer : MonoBehaviour
         {
             NewMove();
         }
-        else
-        {
-            return;
-        }
     }
 
     public void DestinationReached()
     {
         if (passenger != null)
         {
-            //RestoreHealth();
             int index = UnityEngine.Random.Range(0, 1);
             questdialogueScript.TypeText(false, index);
             quest.Complete();
             passenger.SetActive(true);
             passenger.transform.parent = null;
-            Debug.Log("Passenger unparented.");
             passenger = null;
-        }
-
-        else
-        {
-            Debug.Log("No Passenger Found");
         }
     }
 
     public void RestoreHealth()
     {
-        // Calculate the amount of health to restore
         float healthToAdd = 150;
         healingVFX.Play();
         Invoke("TurnOffVFX", 0.3f);
-        // Check if adding the health will exceed the maximum health
         if (health + healthToAdd > maxHealth)
         {
-            // If it will exceed, set the health to the maximum value
             health = maxHealth;
         }
         else
         {
-            // Otherwise, add the health
             health += healthToAdd;
         }
     }
@@ -648,11 +358,5 @@ public class DemoPlayer : MonoBehaviour
     void TurnOffVFX()
     {
         healingVFX.Stop();
-    }
-
-    private void LateUpdate()
-    {
-        //Move();
-        //Steer();
     }
 }

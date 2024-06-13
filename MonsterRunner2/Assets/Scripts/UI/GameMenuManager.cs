@@ -8,16 +8,16 @@ public class GameMenuManager : MonoBehaviour
 {
     public int currentScene;
     public GameObject startScreen;
-    public GameObject defeatScreen;
+    public GameObject resultScreen;
     public GameObject mainMenu;
     [SerializeField] bool hasStarted;
     [SerializeField] GameObject currentMenu;
     // Start is called before the first frame update
     private void Awake()
     {
-        if(defeatScreen != null)
+        if(resultScreen != null)
         {
-            defeatScreen.SetActive(false);
+            resultScreen.SetActive(false);
         }
         else
         {
@@ -25,12 +25,6 @@ public class GameMenuManager : MonoBehaviour
         }
 
         Time.timeScale = 0f;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void LoadLevel()
