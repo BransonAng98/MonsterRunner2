@@ -210,6 +210,32 @@ public class EnemySpawner : MonoBehaviour
         int attempts = 0;
         int maxAttempts = 100; // Avoid infinite loops
 
+        // Check if any road objects are within the spawn area
+        foreach (var road in roads)
+        {
+            Vector3 roadPos = road.transform.position;
+            float distanceToPlayer = Vector3.Distance(roadPos, playerPos.position);
+
+            if (distanceToPlayer >= minDistanceFromPlayer && distanceToPlayer <= spawnRadius)
+            {
+                // Check if the road position meets spacing criteria
+                bool isValidRoadPos = true;
+                foreach (var pos in spawnedEnemies)
+                {
+                    if (Vector3.Distance(roadPos, pos.transform.position) < minSpacing)
+                    {
+                        isValidRoadPos = false;
+                        break;
+                    }
+                }
+
+                if (isValidRoadPos)
+                {
+                    validSpawnPositions.Add(roadPos);
+                }
+            }
+        }
+
         while (validSpawnPositions.Count == 0 && attempts < maxAttempts)
         {
             attempts++;
@@ -245,7 +271,9 @@ public class EnemySpawner : MonoBehaviour
             return playerPos.position + new Vector3(minDistanceFromPlayer, 0, 0); // Default to a position if none found
         }
 
-        return validSpawnPositions[0]; // Return the first valid spawn position
+        // Pick a random valid spawn position from the list
+        int randomIndex = Random.Range(0, validSpawnPositions.Count);
+        return validSpawnPositions[randomIndex];
     }
 
     private void AssignEnemyProperties(GameObject spawnedEnemy)

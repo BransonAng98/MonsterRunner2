@@ -217,26 +217,27 @@ public class enemyCarDriver : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle") &&
-        collision.gameObject.layer != LayerMask.NameToLayer("DeadEnemy"))
+        if (!isDead && collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
             isDead = true;
-            
             CarDeath();
         }
     }
 
     public void CarDeath()
     {
+        Debug.Log("Die");
         if (carRigidbody != null)
         {
-            gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+
+           
             if (enemySpawnerScript != null)
             {
                 enemySpawnerScript.RemoveEnemyFromList(gameObject); // Notify the spawner to remove this car from the list
                                                                     // Implement a method to get the enemy type (e.g., based on a tag or component)
                
             }
+            gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
             speed = 0;
             TurnOnExplosion();
            

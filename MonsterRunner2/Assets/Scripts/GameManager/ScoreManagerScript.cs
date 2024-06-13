@@ -10,6 +10,7 @@ public class ScoreManagerScript : MonoBehaviour
     public float timeSurvived;
     public float stopwatchTime;
     public TextMeshProUGUI activeCounter;
+    public TextMeshProUGUI goldamtCounter;
     public QuestGiver questgiverScript;
     public EnemySpawner enemySpawnerScript;
 
@@ -36,6 +37,8 @@ public class ScoreManagerScript : MonoBehaviour
 
         // Update the active counter display
         activeCounter.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        goldamtCounter.text = goldEarned.ToString();
+
 
         // Check if missions completed has increased
         if (missionsCompleted > lastMissionCount)

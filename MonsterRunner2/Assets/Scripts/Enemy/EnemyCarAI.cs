@@ -58,7 +58,7 @@ public class EnemyCarAI : MonoBehaviour
             }
 
             float angleToDir = Vector3.SignedAngle(transform.forward, dirToMovePosition, Vector3.up);
-            if (Mathf.Abs(angleToDir) < 30)
+            if (Mathf.Abs(angleToDir) < 10f)
             {
                 turnAmount = 0f; // Don't steer if angle is within -30 to 30 degrees
             }
