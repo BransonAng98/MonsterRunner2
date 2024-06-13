@@ -36,6 +36,7 @@ public class UpgradeManager : MonoBehaviour
     private Skill lockedSkill;
 
     public PlayerCarDisplay carDisplay;
+    public PlayerInfoData playerData;
     public JsonSystem json;
 
     void Start()
@@ -90,6 +91,7 @@ public class UpgradeManager : MonoBehaviour
     {
         carDisplay.activateID = carDisplay.selectedCarID;
         carDisplay.UpdateCarSkin(carDisplay.activateID);
+        playerData.selectedVehicleID = carDisplay.activateID;
         ActiveIconDisplay();
     }
 

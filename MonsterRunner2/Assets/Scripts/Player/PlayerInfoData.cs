@@ -3,5 +3,5 @@ using System;
 [Serializable]
 public class PlayerInfoData
 {
-    public int selectedVehicleID;
+    public int selectedVehicleID = 1;
 }

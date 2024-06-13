@@ -167,6 +167,7 @@ public class DemoPlayer : MonoBehaviour
                 float knockbackForce = collision.impulse.magnitude * knockBack;
                 knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
                 rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+                Debug.Log("Death by cops");
             }
         }
 
