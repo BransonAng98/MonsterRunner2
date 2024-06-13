@@ -257,6 +257,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 69682414}
+        m_TargetAssemblyTypeName: JsonSystem, Assembly-CSharp
+        m_MethodName: SaveToJson
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &61053983
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +447,7 @@ MonoBehaviour:
   mainMenu: {fileID: 584724935}
   hasStarted: 0
   currentMenu: {fileID: 0}
+  json: {fileID: 69682414}
 --- !u!4 &69682412
 Transform:
   m_ObjectHideFlags: 0
@@ -484,6 +497,8 @@ MonoBehaviour:
   carDisplay: {fileID: 69682415}
   playerData:
     selectedVehicleID: 0
+    money: 0
+    gems: 0
   json: {fileID: 69682414}
 --- !u!114 &69682414
 MonoBehaviour:
@@ -502,6 +517,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a451df625a04c1e4bb7786e4d8059fb2, type: 2}
   selectedVehicle: {fileID: 69682415}
   activeID: 0
+  playerCurrency: 0
 --- !u!114 &69682415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1932,6 +1948,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 69682414}
+        m_TargetAssemblyTypeName: JsonSystem, Assembly-CSharp
+        m_MethodName: SaveToJson
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4622,6 +4650,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 69682414}
+        m_TargetAssemblyTypeName: JsonSystem, Assembly-CSharp
+        m_MethodName: SaveToJson
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

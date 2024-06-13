@@ -12,6 +12,8 @@ public class GameMenuManager : MonoBehaviour
     public GameObject mainMenu;
     [SerializeField] bool hasStarted;
     [SerializeField] GameObject currentMenu;
+    public JsonSystem json;
+
     // Start is called before the first frame update
     private void Awake()
     {

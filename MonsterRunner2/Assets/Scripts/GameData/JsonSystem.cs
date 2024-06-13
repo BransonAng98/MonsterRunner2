@@ -10,14 +10,15 @@ public class JsonSystem : MonoBehaviour
     public List<PlayerSO> allVehicleDataList;
     public PlayerCarDisplay selectedVehicle;
     public int activeID;
+    public float playerCurrency;
 
     private string vehicleDataFilePath;
     private string playerDataFilePath;
 
     private void Awake()
     {
-        vehicleDataFilePath = Application.dataPath + "/VehicleDataFile.json";
-        playerDataFilePath = Application.dataPath + "/PlayerDataFile.json";
+        vehicleDataFilePath = Path.Combine(Application.dataPath, "VehicleDataFile.json");
+        playerDataFilePath = Path.Combine(Application.dataPath, "PlayerDataFile.json");
         LoadFromJson();
     }
 
@@ -55,8 +56,11 @@ public class JsonSystem : MonoBehaviour
             //Saving selected car data
             case 1:
                 PlayerInfoData playerData = new PlayerInfoData();
-                playerData.selectedVehicleID = selectedVehicle.activateID;
-
+                playerData.money = playerCurrency;
+                if (selectedVehicle != null)
+                {
+                    playerData.selectedVehicleID = selectedVehicle.activateID;
+                }
                 string playerJson = JsonUtility.ToJson(playerData, true);
                 File.WriteAllText(playerDataFilePath, playerJson);
                 break;
@@ -93,14 +97,16 @@ public class JsonSystem : MonoBehaviour
             string playerJson = File.ReadAllText(playerDataFilePath);
             PlayerInfoData playerData = JsonUtility.FromJson<PlayerInfoData>(playerJson);
             activeID = playerData.selectedVehicleID;
+            playerCurrency = playerData.money;
             if (playerData != null)
             {
                 Debug.Log("Selected Vehicle ID: " + playerData.selectedVehicleID);
+                Debug.Log("Money earned: " + playerData.money);
             }
         }
         else
         {
-            activeID = 1;
+            selectedVehicle.activateID = 1;
             SaveToJson(1);
         }
     }

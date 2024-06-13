@@ -6,7 +6,7 @@ using TMPro;
 
 public class UpgradeManager : MonoBehaviour
 {
-    public int currency = 0;
+    public float currency = 0;
     public TextMeshProUGUI currencyText;
 
     public Button gainCurrencyButton;
@@ -41,6 +41,7 @@ public class UpgradeManager : MonoBehaviour
 
     void Start()
     {
+        currency = json.playerCurrency;
         activeSkill = new Skill(true, 100);  // Initial cost is 5
         lockedSkill = new Skill(false, 100); // Initial cost is 5
 
@@ -150,7 +151,7 @@ public class UpgradeManager : MonoBehaviour
     void UpdateUI()
     {
         currencyText.text = "Currency: " + currency;
-
+        json.playerCurrency = currency;
         upgradeActiveSkillButtonText.text = $"Upgrade Skill (Cost: {activeSkill.cost})";
         unlockSkillButtonText.text = $"Unlock Skill (Cost: {lockedSkill.cost})";
 
