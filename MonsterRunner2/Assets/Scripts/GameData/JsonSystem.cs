@@ -10,6 +10,18 @@ public class JsonSystem : MonoBehaviour
     public List<PlayerSO> allVehicleDataList;
     public PlayerCarDisplay selectedVehicle;
 
+    private string vehicleDataFilePath;
+    private string playerDataFilePath;
+
+    private void Awake()
+    {
+        vehicleDataFilePath = Application.dataPath + "/VehicleDataFile.json";
+        playerDataFilePath = Application.dataPath + "/PlayerDataFile.json";
+        SaveToJson(0);
+        SaveToJson(1);
+        LoadFromJson();
+    }
+
     public void SaveToJson(int function)
     {
         switch (function)
@@ -38,7 +50,7 @@ public class JsonSystem : MonoBehaviour
 
                 // Serializing the array to JSON
                 string carJson = JsonHelper.ToJson(vehicleDataArray, true);
-                File.WriteAllText(Application.dataPath + "/VehicleDataFile.json", carJson);
+                File.WriteAllText(vehicleDataFilePath, carJson);
                 break;
 
             //Saving selected car data
@@ -47,16 +59,16 @@ public class JsonSystem : MonoBehaviour
                 playerData.selectedVehicleID = selectedVehicle.activateID;
 
                 string playerJson = JsonUtility.ToJson(playerData, true);
-                File.WriteAllText(Application.dataPath + "/PlayerDataFile.json", playerJson);
+                File.WriteAllText(playerDataFilePath, playerJson);
                 break;
         }
     }
 
     public void LoadFromJson()
     {
-        string json = File.ReadAllText(Application.dataPath + "/VehicleDataFile.json");
-        if (!string.IsNullOrEmpty(json))
+        if (File.Exists(vehicleDataFilePath))
         {
+            string json = File.ReadAllText(vehicleDataFilePath);
             VehicleData[] dataArray = JsonHelper.FromJson<VehicleData>(json);
             allVehicleDataList = new List<PlayerSO>();
 
@@ -74,22 +86,22 @@ public class JsonSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("File not located");
+            Debug.Log("VehicleDataFile.json not found");
+            return;
         }
 
-        string playerJson = File.ReadAllText(Application.dataPath + "/PlayerDataFile.json");
-        if (!string.IsNullOrEmpty(playerJson))
+        if (File.Exists(playerDataFilePath))
         {
+            string playerJson = File.ReadAllText(playerDataFilePath);
             PlayerInfoData playerData = JsonUtility.FromJson<PlayerInfoData>(playerJson);
             if (playerData != null)
             {
-                // Handle player data
                 Debug.Log("Selected Vehicle ID: " + playerData.selectedVehicleID);
             }
         }
         else
         {
-            Debug.Log("File not located");
+            Debug.Log("PlayerDataFile.json not found");
         }
     }
 }

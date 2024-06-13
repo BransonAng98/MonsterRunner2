@@ -26,4 +26,4 @@ MonoBehaviour:
   ability1: {fileID: 11400000, guid: a79b127a00bcb9b46afcb7a95d226c1f, type: 2}
   ability1Level: 1
   ability2: {fileID: 11400000, guid: 5724a15e25a50bc42b171dbb50d8c985, type: 2}
-  ability2Level: 1
+  ability2Level: 0

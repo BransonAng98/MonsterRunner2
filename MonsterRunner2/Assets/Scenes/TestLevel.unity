@@ -12196,7 +12196,7 @@ MonoBehaviour:
   destination: {fileID: 0}
   questgiverEntity: {fileID: 0}
   objectiveIndicator: {fileID: 0}
-  gunSystem: {fileID: 754238778}
+  gunSystem: {fileID: 0}
   questDialogue: {fileID: 171047680}
   demoPlayer: {fileID: 0}
   scoreManager: {fileID: 1242281396}
@@ -59779,11 +59779,10 @@ GameObject:
   - component: {fileID: 754238775}
   - component: {fileID: 754238776}
   - component: {fileID: 754238777}
-  - component: {fileID: 754238778}
-  - component: {fileID: 754238779}
   - component: {fileID: 754238782}
   - component: {fileID: 754238781}
   - component: {fileID: 754238780}
+  - component: {fileID: 754238784}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameManager
@@ -59836,79 +59835,6 @@ MonoBehaviour:
   mainMenu: {fileID: 0}
   hasStarted: 0
   currentMenu: {fileID: 0}
---- !u!114 &754238778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754238774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c1d946f33ef11643976690521e5db60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  guns:
-  - weaponData: {fileID: 0}
-    gunType: 0
-    gunImage: {fileID: 0}
-  - weaponData: {fileID: 11400000, guid: 2deeba58c2efc5843bc9fdc8ed588b79, type: 2}
-    gunType: 1
-    gunImage: {fileID: 21300000, guid: daf55a0619b4ae34a84ffeb854a9c9cc, type: 3}
-  - weaponData: {fileID: 11400000, guid: 2deeba58c2efc5843bc9fdc8ed588b79, type: 2}
-    gunType: 2
-    gunImage: {fileID: 0}
-  gunIcon: {fileID: 1308585602}
-  currentWeaponData: {fileID: 0}
-  weaponScript: {fileID: 0}
---- !u!114 &754238779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754238774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 452f570cc9acc6141a838b606c94cd97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Trees:
-  - {fileID: 5181888214198736979, guid: 7a872b5f68865d04db7a61f6db42768b, type: 3}
-  - {fileID: 8918607354371028616, guid: de3997f783686234c93091439f033e03, type: 3}
-  - {fileID: 8109771076800938973, guid: ad49ab65272bb53429e0a620bfe5a910, type: 3}
-  - {fileID: 8024011902836754545, guid: fab22de5e6dc5e94d882a0bbd7096589, type: 3}
-  Stones:
-  - {fileID: 5885795594384480917, guid: e6b58f9abc62b7849b4d0aff2c12955f, type: 3}
-  - {fileID: 2122258260918112418, guid: 5a09db0006bfb224aa6f70507d859327, type: 3}
-  Houses:
-  - {fileID: 7245074294509020976, guid: fbe6b569d926f544dab56a99766978fd, type: 3}
-  - {fileID: 6079179253019021944, guid: 3ad662aa62045844081f308d325e38d3, type: 3}
-  - {fileID: 3762736378633212297, guid: 5935476f0d6c36a4caa146c8cbf77dd4, type: 3}
-  - {fileID: 7574374317313724504, guid: 0463f6de990da9642a9c9ec7037d938e, type: 3}
-  enemySpawner:
-  - {fileID: 8527278158336687328, guid: 5ee77461bb45fd643add1757f36c3c59, type: 3}
-  minTreePrefabs: 150
-  maxTreePrefabs: 200
-  minStonePrefabs: 30
-  maxStonePrefabs: 50
-  minHousePrefabs: 12
-  maxHousePrefabs: 15
-  minEnemySpawnerPrefabs: 5
-  maxEnemySpawnerPrefabs: 5
-  instantiatedTreePositions: []
-  instantiatedStonePositions: []
-  instantiatedHousePositions: []
-  instantiatedSpawnerPositions: []
-  treeParent: {fileID: 1519462778}
-  stoneParent: {fileID: 1378826521}
-  houseParent: {fileID: 939457235}
-  enemyspawnerHolder: {fileID: 767771978}
-  missionManager: {fileID: 171047678}
-  playerPos: {fileID: 0}
-  playerData: {fileID: 0}
-  gameController: {fileID: 754238776}
-  scoreManager: {fileID: 1242281396}
 --- !u!114 &754238780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59928,23 +59854,23 @@ MonoBehaviour:
   - vehicleID: 1
     playerPrefab: {fileID: 4344977594908537006, guid: 5b5ae0af3ab38bf4ab6e2c78080344f2,
       type: 3}
-  vehicleID: 1
-  abilityUnlocked: 0
-  secondUnlocked: 1
-  body: {fileID: 0}
-  vehicleMat: {fileID: 0}
-  ab1: {fileID: 0}
-  ab2: {fileID: 0}
+  vehicleID: 0
+  ab1: 0
+  ab2: 0
   playerData: {fileID: 0}
   entityHolder: {fileID: 1002516037}
   playerAbManager: {fileID: 754238781}
   playerDataManager: {fileID: 754238780}
+  playerInfoData:
+    selectedVehicleID: 0
   joystick: {fileID: 1684391701}
   questDManager: {fileID: 171047680}
   menuManager: {fileID: 754238777}
   mainCam: {fileID: 1039292050}
   missionManager: {fileID: 171047678}
   abilityManager: {fileID: 754238781}
+  tokenManager: {fileID: 754238782}
+  ability2Level: 0
 --- !u!114 &754238781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59981,7 +59907,27 @@ MonoBehaviour:
     type: 3}
   spawnLocations: []
   spawnedTokens: []
-  spawnType2: 0
+  spawnType2: 1
+--- !u!114 &754238784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 754238774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7eb4858560648f54ebd2f8e8cde356fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPos: {fileID: 0}
+  threatlvl: 1
+  enemyTypesPrefabs:
+  - {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262, type: 3}
+  - {fileID: 2271412327364450842, guid: c14370a4750163d449c07e01655e66de, type: 3}
+  playerData: {fileID: 0}
+  Radius: 0
+  spawnedEnemies: []
 --- !u!1001 &754252690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84874,7 +84820,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 117.3
     OrthographicSize: 26
-    NearClipPlane: -60
+    NearClipPlane: -80
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 1
@@ -90396,7 +90342,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -60
+  near clip plane: -80
   far clip plane: 1000
   field of view: 117.3
   orthographic: 1
@@ -105575,18 +105521,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1306351859}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1308585602 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5216097740398365668, guid: 4121b3ed49a063c4f893ccfc2bd4533c,
-    type: 3}
-  m_PrefabInstance: {fileID: 14554444}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1308671910
 PrefabInstance:
   m_ObjectHideFlags: 0

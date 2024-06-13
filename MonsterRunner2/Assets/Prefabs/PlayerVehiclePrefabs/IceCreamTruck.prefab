@@ -918,9 +918,9 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: a451df625a04c1e4bb7786e4d8059fb2, type: 2}
   health: 0
   maxHealth: 0
-  maxAcceleration: 0
   maxSpeed: 0
   crashDamage: 0
+  distance: 0
   enemyLayer:
     serializedVersion: 2
     m_Bits: 640
@@ -928,7 +928,11 @@ MonoBehaviour:
   explosionRadius: 45
   turnSensitivity: 0.08
   maxSteeringAngle: 0.005
+  knockBack: 1
+  minimumKnockBack: 6000
+  velocityLerpFactor: 1
   isDead: 0
+  isTriggered: 0
   centerOfMass: {x: 0, y: 0, z: -0.3}
   abilityManager: {fileID: 0}
   playerDataManager: {fileID: 0}
@@ -968,16 +972,10 @@ MonoBehaviour:
     playerHealth: 3
   - carSmoke: {fileID: 1938547634488694387}
     playerHealth: 4
-  steeringWheel: {fileID: 0}
   joystick: {fileID: 0}
   lastKnownVector: {x: 0, y: 0, z: 0}
   joystickInput: {x: 0, y: 0}
   healingVFX: {fileID: 6660763168241695593}
-  inputSteer: 0
-  isTriggered: 0
-  knockBack: 1
-  minimumKnockBack: 6000
-  velocityLerpFactor: 1
   quest:
     isActive: 0
     title: 
@@ -988,12 +986,11 @@ MonoBehaviour:
       destination: {fileID: 0}
       survivalTime: 0
       playerIsAlive: 0
+  questdialogueScript: {fileID: 0}
   destination: {fileID: 0}
   passenger: {fileID: 0}
   impactVFX: {fileID: 1248365930086534, guid: 8a7eff82d5211844591f2c46f6a7a82e, type: 3}
-  distance: 0
   distanceThreshold: 30
-  questdialogueScript: {fileID: 0}
   menuManager: {fileID: 0}
   destinationReached: 0
   meshFilter: {fileID: 814978292844326937}
@@ -1123,7 +1120,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4344977594908537006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dcb80e896c48b264a8835e6dbb91170d, type: 3}
   m_Name: 

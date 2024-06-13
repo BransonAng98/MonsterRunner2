@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,12 +16,8 @@ public class PlayerDataManager : MonoBehaviour
 
     public List<Vehicle> vehicles;
     public int vehicleID;
-    public int abilityUnlocked;
-    public bool secondUnlocked;
-    public Mesh body;
-    public Material vehicleMat;
-    public AbilitySO ab1;
-    public AbilitySO ab2;
+    public int ab1;
+    public int ab2;
 
     public DemoPlayer playerData;
 
@@ -28,6 +25,7 @@ public class PlayerDataManager : MonoBehaviour
     public GameObject entityHolder;
     public PlayerAbilityManager playerAbManager;
     public PlayerDataManager playerDataManager;
+    public PlayerInfoData playerInfoData;
     public Joystick joystick;
     public QuestDialogueManager questDManager;
     public GameMenuManager menuManager;
@@ -37,9 +35,19 @@ public class PlayerDataManager : MonoBehaviour
  
     public missionManagerScript missionManager;
     public PlayerAbilityManager abilityManager;
+    public AbilityTokenManager tokenManager;
+
+    private string vehicleDataFilePath;
+    private string playerDataFilePath;
+
+    [SerializeField] public int ability2Level;
 
     private void Awake()
     {
+        vehicleDataFilePath = Application.dataPath + "/VehicleDataFile.json";
+        playerDataFilePath = Application.dataPath + "/PlayerDataFile.json";
+        LoadFromJson();
+
         //Checking along the list of registered vehicles in the lists
         foreach (Vehicle vehicle in vehicles)
         {
@@ -61,7 +69,55 @@ public class PlayerDataManager : MonoBehaviour
                 playerData.joystick = joystick;
                 playerData.questdialogueScript = questDManager;
                 playerData.menuManager = menuManager;
+
+                if(ab2 != 0)
+                {
+                    tokenManager.spawnType2 = true;
+                }
+
+                else
+                {
+                    tokenManager.spawnType2 = false;
+                }
             }
+        }
+    }
+
+    public void LoadFromJson()
+    {
+        if (File.Exists(vehicleDataFilePath))
+        {
+            string json = File.ReadAllText(vehicleDataFilePath);
+            VehicleData[] dataArray = JsonHelper.FromJson<VehicleData>(json);
+
+            foreach (var data in dataArray)
+            {
+                PlayerSO vehicleData = ScriptableObject.CreateInstance<PlayerSO>();
+                vehicleData.vehicleName = data.vehicleName;
+                vehicleData.vehicleID = data.vehicleID;
+                vehicleData.maxSpeed = data.speed;
+                ab1 = data.ability1Level;
+                ab2 = data.ability2Level;
+            }
+        }
+        else
+        {
+            Debug.Log("VehicleDataFile.json not found");
+            return;
+        }
+
+        if (File.Exists(playerDataFilePath))
+        {
+            string playerJson = File.ReadAllText(playerDataFilePath);
+            playerInfoData = JsonUtility.FromJson<PlayerInfoData>(playerJson);
+            if (playerInfoData != null)
+            {
+                vehicleID = playerInfoData.selectedVehicleID;
+            }
+        }
+        else
+        {
+            Debug.Log("PlayerDataFile.json not found");
         }
     }
 
