@@ -482,6 +482,8 @@ MonoBehaviour:
   setActiveButton: {fileID: 1442651831}
   activeIndicator: {fileID: 1495239321}
   carDisplay: {fileID: 69682415}
+  playerData:
+    selectedVehicleID: 0
   json: {fileID: 69682414}
 --- !u!114 &69682414
 MonoBehaviour:
@@ -499,6 +501,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6a42c906be304ef4b821acffffdb2af3, type: 2}
   - {fileID: 11400000, guid: a451df625a04c1e4bb7786e4d8059fb2, type: 2}
   selectedVehicle: {fileID: 69682415}
+  activeID: 0
 --- !u!114 &69682415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,11 +530,12 @@ MonoBehaviour:
     bodyMaterial: {fileID: -2310514774154243031, guid: 49c26b01a602bba4896bfacf2ed9eeb3,
       type: 3}
   selectedCarID: 1
-  activateID: 0
+  activateID: 1
   displayCars:
   - {fileID: 1679084736413076216}
   - {fileID: 423124534}
   upgradeCarDisplayName: {fileID: 1007595020}
+  json: {fileID: 69682414}
 --- !u!1 &92632928
 GameObject:
   m_ObjectHideFlags: 0

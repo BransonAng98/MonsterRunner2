@@ -9,6 +9,7 @@ public class JsonSystem : MonoBehaviour
 
     public List<PlayerSO> allVehicleDataList;
     public PlayerCarDisplay selectedVehicle;
+    public int activeID;
 
     private string vehicleDataFilePath;
     private string playerDataFilePath;
@@ -17,8 +18,6 @@ public class JsonSystem : MonoBehaviour
     {
         vehicleDataFilePath = Application.dataPath + "/VehicleDataFile.json";
         playerDataFilePath = Application.dataPath + "/PlayerDataFile.json";
-        SaveToJson(0);
-        SaveToJson(1);
         LoadFromJson();
     }
 
@@ -86,14 +85,14 @@ public class JsonSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("VehicleDataFile.json not found");
-            return;
+            SaveToJson(0);
         }
 
         if (File.Exists(playerDataFilePath))
         {
             string playerJson = File.ReadAllText(playerDataFilePath);
             PlayerInfoData playerData = JsonUtility.FromJson<PlayerInfoData>(playerJson);
+            activeID = playerData.selectedVehicleID;
             if (playerData != null)
             {
                 Debug.Log("Selected Vehicle ID: " + playerData.selectedVehicleID);
@@ -101,7 +100,8 @@ public class JsonSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log("PlayerDataFile.json not found");
+            activeID = 1;
+            SaveToJson(1);
         }
     }
 }

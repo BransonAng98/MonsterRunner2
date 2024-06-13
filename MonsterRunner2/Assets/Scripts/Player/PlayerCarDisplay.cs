@@ -22,11 +22,13 @@ public class PlayerCarDisplay : MonoBehaviour
     public int activateID;
     public List<GameObject> displayCars = new List<GameObject>();
     public TextMeshProUGUI upgradeCarDisplayName;
+    public JsonSystem json;
 
     // Start is called before the first frame update
     void Start()
     {
-        activateID = selectedCarID;
+        activateID = json.activeID;
+        selectedCarID = activateID;
         UpdateCarSkin(activateID);
     }
 
