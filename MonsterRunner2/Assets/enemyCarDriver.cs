@@ -8,7 +8,7 @@ public class enemyCarDriver : MonoBehaviour
     [SerializeField] private float speed;
     public float speedMax = 18f;
     public float speedMin = 9f;
-    private float acceleration = 10f;
+    [SerializeField] private float acceleration;
     private float brakeSpeed = 100f;
     private float reverseSpeed = 30f;
     private float idleSlowdown = 10f;
@@ -44,6 +44,7 @@ public class enemyCarDriver : MonoBehaviour
         //DeathExplosionVFX.SetActive(false);
         carRigidbody = GetComponent<Rigidbody>();
         speed = Random.Range(6f, 10f); // Set the initial speed to a random value between 6 and 10
+        acceleration = Random.Range(8, 14); // Set the acceleration to a random value between 5 and 14
     }
 
     private void Update()
@@ -87,7 +88,8 @@ public class enemyCarDriver : MonoBehaviour
                 }
 
                 // Gradually reduce speed when turning
-                float turnSpeedReductionRate = 5f; // Adjust as needed for the desired speed reduction rate
+                float turnSpeedReductionRate = 3f;
+                // Adjust as needed for the desired speed reduction rate
                 if (turnAmount != 0)
                 {
                     // Calculate turn speed reduction based on turn amount and reduction rate
@@ -215,7 +217,8 @@ public class enemyCarDriver : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle") &&
+        collision.gameObject.layer != LayerMask.NameToLayer("DeadEnemy"))
         {
             isDead = true;
             
@@ -227,6 +230,7 @@ public class enemyCarDriver : MonoBehaviour
     {
         if (carRigidbody != null)
         {
+            gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
             if (enemySpawnerScript != null)
             {
                 enemySpawnerScript.RemoveEnemyFromList(gameObject); // Notify the spawner to remove this car from the list
@@ -245,7 +249,7 @@ public class enemyCarDriver : MonoBehaviour
             // Apply torque force for rotation
             Vector3 torque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             carRigidbody.AddTorque(torque * flingForce, ForceMode.Impulse);
-            gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+            
             DestroyCar();
         }
     }

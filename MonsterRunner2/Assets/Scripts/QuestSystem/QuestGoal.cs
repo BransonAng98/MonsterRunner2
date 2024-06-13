@@ -42,7 +42,7 @@ public class QuestGoal
         if(goaltype == GoalType.Survive)
         {
             Debug.Log("Survival Time");
-            float[] possibleTimes = { 60f, 120f, 180f };
+            float[] possibleTimes = { 30f, 60f, 90f };
             survivalTime = possibleTimes[Random.Range(0, possibleTimes.Length)];
             playerIsAlive = true;  // Assume player is alive initially
           
