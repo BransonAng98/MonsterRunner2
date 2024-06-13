@@ -24,17 +24,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         // Assign the player transform by finding the object with the tag "Player"
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            playerPos = player.transform;
-            playerData = player.GetComponent<DemoPlayer>();
-        }
-        else
-        {
-            Debug.LogError("Player object not found!");
-            return;
-        }
+       
 
         currentThreatLevel = threatlvl;
         UpdateEnemiesForThreatLevel();

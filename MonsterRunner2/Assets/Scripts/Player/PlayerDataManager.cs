@@ -29,7 +29,7 @@ public class PlayerDataManager : MonoBehaviour
     public Joystick joystick;
     public QuestDialogueManager questDManager;
     public GameMenuManager menuManager;
-
+    public EnemySpawner enemySpawnerScript;
     //Scriptst that require player data
     public CinemachineVirtualCamera mainCam;
  
@@ -67,7 +67,7 @@ public class PlayerDataManager : MonoBehaviour
                 playerData.questdialogueScript = questDManager;
                 playerData.menuManager = menuManager;
                 questgiverManager.player = playerData;
-
+                enemySpawnerScript.playerPos = playerData.transform;
                 if(ab2 != 0)
                 {
                     tokenManager.spawnType2 = true;

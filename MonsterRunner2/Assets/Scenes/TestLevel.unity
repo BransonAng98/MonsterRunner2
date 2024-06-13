@@ -59830,6 +59830,7 @@ MonoBehaviour:
   joystick: {fileID: 1684391701}
   questDManager: {fileID: 171047680}
   menuManager: {fileID: 754238777}
+  enemySpawnerScript: {fileID: 754238784}
   mainCam: {fileID: 1039292050}
   missionManager: {fileID: 171047678}
   abilityManager: {fileID: 754238781}
