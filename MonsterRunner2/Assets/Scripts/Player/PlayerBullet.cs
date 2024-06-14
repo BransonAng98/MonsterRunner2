@@ -10,6 +10,8 @@ public class PlayerBullet : MonoBehaviour
         {
             enemyCarDriver hitEntity = collision.gameObject.GetComponent<enemyCarDriver>();
             //Kill enemy
+            hitEntity.isDead = true;
+            Destroy(gameObject);
         }
 
         if (collision.gameObject.CompareTag("Obstacle"))

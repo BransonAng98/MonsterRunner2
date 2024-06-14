@@ -73,7 +73,6 @@ public class UpgradeManager : MonoBehaviour
             currency -= skill.cost;
             skill.level++;
             skill.cost += 100; // Increase cost by x for each upgrade
-            UpdateUI();
 
             switch (abilityID)
             {
@@ -86,6 +85,8 @@ public class UpgradeManager : MonoBehaviour
                     carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level++;
                     break;
             }
+
+            UpdateUI();
         }
     }
 
@@ -146,6 +147,7 @@ public class UpgradeManager : MonoBehaviour
             lockedSkillOverlay.SetActive(true);
             upgradeLockedSkillBtn.SetActive(true);
             unlockSkillBtn.SetActive(false);
+            UpgradeSkill(lockedSkill, 1);
             UpdateUI();
         }
     }

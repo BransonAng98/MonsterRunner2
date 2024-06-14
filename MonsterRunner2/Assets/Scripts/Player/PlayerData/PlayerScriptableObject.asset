@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b347fd614aac1d34e9226ec4586b06fe, type: 3}
   m_Name: PlayerScriptableObject
   m_EditorClassIdentifier: 
-  selectedVehicleID: 0
+  selectedVehicleID: 1
   money: 0
   gems: 0
+  gameStart: 0

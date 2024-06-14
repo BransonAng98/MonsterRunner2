@@ -32,8 +32,6 @@ public class GameMenuManager : MonoBehaviour
     public void LoadLevel()
     {
         SceneManager.LoadScene("TestLevel");
-        //json.SaveToJson(0);
-        //json.SaveToJson(1);
         hasStarted = true;
     }
 
@@ -47,6 +45,8 @@ public class GameMenuManager : MonoBehaviour
     public void ReturnToMain()
     {
         currentMenu.SetActive(false);
+        json.SaveToJson(0);
+        json.SaveToJson(1);
         mainMenu.SetActive(true);
     }
 

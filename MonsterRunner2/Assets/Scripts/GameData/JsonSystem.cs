@@ -17,30 +17,16 @@ public class JsonSystem : MonoBehaviour
     private string vehicleDataFilePath;
     private string playerDataFilePath;
 
-    public string targetScene;
-    public Scene currentScene;
-
     private void Awake()
     {
-        if (!File.Exists(vehicleDataFilePath))
-        {
-            vehicleDataFilePath = Path.Combine(Application.persistentDataPath, "VehicleDataFile.json");
-        }
-        if (!File.Exists(playerDataFilePath))
-        {
-            playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
-        }
+        vehicleDataFilePath = Path.Combine(Application.persistentDataPath, "VehicleDataFile.json");
+        playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
         Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
 
-        currentScene = SceneManager.GetActiveScene();
-
-        if(currentScene.name == targetScene)
+        if (!playerInfoData.gameStart)
         {
             LoadFromJson();
-        }
-        else
-        {
-            Debug.Log("This is not the main menu");
+            playerInfoData.gameStart = true;
         }
     }
 
@@ -81,10 +67,6 @@ public class JsonSystem : MonoBehaviour
                 playerData.selectedVehicleID = playerInfoData.selectedVehicleID;
                 playerData.money = playerInfoData.money;
                 playerData.gems = playerInfoData.gems;
-                if (selectedVehicle != null)
-                {
-                    playerData.selectedVehicleID = selectedVehicle.activateID;
-                }
                 string playerJson = JsonUtility.ToJson(playerData, true);
                 File.WriteAllText(playerDataFilePath, playerJson);
                 break;
@@ -133,7 +115,6 @@ public class JsonSystem : MonoBehaviour
         else
         {
             Debug.LogError("Unable to find player file path");
-            selectedVehicle.activateID = 1;
             SaveToJson(1);
         }
     }
