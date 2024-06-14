@@ -160,13 +160,8 @@ public class DemoPlayer : MonoBehaviour
             if (collision.gameObject.layer != 9)
             {
                 TakeDamage(1000);
-                Vector3 knockbackDirection = transform.position - collision.contacts[0].point;
-                Vector3 spawnPos = collision.contacts[0].point;
-                Instantiate(impactVFX, spawnPos, Quaternion.identity);
-                knockbackDirection.Normalize();
-                float knockbackForce = collision.impulse.magnitude * knockBack;
-                knockbackForce = Mathf.Max(knockbackForce, minimumKnockBack);
-                rb.AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+                Vector3 ExplodePos = new Vector3 (transform.position.x, transform.position.y + 2f, transform.position.z);
+                Instantiate(impactVFX, ExplodePos, Quaternion.identity);
                 Debug.Log("Death by cops");
             }
         }

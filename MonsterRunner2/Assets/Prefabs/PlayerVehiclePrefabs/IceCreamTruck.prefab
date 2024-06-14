@@ -989,7 +989,7 @@ MonoBehaviour:
   questdialogueScript: {fileID: 0}
   destination: {fileID: 0}
   passenger: {fileID: 0}
-  impactVFX: {fileID: 1248365930086534, guid: 8a7eff82d5211844591f2c46f6a7a82e, type: 3}
+  impactVFX: {fileID: 4661394443100670, guid: 0763f718c04adb34ca119915b22e53e6, type: 3}
   distanceThreshold: 30
   menuManager: {fileID: 0}
   destinationReached: 0
