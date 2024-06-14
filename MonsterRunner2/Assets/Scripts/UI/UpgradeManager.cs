@@ -37,11 +37,12 @@ public class UpgradeManager : MonoBehaviour
 
     public PlayerCarDisplay carDisplay;
     public PlayerInfoData playerData;
+    public PlayerDataSO playerInfoData;
     public JsonSystem json;
 
     void Start()
     {
-        currency = json.playerCurrency;
+        currency = playerInfoData.money;
         activeSkill = new Skill(true, 100);  // Initial cost is 5
         lockedSkill = new Skill(false, 100); // Initial cost is 5
 
@@ -92,7 +93,8 @@ public class UpgradeManager : MonoBehaviour
     {
         carDisplay.activateID = carDisplay.selectedCarID;
         carDisplay.UpdateCarSkin(carDisplay.activateID);
-        playerData.selectedVehicleID = carDisplay.activateID;
+        playerInfoData.selectedVehicleID = carDisplay.selectedCarID;
+        json.SaveToJson(1);
         ActiveIconDisplay();
     }
 
@@ -151,7 +153,7 @@ public class UpgradeManager : MonoBehaviour
     void UpdateUI()
     {
         currencyText.text = "Currency: " + currency;
-        json.playerCurrency = currency;
+        playerInfoData.money = currency;
         upgradeActiveSkillButtonText.text = $"Upgrade Skill (Cost: {activeSkill.cost})";
         unlockSkillButtonText.text = $"Unlock Skill (Cost: {lockedSkill.cost})";
 

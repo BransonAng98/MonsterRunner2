@@ -1,5 +1,4 @@
 using System;
-using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,10 +40,13 @@ public class PlayerDataManager : MonoBehaviour
     private string playerDataFilePath;
 
     [SerializeField] public int ability2Level;
-    public JsonSystem json;
+    public PlayerDataSO playerDataSO;
     private void Awake()
     {
-        json.LoadFromJson();
+
+        vehicleID = playerDataSO.selectedVehicleID;
+        Debug.Log(vehicleID);
+
         //Checking along the list of registered vehicles in the lists
         foreach (Vehicle vehicle in vehicles)
         {

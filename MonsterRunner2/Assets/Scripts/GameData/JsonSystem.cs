@@ -9,6 +9,7 @@ public class JsonSystem : MonoBehaviour
 
     public List<PlayerSO> allVehicleDataList;
     public PlayerCarDisplay selectedVehicle;
+    public PlayerDataSO playerInfoData;
     public int activeID;
     public float playerCurrency;
 
@@ -17,8 +18,14 @@ public class JsonSystem : MonoBehaviour
 
     private void Awake()
     {
-        vehicleDataFilePath = Path.Combine(Application.persistentDataPath, "VehicleDataFile.json");
-        playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
+        if (!File.Exists(vehicleDataFilePath))
+        {
+            vehicleDataFilePath = Path.Combine(Application.persistentDataPath, "VehicleDataFile.json");
+        }
+        if (!File.Exists(playerDataFilePath))
+        {
+            playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
+        }
         Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
         LoadFromJson();
     }
@@ -57,7 +64,9 @@ public class JsonSystem : MonoBehaviour
             //Saving selected car data
             case 1:
                 PlayerInfoData playerData = new PlayerInfoData();
-                playerData.money = playerCurrency;
+                playerData.selectedVehicleID = playerInfoData.selectedVehicleID;
+                playerData.money = playerInfoData.money;
+                playerData.gems = playerInfoData.gems;
                 if (selectedVehicle != null)
                 {
                     playerData.selectedVehicleID = selectedVehicle.activateID;
@@ -90,6 +99,7 @@ public class JsonSystem : MonoBehaviour
         }
         else
         {
+            Debug.LogError("Unable to find vehicle file path");
             SaveToJson(0);
         }
 
@@ -97,8 +107,9 @@ public class JsonSystem : MonoBehaviour
         {
             string playerJson = File.ReadAllText(playerDataFilePath);
             PlayerInfoData playerData = JsonUtility.FromJson<PlayerInfoData>(playerJson);
-            activeID = playerData.selectedVehicleID;
-            playerCurrency = playerData.money;
+            playerInfoData.selectedVehicleID = playerData.selectedVehicleID;
+            playerInfoData.money = playerData.money;
+            playerInfoData.gems = playerData.gems;
             if (playerData != null)
             {
                 Debug.Log("Selected Vehicle ID: " + playerData.selectedVehicleID);
@@ -107,6 +118,7 @@ public class JsonSystem : MonoBehaviour
         }
         else
         {
+            Debug.LogError("Unable to find player file path");
             selectedVehicle.activateID = 1;
             SaveToJson(1);
         }

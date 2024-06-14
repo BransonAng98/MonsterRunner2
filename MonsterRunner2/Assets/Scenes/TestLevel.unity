@@ -12145,7 +12145,7 @@ MonoBehaviour:
   scoreManager: {fileID: 1242281396}
   missionManager: {fileID: 171047678}
   buildingObjects: []
-  json: {fileID: 754238785}
+  playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
 --- !u!1001 &171110433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -59837,7 +59837,7 @@ MonoBehaviour:
   tokenManager: {fileID: 754238782}
   questgiverManager: {fileID: 171047681}
   ability2Level: 0
-  json: {fileID: 754238785}
+  playerDataSO: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
 --- !u!114 &754238781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59910,6 +59910,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allVehicleDataList: []
   selectedVehicle: {fileID: 0}
+  playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   activeID: 0
   playerCurrency: 0
 --- !u!1001 &754252690

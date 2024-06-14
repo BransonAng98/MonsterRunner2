@@ -19,7 +19,7 @@ public class QuestGiver : MonoBehaviour
     public missionManagerScript missionManager;
     public List<GameObject> buildingObjects;
 
-    public JsonSystem json;
+    public PlayerDataSO playerInfoData;
 
     private bool isOnCooldown = false;
     private bool isFirstQuest = true;
@@ -94,7 +94,7 @@ public class QuestGiver : MonoBehaviour
     {
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
-        json.playerCurrency += scoreManager.goldEarned;
+        playerInfoData.money += scoreManager.goldEarned;
 
         PrintRewardDialogue();
     }

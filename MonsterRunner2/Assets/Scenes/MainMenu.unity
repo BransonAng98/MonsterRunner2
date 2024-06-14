@@ -499,6 +499,7 @@ MonoBehaviour:
     selectedVehicleID: 0
     money: 0
     gems: 0
+  playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   json: {fileID: 69682414}
 --- !u!114 &69682414
 MonoBehaviour:
@@ -516,6 +517,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6a42c906be304ef4b821acffffdb2af3, type: 2}
   - {fileID: 11400000, guid: a451df625a04c1e4bb7786e4d8059fb2, type: 2}
   selectedVehicle: {fileID: 69682415}
+  playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   activeID: 0
   playerCurrency: 0
 --- !u!114 &69682415
@@ -532,14 +534,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cars:
   - vehicleName: Green Hornet
-    vehicleID: 1
+    vehicleID: 0
     vehicleData: {fileID: 11400000, guid: 6a42c906be304ef4b821acffffdb2af3, type: 2}
     vehicleBody: {fileID: -8189487360084506886, guid: 5eac0803a389c9b48aaeedf9a9ac90a5,
       type: 3}
     bodyMaterial: {fileID: -2310514774154243031, guid: 5eac0803a389c9b48aaeedf9a9ac90a5,
       type: 3}
   - vehicleName: Ice Van
-    vehicleID: 2
+    vehicleID: 1
     vehicleData: {fileID: 11400000, guid: a451df625a04c1e4bb7786e4d8059fb2, type: 2}
     vehicleBody: {fileID: -2971661163974314768, guid: 49c26b01a602bba4896bfacf2ed9eeb3,
       type: 3}
