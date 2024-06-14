@@ -30,7 +30,7 @@ public class AbilityTokenManager : MonoBehaviour
             Transform spawnLocation = spawnLocations[i];
 
             // Spawn the first power-up at the current spawn location
-            GameObject token1 = Instantiate(powerUpType1Prefab, spawnLocation.position, Quaternion.identity);
+            GameObject token1 = Instantiate(powerUpType1Prefab, spawnLocation.position, Quaternion.Euler(-90,0,0));
             spawnedTokens.Add(token1);
 
             // If spawnType2 is true and there are more spawn locations, spawn the second power-up at the next spawn location
