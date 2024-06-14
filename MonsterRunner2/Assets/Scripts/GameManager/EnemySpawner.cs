@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform playerPos;
     [SerializeField] public int threatlvl;
     [SerializeField] private GameObject[] enemyTypesPrefabs;
-    [SerializeField] private DemoPlayer playerData; // Assuming you have a PlayerData script to pass to enemies
+    [SerializeField] public DemoPlayer playerData; // Assuming you have a PlayerData script to pass to enemies
     [SerializeField] private float Radius;
 
     [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();

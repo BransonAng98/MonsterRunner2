@@ -54,7 +54,7 @@ public class PlayerDataManager : MonoBehaviour
             {
                 GameObject playerCar = Instantiate(vehicle.playerPrefab, new Vector3(0, 2, 0), Quaternion.identity);
                 playerCar.transform.SetParent(entityHolder.transform);
-                DemoPlayer playerData = playerCar.GetComponent<DemoPlayer>();
+                playerData = playerCar.GetComponent<DemoPlayer>();
 
                 mainCam.Follow = playerCar.transform;
              
@@ -70,6 +70,7 @@ public class PlayerDataManager : MonoBehaviour
                 playerData.menuManager = menuManager;
                 questgiverManager.player = playerData;
                 enemySpawnerScript.playerPos = playerData.transform;
+                enemySpawnerScript.playerData = playerData;
                 if(ab2 != 0)
                 {
                     tokenManager.spawnType2 = true;
