@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class JsonSystem : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class JsonSystem : MonoBehaviour
     private string vehicleDataFilePath;
     private string playerDataFilePath;
 
+    public string targetScene;
+    public Scene currentScene;
+
     private void Awake()
     {
         if (!File.Exists(vehicleDataFilePath))
@@ -27,7 +31,17 @@ public class JsonSystem : MonoBehaviour
             playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
         }
         Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
-        LoadFromJson();
+
+        currentScene = SceneManager.GetActiveScene();
+
+        if(currentScene.name == targetScene)
+        {
+            LoadFromJson();
+        }
+        else
+        {
+            Debug.Log("This is not the main menu");
+        }
     }
 
     public void SaveToJson(int function)

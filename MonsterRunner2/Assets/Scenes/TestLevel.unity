@@ -59913,6 +59913,9 @@ MonoBehaviour:
   playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   activeID: 0
   playerCurrency: 0
+  targetScene: MainMenu
+  currentScene:
+    m_Handle: 0
 --- !u!1001 &754252690
 PrefabInstance:
   m_ObjectHideFlags: 0

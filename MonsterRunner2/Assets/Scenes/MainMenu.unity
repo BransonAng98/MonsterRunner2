@@ -520,6 +520,9 @@ MonoBehaviour:
   playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   activeID: 0
   playerCurrency: 0
+  targetScene: MainMenu
+  currentScene:
+    m_Handle: 0
 --- !u!114 &69682415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,7 +556,10 @@ MonoBehaviour:
   - {fileID: 1679084736413076216}
   - {fileID: 423124534}
   upgradeCarDisplayName: {fileID: 1007595020}
-  json: {fileID: 69682414}
+  playerData:
+    selectedVehicleID: 1
+    money: 0
+    gems: 0
 --- !u!1 &92632928
 GameObject:
   m_ObjectHideFlags: 0
