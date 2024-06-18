@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 958423283168e5848b7162bc2decc491, type: 3}
-  m_Name: FrozenAura
+  m_Name: EmpPulse
   m_EditorClassIdentifier: 
-  abilityName: FrozenAura
+  abilityName: EmpPusle
   abilityCD: 5
   abilityActive: 10
   playerObj: {fileID: 0}

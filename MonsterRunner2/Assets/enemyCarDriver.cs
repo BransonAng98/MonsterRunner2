@@ -6,6 +6,7 @@ public class enemyCarDriver : MonoBehaviour
 {
     #region Fields
     [SerializeField] private float speed;
+    private float ogSpeedHolder;
     public float speedMax = 18f;
     public float speedMin = 9f;
     [SerializeField] private float acceleration;
@@ -44,6 +45,7 @@ public class enemyCarDriver : MonoBehaviour
         //DeathExplosionVFX.SetActive(false);
         carRigidbody = GetComponent<Rigidbody>();
         speed = Random.Range(6f, 10f); // Set the initial speed to a random value between 6 and 10
+        ogSpeedHolder = speed;
         acceleration = Random.Range(8, 14); // Set the acceleration to a random value between 5 and 14
     }
 
@@ -62,97 +64,90 @@ public class enemyCarDriver : MonoBehaviour
 
         if (!isDead) //if im not dead or im not being crowd controlled
         {
-            if (!isCCed)
+
+            if (forwardAmount > 0)
             {
-                if (forwardAmount > 0)
-                {
-                    // Calculate acceleration based on current speed ratio
-                    float speedRatio = speed / speedMax;
-                    float accelerationFactor = 1 - speedRatio; // Inverse acceleration: slower as it approaches max speed
-                    float currentAcceleration = acceleration * accelerationFactor;
+                // Calculate acceleration based on current speed ratio
+                float speedRatio = speed / speedMax;
+                float accelerationFactor = 1 - speedRatio; // Inverse acceleration: slower as it approaches max speed
+                float currentAcceleration = acceleration * accelerationFactor;
 
-                    // Accelerating
-                    speed += forwardAmount * currentAcceleration * Time.deltaTime;
+                // Accelerating
+                speed += forwardAmount * currentAcceleration * Time.deltaTime;
+            }
+            else if (forwardAmount == 0)
+            {
+                // Slow down when not accelerating
+                if (speed > 0)
+                {
+                    speed -= idleSlowdown * Time.deltaTime;
                 }
-                else if (forwardAmount == 0)
+                else if (speed < 0)
                 {
-                    // Slow down when not accelerating
-                    if (speed > 0)
-                    {
-                        speed -= idleSlowdown * Time.deltaTime;
-                    }
-                    else if (speed < 0)
-                    {
-                        speed += idleSlowdown * Time.deltaTime;
-                    }
-                }
-
-                // Gradually reduce speed when turning
-                float turnSpeedReductionRate = 5f;
-                // Adjust as needed for the desired speed reduction rate
-                if (turnAmount != 0)
-                {
-                    // Calculate turn speed reduction based on turn amount and reduction rate
-                    float turnSpeedReduction = Mathf.Abs(turnAmount) * turnSpeedReductionRate * Time.deltaTime;
-                    speed -= turnSpeedReduction;
-                }
-
-                // Clamp speed within limits
-                speed = Mathf.Clamp(speed, speedMin, speedMax);
-
-                carRigidbody.velocity = transform.forward * speed;
-
-                if (speed < 0)
-                {
-                    // Going backwards, invert wheels
-                    turnAmount = turnAmount * -1f;
-                }
-
-                if (turnAmount > 0 || turnAmount < 0)
-                {
-                    // Turning
-                    if ((turnSpeed > 0 && turnAmount < 0) || (turnSpeed < 0 && turnAmount > 0))
-                    {
-                        // Changing turn direction
-                        float minTurnAmount = 20f;
-                        turnSpeed = turnAmount * minTurnAmount;
-                    }
-                    turnSpeed += turnAmount * turnSpeedAcceleration * Time.deltaTime;
-                }
-                else
-                {
-                    // Not turning
-                    if (turnSpeed > 0)
-                    {
-                        turnSpeed -= turnIdleSlowdown * Time.deltaTime;
-                    }
-                    if (turnSpeed < 0)
-                    {
-                        turnSpeed += turnIdleSlowdown * Time.deltaTime;
-                    }
-                    if (turnSpeed > -1f && turnSpeed < +1f)
-                    {
-                        // Stop rotating
-                        turnSpeed = 0f;
-                    }
-                }
-
-                float speedNormalized = speed / speedMax;
-                float invertSpeedNormalized = Mathf.Clamp(1 - speedNormalized, .75f, 1f);
-
-                turnSpeed = Mathf.Clamp(turnSpeed, -turnSpeedMax, turnSpeedMax);
-
-                carRigidbody.angularVelocity = new Vector3(0, turnSpeed * (invertSpeedNormalized * 1f) * Mathf.Deg2Rad, 0);
-
-                if (transform.eulerAngles.x > 2 || transform.eulerAngles.x < -2 || transform.eulerAngles.z > 2 || transform.eulerAngles.z < -2)
-                {
-                    transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+                    speed += idleSlowdown * Time.deltaTime;
                 }
             }
 
+            // Gradually reduce speed when turning
+            float turnSpeedReductionRate = 5f;
+            // Adjust as needed for the desired speed reduction rate
+            if (turnAmount != 0)
+            {
+                // Calculate turn speed reduction based on turn amount and reduction rate
+                float turnSpeedReduction = Mathf.Abs(turnAmount) * turnSpeedReductionRate * Time.deltaTime;
+                speed -= turnSpeedReduction;
+            }
+
+            // Clamp speed within limits
+            speed = Mathf.Clamp(speed, speedMin, speedMax);
+
+            carRigidbody.velocity = transform.forward * speed;
+
+            if (speed < 0)
+            {
+                // Going backwards, invert wheels
+                turnAmount = turnAmount * -1f;
+            }
+
+            if (turnAmount > 0 || turnAmount < 0)
+            {
+                // Turning
+                if ((turnSpeed > 0 && turnAmount < 0) || (turnSpeed < 0 && turnAmount > 0))
+                {
+                    // Changing turn direction
+                    float minTurnAmount = 20f;
+                    turnSpeed = turnAmount * minTurnAmount;
+                }
+                turnSpeed += turnAmount * turnSpeedAcceleration * Time.deltaTime;
+            }
             else
             {
-                Debug.Log(gameObject.name + "is cced");
+                // Not turning
+                if (turnSpeed > 0)
+                {
+                    turnSpeed -= turnIdleSlowdown * Time.deltaTime;
+                }
+                if (turnSpeed < 0)
+                {
+                    turnSpeed += turnIdleSlowdown * Time.deltaTime;
+                }
+                if (turnSpeed > -1f && turnSpeed < +1f)
+                {
+                    // Stop rotating
+                    turnSpeed = 0f;
+                }
+            }
+
+            float speedNormalized = speed / speedMax;
+            float invertSpeedNormalized = Mathf.Clamp(1 - speedNormalized, .75f, 1f);
+
+            turnSpeed = Mathf.Clamp(turnSpeed, -turnSpeedMax, turnSpeedMax);
+
+            carRigidbody.angularVelocity = new Vector3(0, turnSpeed * (invertSpeedNormalized * 1f) * Mathf.Deg2Rad, 0);
+
+            if (transform.eulerAngles.x > 2 || transform.eulerAngles.x < -2 || transform.eulerAngles.z > 2 || transform.eulerAngles.z < -2)
+            {
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             }
         }
 
@@ -163,6 +158,34 @@ public class enemyCarDriver : MonoBehaviour
             {
                 isCCed = false;
             }
+
+            else
+            {
+                //Reset speed
+                CCEffect(0);
+            }
+        }
+    }
+
+    public void CCEffect(int condition)
+    {
+        switch (condition)
+        {
+            //Reset speed
+            case 0:
+                speed = ogSpeedHolder;
+                break;
+
+            //Stop enemy from moving
+            case 1:
+                speed = 0;
+                break;
+
+            //Half enemy speed
+            case 2:
+                float newSpeed = speed / 2;
+                speed = newSpeed;
+                break;
         }
     }
 

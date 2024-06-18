@@ -7,6 +7,7 @@ public class AbilitySO : ScriptableObject
     public float abilityCD;
     public float abilityActive;
 
+    public virtual void LevelUpSkill(int abilityLvl) { }
     public virtual void AssignVariables(Transform origin, Transform player) { }
     public virtual void Activate() { }
 

@@ -6,6 +6,7 @@ public class SlowScript : MonoBehaviour
 {
     public List<enemyCarDriver> affectedEnemyList = new List<enemyCarDriver>();
     public float ccDuration;
+    public int ccType;
 
     [SerializeField] SphereCollider aoeRadius;
     // Start is called before the first frame update
@@ -58,6 +59,7 @@ public class SlowScript : MonoBehaviour
                     affectedEnemyList.Add(enemyCar);
                     enemyCar.ccDuration = ccDuration;
                     enemyCar.isCCed = true;
+                    enemyCar.CCEffect(ccType);
                 }
             }
         }

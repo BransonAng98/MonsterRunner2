@@ -862,7 +862,7 @@ GameObject:
   - component: {fileID: 6901216936559944770}
   - component: {fileID: 6901216936559944775}
   m_Layer: 8
-  m_Name: IceCreamTruck
+  m_Name: IceVan
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2427,7 +2427,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   affectedEnemyList: []
-  ccDuration: 0
+  ccDuration: 3
+  ccType: 1
   aoeRadius: {fileID: 1733089766402678864}
 --- !u!1001 &9163566531336423435
 PrefabInstance:

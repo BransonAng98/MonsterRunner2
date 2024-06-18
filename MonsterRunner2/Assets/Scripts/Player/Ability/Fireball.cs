@@ -21,6 +21,30 @@ public class Fireball : AbilitySO
         Vector3.left     // 3 - Left
     };
 
+    public override void LevelUpSkill(int abilityLevel)
+    {
+        switch (abilityLevel)
+        {
+            case 1:
+                //Nothing
+                break;
+            case 2:
+                shootingInterval -= 0.5f;
+                break;
+            case 3:
+                bulletSpeed += 5f;
+                break;
+            case 4:
+                shootingInterval -= 0.5f;
+                break;
+            case 5:
+                bulletSpeed += 5f;
+                break;
+        }
+
+        Debug.Log("Ability level is:" + abilityLevel);
+    }
+
     public override void AssignVariables(Transform origin, Transform playerPos)
     {
         bulletSpawnLoc = origin;
