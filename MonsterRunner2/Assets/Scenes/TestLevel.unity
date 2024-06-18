@@ -15663,7 +15663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
+  m_LookaheadTime: 0.2
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
   m_HorizontalDamping: 0.5
@@ -90829,7 +90829,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 117.3
     OrthographicSize: 46
-    NearClipPlane: -80
+    NearClipPlane: -160
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 1
@@ -96763,7 +96763,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -80
+  near clip plane: -160
   far clip plane: 1000
   field of view: 117.3
   orthographic: 1
@@ -111212,7 +111212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281944553}
   m_LocalRotation: {x: -0, y: -0.25881878, z: -0, w: -0.96592593}
-  m_LocalPosition: {x: -146, y: 25, z: 9}
+  m_LocalPosition: {x: -162.6, y: 25, z: 18.6}
   m_LocalScale: {x: 4, y: 30, z: 486.18}
   m_ConstrainProportionsScale: 0
   m_Children: []
