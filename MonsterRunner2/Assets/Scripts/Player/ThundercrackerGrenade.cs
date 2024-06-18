@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThundercrackerGrenade : MonoBehaviour
 {
     public float timeToDetonate;
-    public ParticleSystem thunderbolt;
+    public GameObject thunderbolt;
     public bool isTriggered;
 
     public List<enemyCarDriver> affectedEnemyList = new List<enemyCarDriver>();
@@ -14,13 +14,14 @@ public class ThundercrackerGrenade : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        thunderbolt.Stop();
+        thunderbolt.SetActive(false);
     }
 
     void CallThunder()
     {
+        Destroy(this.gameObject, 2f);
         isTriggered = true;
-        thunderbolt.Play();
+        thunderbolt.SetActive(true);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, aoeRadius.radius);
 
         foreach (Collider collider in hitColliders)
@@ -35,7 +36,6 @@ public class ThundercrackerGrenade : MonoBehaviour
                 }
             }
         }
-        Destroy(this.gameObject);
     }
 
     // Update is called once per frame
