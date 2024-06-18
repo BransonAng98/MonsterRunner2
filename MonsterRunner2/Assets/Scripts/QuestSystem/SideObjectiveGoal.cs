@@ -1,35 +1,59 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
 public class SideObjectiveGoal
-{
-    public ObjectiveType objectivetype;
-    // Start is called before the first frame update
-    public float distanceTravelled;
+{ 
+    public ObjectiveType objectiveType;
+    [SerializeField] public int requiredKillAmount;
+    [SerializeField] public int currentAmount;
+    [SerializeField] public float goldtobeEarnedAmt;
+
+    public void NoQuest()
+    {
+
+    }
     public void EnemyKilled()
     {
-        if (objectivetype == ObjectiveType.Kill)
+        if (objectiveType == ObjectiveType.Kill)
         {
-            //currentAmount++;
+            int[] killCount = { 2, 4, 6 };
+            requiredKillAmount = killCount[UnityEngine.Random.Range(0, killCount.Length)];
+            Debug.Log("EnemyKilled function called. Required Kill Amount: " + requiredKillAmount);
         }
-
     }
 
     public void ReachDestination()
     {
-        if (objectivetype == ObjectiveType.DistanceTravelled)
+        if (objectiveType == ObjectiveType.EarnGold)
         {
-            
+            float[] goldtobeEarned = { 100f, 150f, 200f };
+            goldtobeEarnedAmt = goldtobeEarned[UnityEngine.Random.Range(0, goldtobeEarned.Length)];
+            Debug.Log("ReachDestination function called. Distance Travelled: " + goldtobeEarnedAmt);
         }
-
     }
+
+   
+
+    public void ChooseRandomObjectiveType()
+    {
+        // Get all values of ObjectiveType
+        ObjectiveType[] objectiveTypes = (ObjectiveType[])Enum.GetValues(typeof(ObjectiveType));
+
+        // Exclude the 'none' type
+        ObjectiveType[] validObjectiveTypes = Array.FindAll(objectiveTypes, type => type != ObjectiveType.none);
+
+        // Randomly select one of the valid objective types
+        objectiveType = validObjectiveTypes[UnityEngine.Random.Range(0, validObjectiveTypes.Length)];
+    }
+
 
     public enum ObjectiveType
     {
+        none,
         Kill,
-        DistanceTravelled
+        EarnGold
     }
-
 }

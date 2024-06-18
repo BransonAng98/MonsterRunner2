@@ -10,7 +10,7 @@ public class SideObjective
     public string title;
     public float goldReward;
 
-    public QuestGoal goal;
+    public SideObjectiveGoal goal;
 
     public void CompleteSideObjective()
     {

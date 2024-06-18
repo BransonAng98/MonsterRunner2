@@ -9,8 +9,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyTypesPrefabs;
     [SerializeField] public DemoPlayer playerData; // Assuming you have a PlayerData script to pass to enemies
     [SerializeField] private float Radius;
+    [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
 
-    [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
+   [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
     private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
         { 1, new List<int> { 6, 0 } }, // 4 of type 1, 0 of type 2
@@ -281,6 +282,7 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyDriverlogic.playerscript = playerData;
             enemyDriverlogic.enemySpawnerScript = this;
+            enemyDriverlogic.sideobjective = SideObjectiveQuestGiverScript;
             // Assign other necessary properties to enemyDriverlogic
         }
         if (enemyGunnerAI != null)

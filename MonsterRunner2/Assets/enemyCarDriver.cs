@@ -37,6 +37,7 @@ public class enemyCarDriver : MonoBehaviour
     public GameObject DeathExplosionVFX;
     public EnemySpawner enemySpawnerScript;
     public int enemyType;
+    public SideObjectiveQuestGiver sideobjective;
     #endregion
 
     private void Awake()
@@ -243,27 +244,41 @@ public class enemyCarDriver : MonoBehaviour
         if (!isDead && collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle"))
         {
             isDead = true;
-            CarDeath();
+            CarDeath(0);
         }
     }
 
-    public void CarDeath()
+
+    public void CarDeath(int causeOfDeath)
     {
         Debug.Log("Die");
+        switch (causeOfDeath)
+        {
+            case 0:
+                // Killed by another car
+                Debug.Log("Killed by another car");
+                break;
+            case 1:
+                // Killed by a bullet
+                sideobjective.currentenemykilled++;
+                Debug.Log("Killed by Player");
+                break;
+            default:
+                // Unknown cause of death
+                Debug.Log("Unknown cause of death");
+                break;
+        }
+
         if (carRigidbody != null)
         {
-
-           
             if (enemySpawnerScript != null)
             {
                 enemySpawnerScript.RemoveEnemyFromList(gameObject); // Notify the spawner to remove this car from the list
-                                                                    // Implement a method to get the enemy type (e.g., based on a tag or component)
-               
             }
+
             gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
             speed = 0;
             TurnOnExplosion();
-           
             carRigidbody.constraints = RigidbodyConstraints.None;
 
             // Apply an impulse force to fling the car
@@ -273,9 +288,12 @@ public class enemyCarDriver : MonoBehaviour
             // Apply torque force for rotation
             Vector3 torque = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             carRigidbody.AddTorque(torque * flingForce, ForceMode.Impulse);
-            
+
             DestroyCar();
         }
+
+        // Check cause of death using switch-case
+      
     }
 
     public void DestroyCar()

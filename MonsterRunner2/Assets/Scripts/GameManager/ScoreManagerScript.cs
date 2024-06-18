@@ -11,7 +11,9 @@ public class ScoreManagerScript : MonoBehaviour
     public float stopwatchTime;
     public TextMeshProUGUI activeCounter;
     public TextMeshProUGUI goldamtCounter;
+    public TextMeshProUGUI sideobjectiveText;
     public QuestGiver questgiverScript;
+    public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
     public EnemySpawner enemySpawnerScript;
 
     private int lastMissionCount = 0;
