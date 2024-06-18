@@ -23,7 +23,7 @@ MonoBehaviour:
     type: 3}
   bodyMaterial: {fileID: -2310514774154243031, guid: da3841936fd28f54f8cd663c02e73176,
     type: 3}
-  ability1: {fileID: 0}
-  ability1Level: 0
-  ability2: {fileID: 0}
+  ability1: {fileID: 11400000, guid: 31fa7e7dc0a2e034e8c073caf2f93825, type: 2}
+  ability1Level: 1
+  ability2: {fileID: 11400000, guid: cf18029594a863d4f8fb00c6323cff92, type: 2}
   ability2Level: 0
