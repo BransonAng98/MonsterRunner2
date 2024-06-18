@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958423283168e5848b7162bc2decc491, type: 3}
   m_Name: FrozenAura
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: FrozenAura
   abilityCD: 5
   abilityActive: 10
   playerObj: {fileID: 0}

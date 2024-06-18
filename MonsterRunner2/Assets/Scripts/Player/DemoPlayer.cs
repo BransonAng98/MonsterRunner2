@@ -116,6 +116,8 @@ public class DemoPlayer : MonoBehaviour
         maxSpeed = playerData.maxSpeed;
         crashDamage = 150f - playerData.crashResistance;
         ability1.AssignVariables(abillityOrigin, this.transform);
+        ability1.LevelUpSkill(playerData.ability1Level);
+        ability2.LevelUpSkill(playerData.ability2Level);
         ability2.AssignVariables(this.transform, this.transform);
     }
 

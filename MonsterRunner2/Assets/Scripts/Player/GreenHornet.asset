@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: GreenHornet
   m_EditorClassIdentifier: 
   health: 1000
-  maxSpeed: 15
+  maxSpeed: 28
   acceleration: 1000
   damage: 0
   crashResistance: 0
-  vehicleName: Green Hornet
+  vehicleName: Raikage
   vehicleID: 0
   vehicleBody: {fileID: -8189487360084506886, guid: 5eac0803a389c9b48aaeedf9a9ac90a5,
     type: 3}
   bodyMaterial: {fileID: -2310514774154243031, guid: 5eac0803a389c9b48aaeedf9a9ac90a5,
     type: 3}
-  ability1: {fileID: 11400000, guid: a79b127a00bcb9b46afcb7a95d226c1f, type: 2}
+  ability1: {fileID: 11400000, guid: edaa009cec62e5e40ae1f9fb57d1f4f2, type: 2}
   ability1Level: 1
-  ability2: {fileID: 11400000, guid: 5724a15e25a50bc42b171dbb50d8c985, type: 2}
+  ability2: {fileID: 11400000, guid: 5845b80f1ace5404da96fb0c1aca05c8, type: 2}
   ability2Level: 0
