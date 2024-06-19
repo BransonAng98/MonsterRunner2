@@ -80,7 +80,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedMax: 26
+  speedMaxMin: 24
+  speedMaxMax: 28
+  speedMax: 0
   speedMin: 17
   acceleration: 0
   turnSpeed: 0
@@ -157,7 +159,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.5
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5039597517276347344
 PrefabInstance:
