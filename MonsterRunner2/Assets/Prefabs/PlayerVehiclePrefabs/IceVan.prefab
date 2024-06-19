@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 814978292844326937}
   - component: {fileID: 5028679620144609091}
   - component: {fileID: 5028679620144609090}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: body
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -152,7 +152,7 @@ GameObject:
   - component: {fileID: 7689060886232844519}
   - component: {fileID: 4322541478288779164}
   - component: {fileID: 7334392647742056787}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 2822746115824961691}
   - component: {fileID: 2822746115824961690}
   - component: {fileID: 6901216935374903106}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2822746115915674607}
   - component: {fileID: 6901216935966617582}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 2822746116192888761}
   - component: {fileID: 2822746116192888760}
   - component: {fileID: 6901216936014511168}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -640,7 +640,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2822746116962338181}
   - component: {fileID: 2822746116962338180}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2822746116977209152}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -736,7 +736,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2822746117503867612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Meshes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 3476460734282393151}
   - component: {fileID: 4384849072564827258}
   - component: {fileID: 2822737144273781773}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1147,7 +1147,7 @@ GameObject:
   - component: {fileID: 3244279664429341441}
   - component: {fileID: 5699202878517499859}
   - component: {fileID: 3753951273741630361}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1232,7 +1232,7 @@ GameObject:
   - component: {fileID: 5831831194103309057}
   - component: {fileID: 7671315897424078995}
   - component: {fileID: 1973933590161292257}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

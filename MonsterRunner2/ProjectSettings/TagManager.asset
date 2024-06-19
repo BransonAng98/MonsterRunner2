@@ -30,7 +30,7 @@ TagManager:
   - Player
   - DeadEnemy
   - Untouchable
-  - 
+  - Enemy
   - PostProcessing
   - 
   - 

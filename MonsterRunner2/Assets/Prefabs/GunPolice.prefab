@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 496646055262577893}
   - component: {fileID: 3761609746862323373}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DetectionCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +59,7 @@ GameObject:
   - component: {fileID: 2271412327364450788}
   - component: {fileID: 2271412327364450843}
   - component: {fileID: 2271412327364450784}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GunPolice
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,6 +159,7 @@ MonoBehaviour:
     type: 3}
   enemySpawnerScript: {fileID: 0}
   enemyType: 1
+  sideobjective: {fileID: 0}
 --- !u!114 &2271412327364450784
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +191,7 @@ GameObject:
   - component: {fileID: 2271412328308955063}
   - component: {fileID: 2271412328308955057}
   - component: {fileID: 2271412328308955056}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,6 +349,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Main_Truck_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6a68e4f92f143804db8825dfb81c763f,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a68e4f92f143804db8825dfb81c763f, type: 3}
