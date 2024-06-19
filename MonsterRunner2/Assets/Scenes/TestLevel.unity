@@ -12960,7 +12960,7 @@ MonoBehaviour:
   - You're our diversion. Keep the heat off us while we make our move.
   - You're the distraction. Draw their attention while we execute the plan.
   questText:
-  - We're almost out! Keep the cops occupied!
+  - The alarm tripped! Keep the cops away!
   - We're in the vault! Keep the cops busy!
   - We've got the goods! Buy us some time!
   - We need more time! Keep the cops off us!
@@ -105369,7 +105369,7 @@ GameObject:
   - component: {fileID: 1202155092}
   - component: {fileID: 1202155094}
   m_Layer: 5
-  m_Name: Frame_BarFrame_Top01_Navy
+  m_Name: Frame_TopBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105396,7 +105396,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -228}
-  m_SizeDelta: {x: 0, y: 101.0891}
+  m_SizeDelta: {x: 0, y: 114.4544}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1202155092
 MonoBehaviour:
@@ -105411,15 +105411,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.60784316}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 30b1a3b4a6f4749c5ad29bdce9aee4c6, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 9e3fa591d06afff4ab47d239c23a4508, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

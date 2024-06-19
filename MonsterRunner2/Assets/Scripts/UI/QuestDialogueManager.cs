@@ -56,7 +56,7 @@ public class QuestDialogueManager : MonoBehaviour
 
         typingCoroutine = null; // Reset coroutine reference
         // Wait a bit longer before closing to ensure the player can read the text
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         CloseWindow();
     }
 
