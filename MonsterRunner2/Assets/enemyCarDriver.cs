@@ -7,9 +7,8 @@ public class enemyCarDriver : MonoBehaviour
     #region Fields
     [SerializeField] private float speed;
     private float ogSpeedHolder;
-    public float speedMaxMin = 15f; // Minimum value for the random range
-    public float speedMaxMax = 25f; // Maximum value for the random range
-    [SerializeField]private float speedMax;
+    
+    public float speedMax;
     public float speedMin = 9f;
     [SerializeField] private float acceleration;
     private float brakeSpeed = 100f;
@@ -48,7 +47,7 @@ public class enemyCarDriver : MonoBehaviour
         speed = Random.Range(6f, 10f); // Set the initial speed to a random value between 6 and 10
         ogSpeedHolder = speed;
         acceleration = Random.Range(8f, 14f); // Set the acceleration to a random value between 8 and 14
-        speedMax = Random.Range(speedMaxMin, speedMaxMax); // Set speedMax to a random value between speedMaxMin and speedMaxMax
+      
     }
 
     private void Update()

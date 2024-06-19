@@ -14,11 +14,12 @@ public class EnemyCarAI : MonoBehaviour
     private const float stoppingSpeed = 40f;
     private const float reverseDistance = 25f;
     private const float minSpeedToReverse = 15f;
-    private const float avoidanceStrength = 180f; // Multiplier for avoidance steering
+    private const float avoidanceStrength = 1f; // Multiplier for avoidance steering
+    private const float detectionRadius = 10f; // Radius for detecting obstacles
 
     [SerializeField] private bool isAvoiding;
+    [SerializeField]private List<Collider> nearbyObstacles = new List<Collider>();
 
-    
     private void Update()
     {
         SetTargetPosition(targetPositionTranform.position);
@@ -57,24 +58,22 @@ public class EnemyCarAI : MonoBehaviour
                 }
             }
 
-            float angleToDir = Vector3.SignedAngle(transform.forward, dirToMovePosition, Vector3.up);
+            Vector3 avoidanceVector = CalculateAvoidanceVector();
+            Vector3 combinedDirection = (dirToMovePosition + avoidanceVector).normalized;
+
+            float angleToDir = Vector3.SignedAngle(transform.forward, combinedDirection, Vector3.up);
             if (Mathf.Abs(angleToDir) < 10f)
             {
-                turnAmount = 0f; // Don't steer if angle is within -30 to 30 degrees
+                turnAmount = 0f; // Don't steer if angle is within -10 to 10 degrees
             }
             else
             {
-                if (isAvoiding)
-                {
-                    // Stronger avoidance behavior
-                    turnAmount = (angleToDir > 0 ? -1f : 1f) * avoidanceStrength; // Steer away from the obstacle more strongly
-                    forwardAmount *= 0.5f; // Reduce speed when avoiding
-                }
-                else
-                {
-                    // No obstacles or enemies detected, continue turning towards target
-                    turnAmount = angleToDir > 0 ? 1f : -1f;
-                }
+                turnAmount = angleToDir > 0 ? 1f : -1f;
+            }
+
+            if (isAvoiding)
+            {
+                forwardAmount *= 0.5f; // Reduce speed when avoiding
             }
         }
         else
@@ -94,18 +93,40 @@ public class EnemyCarAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if ( other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Obstacle"))
         {
-            //isAvoiding = true;
-            Debug.Log("Avoid");
+            isAvoiding = true;
+            if (!nearbyObstacles.Contains(other))
+            {
+                nearbyObstacles.Add(other);
+            }
+            Debug.Log("Avoiding: " + other.name);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if ( other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Obstacle"))
         {
-            //isAvoiding = false;
+            nearbyObstacles.Remove(other);
+            if (nearbyObstacles.Count == 0)
+            {
+                isAvoiding = false;
+            }
+            Debug.Log("Stopped avoiding: " + other.name);
         }
+    }
+
+    private Vector3 CalculateAvoidanceVector()
+    {
+        Vector3 avoidanceVector = Vector3.zero;
+        foreach (Collider obstacle in nearbyObstacles)
+        {
+            Vector3 directionAwayFromObstacle = (transform.position - obstacle.transform.position).normalized;
+            float distanceToObstacle = Vector3.Distance(transform.position, obstacle.transform.position);
+            float avoidanceForce = Mathf.Clamp01(detectionRadius - distanceToObstacle) / detectionRadius;
+            avoidanceVector += directionAwayFromObstacle * avoidanceForce;
+        }
+        return avoidanceVector.normalized * avoidanceStrength;
     }
 }

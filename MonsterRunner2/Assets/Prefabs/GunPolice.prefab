@@ -43,7 +43,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 4.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2271412327364450842
 GameObject:
@@ -129,6 +129,7 @@ MonoBehaviour:
   carDriver: {fileID: 2271412327364450843}
   detectionColliderObject: {fileID: 0}
   isAvoiding: 0
+  nearbyObstacles: []
 --- !u!114 &2271412327364450843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,9 +143,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedMaxMin: 25
-  speedMaxMax: 27
-  speedMax: 0
+  speedMax: 26
   speedMin: 14
   acceleration: 0
   turnSpeed: 0

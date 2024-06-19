@@ -14,8 +14,11 @@ public class EnemySpawner : MonoBehaviour
    [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
     private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
-        { 1, new List<int> { 6, 0 } }, // 4 of type 1, 0 of type 2
-        { 2, new List<int> { 6, 2 } }  // 4 of type 1, 2 of type 2
+        { 1, new List<int> { 4, 0 } }, // 4 of type 1, 0 of type 2
+        { 2, new List<int> { 6, 0 } }, // 4 of type 1, 2 of type 2
+        { 3, new List<int> { 8, 0 } },
+        { 4, new List<int> { 6, 2 } },
+        { 5, new List<int> { 4, 4 } },
         // Add more threat levels as needed
     };
 
