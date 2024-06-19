@@ -9,4 +9,5 @@ public class PlayerDataSO : ScriptableObject
     public float money;
     public int gems;
     public bool gameStart;
+    public bool hasPlayedTutorial;
 }
