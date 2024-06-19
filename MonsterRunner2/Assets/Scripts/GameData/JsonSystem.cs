@@ -67,6 +67,7 @@ public class JsonSystem : MonoBehaviour
                 playerData.selectedVehicleID = playerInfoData.selectedVehicleID;
                 playerData.money = playerInfoData.money;
                 playerData.gems = playerInfoData.gems;
+                playerData.hasPlayedTutorial = playerInfoData.hasPlayedTutorial;
                 string playerJson = JsonUtility.ToJson(playerData, true);
                 File.WriteAllText(playerDataFilePath, playerJson);
                 break;
@@ -106,6 +107,7 @@ public class JsonSystem : MonoBehaviour
             playerInfoData.selectedVehicleID = playerData.selectedVehicleID;
             playerInfoData.money = playerData.money;
             playerInfoData.gems = playerData.gems;
+            playerInfoData.hasPlayedTutorial = playerData.hasPlayedTutorial;
             if (playerData != null)
             {
                 Debug.Log("Selected Vehicle ID: " + playerData.selectedVehicleID);
