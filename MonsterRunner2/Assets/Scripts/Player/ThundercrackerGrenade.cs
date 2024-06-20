@@ -32,7 +32,7 @@ public class ThundercrackerGrenade : MonoBehaviour
 
                 if (!affectedEnemyList.Contains(enemyCar))
                 {
-                    enemyCar.isDead = true;
+                    enemyCar.CarDeath(1);
                 }
             }
         }

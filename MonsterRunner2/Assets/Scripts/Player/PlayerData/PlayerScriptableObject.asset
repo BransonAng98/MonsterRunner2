@@ -15,5 +15,5 @@ MonoBehaviour:
   selectedVehicleID: 0
   money: 0
   gems: 0
-  gameStart: 1
+  gameStart: 0
   hasPlayedTutorial: 0
