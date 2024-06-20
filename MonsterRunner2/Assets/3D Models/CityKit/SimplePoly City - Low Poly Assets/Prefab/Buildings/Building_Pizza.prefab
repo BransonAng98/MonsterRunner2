@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: -2208836191058803270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building_Pizza
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

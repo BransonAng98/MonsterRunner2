@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 7018376225762091271}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building Sky_big_color01
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

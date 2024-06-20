@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7626702865105273126}
   - component: {fileID: 7960042799331685368}
   - component: {fileID: 4922941962260111242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building_Stadium
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 8065558011071459954}
   - component: {fileID: 4771569011758567129}
   - component: {fileID: 2604826457728057032}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CornerColliders (1)
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 2568938589001630292}
   - component: {fileID: 426560638378005761}
   - component: {fileID: 6663510741769879239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ExtraColliders
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 8665731515836445018}
   - component: {fileID: 9210828137346061534}
   - component: {fileID: 5790215306967011680}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CornerColliders
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

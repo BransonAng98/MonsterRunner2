@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4174187122828430321}
   - component: {fileID: 2164338454197059387}
   - component: {fileID: 374441856568687831}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hospital
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

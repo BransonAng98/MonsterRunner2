@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5635428941072860468}
   - component: {fileID: 7625130226012025342}
   - component: {fileID: -5512466473474678001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Police_Station
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

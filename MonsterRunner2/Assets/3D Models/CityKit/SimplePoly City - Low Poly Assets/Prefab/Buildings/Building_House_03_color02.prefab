@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: -2779699078463735817}
   - component: {fileID: 3065654226733941132}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Building_House_03_color02
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

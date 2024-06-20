@@ -20,6 +20,13 @@ public class EnemyCarAI : MonoBehaviour
     [SerializeField] private bool isAvoiding;
     [SerializeField]private List<Collider> nearbyObstacles = new List<Collider>();
 
+    [SerializeField] private float elapsedTime = 0f;
+    public Material mainTexture;
+    public Material transparentTexture;
+    private void Start()
+    {
+        ChangeToTransparentTexture();
+    }
     private void Update()
     {
         SetTargetPosition(targetPositionTranform.position);
@@ -128,5 +135,58 @@ public class EnemyCarAI : MonoBehaviour
             avoidanceVector += directionAwayFromObstacle * avoidanceForce;
         }
         return avoidanceVector.normalized * avoidanceStrength;
+    }
+
+    // Function to flash the material transparent
+    public IEnumerator FlashTransparent(float duration, float flashSpeed)
+    {
+        gameObject.layer = 14;
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        if (renderer == null)
+        {
+            Debug.LogError("Renderer component not found!");
+            yield break;
+        }
+
+        Material material = renderer.material;
+        material = mainTexture; // Start with the main texture
+
+      
+        bool switchMaterial = false;
+
+        while (true) // Infinite loop
+        {
+            elapsedTime += Time.deltaTime;
+
+            if (elapsedTime >= flashSpeed)
+            {
+                switchMaterial = !switchMaterial;
+                material = switchMaterial ? transparentTexture : mainTexture;
+                renderer.material = material;
+                
+            }
+
+            if (elapsedTime >= duration) // Check if duration is reached
+            {
+                gameObject.layer = 11;
+                break; // Exit the loop
+               
+            }
+
+            yield return null;
+        }
+
+        // Ensure the material is set back to the main texture at the end of the flash duration
+        renderer.material = mainTexture;
+    }
+
+    public void ChangeToTransparentTexture()
+    {
+        GetComponentInChildren<Renderer>().material = transparentTexture;
+    }
+
+    public void ChangeToMainTexture()
+    {
+        GetComponentInChildren<Renderer>().material = mainTexture;
     }
 }

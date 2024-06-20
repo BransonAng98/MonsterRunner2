@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1241753849019316273}
   - component: {fileID: 4927796164026264566}
   - component: {fileID: 8906336202318688310}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Market
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
