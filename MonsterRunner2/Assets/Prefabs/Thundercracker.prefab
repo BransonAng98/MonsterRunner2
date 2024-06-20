@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7615801959409793012}
   - component: {fileID: 8815739416803991201}
   - component: {fileID: 5695780697828304965}
-  m_Layer: 13
+  m_Layer: 10
   m_Name: Thundercracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7615801959409793019}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7072935072807122670}
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bf2b13b8fab92e0408eb30d6a83ca8ba, type: 2}
+  - {fileID: 2100000, guid: 3308580aebbd45b47b794ea56c9017c6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,7 +128,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &7072385365378100344
 PrefabInstance:

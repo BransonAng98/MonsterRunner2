@@ -33950,9 +33950,10 @@ GameObject:
   - component: {fileID: 3049428253405200620}
   - component: {fileID: 3455498449517880852}
   - component: {fileID: 3922247334887890555}
-  m_Layer: 0
+  - component: {fileID: 2661265272302419430}
+  m_Layer: 13
   m_Name: FX_Defense_Inactive
-  m_TagString: Untagged
+  m_TagString: AbilityToken
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38787,7 +38788,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &3922247334887890555
 MonoBehaviour:
@@ -38803,6 +38804,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupEffect: {fileID: 7888857835762348946, guid: 84dab4a8cf751fc4181b5f09a6186c21,
     type: 3}
+--- !u!114 &2661265272302419430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049428253405200621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a240b6d1eddf2419a0000c47ae0d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityID: 1
 --- !u!1 &3352170921516341385
 GameObject:
   m_ObjectHideFlags: 0

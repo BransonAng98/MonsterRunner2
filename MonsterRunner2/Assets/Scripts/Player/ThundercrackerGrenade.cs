@@ -19,7 +19,7 @@ public class ThundercrackerGrenade : MonoBehaviour
 
     void CallThunder()
     {
-        Destroy(this.gameObject, 2f);
+        Destroy(this.gameObject, 0.1f);
         isTriggered = true;
         thunderbolt.SetActive(true);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, aoeRadius.radius);
