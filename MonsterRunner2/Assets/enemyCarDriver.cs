@@ -42,9 +42,8 @@ public class enemyCarDriver : MonoBehaviour
     {
         isDead = false;
         carRigidbody = GetComponent<Rigidbody>();
-        speed = Random.Range(6f, 10f); // Set the initial speed to a random value between 6 and 10
         ogSpeedHolder = speed;
-        acceleration = Random.Range(15f, 20f); // Set the acceleration to a random value between 8 and 14
+        acceleration = Random.Range(20f, 22f); // Set the acceleration to a random value between x and y
       
     }
 
@@ -108,7 +107,7 @@ public class enemyCarDriver : MonoBehaviour
         }
 
         // Gradually reduce speed when turning
-        float turnSpeedReductionRate = 5f;
+        float turnSpeedReductionRate = 2f;
         if (turnAmount != 0)
         {
             float turnSpeedReduction = Mathf.Abs(turnAmount) * turnSpeedReductionRate * Time.deltaTime;

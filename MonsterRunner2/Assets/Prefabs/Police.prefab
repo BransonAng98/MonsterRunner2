@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   speedMax: 30
-  speedMin: 24
+  speedMin: 26
   acceleration: 0
   turnSpeed: 0
   playerscript: {fileID: 0}
