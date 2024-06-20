@@ -11,17 +11,11 @@ public class ThundercrackerGrenade : MonoBehaviour
     public List<enemyCarDriver> affectedEnemyList = new List<enemyCarDriver>();
     [SerializeField] SphereCollider aoeRadius;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        thunderbolt.SetActive(false);
-    }
-
     void CallThunder()
     {
         Destroy(this.gameObject, 0.1f);
         isTriggered = true;
-        thunderbolt.SetActive(true);
+        Instantiate(thunderbolt, transform.position, Quaternion.identity);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, aoeRadius.radius);
 
         foreach (Collider collider in hitColliders)
