@@ -80,8 +80,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedMax: 28
-  speedMin: 17
+  speedMax: 30
+  speedMin: 24
   acceleration: 0
   turnSpeed: 0
   playerscript: {fileID: 0}
@@ -115,6 +115,7 @@ MonoBehaviour:
   detectionColliderObject: {fileID: 6372198578092894673}
   isAvoiding: 0
   nearbyObstacles: []
+  elapsedTime: 0
   mainTexture: {fileID: 2100000, guid: cbdc2ef6f64d3a245b8c547539b59a2e, type: 2}
   transparentTexture: {fileID: 2100000, guid: e64a08a9c999e13479087836d51e85c0, type: 2}
 --- !u!1 &6372198578092894673

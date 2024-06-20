@@ -44,7 +44,7 @@ public class enemyCarDriver : MonoBehaviour
         carRigidbody = GetComponent<Rigidbody>();
         speed = Random.Range(6f, 10f); // Set the initial speed to a random value between 6 and 10
         ogSpeedHolder = speed;
-        acceleration = Random.Range(8f, 14f); // Set the acceleration to a random value between 8 and 14
+        acceleration = Random.Range(15f, 20f); // Set the acceleration to a random value between 8 and 14
       
     }
 
