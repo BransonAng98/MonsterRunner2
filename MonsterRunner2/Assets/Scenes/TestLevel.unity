@@ -64980,9 +64980,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ee7e07f6b13e3143b5a347cdd863835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpType1Prefab: {fileID: 6516861868727964360, guid: 7f7a4a6297fa1a340ad670d493f6defd,
+  powerUpType1Prefab: {fileID: 9007195338992934650, guid: 7f7a4a6297fa1a340ad670d493f6defd,
     type: 3}
-  powerUpType2Prefab: {fileID: 1503986723495590412, guid: f739e2e4cc32d40419a123cbdbb22a97,
+  powerUpType2Prefab: {fileID: 7609958020027802957, guid: f739e2e4cc32d40419a123cbdbb22a97,
     type: 3}
   spawnLocations:
   - {fileID: 1587782329}
