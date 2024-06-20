@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAbilityManager : MonoBehaviour
 {
@@ -17,10 +18,13 @@ public class PlayerAbilityManager : MonoBehaviour
     public int abilityID;
     public DemoPlayer player;
     public AbilityTokenManager abTokenManager;
+    public Slider abilityActiveSlider;
 
     //Private Variable
     private float cooldown;
     private float activeTime;
+    private RectTransform sliderRectTransform;
+    private Vector3 sliderOffset = new Vector3(0, 100, 0);  // Adjust this value to position the slider above the player
 
     //Serializable Variables
     [SerializeField] List<AbilitySO> ability = new List<AbilitySO>();
@@ -31,6 +35,15 @@ public class PlayerAbilityManager : MonoBehaviour
         {
             ability.Add(player.ability1);
             ability.Add(player.ability2);
+        }
+
+        // Initialize the slider
+        if (abilityActiveSlider != null)
+        {
+            abilityActiveSlider.maxValue = 0;
+            abilityActiveSlider.value = 0;
+            sliderRectTransform = abilityActiveSlider.GetComponent<RectTransform>();
+            abilityActiveSlider.gameObject.SetActive(false);
         }
     }
 
@@ -46,6 +59,12 @@ public class PlayerAbilityManager : MonoBehaviour
                     //Sets the state to activate so the abilty is triggered
                     abilityState = AbilityState.Active;
                     activeTime = ability[abilityID].abilityActive;
+
+                    if (abilityActiveSlider != null)
+                    {
+                        abilityActiveSlider.maxValue = activeTime;
+                        abilityActiveSlider.value = activeTime;
+                    }
                 }
                 break;
 
@@ -54,9 +73,14 @@ public class PlayerAbilityManager : MonoBehaviour
                 {
                     //Countdown from the ability's activation time
                     activeTime -= Time.deltaTime;
-
                     //Activates the corresponding ability SO within the ability list
                     ability[abilityID].Activate();
+
+                    if (abilityActiveSlider != null)
+                    {
+                        abilityActiveSlider.gameObject.SetActive(true);
+                        abilityActiveSlider.value = activeTime;
+                    }
                 }
                 else
                 {
@@ -64,6 +88,13 @@ public class PlayerAbilityManager : MonoBehaviour
                     abilityState = AbilityState.Cooldown;
                     ability[abilityID].Deactive();
                     cooldown = ability[abilityID].abilityCD;
+
+                    // Reset the slider value
+                    if (abilityActiveSlider != null)
+                    {
+                        abilityActiveSlider.gameObject.SetActive(false);
+                        abilityActiveSlider.value = 0;
+                    }
                 }
                 break;
 
@@ -81,6 +112,13 @@ public class PlayerAbilityManager : MonoBehaviour
                     abilityState = AbilityState.Ready;
                 }
                 break;
+        }
+
+        // Update slider position to follow the player smoothly
+        if (player != null && abilityActiveSlider != null)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(player.transform.position) + sliderOffset;
+            sliderRectTransform.position = Vector3.Lerp(sliderRectTransform.position, screenPos, Time.deltaTime * 10f);
         }
     }
 }

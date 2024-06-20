@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 5853373278141401202}
   - component: {fileID: 651399118089179387}
   - component: {fileID: 1718949256786022089}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: SwordToken
   m_TagString: AbilityToken
   m_Icon: {fileID: 0}

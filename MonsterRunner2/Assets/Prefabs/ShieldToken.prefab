@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2275702476972482742}
   - component: {fileID: 7759353309372703318}
   - component: {fileID: 5891301196573401694}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShieldToken
   m_TagString: AbilityToken
   m_Icon: {fileID: 0}
