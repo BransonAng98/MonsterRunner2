@@ -26,11 +26,12 @@ public class EnemyCarAI : MonoBehaviour
     private void Start()
     {
         ChangeToTransparentTexture();
+        StartCoroutine(FlashTransparent(4f, 1f));
     }
     private void Update()
     {
         SetTargetPosition(targetPositionTranform.position);
-
+        CleanupObstaclesList();
         float forwardAmount = 0f;
         float turnAmount = 0f;
         float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
@@ -124,6 +125,10 @@ public class EnemyCarAI : MonoBehaviour
         }
     }
 
+    private void CleanupObstaclesList()
+    {
+        nearbyObstacles.RemoveAll(item => item == null);
+    }
     private Vector3 CalculateAvoidanceVector()
     {
         Vector3 avoidanceVector = Vector3.zero;
@@ -149,9 +154,14 @@ public class EnemyCarAI : MonoBehaviour
         }
 
         Material material = renderer.material;
+        if (material == null)
+        {
+            Debug.LogError("Material not found on Renderer!");
+            yield break;
+        }
+
         material = mainTexture; // Start with the main texture
 
-      
         bool switchMaterial = false;
 
         while (true) // Infinite loop
@@ -163,14 +173,12 @@ public class EnemyCarAI : MonoBehaviour
                 switchMaterial = !switchMaterial;
                 material = switchMaterial ? transparentTexture : mainTexture;
                 renderer.material = material;
-                
             }
 
             if (elapsedTime >= duration) // Check if duration is reached
             {
                 gameObject.layer = 11;
                 break; // Exit the loop
-               
             }
 
             yield return null;

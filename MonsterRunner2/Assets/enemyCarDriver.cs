@@ -11,8 +11,6 @@ public class enemyCarDriver : MonoBehaviour
     public float speedMax;
     public float speedMin = 9f;
     [SerializeField] private float acceleration;
-    private float brakeSpeed = 100f;
-    private float reverseSpeed = 30f;
     private float idleSlowdown = 10f;
 
     [SerializeField] private float turnSpeed;
@@ -78,7 +76,7 @@ public class enemyCarDriver : MonoBehaviour
             }
         }
 
-        if (!isDead && !isCCed)
+        if (!isDead) //check if need CC PLEASE KEITH DELVIN BRANSON
         {
             HandleMovement();
         }
@@ -241,7 +239,7 @@ public class enemyCarDriver : MonoBehaviour
     {
         if (!isDead && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle")))
         {
-            isDead = true;
+           
             CarDeath(0);
         }
     }
@@ -252,10 +250,13 @@ public class enemyCarDriver : MonoBehaviour
         switch (causeOfDeath)
         {
             case 0:
+                isDead = true;
                 Debug.Log("Killed by another car");
                 break;
             case 1:
+                isDead = true;
                 sideobjective.currentenemykilled++;
+               
                 Debug.Log("Killed by Player");
                 break;
             default:

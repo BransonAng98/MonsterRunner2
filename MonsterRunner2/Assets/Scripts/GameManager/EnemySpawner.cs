@@ -84,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
                     enemy.transform.LookAt(playerPos);
                     newSpawnedEnemies.Add(enemy);
                     AssignEnemyProperties(enemy);
-                    StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
+                    //StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
                 }
             }
             else if (currentCount > requiredCount)
@@ -153,7 +153,7 @@ public class EnemySpawner : MonoBehaviour
                 enemy.transform.LookAt(playerPos);
                 spawnedEnemies.Add(enemy);
                 AssignEnemyProperties(enemy);
-                StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
+                //StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
             }
         }
     }
@@ -179,7 +179,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.transform.LookAt(playerPos);
         spawnedEnemies.Add(enemy);
         AssignEnemyProperties(enemy);
-        StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
+        //StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
     }
 
     public void RemoveEnemyFromList(GameObject enemyToRemove)
