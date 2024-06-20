@@ -27,5 +27,6 @@ public class TutorialManager : MonoBehaviour
     {
         tutorialScreen.SetActive(false);
         playerData.hasPlayedTutorial = true;
+        Time.timeScale = 1f;
     }
 }
