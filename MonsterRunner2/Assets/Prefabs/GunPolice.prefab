@@ -130,6 +130,9 @@ MonoBehaviour:
   detectionColliderObject: {fileID: 0}
   isAvoiding: 0
   nearbyObstacles: []
+  elapsedTime: 0
+  mainTexture: {fileID: 2100000, guid: cbdc2ef6f64d3a245b8c547539b59a2e, type: 2}
+  transparentTexture: {fileID: 2100000, guid: e64a08a9c999e13479087836d51e85c0, type: 2}
 --- !u!114 &2271412327364450843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   speedMax: 26
-  speedMin: 14
+  speedMin: 18
   acceleration: 0
   turnSpeed: 0
   playerscript: {fileID: 0}
@@ -346,6 +349,11 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 6a68e4f92f143804db8825dfb81c763f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cbdc2ef6f64d3a245b8c547539b59a2e, type: 2}
     - target: {fileID: 919132149155446097, guid: 6a68e4f92f143804db8825dfb81c763f,
         type: 3}
       propertyPath: m_Name
