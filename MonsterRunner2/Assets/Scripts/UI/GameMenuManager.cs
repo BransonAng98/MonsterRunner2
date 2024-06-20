@@ -10,16 +10,22 @@ public class GameMenuManager : MonoBehaviour
     public GameObject startScreen;
     public GameObject resultScreen;
     public GameObject mainMenu;
-    [SerializeField] bool hasStarted;
+    public GameObject gameplayUI;
+    public GameObject pauseMenu;
+
     [SerializeField] GameObject currentMenu;
+    [SerializeField] bool hasStarted;
+
     public JsonSystem json;
 
     // Start is called before the first frame update
     private void Awake()
     {
-        if(resultScreen != null)
+        
+        if (resultScreen != null)
         {
             resultScreen.SetActive(false);
+            pauseMenu.SetActive(false);
         }
         else
         {
@@ -50,12 +56,27 @@ public class GameMenuManager : MonoBehaviour
         mainMenu.SetActive(true);
     }
 
-
     public void StartGame()
     {
         Debug.Log("Start Game");
         Time.timeScale = 1f;
         startScreen.SetActive(false);
+    }
+
+    public void PauseGame()
+    {
+        Debug.Log("Game Paused");
+        gameplayUI.SetActive(false);
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void UnpauseGame()
+    {
+        Debug.Log("Game Unpaused");
+        Time.timeScale = 1f;
+        gameplayUI.SetActive(true);
+        pauseMenu.SetActive(false); 
     }
 
     public void RestartGame()
@@ -74,5 +95,4 @@ public class GameMenuManager : MonoBehaviour
         json.SaveToJson(1);
         SceneManager.LoadScene("MainMenu");
     }
-
 }
