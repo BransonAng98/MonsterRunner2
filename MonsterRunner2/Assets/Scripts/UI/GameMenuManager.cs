@@ -16,6 +16,8 @@ public class GameMenuManager : MonoBehaviour
     [SerializeField] GameObject currentMenu;
     [SerializeField] bool hasStarted;
 
+    public PlayerDataSO playerData;
+    public PlayerCarDisplay carDisplay;
     public JsonSystem json;
 
     // Start is called before the first frame update
@@ -53,6 +55,7 @@ public class GameMenuManager : MonoBehaviour
         currentMenu.SetActive(false);
         json.SaveToJson(0);
         json.SaveToJson(1);
+        carDisplay.UpdateCarSkin(playerData.selectedVehicleID);
         mainMenu.SetActive(true);
     }
 
