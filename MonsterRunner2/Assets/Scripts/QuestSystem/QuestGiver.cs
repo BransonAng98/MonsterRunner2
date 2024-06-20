@@ -21,11 +21,15 @@ public class QuestGiver : MonoBehaviour
 
     public PlayerDataSO playerInfoData;
 
+    public EnemySpawner enemySpawnerScript;
+
     private bool isOnCooldown = false;
     private bool isFirstQuest = true;
+    public bool gameStarted;
 
     private void Start()
     {
+        gameStarted = false;
         buildingObjects = missionManager.buildingObjectsList;
         StartCoroutine(StartGameSequence());
     }
@@ -41,6 +45,8 @@ public class QuestGiver : MonoBehaviour
             isFirstQuest = false; // Set isFirstQuest to false after displaying intro
             yield return new WaitForSeconds(initialMissionDelay);
         }
+
+        gameStarted = true;
 
         StartNewQuest();
     }
@@ -86,7 +92,7 @@ public class QuestGiver : MonoBehaviour
         quest.goal.SurviveWave();
         quest.goldRewardAmt();
         survivaltime = quest.goal.survivalTime;
-
+        enemySpawnerScript.UpdateEnemiesForThreatLevel();
         PrintQuestDialogue();
     }
 

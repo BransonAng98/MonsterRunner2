@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float Radius;
     [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
 
+    public QuestGiver questGiverScript;
+
    [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
     private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
@@ -31,33 +33,37 @@ public class EnemySpawner : MonoBehaviour
        
 
         currentThreatLevel = threatlvl;
-        UpdateEnemiesForThreatLevel();
+        
     }
 
     private void Update()
     {
-        if (currentThreatLevel != threatlvl)
+        if(questGiverScript.gameStarted == true)
         {
-            currentThreatLevel = threatlvl;
-            UpdateEnemiesForThreatLevel();
-        }
-
-        bool allNull = true;
-        foreach (var enemy in spawnedEnemies)
-        {
-            if (enemy != null)
+            if (currentThreatLevel != threatlvl)
             {
-                allNull = false;
-                break;
+                currentThreatLevel = threatlvl;
+                UpdateEnemiesForThreatLevel();
+            }
+
+            bool allNull = true;
+            foreach (var enemy in spawnedEnemies)
+            {
+                if (enemy != null)
+                {
+                    allNull = false;
+                    break;
+                }
+            }
+
+            if (allNull)
+            {
+                UpdateEnemiesForThreatLevel();
             }
         }
-
-        if (allNull)
-        {
-            UpdateEnemiesForThreatLevel();
-        }
     }
-    private void UpdateEnemiesForThreatLevel()
+       
+    public void UpdateEnemiesForThreatLevel()
     {
         Debug.Log("Updating Enemies for Threat Level: " + currentThreatLevel);
 
