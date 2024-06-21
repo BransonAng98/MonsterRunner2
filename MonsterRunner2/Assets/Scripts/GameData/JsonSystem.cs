@@ -23,11 +23,10 @@ public class JsonSystem : MonoBehaviour
         playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
         Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
 
-        if (!playerInfoData.gameStart)
+        if (!File.Exists(playerDataFilePath) && !File.Exists(vehicleDataFilePath))
         {
             //Creating a new data for playerSO and vehicleSos and saving it to Json
             CreateFreshJsonFile();
-            playerInfoData.gameStart = true;
         }
     }
 
@@ -69,7 +68,6 @@ public class JsonSystem : MonoBehaviour
                 playerData.money = playerInfoData.money;
                 playerData.gems = playerInfoData.gems;
                 playerData.hasPlayedTutorial = playerInfoData.hasPlayedTutorial;
-                playerData.gameStart = playerInfoData.gameStart;
                 string playerJson = JsonUtility.ToJson(playerData, true);
                 File.WriteAllText(playerDataFilePath, playerJson);
                 break;
@@ -144,11 +142,6 @@ public class JsonSystem : MonoBehaviour
             playerInfoData.money = playerData.money;
             playerInfoData.gems = playerData.gems;
             playerInfoData.hasPlayedTutorial = playerData.hasPlayedTutorial;
-            if (playerData != null)
-            {
-                Debug.Log("Selected Vehicle ID: " + playerData.selectedVehicleID);
-                Debug.Log("Money earned: " + playerData.money);
-            }
         }
         else
         {
