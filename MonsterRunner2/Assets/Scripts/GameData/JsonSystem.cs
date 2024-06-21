@@ -30,7 +30,7 @@ public class JsonSystem : MonoBehaviour
         }
         else
         {
-            Debug.Log(playerDataFilePath);
+            Debug.Log("player data file loc is" + playerDataFilePath);
         }
     }
 
