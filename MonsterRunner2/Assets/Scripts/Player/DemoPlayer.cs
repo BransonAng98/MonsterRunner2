@@ -172,6 +172,8 @@ public class DemoPlayer : MonoBehaviour
         {
             abilityManager.abilityID = collision.gameObject.GetComponent<AbilityToken>().abilityID;
             abilityManager.isTriggered = true;
+            PowerUp triggerCollectedVFX = collision.gameObject.GetComponent<PowerUp>();
+            triggerCollectedVFX.Pickup();
         }
     }
 

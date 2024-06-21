@@ -858,7 +858,6 @@ GameObject:
   - component: {fileID: 3965321299940452884}
   - component: {fileID: 4344977594908537003}
   - component: {fileID: 4344977594908537005}
-  - component: {fileID: 6901216936559944797}
   - component: {fileID: 6901216936559944770}
   - component: {fileID: 6901216936559944775}
   m_Layer: 8
@@ -1001,19 +1000,6 @@ MonoBehaviour:
   questIndicator: {fileID: 6901216935879526369}
   abillityOrigin: {fileID: 7178271502345445823}
   particleSystem: {fileID: 7030044319678869338}
---- !u!65 &6901216936559944797
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4344977594908537006}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5355031, y: 2.7568464, z: 5.7515516}
-  m_Center: {x: 0.0017656088, y: 1.5769377, z: 0.19708598}
 --- !u!120 &6901216936559944770
 LineRenderer:
   m_ObjectHideFlags: 0

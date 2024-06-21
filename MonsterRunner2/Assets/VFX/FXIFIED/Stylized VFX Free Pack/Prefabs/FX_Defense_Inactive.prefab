@@ -38802,7 +38802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57e983e7e4de77347aa726b43efd6b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupEffect: {fileID: 7888857835762348946, guid: 84dab4a8cf751fc4181b5f09a6186c21,
+  pickupEffect: {fileID: 8734376389421900958, guid: a986a528e202bb44aa1145f560533661,
     type: 3}
 --- !u!114 &2661265272302419430
 MonoBehaviour:
