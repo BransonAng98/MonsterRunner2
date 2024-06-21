@@ -20,8 +20,6 @@ public class GameMenuManager : MonoBehaviour
     public PlayerCarDisplay carDisplay;
     public JsonSystem json;
 
-    public GameObject tutorialDebugText;
-
     // Start is called before the first frame update
     private void Awake()
     {
@@ -38,17 +36,6 @@ public class GameMenuManager : MonoBehaviour
 
         Time.timeScale = 0f;
         Debug.Log(playerData.hasPlayedTutorial);
-    }
-    private void Start()
-    {
-        if (playerData.hasPlayedTutorial)
-        {
-            tutorialDebugText.SetActive(true);
-        }
-        else
-        {
-            tutorialDebugText.SetActive(false);
-        }
     }
 
     public void LoadLevel()
