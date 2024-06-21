@@ -18,7 +18,7 @@ public class SideObjectiveQuestGiver : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemySpawnerScript = SideObjective.enemySpawnerScript;
+        SideObjective.enemySpawnerScript = enemySpawnerScript;
         SideObjective.goal.ChooseRandomObjectiveType();
         RunObjectiveFunction(SideObjective.goal.objectiveType);
         SideObjective.goldRewardAmt();

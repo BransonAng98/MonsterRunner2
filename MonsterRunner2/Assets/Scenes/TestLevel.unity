@@ -13114,6 +13114,7 @@ MonoBehaviour:
       destination: {fileID: 0}
       survivalTime: 0
       playerIsAlive: 0
+    enemyspawnerScript: {fileID: 0}
   player: {fileID: 0}
   destination: {fileID: 0}
   survivaltime: 0
@@ -13148,12 +13149,14 @@ MonoBehaviour:
       requiredKillAmount: 0
       currentAmount: 0
       goldtobeEarnedAmt: 0
+    enemySpawnerScript: {fileID: 0}
   enemykilled: 0
   currentenemykilled: 0
   goldtobeEarned: 0
   currentGoldAmt: 0
   scoreManager: {fileID: 1242281396}
   playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
+  enemySpawnerScript: {fileID: 754238784}
 --- !u!1001 &171110433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65187,6 +65190,8 @@ MonoBehaviour:
   mainMenu: {fileID: 0}
   gameplayUI: {fileID: 1488209289}
   pauseMenu: {fileID: 818063169}
+  loadingScreen: {fileID: 0}
+  loadingSlider: {fileID: 0}
   currentMenu: {fileID: 0}
   hasStarted: 0
   playerData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
