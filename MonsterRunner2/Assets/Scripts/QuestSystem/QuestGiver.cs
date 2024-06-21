@@ -30,6 +30,7 @@ public class QuestGiver : MonoBehaviour
     private void Start()
     {
         gameStarted = false;
+        quest.enemyspawnerScript = enemySpawnerScript;
         buildingObjects = missionManager.buildingObjectsList;
         StartCoroutine(StartGameSequence());
     }

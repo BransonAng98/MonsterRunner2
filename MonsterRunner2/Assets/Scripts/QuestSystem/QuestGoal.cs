@@ -36,7 +36,7 @@ public class QuestGoal
         if(goaltype == GoalType.Survive)
         {
             
-            float[] possibleTimes = { 30f, 60f, 90f };
+            float[] possibleTimes = { 30f, 60f, 60f };
             survivalTime = possibleTimes[Random.Range(0, possibleTimes.Length)];
             playerIsAlive = true;  // Assume player is alive initially
           

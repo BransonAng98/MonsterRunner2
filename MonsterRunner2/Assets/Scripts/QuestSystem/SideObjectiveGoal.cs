@@ -19,7 +19,7 @@ public class SideObjectiveGoal
     {
         if (objectiveType == ObjectiveType.Kill)
         {
-            int[] killCount = { 2, 4, 6 };
+            int[] killCount = { 2, 3, 4 };
             requiredKillAmount = killCount[UnityEngine.Random.Range(0, killCount.Length)];
             Debug.Log("EnemyKilled function called. Required Kill Amount: " + requiredKillAmount);
         }
