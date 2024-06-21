@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class PlayerInfoData
 {
-    public int selectedVehicleID = 1;
+    public int selectedVehicleID;
     public float money;
     public int gems;
     public bool gameStart;
