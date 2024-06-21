@@ -23,10 +23,14 @@ public class JsonSystem : MonoBehaviour
         playerDataFilePath = Path.Combine(Application.persistentDataPath, "PlayerDataFile.json");
         Debug.Log("Persistent Data Path: " + Application.persistentDataPath);
 
-        if (!File.Exists(playerDataFilePath) && !File.Exists(vehicleDataFilePath))
+        if (!File.Exists(playerDataFilePath))
         {
             //Creating a new data for playerSO and vehicleSos and saving it to Json
             CreateFreshJsonFile();
+        }
+        else
+        {
+            Debug.Log(playerDataFilePath);
         }
     }
 
