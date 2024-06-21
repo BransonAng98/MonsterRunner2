@@ -12,6 +12,9 @@ public class GameMenuManager : MonoBehaviour
     public GameObject mainMenu;
     public GameObject gameplayUI;
     public GameObject pauseMenu;
+    public GameObject loadingScreen;
+
+    public Slider loadingSlider;
 
     [SerializeField] GameObject currentMenu;
     [SerializeField] bool hasStarted;
@@ -40,8 +43,38 @@ public class GameMenuManager : MonoBehaviour
 
     public void LoadLevel()
     {
-        SceneManager.LoadScene("TestLevel");
+        StartCoroutine(LoadLevelAsync("TestLevel"));
         hasStarted = true;
+    }
+
+    IEnumerator LoadLevelAsync(string sceneName)
+    {
+        // Show loading screen
+        loadingScreen.SetActive(true);
+
+        // Fake loading progress
+        float fakeProgress = 0f;
+        while (fakeProgress < 1f)
+        {
+            fakeProgress += Time.deltaTime * 0.8f;
+            loadingSlider.value = fakeProgress;
+            yield return new WaitForSeconds(0.02f);
+        }
+
+        // Load the scene asynchronously
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+        asyncLoad.allowSceneActivation = false;
+
+        // Wait until the asynchronous scene load is complete
+        while (!asyncLoad.isDone)
+        {
+            if (asyncLoad.progress >= 0.9f)
+            {
+                // Allow scene activation once the fake loading is done
+                asyncLoad.allowSceneActivation = true;
+            }
+            yield return null;
+        }
     }
 
     public void OpenMenu(GameObject nextMenu)
