@@ -37,6 +37,7 @@ public class GameMenuManager : MonoBehaviour
         }
 
         Time.timeScale = 0f;
+        Debug.Log(playerData.hasPlayedTutorial);
     }
     private void Start()
     {
