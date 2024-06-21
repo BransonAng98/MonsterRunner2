@@ -14,10 +14,11 @@ public class SideObjectiveQuestGiver : MonoBehaviour
     public PlayerDataSO playerInfoData;
 
     private bool questCompleted = false;
-
+    public EnemySpawner enemySpawnerScript;
     // Start is called before the first frame update
     void Start()
     {
+        enemySpawnerScript = SideObjective.enemySpawnerScript;
         SideObjective.goal.ChooseRandomObjectiveType();
         RunObjectiveFunction(SideObjective.goal.objectiveType);
         SideObjective.goldRewardAmt();

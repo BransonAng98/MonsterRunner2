@@ -876,8 +876,8 @@ Transform:
   m_GameObject: {fileID: 4344977594908537006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8997643780612425599}
   - {fileID: 2172151894890145984}
@@ -985,6 +985,7 @@ MonoBehaviour:
       destination: {fileID: 0}
       survivalTime: 0
       playerIsAlive: 0
+    enemyspawnerScript: {fileID: 0}
   questdialogueScript: {fileID: 0}
   destination: {fileID: 0}
   passenger: {fileID: 0}

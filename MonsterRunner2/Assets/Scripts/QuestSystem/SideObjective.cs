@@ -11,6 +11,7 @@ public class SideObjective
     public float goldReward;
 
     public SideObjectiveGoal goal;
+    public EnemySpawner enemySpawnerScript;
 
     public void CompleteSideObjective()
     {
@@ -20,7 +21,22 @@ public class SideObjective
 
     public void goldRewardAmt()
     {
-        float[] possiblegoldAMT = { 60f, 70f, 80f, 90f, 100f };
-        goldReward = possiblegoldAMT[Random.Range(0, possiblegoldAMT.Length)];
+        float[] possibleGoldAmounts;
+
+        switch (enemySpawnerScript.threatlvl)
+        {
+            case 1:
+                possibleGoldAmounts = new float[] { 20f, 30f, 40f };
+                break;
+            case 2:
+                possibleGoldAmounts = new float[] { 60f, 70f, 80f };
+                break;
+            default:
+                possibleGoldAmounts = new float[] { 0f }; // Default case if needed
+                break;
+        }
+
+        goldReward = possibleGoldAmounts[Random.Range(0, possibleGoldAmounts.Length)];
     }
+
 }
