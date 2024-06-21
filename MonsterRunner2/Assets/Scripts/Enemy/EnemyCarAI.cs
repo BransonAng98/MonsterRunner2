@@ -26,7 +26,7 @@ public class EnemyCarAI : MonoBehaviour
     private void Start()
     {
         ChangeToTransparentTexture();
-        StartCoroutine(FlashTransparent(4f, 1f));
+        StartCoroutine(FlashTransparent(4f, 0.5f));
     }
     private void Update()
     {
@@ -163,16 +163,19 @@ public class EnemyCarAI : MonoBehaviour
         material = mainTexture; // Start with the main texture
 
         bool switchMaterial = false;
+        float flashElapsedTime = 0f; // Local elapsed time for flashing
 
         while (true) // Infinite loop
         {
             elapsedTime += Time.deltaTime;
+            flashElapsedTime += Time.deltaTime;
 
-            if (elapsedTime >= flashSpeed)
+            if (flashElapsedTime >= flashSpeed)
             {
                 switchMaterial = !switchMaterial;
                 material = switchMaterial ? transparentTexture : mainTexture;
                 renderer.material = material;
+                flashElapsedTime = 0f; // Reset flash elapsed time
             }
 
             if (elapsedTime >= duration) // Check if duration is reached
