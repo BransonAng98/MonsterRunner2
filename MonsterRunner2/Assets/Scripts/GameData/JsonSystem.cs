@@ -25,7 +25,8 @@ public class JsonSystem : MonoBehaviour
 
         if (!playerInfoData.gameStart)
         {
-            LoadFromJson();
+            //Creating a new data for playerSO and vehicleSos and saving it to Json
+            CreateFreshJsonFile();
             playerInfoData.gameStart = true;
         }
     }
@@ -72,6 +73,40 @@ public class JsonSystem : MonoBehaviour
                 File.WriteAllText(playerDataFilePath, playerJson);
                 break;
         }
+    }
+
+    void CreateFreshJsonFile()
+    {
+        // Creating and populating the list of VehicleData
+        List<VehicleData> vehicleDataList = new List<VehicleData>();
+
+        // Populating the list with multiple VehicleData objects
+        foreach (var vehicleData in allVehicleDataList)
+        {
+            VehicleData carData = new VehicleData();
+            carData.vehicleName = vehicleData.vehicleName;
+            carData.vehicleID = vehicleData.vehicleID;
+            carData.speed = vehicleData.maxSpeed;
+            carData.ability1Level = vehicleData.ability1Level;
+            carData.ability2Level = vehicleData.ability2Level;
+
+            vehicleDataList.Add(carData);
+        }
+
+        // Convert the list to an array
+        VehicleData[] vehicleDataArray = vehicleDataList.ToArray();
+
+        // Serializing the array to JSON
+        string carJson = JsonHelper.ToJson(vehicleDataArray, true);
+        File.WriteAllText(vehicleDataFilePath, carJson);
+
+        PlayerInfoData playerData = new PlayerInfoData();
+        playerData.selectedVehicleID = 0;
+        playerData.money = 0;
+        playerData.gems = 0;
+        playerData.hasPlayedTutorial = false;
+        string playerJson = JsonUtility.ToJson(playerData, true);
+        File.WriteAllText(playerDataFilePath, playerJson);
     }
 
     public void LoadFromJson()
