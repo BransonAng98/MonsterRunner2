@@ -69,6 +69,7 @@ public class JsonSystem : MonoBehaviour
                 playerData.money = playerInfoData.money;
                 playerData.gems = playerInfoData.gems;
                 playerData.hasPlayedTutorial = playerInfoData.hasPlayedTutorial;
+                playerData.gameStart = playerInfoData.gameStart;
                 string playerJson = JsonUtility.ToJson(playerData, true);
                 File.WriteAllText(playerDataFilePath, playerJson);
                 break;
