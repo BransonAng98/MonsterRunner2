@@ -8,7 +8,7 @@ public class TutorialManager : MonoBehaviour
     public GameObject startGameScreen;
     public GameObject tutorialScreen;
 
-    private void Awake()
+    private void Start()
     {
         if (!playerData.hasPlayedTutorial)
         {
