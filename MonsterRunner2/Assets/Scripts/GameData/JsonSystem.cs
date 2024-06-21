@@ -31,6 +31,7 @@ public class JsonSystem : MonoBehaviour
         else
         {
             Debug.Log("player data file loc is" + playerDataFilePath);
+            LoadFromJson();
         }
     }
 
