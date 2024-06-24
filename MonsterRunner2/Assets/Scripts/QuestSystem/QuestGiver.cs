@@ -37,10 +37,10 @@ public class QuestGiver : MonoBehaviour
     private void Start()
     {
         quest.goal.ChooseRandomGoal();
-        gameStarted = false;
+        gameStarted = true;
         quest.enemyspawnerScript = enemySpawnerScript;
         buildingObjects = missionManager.buildingObjectsList;
-        StartCoroutine(StartGameSequence());
+        //StartCoroutine(StartGameSequence());
         RunGoalType(quest.goal.goaltype);
     }
 
@@ -58,34 +58,67 @@ public class QuestGiver : MonoBehaviour
 
         gameStarted = true;
 
-        StartNewQuest();
+        
     }
 
     private void Update()
     {
-        // Only reduce survival time if it's not on cooldown
+        switch (quest.goal.goaltype)
+        {
+            case QuestGoal.GoalType.Kill:
+                UpdateKillGoal();
+                break;
+            case QuestGoal.GoalType.Survive:
+                UpdateSurviveGoal();
+                break;
+            case QuestGoal.GoalType.Reach:
+                UpdateReachGoal();
+                break;
+            case QuestGoal.GoalType.none:
+            default:
+                // Handle any other objective types if needed
+                break;
+        }
+    }
+
+    private void UpdateKillGoal()
+    {
+        if (currentenemykilled == enemykilled)
+        {
+            CompleteQuest();
+            Debug.Log("Objective Completed!");
+        }
+    }
+
+    private void UpdateSurviveGoal()
+    {
         if (!isOnCooldown)
         {
             ReduceSurvivalTime();
+            if (survivaltime <= 0 && !player.isDead)
+            {
+                CompleteQuest();
+            }
         }
     }
+
+    private void UpdateReachGoal()
+    {
+        float distanceToDestination = Vector3.Distance(transform.position, destination.transform.position);
+        if (distanceToDestination < 0.5f) // Adjust the threshold as needed
+        {
+            CompleteQuest();
+        }
+    }
+
+
 
     private void ReduceSurvivalTime()
     {
         if (survivaltime > 0)
         {
             survivaltime -= Time.deltaTime;
-            if (survivaltime <= 0)
-            {
-                survivaltime = 0;
-                if (!player.isDead)
-                {
-                    quest.Complete();
-                    CompleteQuest();
-
-                    StartCoroutine(CooldownBeforeNextMission());
-                }
-            }
+           
         }
     }
 
@@ -93,18 +126,11 @@ public class QuestGiver : MonoBehaviour
     {
         isOnCooldown = true;
         yield return new WaitForSeconds(questCooldownTime);
-        StartNewQuest();
+       
         isOnCooldown = false;
     }
 
-    private void StartNewQuest()
-    {
-        quest.goal.SurviveWave();
-        quest.goldRewardAmt();
-        survivaltime = quest.goal.survivalTime;
-        enemySpawnerScript.UpdateEnemiesForThreatLevel();
-        PrintQuestDialogue();
-    }
+   
 
     public void CompleteQuest()
     {
@@ -147,22 +173,22 @@ public class QuestGiver : MonoBehaviour
         switch (goaltype)
         {
             case QuestGoal.GoalType.none:
-                // Do nothing for 'none' type
+              
                 break;
             case QuestGoal.GoalType.Kill:
-                // Run the enemy kill function
+            
                 quest.goal.EnemyKilled();
                 enemykilled = quest.goal.requiredKillAmount;
                 break;
             case QuestGoal.GoalType.Survive:
-                // Run the earn gold function
+      
                 quest.goal.SurviveWave();
                 survivaltime = quest.goal.survivalTime;
                 break;
             case QuestGoal.GoalType.Reach:
-                // Run the earn gold function
-                //SideObjective.goal.EarnGold();
-                //goldtobeEarned = SideObjective.goal.goldtobeEarnedAmt;
+                GetDestination();
+                quest.goal.ReachDestination();
+              
                 break;
             default:
                 // Handle any other objective types if needed

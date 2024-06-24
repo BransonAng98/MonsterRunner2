@@ -47,7 +47,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 0.76, z: 10}
+  m_Size: {x: 3, y: 0.76, z: 3}
   m_Center: {x: 0, y: 0.35, z: 0}
 --- !u!114 &4363903970403159762
 MonoBehaviour:
@@ -84,6 +84,8 @@ MonoBehaviour:
     currentAmount: 0
   player: {fileID: 0}
   destination: {fileID: 0}
+  enemykilled: 0
+  currentenemykilled: 0
   survivaltime: 0
   questCooldownTime: 0
   initialIntroDelay: 0

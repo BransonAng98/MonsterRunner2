@@ -36,6 +36,7 @@ public class enemyCarDriver : MonoBehaviour
     public EnemySpawner enemySpawnerScript;
     public int enemyType;
     public SideObjectiveQuestGiver sideobjective;
+    public QuestGiver questgiverScript;
     #endregion
 
     private void Awake()
@@ -255,6 +256,7 @@ public class enemyCarDriver : MonoBehaviour
             case 1:
                 isDead = true;
                 sideobjective.currentenemykilled++;
+                questgiverScript.currentenemykilled++;
                
                 Debug.Log("Killed by Player");
                 break;

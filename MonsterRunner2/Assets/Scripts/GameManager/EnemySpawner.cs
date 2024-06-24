@@ -10,9 +10,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public DemoPlayer playerData; // Assuming you have a PlayerData script to pass to enemies
     [SerializeField] private float Radius;
     [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
+    [SerializeField] public QuestGiver QuestGiverScript;
 
     public QuestGiver questGiverScript;
-
+    public GameObject player;
    [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
     private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
@@ -33,34 +34,36 @@ public class EnemySpawner : MonoBehaviour
        
 
         currentThreatLevel = threatlvl;
-        
+        UpdateEnemiesForThreatLevel();
     }
 
     private void Update()
     {
-        if(questGiverScript.gameStarted == true)
+
+        bool allNull = true;
+        foreach (var enemy in spawnedEnemies)
         {
-            if (currentThreatLevel != threatlvl)
+            if (enemy != null)
             {
-                currentThreatLevel = threatlvl;
-                UpdateEnemiesForThreatLevel();
-            }
-
-            bool allNull = true;
-            foreach (var enemy in spawnedEnemies)
-            {
-                if (enemy != null)
-                {
-                    allNull = false;
-                    break;
-                }
-            }
-
-            if (allNull)
-            {
-                UpdateEnemiesForThreatLevel();
+                allNull = false;
+                break;
             }
         }
+
+        if (allNull)
+        {
+            UpdateEnemiesForThreatLevel();
+        }
+        //if (questGiverScript.gameStarted == true)
+        //{
+        //    if (currentThreatLevel != threatlvl)
+        //    {
+        //        currentThreatLevel = threatlvl;
+               
+        //    }
+
+          
+        //}
     }
        
     public void UpdateEnemiesForThreatLevel()
@@ -295,6 +298,7 @@ public class EnemySpawner : MonoBehaviour
             enemyDriverlogic.playerscript = playerData;
             enemyDriverlogic.enemySpawnerScript = this;
             enemyDriverlogic.sideobjective = SideObjectiveQuestGiverScript;
+            enemyDriverlogic.questgiverScript = QuestGiverScript;
             // Assign other necessary properties to enemyDriverlogic
         }
         if (enemyGunnerAI != null)

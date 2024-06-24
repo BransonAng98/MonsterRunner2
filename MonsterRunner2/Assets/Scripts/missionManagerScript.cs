@@ -13,10 +13,6 @@ public class missionManagerScript : MonoBehaviour
     public QuestGiver questgiverEntity;
     public ObjectiveIndicator objectiveIndicator;
 
-   
-   
-   
-
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
     [SerializeField] public int passengerCount;
@@ -29,7 +25,7 @@ public class missionManagerScript : MonoBehaviour
     public int numberOfPassengersToSpawn = 5; // Number of passengers to spawn
     public float minSpacing = 100f; // Minimum spacing between passengers
 
-    //assignttoQuest
+    // assignttoQuest
     public QuestDialogueManager questDialogue;
     public DemoPlayer demoPlayer;
     public ScoreManagerScript scoreManager;
@@ -37,11 +33,14 @@ public class missionManagerScript : MonoBehaviour
     public List<GameObject> buildingObjects;
 
     public PlayerDataSO playerInfoData;
-
     public EnemySpawner enemySpawnerScript;
+
+    // List to hold references to instantiated passengers
+    public List<GameObject> passengers = new List<GameObject>();
 
     void Start()
     {
+        CollectBuildingObjects();
         SpawnPassengers();
     }
 
@@ -52,13 +51,46 @@ public class missionManagerScript : MonoBehaviour
             Vector3 spawnPosition = GetRandomSpawnPosition();
             if (IsWalkable(spawnPosition))
             {
-                AssignPassengerProperties(passengerPrefab);
-                Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
-              
+                GameObject passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
+                AssignPassengerProperties(passenger);
+                passengers.Add(passenger);
             }
             else
             {
                 Debug.LogWarning("Could not find a non-walkable position to spawn the passenger.");
+            }
+        }
+    }
+
+    void CollectBuildingObjects()
+    {
+        int buildingLayer = LayerMask.NameToLayer("Buildings");
+        if (buildingLayer == -1)
+        {
+            Debug.LogError("Layer 'building' not found. Please check the layer name.");
+            return;
+        }
+
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.layer == buildingLayer)
+            {
+                buildingObjectsList.Add(obj);
+            }
+        }
+
+        Debug.Log($"Collected {buildingObjectsList.Count} objects under the 'building' layer.");
+    }
+
+    public void DestroyOtherPassengers(GameObject currentPassenger)
+    {
+        for (int i = passengers.Count - 1; i >= 0; i--)
+        {
+            if (passengers[i] != currentPassenger)
+            {
+                Destroy(passengers[i]);
+                passengers.RemoveAt(i);
             }
         }
     }
@@ -68,7 +100,7 @@ public class missionManagerScript : MonoBehaviour
         QuestGiver questgiverScript = passengerEntity.GetComponent<QuestGiver>();
         PassengerController passengerScript = passengerEntity.GetComponent<PassengerController>();
 
-        if(questgiverScript != null)
+        if (questgiverScript != null)
         {
             questgiverScript.player = demoPlayer;
             questgiverScript.questDialogue = questDialogue;
@@ -80,7 +112,6 @@ public class missionManagerScript : MonoBehaviour
 
         if (passengerScript != null)
         {
-
             passengerScript.scoreManager = scoreManager;
             passengerScript.missionmanager = missionManager;
         }

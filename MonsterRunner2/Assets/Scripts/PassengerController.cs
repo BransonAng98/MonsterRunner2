@@ -4,55 +4,32 @@ using UnityEngine;
 
 public class PassengerController : MonoBehaviour
 {
-    
-
     public DemoPlayer playerscript;
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
     public GameObject passengerDestination;
-   
-   
+
     public missionManagerScript missionmanager;
     public ScoreManagerScript scoreManager;
 
-    
     public bool pickedUp;
     private float moveSpeed = 30f;
 
     // Start is called before the first frame update
     void Start()
     {
-        questgiver = GetComponentInChildren<QuestGiver>();
-       
+        questgiver = GetComponent<QuestGiver>();
         passengerDestination = questgiver.destination;
     }
 
-    void TriggerHouse(bool trigger)
-    {
-        
-        HouseScript selectedHouse = passengerDestination.GetComponentInChildren<HouseScript>();
-        if (trigger)
-        {
-            selectedHouse.TurnOnVFX();
-            
-        }
-        else
-        {
-            selectedHouse.CreateReachedVFX();
-            selectedHouse.TurnOffVFX();
-            
-        }
-    }
-
-   
     // Update is called once per frame
     void Update()
     {
         if (pickedUp)
         {
             Debug.Log("Take Me Home");
-            
+
             // Calculate direction towards the destination
             Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
 
@@ -70,11 +47,9 @@ public class PassengerController : MonoBehaviour
             float distanceToDestination = Vector3.Distance(transform.position, passengerDestination.transform.position);
             if (distanceToDestination < 0.5f) // Adjust the threshold as needed
             {
-
                 Debug.Log("ReachedHome");
-                playerscript.RestoreHealth();
-                TriggerHouse(false);
-            
+               
+                //TriggerHouse(false);
                 scoreManager.missionsCompleted++;
                 DestroyPassenger();
             }
@@ -84,9 +59,13 @@ public class PassengerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        {
-         
-            TriggerHouse(true);
+        {   
+            
+            // numberOfKills = playerData.KilCount;
+            // Destroy all other passengers
+            missionmanager.DestroyOtherPassengers(gameObject);
+
+            //TriggerHouse(true);
             pickedUp = true;
             idleVFX.SetActive(false);
             Instantiate(PickupVFX, transform.position, Quaternion.identity);
@@ -105,12 +84,13 @@ public class PassengerController : MonoBehaviour
             if (rb != null)
             {
                 rb.isKinematic = true;
-                }
-               
-            gameObject.SetActive(false);
+            }
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(false);
+            }
         }
     }
-
 
     public void DestroyPassenger()
     {
