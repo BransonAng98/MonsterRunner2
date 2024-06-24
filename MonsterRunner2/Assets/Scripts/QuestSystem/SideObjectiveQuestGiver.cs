@@ -79,7 +79,7 @@ public class SideObjectiveQuestGiver : MonoBehaviour
                 break;
             case SideObjectiveGoal.ObjectiveType.EarnGold:
                 // Run the earn gold function
-                SideObjective.goal.ReachDestination();
+                SideObjective.goal.EarnGold();
                 goldtobeEarned = SideObjective.goal.goldtobeEarnedAmt;
                 break;
             default:

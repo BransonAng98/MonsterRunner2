@@ -47,7 +47,7 @@ public class EnvironmentSpawner : MonoBehaviour
     void Start()
     {
         SpawnEnvironment();
-        missionManager.FindBuildingObjects();
+        //missionManager.FindBuildingObjects();
        
     }
 

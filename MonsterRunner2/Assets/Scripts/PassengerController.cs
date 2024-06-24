@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PassengerController : MonoBehaviour
 {
-    public int gunType;
+    
 
     public DemoPlayer playerscript;
     public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
     public GameObject passengerDestination;
-    public ObjectiveIndicator arrow;
-    public GunSystem gunSystem;
+   
+   
     public missionManagerScript missionmanager;
     public ScoreManagerScript scoreManager;
 
@@ -24,7 +24,7 @@ public class PassengerController : MonoBehaviour
     void Start()
     {
         questgiver = GetComponentInChildren<QuestGiver>();
-        arrow.UpdateObjective(0, this.transform);
+       
         passengerDestination = questgiver.destination;
     }
 
@@ -35,13 +35,13 @@ public class PassengerController : MonoBehaviour
         if (trigger)
         {
             selectedHouse.TurnOnVFX();
-            arrow.UpdateObjective(2, selectedHouse.gameObject.transform);
+            
         }
         else
         {
             selectedHouse.CreateReachedVFX();
             selectedHouse.TurnOffVFX();
-            arrow.UpdateObjective(3, null);
+            
         }
     }
 
@@ -74,7 +74,7 @@ public class PassengerController : MonoBehaviour
                 Debug.Log("ReachedHome");
                 playerscript.RestoreHealth();
                 TriggerHouse(false);
-                gunSystem.UpdateGunInfo(0);
+            
                 scoreManager.missionsCompleted++;
                 DestroyPassenger();
             }
@@ -85,7 +85,7 @@ public class PassengerController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gunSystem.UpdateGunInfo(gunType);
+         
             TriggerHouse(true);
             pickedUp = true;
             idleVFX.SetActive(false);
@@ -106,7 +106,7 @@ public class PassengerController : MonoBehaviour
             {
                 rb.isKinematic = true;
                 }
-                arrow.UpdateObjective(1, null);
+               
             gameObject.SetActive(false);
         }
     }

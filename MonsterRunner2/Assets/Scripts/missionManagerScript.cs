@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class missionManagerScript : MonoBehaviour
 {
@@ -11,157 +12,91 @@ public class missionManagerScript : MonoBehaviour
     public GameObject destination;
     public QuestGiver questgiverEntity;
     public ObjectiveIndicator objectiveIndicator;
-    public GunSystem gunSystem;
-    public QuestDialogueManager questDialogue;
-    public DemoPlayer demoPlayer;
-    public ScoreManagerScript scoreManager;
+
+   
+   
+   
 
     // List to hold all objects under the "building" layer
     public List<GameObject> buildingObjectsList = new List<GameObject>();
     [SerializeField] public int passengerCount;
-    public float spawnRadius = 40f; // Radius around the player for spawning passengers
-    private float minXRange = -300f; // Minimum spawning width for the x-axis
-    private float maxXRange = 300f; // Maximum spawning width for the x-axis
-    private float minZRange = -220f; // Minimum spawning width for the z-axis
-    private float maxZRange = 220f; // Maximum spawning width for the z-axis
-    private float minimumObstacleDistance = 20f;
 
     [SerializeField] private float survivalTime;
-    
+
+    public float spawnRadius = 100f; // Distance from the player to spawn the prefab
+    public float maxSearchRadius = 500f; // Maximum search radius for finding a walkable position
+    public int maxAttempts = 1000; // Maximum attempts to find a non-walkable position
+    public int numberOfPassengersToSpawn = 5; // Number of passengers to spawn
+    public float minSpacing = 100f; // Minimum spacing between passengers
+
+    //assignttoQuest
+    public QuestDialogueManager questDialogue;
+    public DemoPlayer demoPlayer;
+    public ScoreManagerScript scoreManager;
+    public missionManagerScript missionManager;
+    public List<GameObject> buildingObjects;
+
+    public PlayerDataSO playerInfoData;
+
+    public EnemySpawner enemySpawnerScript;
+
     void Start()
     {
-        //passengerCount = 0;
+        SpawnPassengers();
     }
 
-    private void Update()
+    public void SpawnPassengers()
     {
-        GetSurvivalTime();
-
-        if(passengerCount == 0)
+        for (int i = 0; i < numberOfPassengersToSpawn; i++)
         {
-            //CreatePassenger();
-        }
-    }
-    public void FindBuildingObjects()
-    {
-        Debug.Log("FindBuildings");
-        // Find the holder object named "Building"
-        if (buildingHolder == null)
-        {
-            Debug.LogWarning("Building holder object not found!");
-            return;
-        }
-
-        // Find all objects with the layer named "Buildings" under the "Building" holder object
-        Transform[] buildingChildren = buildingHolder.GetComponentsInChildren<Transform>();
-        foreach (Transform child in buildingChildren)
-        {
-            if (child.gameObject.layer == LayerMask.NameToLayer("Buildings"))
+            Vector3 spawnPosition = GetRandomSpawnPosition();
+            if (IsWalkable(spawnPosition))
             {
-                // Add the child object to the list if it's under the "Buildings" layer
-                buildingObjectsList.Add(child.gameObject);
-            }
-        }
-    }
-
-    public void GetDestination()
-    {
-        if(questgiverEntity != null)
-        {
-            destination = questgiverEntity.destination;
-        }
-    }
-
-    public void GetSurvivalTime()
-    {
-        if(questgiverEntity != null)
-        {
-            survivalTime = questgiverEntity.survivaltime;
-        }
-
-    }
-
-    Vector3 GetRandomPrefabPosition()
-    {
-        Vector3 playerPosition = player.transform.position;
-        Vector3 randomOffset = Random.insideUnitSphere * (spawnRadius - 10f); // Subtract 10 units from the spawn radius
-
-        // Ensure that the random offset is within the bounds of the ground object
-        Vector3 spawnPosition = playerPosition + randomOffset;
-        if (actualGround != null)
-        {
-            Renderer groundRenderer = actualGround.GetComponent<Renderer>();
-            if (groundRenderer != null)
-            {
-                Bounds groundBounds = groundRenderer.bounds;
-                // Adjust the bounds by 10 units
-                float minX = groundBounds.min.x + 25f;
-                float maxX = groundBounds.max.x - 25f;
-                float minZ = groundBounds.min.z + 25f;
-                float maxZ = groundBounds.max.z - 25f;
-
-                // Clamp the spawn position within the adjusted bounds
-                spawnPosition.x = Mathf.Clamp(spawnPosition.x, minX, maxX);
-                spawnPosition.z = Mathf.Clamp(spawnPosition.z, minZ, maxZ);
+                AssignPassengerProperties(passengerPrefab);
+                Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
+              
             }
             else
             {
-                Debug.LogWarning("Ground object does not have a Renderer component!");
+                Debug.LogWarning("Could not find a non-walkable position to spawn the passenger.");
             }
         }
-        else
+    }
+
+    private void AssignPassengerProperties(GameObject passengerEntity)
+    {
+        QuestGiver questgiverScript = passengerEntity.GetComponent<QuestGiver>();
+        PassengerController passengerScript = passengerEntity.GetComponent<PassengerController>();
+
+        if(questgiverScript != null)
         {
-            Debug.LogWarning("Ground object reference is null!");
+            questgiverScript.player = demoPlayer;
+            questgiverScript.questDialogue = questDialogue;
+            questgiverScript.scoreManager = scoreManager;
+            questgiverScript.missionManager = missionManager;
+            questgiverScript.playerInfoData = playerInfoData;
+            questgiverScript.enemySpawnerScript = enemySpawnerScript;
         }
 
-        // Ensure that the y-component is always 0
-        spawnPosition.y = 0f;
-
-        // Check for obstacles within a certain radius
-        Collider[] colliders = Physics.OverlapSphere(spawnPosition, minimumObstacleDistance);
-        foreach (Collider collider in colliders)
+        if (passengerScript != null)
         {
-            // If the collider is tagged as an obstacle
-            if (collider.CompareTag("Obstacle"))
-            {
-                // Adjust spawn position to be at least minimumObstacleDistance away from the obstacle
-                Vector3 directionToObstacle = spawnPosition - collider.transform.position;
-                float distanceToObstacle = directionToObstacle.magnitude;
-                if (distanceToObstacle < minimumObstacleDistance)
-                {
-                    spawnPosition += directionToObstacle.normalized * (minimumObstacleDistance - distanceToObstacle);
-                }
-            }
-        }
 
+            passengerScript.scoreManager = scoreManager;
+            passengerScript.missionmanager = missionManager;
+        }
+    }
+
+    Vector3 GetRandomSpawnPosition()
+    {
+        Vector2 randomDirection = Random.insideUnitCircle.normalized * spawnRadius;
+        Vector3 spawnPosition = player.transform.position + new Vector3(randomDirection.x, 0, randomDirection.y);
         return spawnPosition;
     }
 
-    public void CreatePassenger()
+    bool IsWalkable(Vector3 position)
     {
-        Vector3 spawnPosition = GetRandomPrefabPosition();
-        GameObject passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
-        PassengerController passengerController = passenger.GetComponentInChildren<PassengerController>();
-
-        if (passengerController != null)
-        {
-            passengerController.playerscript = demoPlayer;
-            passengerController.arrow = objectiveIndicator;
-            passengerController.gunSystem = gunSystem;
-            passengerController.scoreManager = scoreManager;
-            passengerController.missionmanager = this.GetComponent<missionManagerScript>();
-            questgiverEntity = passengerController.GetComponentInChildren<QuestGiver>();
-
-            if (questgiverEntity != null)
-            {
-                questgiverEntity.player = player.GetComponent<DemoPlayer>();
-                questgiverEntity.missionManager = this.GetComponent<missionManagerScript>();
-                questgiverEntity.questDialogue = questDialogue;
-            }
-        }
-
-        passengerCount++;
-        GetDestination();
+        NavMeshHit hit;
+        bool isWalkable = NavMesh.SamplePosition(position, out hit, Mathf.Infinity, NavMesh.AllAreas);
+        return isWalkable;
     }
-
 }

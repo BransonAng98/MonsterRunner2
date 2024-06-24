@@ -25,7 +25,7 @@ public class SideObjectiveGoal
         }
     }
 
-    public void ReachDestination()
+    public void EarnGold()
     {
         if (objectiveType == ObjectiveType.EarnGold)
         {
