@@ -7,6 +7,7 @@ public class PlayerDataSO : ScriptableObject
 {
     public int selectedVehicleID;
     public float money;
+    public float moneyAccumulatedInGame;
     public int gems;
     public bool gameStart;
     public bool hasPlayedTutorial;

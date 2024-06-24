@@ -1,0 +1,64 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CoinScript : MonoBehaviour
+{
+    public PlayerDataSO playerData;
+    public int money;
+    public ParticleSystem particles;
+    public float respawnTime;
+    public bool startRespawn;
+    public Collider coinCollider;
+    public MeshRenderer coinRenderer;
+
+    private float respawnTimeHolder;
+    // Start is called before the first frame update
+    void Start()
+    {
+        respawnTimeHolder = respawnTime;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            //Activate particles here
+            playerData.moneyAccumulatedInGame += money;
+            DeactiveObject();
+            startRespawn = true;
+            Debug.Log("Player obtained money");
+        }
+    }
+
+    void DeactiveObject()
+    {
+        coinRenderer.enabled = false;
+        coinCollider.enabled = false;
+    }
+
+    void ReactiveObject()
+    {
+        coinRenderer.enabled = true;
+        coinCollider.enabled = true;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (startRespawn)
+        {
+            if(respawnTime > 0f)
+            {
+                respawnTime -= Time.deltaTime;
+            }
+
+            else
+            {
+                ReactiveObject();
+                startRespawn = false;
+                respawnTime = respawnTimeHolder;
+            }
+        }
+    }
+}
