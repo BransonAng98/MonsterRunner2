@@ -67425,7 +67425,7 @@ GameObject:
   m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &754238775
 Transform:
@@ -67435,7 +67435,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754238774}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -67677,7 +67677,20 @@ MonoBehaviour:
   - {fileID: 1104775940}
   - {fileID: 1810159059}
   - {fileID: 1818320852}
-  alphabetList: []
+  deactiveList:
+  - {fileID: 1191660029278914827}
+  - {fileID: 6899946196280393312}
+  - {fileID: 7631386268959869590}
+  - {fileID: 8187978345736050156}
+  - {fileID: 5333914094736098015}
+  - {fileID: 34843522959392498}
+  activeList:
+  - {fileID: 4382650809201787328}
+  - {fileID: 8450648017429616197}
+  - {fileID: 2230448472299639724}
+  - {fileID: 7535526322181544472}
+  - {fileID: 2997264264440806939}
+  - {fileID: 2320831737731050065}
   letterTokenPrefab: {fileID: 7035016444539973545, guid: 3d8ca860298d7cf40b3c1041ce5e1804,
     type: 3}
   spawnedLetterTokens: []
@@ -86368,7 +86381,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 934717420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 511, y: 0.5, z: -267.1}
+  m_LocalPosition: {x: 212.7, y: 2.5, z: -378.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102721,7 +102734,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1104775939}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 279.1, y: 0.5, z: 14.7}
+  m_LocalPosition: {x: 279.1, y: 2.5, z: 14.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -126240,7 +126253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372579265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 566.7, y: 0.5, z: -485.1}
+  m_LocalPosition: {x: 566.7, y: 2.5, z: -485.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152708,7 +152721,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681659116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 473.97, y: 0, z: 185}
+  m_LocalPosition: {x: 374.1, y: 0, z: 185}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -165052,7 +165065,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810159058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 294.7, y: 0.5, z: -374.5}
+  m_LocalPosition: {x: 294.7, y: 2.5, z: -374.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -165524,7 +165537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818320851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 175.7, y: 0.5, z: -577}
+  m_LocalPosition: {x: 175.7, y: 2.5, z: -577}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -185382,7 +185395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2008916827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 689, y: 0.5, z: 0.2}
+  m_LocalPosition: {x: 689, y: 2.5, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -188143,7 +188156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050076301}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 899.5, y: 0.5, z: -295.4}
+  m_LocalPosition: {x: 899.5, y: 2.5, z: -295.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201544,7 +201557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8434237570142537810
 RectTransform:
   m_ObjectHideFlags: 0
