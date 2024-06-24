@@ -1,13 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 public class QuestGiver : MonoBehaviour
 {
     public Quest quest;
+    public QuestGoal questGoalScript;
     public DemoPlayer player;
     public GameObject destination;
+
+    [SerializeField] private int enemykilled;
+    [SerializeField] public int currentenemykilled;
 
     public float survivaltime;
     public float questCooldownTime; // Cooldown duration between quests
@@ -27,12 +32,16 @@ public class QuestGiver : MonoBehaviour
     private bool isFirstQuest = true;
     public bool gameStarted;
 
+    private bool questcompleted = false;
+
     private void Start()
     {
+        quest.goal.ChooseRandomGoal();
         gameStarted = false;
         quest.enemyspawnerScript = enemySpawnerScript;
         buildingObjects = missionManager.buildingObjectsList;
         StartCoroutine(StartGameSequence());
+        RunGoalType(quest.goal.goaltype);
     }
 
     private IEnumerator StartGameSequence()
@@ -132,5 +141,35 @@ public class QuestGiver : MonoBehaviour
         int index = Random.Range(0, questDialogue.rewardText.Length);
         questDialogue.TypeText(false, index); // Show reward text when quest is completed
     }
+
+    void RunGoalType(QuestGoal.GoalType goaltype)
+    {
+        switch (goaltype)
+        {
+            case QuestGoal.GoalType.none:
+                // Do nothing for 'none' type
+                break;
+            case QuestGoal.GoalType.Kill:
+                // Run the enemy kill function
+                quest.goal.EnemyKilled();
+                enemykilled = quest.goal.requiredKillAmount;
+                break;
+            case QuestGoal.GoalType.Survive:
+                // Run the earn gold function
+                quest.goal.SurviveWave();
+                survivaltime = quest.goal.survivalTime;
+                break;
+            case QuestGoal.GoalType.Reach:
+                // Run the earn gold function
+                //SideObjective.goal.EarnGold();
+                //goldtobeEarned = SideObjective.goal.goldtobeEarnedAmt;
+                break;
+            default:
+                // Handle any other objective types if needed
+                break;
+        }
+    }
 }
+
+
 
