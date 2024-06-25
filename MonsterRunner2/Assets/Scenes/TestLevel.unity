@@ -198515,9 +198515,9 @@ RectTransform:
   m_Father: {fileID: 5486534011018361703}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 702.5002, y: -84.64014}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 171.9911, y: 171.9911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &38036769054559099
@@ -198588,9 +198588,9 @@ RectTransform:
   m_Father: {fileID: 5486534011018361703}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 269.1667, y: -84.64014}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 171.9911, y: 171.9911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &414282363715173488
@@ -198634,9 +198634,9 @@ RectTransform:
   m_Father: {fileID: 5486534011018361703}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 377.50006, y: -84.64014}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 171.9911, y: 171.9911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &587029644730655621
@@ -199255,9 +199255,9 @@ RectTransform:
   m_Father: {fileID: 5486534011018361703}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 594.1668, y: -84.64014}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 171.9911, y: 171.9911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2844773012599530113
@@ -199347,7 +199347,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &3194649926273821821
 GameObject:
   m_ObjectHideFlags: 0
@@ -200986,9 +200986,9 @@ RectTransform:
   m_Father: {fileID: 5486534011018361703}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 485.83344, y: -84.64014}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 171.9911, y: 171.9911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6167999024353762868
@@ -202796,32 +202796,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8254553216338819774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8388734564758905129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 4
-  m_Spacing: -430
-  m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
-  m_ChildScaleWidth: 0
-  m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
 --- !u!114 &8324128993009064460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202885,7 +202859,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5285184023670679990}
-  - component: {fileID: 8254553216338819774}
   m_Layer: 5
   m_Name: I.Drive_Icon_Activated
   m_TagString: Untagged
@@ -203002,9 +202975,9 @@ RectTransform:
   m_Father: {fileID: 5486534011018361703}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 810.83356, y: -84.64014}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 171.9911, y: 171.9911}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8866888030518258400
