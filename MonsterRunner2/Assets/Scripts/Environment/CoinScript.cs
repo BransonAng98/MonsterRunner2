@@ -25,6 +25,7 @@ public class CoinScript : MonoBehaviour
         {
             //Activate particles here
             playerData.moneyAccumulatedInGame += money;
+            Instantiate(particles, transform.position, transform.rotation);
             DeactiveObject();
             startRespawn = true;
             Debug.Log("Player obtained money");

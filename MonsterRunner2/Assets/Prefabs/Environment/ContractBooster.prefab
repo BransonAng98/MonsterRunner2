@@ -61,7 +61,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contractID: 0
-  particles: {fileID: 0}
+  particles: {fileID: 8734376389421901152, guid: 3a0b447e5331db64c83282eb910d0aea,
+    type: 3}
   respawnTime: 45
   startRespawn: 0
   coinCollider: {fileID: 2011461910349696715}
