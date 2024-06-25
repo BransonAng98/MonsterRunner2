@@ -42,9 +42,11 @@ public class PassengerController : MonoBehaviour
                 {
                     child.gameObject.SetActive(true);
                 }
+             
+                questgiverScript.CompleteQuest();
                 Debug.Log("ReachedHome");
-                // Calculate direction towards the destination
-                Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
+            // Calculate direction towards the destination
+                 Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
 
                 // Move towards the destination
                 transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);

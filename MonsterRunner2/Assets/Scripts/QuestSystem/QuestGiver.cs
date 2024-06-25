@@ -85,7 +85,7 @@ public class QuestGiver : MonoBehaviour
                 break;
             case "Reach":
                 UpdateReachGoal();
-                Debug.Log("CheckingReachQuest");
+                
                 break;
             case "None":
             default:
@@ -143,6 +143,7 @@ public class QuestGiver : MonoBehaviour
 
     public void CompleteQuest()
     {
+        Debug.Log("QuestCompleted");
         questCompleted = true;
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
@@ -205,6 +206,7 @@ public class QuestGiver : MonoBehaviour
     public void RunGoalType(string goaltype)
     {
         PrintQuestDialogue();
+        quest.goldRewardAmt();
         switch (goaltype)
         {
             case "Kill":
