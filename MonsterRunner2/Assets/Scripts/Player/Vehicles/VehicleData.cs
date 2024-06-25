@@ -10,5 +10,7 @@ public class VehicleData
     public int vehicleID;
     public float speed;
     public int ability1Level;
+    public Sprite ability1Sprite;
     public int ability2Level;
+    public Sprite ability2Sprite;
 }

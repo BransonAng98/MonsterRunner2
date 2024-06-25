@@ -20,9 +20,11 @@ public class PlayerCarDisplay : MonoBehaviour
     public List<CarType> cars;
     public int selectedCarID;
     public int activateID;
+    public Sprite ability1Sprite;
+    public Sprite ability2Sprite;
     public List<GameObject> displayCars = new List<GameObject>();
     public TextMeshProUGUI upgradeCarDisplayName;
-    public PlayerInfoData playerData;
+    public PlayerDataSO playerData;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +43,9 @@ public class PlayerCarDisplay : MonoBehaviour
 
             MeshRenderer mat = dCars.GetComponent<MeshRenderer>();
             mat.material = cars[id].bodyMaterial;
+
+            ability1Sprite = cars[id].vehicleData.ability1Sprite;
+            ability2Sprite = cars[id].vehicleData.ability2Sprite;
         }
 
         upgradeCarDisplayName.text = cars[id].vehicleName;

@@ -27,6 +27,10 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI activeSkillLevelText;
     public TextMeshProUGUI lockedSkillLevelText;
 
+    public Image ability1Icon;
+    public Image ability2Icon;
+    public Image ability2LockedIcon;
+
     public Button leftArrow;
     public Button rightArrow;
     public Button setActiveButton;
@@ -36,13 +40,12 @@ public class UpgradeManager : MonoBehaviour
     private Skill lockedSkill;
 
     public PlayerCarDisplay carDisplay;
-    public PlayerInfoData playerData;
-    public PlayerDataSO playerInfoData;
+    public PlayerDataSO playerData;
     public JsonSystem json;
 
     void Start()
     {
-        currency = playerInfoData.money;
+        currency = playerData.money;
         activeSkill = new Skill(true, 100);  // Initial cost is 5
         lockedSkill = new Skill(false, 100); // Initial cost is 5
 
@@ -57,7 +60,18 @@ public class UpgradeManager : MonoBehaviour
         //leftArrow.onClick.AddListener(() => SwitchCar(0));
         //rightArrow.onClick.AddListener(() => SwitchCar(1));
         upgradeLockedSkillBtn.SetActive(false);
+
+        //ActiveIconDisplay();
+    }
+
+    private void OnEnable()
+    {
         ActiveIconDisplay();
+    }
+
+    public void ResetVehicleSelection()
+    {
+        carDisplay.selectedCarID = 0;
     }
 
     void GainCurrency()
@@ -94,14 +108,19 @@ public class UpgradeManager : MonoBehaviour
     {
         carDisplay.activateID = carDisplay.selectedCarID;
         carDisplay.UpdateCarSkin(carDisplay.activateID);
-        playerInfoData.selectedVehicleID = carDisplay.selectedCarID;
+        playerData.selectedVehicleID = carDisplay.selectedCarID;
         json.SaveToJson(1);
         ActiveIconDisplay();
     }
 
-    void ActiveIconDisplay()
+    public void ActiveIconDisplay()
     {
-        if (carDisplay.selectedCarID == carDisplay.activateID)
+        carDisplay.UpdateCarSkin(carDisplay.selectedCarID);
+        ability1Icon.sprite = carDisplay.ability1Sprite;
+        ability2Icon.sprite = carDisplay.ability2Sprite;
+        ability2LockedIcon.sprite = carDisplay.ability2Sprite;
+
+        if (carDisplay.selectedCarID == playerData.selectedVehicleID)
         {
             activeIndicator.interactable = false;
         }
@@ -121,7 +140,6 @@ public class UpgradeManager : MonoBehaviour
                 if(carDisplay.selectedCarID > 0)
                 {
                     carDisplay.selectedCarID--;
-                    carDisplay.UpdateCarSkin(carDisplay.selectedCarID);
                 }
                 break;
             
@@ -130,7 +148,6 @@ public class UpgradeManager : MonoBehaviour
                 if(carDisplay.selectedCarID < 1)
                 {
                     carDisplay.selectedCarID++;
-                    carDisplay.UpdateCarSkin(carDisplay.selectedCarID);
                 }
                 break;
         }
@@ -155,10 +172,9 @@ public class UpgradeManager : MonoBehaviour
     void UpdateUI()
     {
         currencyText.text = "Currency: " + currency;
-        playerInfoData.money = currency;
+        playerData.money = currency;
         upgradeActiveSkillButtonText.text = $"Upgrade Skill (Cost: {activeSkill.cost})";
         unlockSkillButtonText.text = $"Unlock Skill (Cost: {lockedSkill.cost})";
-
         // Check if the skill is unlocked to display and enable the upgrade button
         if (lockedSkill.unlocked)
         {

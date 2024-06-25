@@ -16,7 +16,9 @@ public class PlayerSO : ScriptableObject
     public Mesh vehicleBody;
     public Material bodyMaterial;
     public AbilitySO ability1;
+    public Sprite ability1Sprite;
     public int ability1Level;
     public AbilitySO ability2;
     public int ability2Level;
+    public Sprite ability2Sprite;
 }

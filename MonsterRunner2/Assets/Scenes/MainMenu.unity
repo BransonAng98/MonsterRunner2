@@ -412,6 +412,7 @@ MonoBehaviour:
   gameplayUI: {fileID: 0}
   pauseMenu: {fileID: 0}
   loadingScreen: {fileID: 5963547017874037602}
+  popUpScreen: {fileID: 0}
   loadingSlider: {fileID: 5963547017709299474}
   currentMenu: {fileID: 0}
   hasStarted: 0
@@ -460,18 +461,15 @@ MonoBehaviour:
   activeSkillBtn: {fileID: 28773843}
   activeSkillLevelText: {fileID: 1780924087}
   lockedSkillLevelText: {fileID: 765033976}
+  ability1Icon: {fileID: 1709536232}
+  ability2Icon: {fileID: 331413434}
+  ability2LockedIcon: {fileID: 2141324649}
   leftArrow: {fileID: 1320807393}
   rightArrow: {fileID: 235517903}
   setActiveButton: {fileID: 1442651831}
   activeIndicator: {fileID: 1495239321}
   carDisplay: {fileID: 69682415}
-  playerData:
-    selectedVehicleID: 0
-    money: 0
-    gems: 0
-    gameStart: 0
-    hasPlayedTutorial: 0
-  playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
+  playerData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   json: {fileID: 69682414}
 --- !u!114 &69682414
 MonoBehaviour:
@@ -521,16 +519,13 @@ MonoBehaviour:
       type: 3}
   selectedCarID: 0
   activateID: 0
+  ability1Sprite: {fileID: 0}
+  ability2Sprite: {fileID: 0}
   displayCars:
   - {fileID: 1679084736413076216}
   - {fileID: 423124534}
   upgradeCarDisplayName: {fileID: 1007595020}
-  playerData:
-    selectedVehicleID: 0
-    money: 0
-    gems: 0
-    gameStart: 0
-    hasPlayedTutorial: 0
+  playerData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
 --- !u!1 &92632928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,7 +2104,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f5a9593619cae42d3a04061c5e684d47, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a26c3e75807e36d49be126d4dfe62d3f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2669,7 +2664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &431141289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2681,10 +2676,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1709536231}
+  m_Children: []
   m_Father: {fileID: 1178498878}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -2711,7 +2705,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 532b473d3117a4bfea1c0a9b6ddc1cc2, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8141,6 +8135,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1709536231}
   - {fileID: 431141289}
   - {fileID: 2141324648}
   m_Father: {fileID: 969896656}
@@ -10760,19 +10755,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1495239322}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 69682411}
-        m_TargetAssemblyTypeName: GameMenuManager, Assembly-CSharp
-        m_MethodName: ReturnToMain
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1495239322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11311,6 +11294,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1253102394}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 69682413}
+        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
+        m_MethodName: ActiveIconDisplay
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12350,6 +12345,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 69682413}
+        m_TargetAssemblyTypeName: UpgradeManager, Assembly-CSharp
+        m_MethodName: ResetVehicleSelection
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1690669594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12592,12 +12599,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 431141289}
+  m_Father: {fileID: 1178498878}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 312.5, y: -144.5566}
   m_SizeDelta: {x: 247.53613, y: 266.4916}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1709536232
@@ -12620,7 +12627,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2485c9e6454994b36a896bc87d27d1b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86c0a18aa302e7a449c51acb82c16bb2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15134,7 +15141,7 @@ RectTransform:
   m_Children:
   - {fileID: 331413433}
   m_Father: {fileID: 1178498878}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -15154,14 +15161,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 58b4b0657ad1f4473b181614294c2252, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

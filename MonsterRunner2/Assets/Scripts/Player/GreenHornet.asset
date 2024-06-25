@@ -24,6 +24,8 @@ MonoBehaviour:
   bodyMaterial: {fileID: -2310514774154243031, guid: 5eac0803a389c9b48aaeedf9a9ac90a5,
     type: 3}
   ability1: {fileID: 11400000, guid: edaa009cec62e5e40ae1f9fb57d1f4f2, type: 2}
+  ability1Sprite: {fileID: 21300000, guid: 86c0a18aa302e7a449c51acb82c16bb2, type: 3}
   ability1Level: 1
   ability2: {fileID: 11400000, guid: 5845b80f1ace5404da96fb0c1aca05c8, type: 2}
   ability2Level: 0
+  ability2Sprite: {fileID: 21300000, guid: a26c3e75807e36d49be126d4dfe62d3f, type: 3}
