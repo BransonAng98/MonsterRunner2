@@ -10,7 +10,7 @@ public class missionManagerScript : MonoBehaviour
     public GameObject player; // Reference to the player GameObject
     public GameObject passengerPrefab;
     public GameObject destination;
-    public QuestGiver questgiverEntity;
+   
     public ObjectiveIndicator objectiveIndicator;
 
     // List to hold all objects under the "building" layer
@@ -26,6 +26,7 @@ public class missionManagerScript : MonoBehaviour
     public float minSpacing = 100f; // Minimum spacing between passengers
 
     // assignttoQuest
+    public QuestGiver questgiverEntity;
     public QuestDialogueManager questDialogue;
     public DemoPlayer demoPlayer;
     public ScoreManagerScript scoreManager;
@@ -52,8 +53,9 @@ public class missionManagerScript : MonoBehaviour
             if (IsWalkable(spawnPosition))
             {
                 GameObject passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
-                AssignPassengerProperties(passenger);
+             
                 passengers.Add(passenger);
+                AssignPassengerProperties(passenger);
             }
             else
             {
@@ -97,23 +99,14 @@ public class missionManagerScript : MonoBehaviour
 
     private void AssignPassengerProperties(GameObject passengerEntity)
     {
-        QuestGiver questgiverScript = passengerEntity.GetComponent<QuestGiver>();
         PassengerController passengerScript = passengerEntity.GetComponent<PassengerController>();
-
-        if (questgiverScript != null)
-        {
-            questgiverScript.player = demoPlayer;
-            questgiverScript.questDialogue = questDialogue;
-            questgiverScript.scoreManager = scoreManager;
-            questgiverScript.missionManager = missionManager;
-            questgiverScript.playerInfoData = playerInfoData;
-            questgiverScript.enemySpawnerScript = enemySpawnerScript;
-        }
 
         if (passengerScript != null)
         {
+            
             passengerScript.scoreManager = scoreManager;
             passengerScript.missionmanager = missionManager;
+            passengerScript.questgiverScript = questgiverEntity;
         }
     }
 

@@ -255,8 +255,9 @@ public class enemyCarDriver : MonoBehaviour
                 break;
             case 1:
                 isDead = true;
-                sideobjective.currentenemykilled++;
                 questgiverScript.currentenemykilled++;
+                sideobjective.currentenemykilled++;
+                
                
                 Debug.Log("Killed by Player");
                 break;

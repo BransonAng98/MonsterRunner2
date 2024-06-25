@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
     [SerializeField] public QuestGiver QuestGiverScript;
 
-    public QuestGiver questGiverScript;
+    public bool startSpawning;
     public GameObject player;
    [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
     private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
@@ -31,10 +31,10 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         // Assign the player transform by finding the object with the tag "Player"
-       
 
+        startSpawning = false;
         currentThreatLevel = threatlvl;
-        UpdateEnemiesForThreatLevel();
+        //UpdateEnemiesForThreatLevel();
     }
 
     private void Update()
@@ -50,20 +50,11 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        if (allNull)
+        if (allNull & startSpawning == true)
         {
             UpdateEnemiesForThreatLevel();
         }
-        //if (questGiverScript.gameStarted == true)
-        //{
-        //    if (currentThreatLevel != threatlvl)
-        //    {
-        //        currentThreatLevel = threatlvl;
-               
-        //    }
-
-          
-        //}
+     
     }
        
     public void UpdateEnemiesForThreatLevel()
@@ -280,6 +271,19 @@ public class EnemySpawner : MonoBehaviour
         // Pick a random valid spawn position from the list
         int randomIndex = Random.Range(0, validSpawnPositions.Count);
         return validSpawnPositions[randomIndex];
+    }
+
+    public void DestroyAllEnemies()
+    {
+        foreach (var enemy in spawnedEnemies)
+        {
+            if (enemy != null)
+            {
+                Destroy(enemy);
+            }
+        }
+
+        spawnedEnemies.Clear(); // Clear the list after destroying all enemies
     }
 
     private void AssignEnemyProperties(GameObject spawnedEnemy)
