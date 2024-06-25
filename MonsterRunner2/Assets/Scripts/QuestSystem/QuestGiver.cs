@@ -25,10 +25,11 @@ public class QuestGiver : MonoBehaviour
     public List<GameObject> buildingObjects;
 
     public PlayerDataSO playerInfoData;
-
+    [SerializeField]private bool questCompleted; // Add this variable to track quest completion
     public EnemySpawner enemySpawnerScript;
 
-    private bool isOnCooldown = false;
+    [SerializeField]public bool countdownStart;
+    [SerializeField] private bool isOnCooldown;
     private bool isFirstQuest = true;
     public bool gameStarted;
 
@@ -36,12 +37,16 @@ public class QuestGiver : MonoBehaviour
 
     private void Start()
     {
-        quest.goal.ChooseRandomGoal();
+        questCompleted = false;
+        countdownStart = false;
+        //quest.goal.ChooseRandomGoal();
         gameStarted = true;
         quest.enemyspawnerScript = enemySpawnerScript;
         buildingObjects = missionManager.buildingObjectsList;
+
         //StartCoroutine(StartGameSequence());
-        RunGoalType(quest.goal.goaltype);
+        GetDestination();
+       
     }
 
     private IEnumerator StartGameSequence()
@@ -63,18 +68,23 @@ public class QuestGiver : MonoBehaviour
 
     private void Update()
     {
+        if(countdownStart == true)
+        {
+            ReduceSurvivalTime();
+        }
+        
         switch (quest.goal.goaltype)
         {
-            case QuestGoal.GoalType.Kill:
+            case "Kill":
                 UpdateKillGoal();
                 break;
-            case QuestGoal.GoalType.Survive:
+            case "Survive":
                 UpdateSurviveGoal();
                 break;
-            case QuestGoal.GoalType.Reach:
+            case "Reach":
                 UpdateReachGoal();
                 break;
-            case QuestGoal.GoalType.none:
+            case "None":
             default:
                 // Handle any other objective types if needed
                 break;
@@ -83,7 +93,7 @@ public class QuestGiver : MonoBehaviour
 
     private void UpdateKillGoal()
     {
-        if (currentenemykilled == enemykilled)
+        if (currentenemykilled >= enemykilled & !questCompleted)
         {
             CompleteQuest();
             Debug.Log("Objective Completed!");
@@ -92,20 +102,16 @@ public class QuestGiver : MonoBehaviour
 
     private void UpdateSurviveGoal()
     {
-        if (!isOnCooldown)
+        if (survivaltime <= 0 && !player.isDead & !questCompleted)
         {
-            ReduceSurvivalTime();
-            if (survivaltime <= 0 && !player.isDead)
-            {
-                CompleteQuest();
-            }
+            CompleteQuest();
         }
     }
 
     private void UpdateReachGoal()
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination.transform.position);
-        if (distanceToDestination < 0.5f) // Adjust the threshold as needed
+        if (distanceToDestination < 0.5f & !questCompleted) // Adjust the threshold as needed
         {
             CompleteQuest();
         }
@@ -134,11 +140,20 @@ public class QuestGiver : MonoBehaviour
 
     public void CompleteQuest()
     {
+        questCompleted = true;
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
         playerInfoData.money += scoreManager.goldEarned;
+        missionManager.SpawnPassengers();
+        enemySpawnerScript.DestroyAllEnemies();
+        enemySpawnerScript.startSpawning = false;
 
         PrintRewardDialogue();
+    }
+
+    public void SpawnEnemies()
+    {
+        enemySpawnerScript.startSpawning = true;
     }
 
     public void GetDestination()
@@ -147,6 +162,7 @@ public class QuestGiver : MonoBehaviour
         {
             GameObject randomBuilding = buildingObjects[Random.Range(0, buildingObjects.Count)];
             destination = randomBuilding;
+            Debug.Log("GetDestination");
         }
     }
 
@@ -168,30 +184,25 @@ public class QuestGiver : MonoBehaviour
         questDialogue.TypeText(false, index); // Show reward text when quest is completed
     }
 
-    void RunGoalType(QuestGoal.GoalType goaltype)
+    public void RunGoalType(string goaltype)
     {
         switch (goaltype)
         {
-            case QuestGoal.GoalType.none:
-              
-                break;
-            case QuestGoal.GoalType.Kill:
-            
+            case "Kill":
                 quest.goal.EnemyKilled();
                 enemykilled = quest.goal.requiredKillAmount;
                 break;
-            case QuestGoal.GoalType.Survive:
-      
+
+            case "Survive":
                 quest.goal.SurviveWave();
                 survivaltime = quest.goal.survivalTime;
                 break;
-            case QuestGoal.GoalType.Reach:
-                GetDestination();
+
+            case "Reach":
                 quest.goal.ReachDestination();
-              
                 break;
+
             default:
-                // Handle any other objective types if needed
                 break;
         }
     }

@@ -5,22 +5,25 @@ using UnityEngine;
 public class PassengerController : MonoBehaviour
 {
     public DemoPlayer playerscript;
-    public QuestGiver questgiver;
     public GameObject idleVFX;
     public GameObject PickupVFX;
     public GameObject passengerDestination;
 
+    public QuestGiver questgiverScript;
     public missionManagerScript missionmanager;
     public ScoreManagerScript scoreManager;
 
     public bool pickedUp;
     private float moveSpeed = 30f;
 
+    [SerializeField] private int passengerType;
+
     // Start is called before the first frame update
     void Start()
     {
-        questgiver = GetComponent<QuestGiver>();
-        passengerDestination = questgiver.destination;
+        AssignPassengerType();
+      
+        passengerDestination = questgiverScript.destination;
     }
 
     // Update is called once per frame
@@ -28,8 +31,6 @@ public class PassengerController : MonoBehaviour
     {
         if (pickedUp)
         {
-            Debug.Log("Take Me Home");
-
             // Calculate direction towards the destination
             Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
 
@@ -59,17 +60,15 @@ public class PassengerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-        {   
-            
-            // numberOfKills = playerData.KilCount;
-            // Destroy all other passengers
+        {
+            SetQuestTypeBasedOnPassengerType();
             missionmanager.DestroyOtherPassengers(gameObject);
-
+            questgiverScript.SpawnEnemies();
             //TriggerHouse(true);
             pickedUp = true;
             idleVFX.SetActive(false);
             Instantiate(PickupVFX, transform.position, Quaternion.identity);
-            //questgiver.AcceptQuest();
+            
             Collider[] passengerCollider = GetComponentsInChildren<Collider>();
             if (passengerCollider != null)
             {
@@ -89,6 +88,37 @@ public class PassengerController : MonoBehaviour
             {
                 child.gameObject.SetActive(false);
             }
+        }
+    }
+
+    private void AssignPassengerType()
+    {
+        passengerType = Random.Range(1, 4); // Assign a random passenger type between 1 and 3
+    }
+
+    private void SetQuestTypeBasedOnPassengerType()
+    {
+        switch (passengerType)
+        {
+            case 1:
+                questgiverScript.quest.goal.goaltype = "Kill";
+                questgiverScript.RunGoalType("Kill");
+                Debug.Log("BeingRun1");
+                break;
+            case 2:
+                questgiverScript.quest.goal.goaltype = "Reach";
+                questgiverScript.RunGoalType("Reach");
+                Debug.Log("BeingRun2");
+                break;
+            case 3:
+                questgiverScript.quest.goal.goaltype = "Survive";
+                questgiverScript.RunGoalType("Survive");
+                questgiverScript.countdownStart = true;
+                Debug.Log("BeingRun3");
+                break;
+            default:
+                questgiverScript.quest.goal.goaltype = "None";
+                break;
         }
     }
 
