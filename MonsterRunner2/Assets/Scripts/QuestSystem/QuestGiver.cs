@@ -10,6 +10,7 @@ public class QuestGiver : MonoBehaviour
     public QuestGoal questGoalScript;
     public DemoPlayer player;
     public GameObject destination;
+    public GameObject redDot;
 
     [SerializeField] public int enemykilled;
     [SerializeField] public int currentenemykilled;
@@ -33,6 +34,7 @@ public class QuestGiver : MonoBehaviour
     [SerializeField]public bool countdownStart;
     [SerializeField] private bool isOnCooldown;
     private bool isFirstQuest = true;
+    public bool isInProgress = false;
     public bool gameStarted;
 
     private bool questcompleted = false;
@@ -70,6 +72,7 @@ public class QuestGiver : MonoBehaviour
 
     private void Update()
     {
+        UpdateRedDot();
         if (destination != null)
         {
             distancetoDestination = Vector3.Distance(player.transform.position, destination.transform.position);
@@ -190,6 +193,20 @@ public class QuestGiver : MonoBehaviour
     {
         int index = Random.Range(0, questDialogue.rewardText.Length);
         questDialogue.TypeText(false, index); // Show reward text when quest is completed
+        isInProgress = false;
+        
+    }
+
+    public void UpdateRedDot()
+    {
+        if (isInProgress)
+        {
+            redDot.SetActive(true);
+        }
+        else
+        {
+            redDot.SetActive(false);
+        }
     }
 
     public void RunGoalType(string goaltype)
@@ -199,15 +216,18 @@ public class QuestGiver : MonoBehaviour
             case "Kill":
                 quest.goal.EnemyKilled();
                 enemykilled = quest.goal.requiredKillAmount;
+                isInProgress = true;
                 break;
 
             case "Survive":
                 quest.goal.SurviveWave();
                 survivaltime = quest.goal.survivalTime;
+                isInProgress = true;
                 break;
 
             case "Reach":
                 quest.goal.ReachDestination();
+                isInProgress = true;
                 break;
 
             default:

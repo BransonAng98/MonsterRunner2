@@ -23,6 +23,7 @@ public class GameMenuManager : MonoBehaviour
     public PlayerDataSO playerData;
     public PlayerCarDisplay carDisplay;
     public JsonSystem json;
+    public QuestGiver questGiver;
 
     // Start is called before the first frame update
     private void Awake()
@@ -107,6 +108,7 @@ public class GameMenuManager : MonoBehaviour
     public void OpenPopUpScreen()
     {
         popUpScreen.SetActive(true);
+        questGiver.isInProgress = false;
         Time.timeScale = 0f;
     }
 
