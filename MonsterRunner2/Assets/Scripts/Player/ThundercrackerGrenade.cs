@@ -11,6 +11,17 @@ public class ThundercrackerGrenade : MonoBehaviour
     public List<enemyCarDriver> affectedEnemyList = new List<enemyCarDriver>();
     [SerializeField] SphereCollider aoeRadius;
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (!isTriggered)
+            {
+                CallThunder();
+            }
+        }
+    }
+
     void CallThunder()
     {
         Destroy(this.gameObject, 0.1f);
