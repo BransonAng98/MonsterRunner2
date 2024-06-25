@@ -41,6 +41,7 @@ public class QuestGiver : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(StartGameSequence());
         questCompleted = false;
         countdownStart = false;
         //quest.goal.ChooseRandomGoal();
@@ -56,18 +57,8 @@ public class QuestGiver : MonoBehaviour
     private IEnumerator StartGameSequence()
     {
         yield return new WaitForSeconds(initialIntroDelay);
-
-        // Display intro dialogue after initial delay if it's the first quest
-        if (isFirstQuest)
-        {
-            PrintIntroDialogue();
-            isFirstQuest = false; // Set isFirstQuest to false after displaying intro
-            yield return new WaitForSeconds(initialMissionDelay);
-        }
-
-        gameStarted = true;
-
-        
+        PrintIntroDialogue();
+      
     }
 
     private void Update()
@@ -94,6 +85,7 @@ public class QuestGiver : MonoBehaviour
                 break;
             case "Reach":
                 UpdateReachGoal();
+                Debug.Log("CheckingReachQuest");
                 break;
             case "None":
             default:
@@ -122,7 +114,7 @@ public class QuestGiver : MonoBehaviour
     private void UpdateReachGoal()
     {
         float distanceToDestination = Vector3.Distance(transform.position, destination.transform.position);
-        if (distanceToDestination < 0.5f & !questCompleted) // Adjust the threshold as needed
+        if (distanceToDestination < 20f & !questCompleted) // Adjust the threshold as needed
         {
             CompleteQuest();
         }
@@ -158,6 +150,7 @@ public class QuestGiver : MonoBehaviour
         missionManager.SpawnPassengers();
         enemySpawnerScript.DestroyAllEnemies();
         enemySpawnerScript.startSpawning = false;
+        quest.goal.goaltype = "None";
 
         PrintRewardDialogue();
     }
@@ -211,6 +204,7 @@ public class QuestGiver : MonoBehaviour
 
     public void RunGoalType(string goaltype)
     {
+        PrintQuestDialogue();
         switch (goaltype)
         {
             case "Kill":
@@ -229,7 +223,13 @@ public class QuestGiver : MonoBehaviour
                 quest.goal.ReachDestination();
                 isInProgress = true;
                 break;
-
+            case "None":
+                survivaltime = 0;
+                currentenemykilled = 0;
+                enemykilled = 0;
+                distancetoDestination = 0;
+                destination = null;
+                break;
             default:
                 break;
         }

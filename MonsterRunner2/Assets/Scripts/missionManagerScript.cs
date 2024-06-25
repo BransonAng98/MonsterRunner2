@@ -19,11 +19,11 @@ public class missionManagerScript : MonoBehaviour
 
     [SerializeField] private float survivalTime;
 
-    public float spawnRadius = 80f; // Distance from the player to spawn the prefab
+    public float spawnRadius = 50f; // Distance from the player to spawn the prefab
     public float maxSearchRadius = 500f; // Maximum search radius for finding a walkable position
     public int maxAttempts = 1000; // Maximum attempts to find a non-walkable position
     public int numberOfPassengersToSpawn = 10; // Number of passengers to spawn
-    public float minSpacing = 30f; // Minimum spacing between passengers
+    public float minSpacing = 10f; // Minimum spacing between passengers
 
     // assignttoQuest
     public QuestGiver questgiverEntity;
@@ -49,19 +49,43 @@ public class missionManagerScript : MonoBehaviour
     {
         for (int i = 0; i < numberOfPassengersToSpawn; i++)
         {
-            Vector3 spawnPosition = GetRandomSpawnPosition();
-            if (IsWalkable(spawnPosition))
+            Vector3 spawnPosition = Vector3.zero;
+            bool foundPosition = false;
+
+            for (int attempt = 0; attempt < maxAttempts; attempt++)
+            {
+                spawnPosition = GetRandomSpawnPosition();
+
+                if (IsWalkable(spawnPosition) && IsFarEnoughFromOtherPassengers(spawnPosition))
+                {
+                    foundPosition = true;
+                    break;
+                }
+            }
+
+            if (foundPosition)
             {
                 GameObject passenger = Instantiate(passengerPrefab, spawnPosition, Quaternion.identity);
-             
                 passengers.Add(passenger);
                 AssignPassengerProperties(passenger);
             }
             else
             {
-                Debug.LogWarning("Could not find a non-walkable position to spawn the passenger.");
+                Debug.LogWarning("Could not find a suitable position to spawn the passenger after max attempts.");
             }
         }
+    }
+
+    bool IsFarEnoughFromOtherPassengers(Vector3 position)
+    {
+        foreach (GameObject passenger in passengers)
+        {
+            if (Vector3.Distance(position, passenger.transform.position) < minSpacing)
+            {
+                return false; // Position is too close to an existing passenger
+            }
+        }
+        return true; // Position is far enough from all existing passengers
     }
 
     void CollectBuildingObjects()

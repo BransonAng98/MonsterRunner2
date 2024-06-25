@@ -29,32 +29,37 @@ public class PassengerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pickedUp)
-        {
-            // Calculate direction towards the destination
-            Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
-
-            // Move towards the destination
-            transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
-
-            // Rotate towards the direction of movement
-            if (direction != Vector3.zero)
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-            }
-
             // Check if passenger has reached destination
             float distanceToDestination = Vector3.Distance(transform.position, passengerDestination.transform.position);
-            if (distanceToDestination < 0.5f) // Adjust the threshold as needed
+            if (distanceToDestination <= 20f) // Adjust the threshold as needed
             {
+              
+                // Unparent from other.transform
+                transform.SetParent(null);
+
+                // Set all children to active
+                foreach (Transform child in transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
                 Debug.Log("ReachedHome");
-               
+                // Calculate direction towards the destination
+                Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
+
+                // Move towards the destination
+                transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
+
+                // Rotate towards the direction of movement
+                if (direction != Vector3.zero)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+                }
                 //TriggerHouse(false);
-                scoreManager.missionsCompleted++;
+                
                 DestroyPassenger();
             }
-        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -65,7 +70,7 @@ public class PassengerController : MonoBehaviour
             missionmanager.DestroyOtherPassengers(gameObject);
             questgiverScript.SpawnEnemies();
             //TriggerHouse(true);
-            pickedUp = true;
+            
             idleVFX.SetActive(false);
             Instantiate(PickupVFX, transform.position, Quaternion.identity);
             
@@ -86,6 +91,7 @@ public class PassengerController : MonoBehaviour
             }
             foreach (Transform child in transform)
             {
+                pickedUp = true;
                 child.gameObject.SetActive(false);
             }
         }
