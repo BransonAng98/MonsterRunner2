@@ -25,7 +25,8 @@ public class ContractBoosterScript : MonoBehaviour
             //Activate particles here
             ActiveEffect(contractID);
             DeactiveObject();
-            Debug.Log("Player obtained money");
+            Instantiate(particles, transform.position, transform.rotation);
+            Debug.Log("Contracts are now slightly easier");
         }
     }
 

@@ -28,7 +28,6 @@ public class CoinScript : MonoBehaviour
             Instantiate(particles, transform.position, transform.rotation);
             DeactiveObject();
             startRespawn = true;
-            Debug.Log("Player obtained money");
         }
     }
 

@@ -10,11 +10,7 @@ public class IDriveToken : MonoBehaviour
 
     public IDriveTokenManager iDriveTokenManager;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    string letter;
 
     public void AssignVariable()
     {
@@ -22,6 +18,7 @@ public class IDriveToken : MonoBehaviour
         {
             case 0:
                 text.text = "I";
+                letter = text.text;
                 break;
             case 1:
                 text.text = "D";
@@ -39,6 +36,8 @@ public class IDriveToken : MonoBehaviour
                 text.text = "e";
                 break;
         }
+
+        letter = text.text;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,6 +45,7 @@ public class IDriveToken : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             TriggerEffect(tokenID);
+            //iDriveTokenManager.ActivateUIFeedback(letter);
         }
     }
 
@@ -53,11 +53,5 @@ public class IDriveToken : MonoBehaviour
     {
         iDriveTokenManager.ActivateUIElement(tokenID);
         iDriveTokenManager.DespawnLetterTokens(tokenID);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
