@@ -13,6 +13,7 @@ public class GameMenuManager : MonoBehaviour
     public GameObject gameplayUI;
     public GameObject pauseMenu;
     public GameObject loadingScreen;
+    public GameObject popUpScreen;
 
     public Slider loadingSlider;
 
@@ -100,6 +101,19 @@ public class GameMenuManager : MonoBehaviour
         Debug.Log("Start Game");
         Time.timeScale = 1f;
         startScreen.SetActive(false);
+    }
+
+
+    public void OpenPopUpScreen()
+    {
+        popUpScreen.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void ClosePopUpScreen()
+    {
+        popUpScreen.SetActive(false);
+        Time.timeScale = 1f;
     }
 
     public void PauseGame()
