@@ -141,13 +141,7 @@ public class DemoPlayer : MonoBehaviour
             }
         }
 
-        if (other.CompareTag("Passenger"))
-        {
-            destinationReached = false;
-            passenger = other.gameObject;
-            QuestGiver questGiver = other.transform.GetComponent<QuestGiver>();
-            destination = questGiver.destination;
-        }
+       
     }
 
     private void OnCollisionEnter(Collision collision)

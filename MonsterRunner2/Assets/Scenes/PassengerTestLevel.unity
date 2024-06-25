@@ -13080,18 +13080,16 @@ MonoBehaviour:
     title: 
     goldReward: 0
     goal:
-      goaltype: 0
+      goaltype: 
       DestinationReached: 0
-      destination: {fileID: 0}
       survivalTime: 0
       playerIsAlive: 0
       requiredKillAmount: 0
       currentAmount: 0
     enemyspawnerScript: {fileID: 0}
   questGoalScript:
-    goaltype: 0
+    goaltype: 
     DestinationReached: 0
-    destination: {fileID: 0}
     survivalTime: 0
     playerIsAlive: 0
     requiredKillAmount: 0
@@ -13109,7 +13107,10 @@ MonoBehaviour:
   missionManager: {fileID: 171047678}
   buildingObjects: []
   playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
+  questCompleted: 0
   enemySpawnerScript: {fileID: 754238784}
+  countdownStart: 0
+  isOnCooldown: 0
   gameStarted: 0
 --- !u!114 &171047682
 MonoBehaviour:
@@ -64973,6 +64974,7 @@ MonoBehaviour:
   gameplayUI: {fileID: 1488209289}
   pauseMenu: {fileID: 818063169}
   loadingScreen: {fileID: 0}
+  popUpScreen: {fileID: 0}
   loadingSlider: {fileID: 0}
   currentMenu: {fileID: 0}
   hasStarted: 0
@@ -65096,8 +65098,8 @@ MonoBehaviour:
   playerData: {fileID: 0}
   Radius: 0
   SideObjectiveQuestGiverScript: {fileID: 171047682}
-  QuestGiverScript: {fileID: 0}
-  questGiverScript: {fileID: 171047681}
+  QuestGiverScript: {fileID: 171047681}
+  startSpawning: 0
   player: {fileID: 0}
   spawnedEnemies: []
   roads: []

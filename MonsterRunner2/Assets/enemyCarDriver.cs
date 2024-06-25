@@ -18,6 +18,8 @@ public class enemyCarDriver : MonoBehaviour
     private float turnSpeedAcceleration = 400f;
     private float turnIdleSlowdown = 500f;
 
+   
+
     public DemoPlayer playerscript;
     [SerializeField] public bool isDead;
     public bool isCCed;

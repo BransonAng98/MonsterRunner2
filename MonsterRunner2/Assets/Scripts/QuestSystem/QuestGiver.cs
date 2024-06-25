@@ -11,8 +11,10 @@ public class QuestGiver : MonoBehaviour
     public DemoPlayer player;
     public GameObject destination;
 
-    [SerializeField] private int enemykilled;
+    [SerializeField] public int enemykilled;
     [SerializeField] public int currentenemykilled;
+    
+    public float distancetoDestination;
 
     public float survivaltime;
     public float questCooldownTime; // Cooldown duration between quests
@@ -68,7 +70,13 @@ public class QuestGiver : MonoBehaviour
 
     private void Update()
     {
-        if(countdownStart == true)
+        if (destination != null)
+        {
+            distancetoDestination = Vector3.Distance(player.transform.position, destination.transform.position);
+            // Now distancetoDestination holds the distance between player and destination
+        }
+
+        if (countdownStart == true)
         {
             ReduceSurvivalTime();
         }

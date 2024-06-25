@@ -9,10 +9,18 @@ public class ScoreManagerScript : MonoBehaviour
     public int missionsCompleted;
     public float timeSurvived;
     public float stopwatchTime;
+
+    public int currentEnemiesKilled;
+    public int totalEnemiesKilled;
     public TextMeshProUGUI activeCounter;
     public TextMeshProUGUI goldamtCounter;
     public TextMeshProUGUI sideobjectiveText;
+    public TextMeshProUGUI questDetail;
+    public TextMeshProUGUI questReward;
+    public TextMeshProUGUI sideobjectiveDetail;
+    public TextMeshProUGUI sideobjectiveReward;
     public QuestGiver questgiverScript;
+    public float distancetoTarget;
     public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
     public EnemySpawner enemySpawnerScript;
 
@@ -29,19 +37,9 @@ public class ScoreManagerScript : MonoBehaviour
     void Update()
     {
         stopwatchTime += Time.deltaTime;
-
-        // Update the time survived from the quest giver script
-        timeSurvived = questgiverScript.survivaltime;
-
-        // Calculate minutes and seconds
-        float minutes = Mathf.FloorToInt(timeSurvived / 60);
-        float seconds = Mathf.FloorToInt(timeSurvived % 60);
-
-        // Update the active counter display
-        activeCounter.text = string.Format("{0:00}:{1:00}", minutes, seconds);
-        goldamtCounter.text = goldEarned.ToString();
-
-
+        goldamtCounter.text = goldEarned + "";
+        AssignObjectiveText();
+        AssignSideObjectiveText();
         // Check if missions completed has increased
         if (missionsCompleted > lastMissionCount)
         {
@@ -55,4 +53,59 @@ public class ScoreManagerScript : MonoBehaviour
             lastMissionCount = missionsCompleted;
         }
     }
+
+    public void AssignObjectiveText()
+    {
+        switch(questgiverScript.quest.goal.goaltype)
+        {
+            case "Kill":
+                questDetail.text = "Take out " + totalEnemiesKilled + " enemies and keep the cops distracted for us";
+                currentEnemiesKilled = questgiverScript.currentenemykilled;
+                totalEnemiesKilled = questgiverScript.enemykilled;
+                activeCounter.text = currentEnemiesKilled + "/" + totalEnemiesKilled  + "Killed";
+                questReward.text = questgiverScript.quest.goldReward +  "";
+                break;
+            case "Reach":
+                distancetoTarget = questgiverScript.distancetoDestination;
+                int distanceInt = Mathf.FloorToInt(distancetoTarget);
+                questDetail.text = "Take us to the safe house. It's  " + distancetoTarget + " m away. Hurry!"; 
+                activeCounter.text = distanceInt + "m";
+                questReward.text = questgiverScript.quest.goldReward + "";
+                break;
+
+            case "Survive":
+                timeSurvived = questgiverScript.survivaltime;
+
+                // Calculate minutes and seconds
+                float minutes = Mathf.FloorToInt(timeSurvived / 60);
+                float seconds = Mathf.FloorToInt(timeSurvived % 60);
+
+                // Update the active counter display
+                string timeHolder;
+                timeHolder = string.Format("{0:00}:{1:00}", minutes, seconds);
+                activeCounter.text = timeHolder;
+                questDetail.text = "Keep the cops busy for " + timeHolder + ". While you do that, we will rob the bank";
+                questReward.text = "Reward: " + questgiverScript.quest.goldReward + "";
+                break;
+            
+           
+        }
+    }
+
+    public void AssignSideObjectiveText()
+    {
+        switch(SideObjectiveQuestGiverScript.SideObjective.goal.objectiveType)
+        {
+            case SideObjectiveGoal.ObjectiveType.Kill:
+            sideobjectiveDetail.text = "The boss says he will give you a bonus if you destroy " + SideObjectiveQuestGiverScript.enemykilled + "of their cars.";
+            sideobjectiveReward.text = SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + "";
+            break;
+
+            case SideObjectiveGoal.ObjectiveType.EarnGold:
+            sideobjectiveDetail.text = "The boss is in a generous mood. If you earn " + SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + " before you die, we'll give you a bonus";
+            sideobjectiveReward.text = "Reward: " + SideObjectiveQuestGiverScript.SideObjective.goldReward + "";
+            break;
+        }
+    }
+
 }

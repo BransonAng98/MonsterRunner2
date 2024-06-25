@@ -19,11 +19,11 @@ public class missionManagerScript : MonoBehaviour
 
     [SerializeField] private float survivalTime;
 
-    public float spawnRadius = 100f; // Distance from the player to spawn the prefab
+    public float spawnRadius = 80f; // Distance from the player to spawn the prefab
     public float maxSearchRadius = 500f; // Maximum search radius for finding a walkable position
     public int maxAttempts = 1000; // Maximum attempts to find a non-walkable position
-    public int numberOfPassengersToSpawn = 5; // Number of passengers to spawn
-    public float minSpacing = 100f; // Minimum spacing between passengers
+    public int numberOfPassengersToSpawn = 10; // Number of passengers to spawn
+    public float minSpacing = 30f; // Minimum spacing between passengers
 
     // assignttoQuest
     public QuestGiver questgiverEntity;
@@ -112,11 +112,26 @@ public class missionManagerScript : MonoBehaviour
 
     Vector3 GetRandomSpawnPosition()
     {
-        Vector2 randomDirection = Random.insideUnitCircle.normalized * spawnRadius;
-        Vector3 spawnPosition = player.transform.position + new Vector3(randomDirection.x, 0, randomDirection.y);
-        return spawnPosition;
-    }
+        Vector3 randomPosition = Vector3.zero;
+        int attempts = 0;
 
+        while (attempts < maxAttempts)
+        {
+            Vector2 randomDirection = Random.insideUnitCircle.normalized * spawnRadius;
+            randomPosition = player.transform.position + new Vector3(randomDirection.x, 0, randomDirection.y);
+
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(randomPosition, out hit, maxSearchRadius, NavMesh.AllAreas))
+            {
+                return hit.position; // Found a valid walkable position
+            }
+
+            attempts++;
+        }
+
+        Debug.LogError("Failed to find a walkable spawn position after " + maxAttempts + " attempts.");
+        return player.transform.position; // Default to player's position if no valid position found
+    }
     bool IsWalkable(Vector3 position)
     {
         NavMeshHit hit;

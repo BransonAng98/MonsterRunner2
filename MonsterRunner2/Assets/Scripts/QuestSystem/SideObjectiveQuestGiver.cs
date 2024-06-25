@@ -6,7 +6,7 @@ using TMPro;
 public class SideObjectiveQuestGiver : MonoBehaviour
 {
     public SideObjective SideObjective;
-    [SerializeField] private int enemykilled;
+    [SerializeField] public int enemykilled;
     [SerializeField] public int currentenemykilled;
     [SerializeField] private float goldtobeEarned;
     [SerializeField] private float currentGoldAmt;
