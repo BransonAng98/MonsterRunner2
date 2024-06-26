@@ -13817,6 +13817,8 @@ MonoBehaviour:
   scoreManager: {fileID: 1242281396}
   playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   enemySpawnerScript: {fileID: 754238784}
+  hasRunKillObjective: 0
+  hasRunGoldObjective: 0
 --- !u!1001 &171110433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65369,7 +65371,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1320399616}
   loadingScreen: {fileID: 0}
   popUpScreen: {fileID: 325316002}
-  tutorialScreen: {fileID: 0}
+  tutorialScreen: {fileID: 1627485807}
   loadingSlider: {fileID: 0}
   currentMenu: {fileID: 0}
   sceneID: 0
@@ -65524,7 +65526,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754238774}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91c3a6a7831fccc44b8a24a1bd3de084, type: 3}
   m_Name: 
@@ -144668,6 +144670,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1627086366}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1627485807 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 871967544542237359, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1627942060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191659,6 +191667,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 754238777}
+    - target: {fileID: 6327423416695742410, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: scoreManager
+      value: 
+      objectReference: {fileID: 1242281396}
     - target: {fileID: 7789936772465388861, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
