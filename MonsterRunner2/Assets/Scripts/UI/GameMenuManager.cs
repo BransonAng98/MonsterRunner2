@@ -171,6 +171,7 @@ public class GameMenuManager : MonoBehaviour
             case 2:
                 Debug.Log("Start Game");
                 Time.timeScale = 1f;
+                tutorialScreen.SetActive(false);
                 startScreen.SetActive(false);
                 break;
         }

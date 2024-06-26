@@ -6,51 +6,68 @@ using TMPro;
 public class SideObjectiveQuestGiver : MonoBehaviour
 {
     public SideObjective SideObjective;
-    [SerializeField] public int enemykilled;
-    [SerializeField] public int currentenemykilled;
-    [SerializeField] private float goldtobeEarned;
-    [SerializeField] private float currentGoldAmt;
+    public int enemykilled;
+    public int currentenemykilled;
+    public float goldtobeEarned;
+    public float currentGoldAmt;
     public ScoreManagerScript scoreManager;
     public PlayerDataSO playerInfoData;
+    public EnemySpawner enemySpawnerScript;
 
     private bool questCompleted = false;
-    public EnemySpawner enemySpawnerScript;
-    // Start is called before the first frame update
+
+    [SerializeField]private bool hasRunKillObjective = false;
+    [SerializeField]private bool hasRunGoldObjective = false;
+
     void Start()
     {
         SideObjective.enemySpawnerScript = enemySpawnerScript;
-        SideObjective.goal.ChooseRandomObjectiveType();
+        GetNewSideObjective();
         RunObjectiveFunction(SideObjective.goal.objectiveType);
-        SideObjective.goldRewardAmt();
+        
     }
 
-    // Update is called once per frame
     void Update()
     {
         currentGoldAmt = scoreManager.goldEarned;
 
-        if (!questCompleted)
+        switch (SideObjective.goal.objectiveType)
         {
-            if (SideObjective.goal.objectiveType == SideObjectiveGoal.ObjectiveType.Kill)
-            {
+            case SideObjectiveGoal.ObjectiveType.Kill:
                 scoreManager.sideobjectiveText.text = $"{currentenemykilled}/{enemykilled} killed";
-
-                if (currentenemykilled == enemykilled)
+                if (!hasRunKillObjective)
                 {
-                    CompleteQuest();
-                    Debug.Log("Objective Completed!");
+                    RunObjectiveFunction(SideObjectiveGoal.ObjectiveType.Kill);
+                    scoreManager.sideobjectiveText.text = $"{currentenemykilled}/{enemykilled} killed";
+
+                    if (currentenemykilled >= enemykilled)
+                    {
+                        CompleteQuest();
+                        Debug.Log("Objective Completed!");
+                    }
+
+                    hasRunKillObjective = true;
                 }
-            }
-            else if (SideObjective.goal.objectiveType == SideObjectiveGoal.ObjectiveType.EarnGold)
-            {
+                break;
+            case SideObjectiveGoal.ObjectiveType.EarnGold:
                 scoreManager.sideobjectiveText.text = $"{currentGoldAmt}/{goldtobeEarned} earned";
-
-                if (currentGoldAmt >= goldtobeEarned)
+                if (!hasRunGoldObjective)
                 {
-                    CompleteQuest();
-                    Debug.Log("Objective Completed!");
+                    RunObjectiveFunction(SideObjectiveGoal.ObjectiveType.EarnGold);
+                    
+
+                    if (currentGoldAmt >= goldtobeEarned)
+                    {
+                        CompleteQuest();
+                        Debug.Log("Objective Completed!");
+                    }
+
+                    hasRunGoldObjective = true;
                 }
-            }
+                break;
+            case SideObjectiveGoal.ObjectiveType.none:
+                RunObjectiveFunction(SideObjectiveGoal.ObjectiveType.none);
+                break;
         }
     }
 
@@ -60,30 +77,43 @@ public class SideObjectiveQuestGiver : MonoBehaviour
         scoreManager.goldEarned += SideObjective.goldReward;
         playerInfoData.money += SideObjective.goldReward;
         SideObjective.CompleteSideObjective();
-
+        ResetSideObjectiveValues();
+        SideObjective.goal.objectiveType = SideObjectiveGoal.ObjectiveType.none;
         // Mark the quest as completed
         questCompleted = true;
+    }
+
+    public void GetNewSideObjective()
+    {
+        SideObjective.goal.ChooseRandomObjectiveType();
+        SideObjective.goldRewardAmt();
+        hasRunKillObjective = false;
+        hasRunGoldObjective = false;
+    }
+
+    void ResetSideObjectiveValues()
+    {
+        currentenemykilled = 0;
+        currentGoldAmt = 0;
+        questCompleted = false;
     }
 
     void RunObjectiveFunction(SideObjectiveGoal.ObjectiveType objectiveType)
     {
         switch (objectiveType)
         {
-            case SideObjectiveGoal.ObjectiveType.none:
-                // Do nothing for 'none' type
-                break;
             case SideObjectiveGoal.ObjectiveType.Kill:
-                // Run the enemy kill function
                 SideObjective.goal.EnemyKilled();
                 enemykilled = SideObjective.goal.requiredKillAmount;
                 break;
             case SideObjectiveGoal.ObjectiveType.EarnGold:
-                // Run the earn gold function
                 SideObjective.goal.EarnGold();
                 goldtobeEarned = SideObjective.goal.goldtobeEarnedAmt;
                 break;
+            case SideObjectiveGoal.ObjectiveType.none:
+                GetNewSideObjective();
+                break;
             default:
-                // Handle any other objective types if needed
                 break;
         }
     }

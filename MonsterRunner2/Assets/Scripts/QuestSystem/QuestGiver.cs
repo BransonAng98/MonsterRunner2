@@ -151,6 +151,7 @@ public class QuestGiver : MonoBehaviour
     {
         Debug.Log("QuestCompleted");
         questCompleted = true;
+        GetDestination();
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
         playerInfoData.moneyAccumulatedInGame += scoreManager.goldEarned;
@@ -245,7 +246,7 @@ public class QuestGiver : MonoBehaviour
         currentenemykilled = 0;
         enemykilled = 0;
         distancetoDestination = 0;
-        destination = null;
+       
         isInProgress = false;
         countdownStart = false;
         questCompleted = false;

@@ -116,7 +116,7 @@ public class PassengerController : MonoBehaviour
             case 2:
                 questgiverScript.quest.goal.goaltype = "Reach";
                 questgiverScript.RunGoalType("Reach");
-                questgiverScript.GetDestination();
+               
                 Debug.Log("BeingRun2");
                 break;
             case 3:
