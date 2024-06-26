@@ -81,20 +81,20 @@ public class QuestGiver : MonoBehaviour
         switch (quest.goal.goaltype)
         {
             case "Kill":
-                //dectectionBar.isIncreasing = true;
+                dectectionBar.isIncreasing = false;
                 UpdateKillGoal();
                 break;
             case "Survive":
-                //dectectionBar.isIncreasing = true;
+                dectectionBar.isIncreasing = false;
                 UpdateSurviveGoal();
                 break;
             case "Reach":
-                //dectectionBar.isIncreasing = true;
+                dectectionBar.isIncreasing = false;
                 UpdateReachGoal();
                 break;
             case "None":
             default:
-                //dectectionBar.isIncreasing = false;
+                dectectionBar.isIncreasing = true;
                 // Handle any other objective types if needed
                 break;
         }

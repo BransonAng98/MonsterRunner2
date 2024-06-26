@@ -7,6 +7,7 @@ public class DetectionBar : MonoBehaviour
 {
     public Slider slider;
     public float barValue;
+    public int maximumValue;
     public float decreaseMultiplier;
     public bool isIncreasing;
     public DemoPlayer player;
@@ -17,6 +18,7 @@ public class DetectionBar : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
+        slider.maxValue = maximumValue;
     }
 
     public void StartBar()

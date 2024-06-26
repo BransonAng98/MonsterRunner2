@@ -32,6 +32,7 @@ public class PlayerDataManager : MonoBehaviour
     public QuestDialogueManager questDManager;
     public GameMenuManager menuManager;
     public EnemySpawner enemySpawnerScript;
+    public DetectionBar detectionBar;
 
     //Scriptst that require player data
     public CinemachineVirtualCamera mainCam;
@@ -71,6 +72,7 @@ public class PlayerDataManager : MonoBehaviour
                     missionManager.objectiveIndicator = playerData.questIndicator;
                     missionManager.player = playerCar;
                     abilityManager.player = playerData;
+                    detectionBar.player = playerData;
 
                     playerData.abilityManager = playerAbManager;
                     playerData.playerDataManager = playerDataManager;
