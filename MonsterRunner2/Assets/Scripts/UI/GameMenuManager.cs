@@ -185,11 +185,6 @@ public class GameMenuManager : MonoBehaviour
         }
     }
 
-    public void EndTutorial()
-    {
-        playerData.hasPlayedTutorial = true;
-    }
-
     public void OpenTutorialPage2()
     {
         tutorialScreen1.SetActive(false);
@@ -257,6 +252,13 @@ public class GameMenuManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        switch (sceneID)
+        {
+            case 1:
+                playerData.hasPlayedTutorial = true;
+                break;
+        }
+
         json.SaveToJson(1);
         SceneManager.LoadScene("MainMenu");
     }
