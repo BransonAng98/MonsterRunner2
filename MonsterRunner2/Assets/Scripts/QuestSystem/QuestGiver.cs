@@ -37,6 +37,8 @@ public class QuestGiver : MonoBehaviour
     public bool isInProgress = false;
     public bool gameStarted;
 
+    public DetectionBar dectectionBar;
+
     private bool questcompleted = false;
 
     private void Start()
@@ -79,17 +81,20 @@ public class QuestGiver : MonoBehaviour
         switch (quest.goal.goaltype)
         {
             case "Kill":
+                //dectectionBar.isIncreasing = true;
                 UpdateKillGoal();
                 break;
             case "Survive":
+                //dectectionBar.isIncreasing = true;
                 UpdateSurviveGoal();
                 break;
             case "Reach":
+                //dectectionBar.isIncreasing = true;
                 UpdateReachGoal();
-                
                 break;
             case "None":
             default:
+                //dectectionBar.isIncreasing = false;
                 // Handle any other objective types if needed
                 break;
         }

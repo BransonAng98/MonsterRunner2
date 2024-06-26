@@ -14,11 +14,11 @@ public class GameMenuManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject loadingScreen;
     public GameObject popUpScreen;
-
+    public GameObject tutorialScreen;
     public Slider loadingSlider;
 
     [SerializeField] GameObject currentMenu;
-    [SerializeField] bool hasStarted;
+    [SerializeField] int sceneID;
 
     public PlayerDataSO playerData;
     public PlayerCarDisplay carDisplay;
@@ -28,7 +28,7 @@ public class GameMenuManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        
+        AssignSceneID();
         if (resultScreen != null)
         {
             resultScreen.SetActive(false);
@@ -40,13 +40,64 @@ public class GameMenuManager : MonoBehaviour
         }
 
         Time.timeScale = 0f;
-        Debug.Log(playerData.hasPlayedTutorial);
+    }
+
+    private void Start()
+    {
+        StartOfGameplayScene();
+    }
+
+    void AssignSceneID()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        switch (sceneName)
+        {
+            case "MainMenu":
+                sceneID = 0;
+                break;
+            case "TutorialLevel":
+                sceneID = 1;
+                break;
+            case "TestLevel":
+                sceneID = 2;
+                break;
+        }
+    }
+
+    void StartOfGameplayScene()
+    {
+        switch (sceneID)
+        {
+            case 1:
+                if (!playerData.hasPlayedTutorial)
+                {
+                    tutorialScreen.SetActive(true);
+                    startScreen.SetActive(false);
+                }
+
+                else
+                {
+                    tutorialScreen.SetActive(false);
+                    startScreen.SetActive(true);
+                }
+                break;
+
+            case 2:
+                break;
+        }
     }
 
     public void LoadLevel()
     {
-        StartCoroutine(LoadLevelAsync("TestLevel"));
-        hasStarted = true;
+        if (playerData.hasPlayedTutorial)
+        {
+            StartCoroutine(LoadLevelAsync("TestLevel"));
+        }
+        else
+        {
+            StartCoroutine(LoadLevelAsync("TutorialLevel"));
+        }
     }
 
     IEnumerator LoadLevelAsync(string sceneName)
@@ -79,6 +130,8 @@ public class GameMenuManager : MonoBehaviour
         }
     }
 
+
+
     public void OpenMenu(GameObject nextMenu)
     {
         currentMenu = nextMenu;
@@ -88,20 +141,39 @@ public class GameMenuManager : MonoBehaviour
 
     public void ReturnToMain()
     {
-        playerData.money += playerData.moneyAccumulatedInGame;
-        playerData.moneyAccumulatedInGame = 0;
-        currentMenu.SetActive(false);
+        if(sceneID == 0)
+        {
+            currentMenu.SetActive(false);
+            carDisplay.UpdateCarSkin(playerData.selectedVehicleID);
+            mainMenu.SetActive(true);
+        }
+
+        else
+        {
+            playerData.money += playerData.moneyAccumulatedInGame;
+            playerData.moneyAccumulatedInGame = 0;
+        }
+
         json.SaveToJson(0);
         json.SaveToJson(1);
-        carDisplay.UpdateCarSkin(playerData.selectedVehicleID);
-        mainMenu.SetActive(true);
     }
 
     public void StartGame()
     {
-        Debug.Log("Start Game");
-        Time.timeScale = 1f;
-        startScreen.SetActive(false);
+        switch (sceneID)
+        {
+            case 1:
+                tutorialScreen.SetActive(false);
+                playerData.hasPlayedTutorial = true;
+                Time.timeScale = 1f;
+                break;
+
+            case 2:
+                Debug.Log("Start Game");
+                Time.timeScale = 1f;
+                startScreen.SetActive(false);
+                break;
+        }
     }
 
 
