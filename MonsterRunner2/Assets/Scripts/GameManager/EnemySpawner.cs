@@ -12,10 +12,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
     [SerializeField] public QuestGiver QuestGiverScript;
 
-    public bool startSpawning;
+    [SerializeField] public bool startSpawning;
     public GameObject player;
    [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
-    private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
+    [SerializeField]private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
         { 1, new List<int> { 4, 0 } }, // 4 of type 1, 0 of type 2
         { 2, new List<int> { 6, 0 } }, // 4 of type 1, 2 of type 2
@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
         // Add more threat levels as needed
     };
 
-    private int currentThreatLevel = 0;
+    [SerializeField]private int currentThreatLevel = 0;
     [SerializeField]private List<GameObject> roads = new List<GameObject>(); // List to store road objects
 
     private void Start()
@@ -33,12 +33,13 @@ public class EnemySpawner : MonoBehaviour
         // Assign the player transform by finding the object with the tag "Player"
 
         startSpawning = false;
-        currentThreatLevel = threatlvl;
+      
         //UpdateEnemiesForThreatLevel();
     }
 
     private void Update()
     {
+        currentThreatLevel = threatlvl;
 
         bool allNull = true;
         foreach (var enemy in spawnedEnemies)
@@ -84,7 +85,7 @@ public class EnemySpawner : MonoBehaviour
                     enemy.transform.LookAt(playerPos);
                     newSpawnedEnemies.Add(enemy);
                     AssignEnemyProperties(enemy);
-                    //StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
+                    
                 }
             }
             else if (currentCount > requiredCount)
@@ -275,15 +276,31 @@ public class EnemySpawner : MonoBehaviour
 
     public void DestroyAllEnemies()
     {
-        foreach (var enemy in spawnedEnemies)
+        // Create a temporary list to store enemies to be destroyed
+        List<GameObject> enemiesToDestroy = new List<GameObject>(spawnedEnemies);
+
+        foreach (var enemy in enemiesToDestroy)
         {
             if (enemy != null)
+            {
+                enemyCarDriver enemyscript = enemy.GetComponent<enemyCarDriver>();
+                if (enemyscript != null)
+                {
+                    enemyscript.CarDeath(0);
+                }
+            }
+        }
+        foreach(var enemy in spawnedEnemies)
+        {
+            if(enemy != null)
             {
                 Destroy(enemy);
             }
         }
-
-        spawnedEnemies.Clear(); // Clear the list after destroying all enemies
+        spawnedEnemies.Clear();
+        startSpawning = false;
+        // Clear the original list after destroying all enemies
+        //
     }
 
     private void AssignEnemyProperties(GameObject spawnedEnemy)
