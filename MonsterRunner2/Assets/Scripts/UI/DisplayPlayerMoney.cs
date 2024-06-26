@@ -7,15 +7,22 @@ public class DisplayPlayerMoney : MonoBehaviour
 {
     public PlayerDataSO playerData;
     [SerializeField] private TextMeshProUGUI text;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
+        this.gameObject.SetActive(false);
+        this.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
         text.text = playerData.moneyAccumulatedInGame.ToString();
+    }
+
+    private void OnDestroy()
+    {
+        playerData.moneyAccumulatedInGame = 0;
     }
 }
