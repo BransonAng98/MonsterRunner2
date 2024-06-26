@@ -14,7 +14,8 @@ public class GameMenuManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject loadingScreen;
     public GameObject popUpScreen;
-    public GameObject tutorialScreen;
+    public GameObject tutorialScreen1;
+    public GameObject tutorialScreen2;
     public Slider loadingSlider;
 
     [SerializeField] GameObject currentMenu;
@@ -45,6 +46,7 @@ public class GameMenuManager : MonoBehaviour
     private void Start()
     {
         StartOfGameplayScene();
+        DeactiveScene();
     }
 
     void AssignSceneID()
@@ -65,22 +67,30 @@ public class GameMenuManager : MonoBehaviour
         }
     }
 
+    void DeactiveScene()
+    {
+        switch (sceneID)
+        {
+            case 1:
+                startScreen.SetActive(false);
+                tutorialScreen2.SetActive(false);
+                break;
+
+            case 2:
+                tutorialScreen1.SetActive(false);
+                tutorialScreen2.SetActive(false);
+                break;
+        }
+    }
+
     void StartOfGameplayScene()
     {
         switch (sceneID)
         {
             case 1:
-                if (!playerData.hasPlayedTutorial)
-                {
-                    tutorialScreen.SetActive(true);
-                    startScreen.SetActive(false);
-                }
-
-                else
-                {
-                    tutorialScreen.SetActive(false);
-                    startScreen.SetActive(true);
-                }
+                tutorialScreen1.SetActive(true);
+                tutorialScreen2.SetActive(false);
+                startScreen.SetActive(false);
                 break;
 
             case 2:
@@ -163,20 +173,43 @@ public class GameMenuManager : MonoBehaviour
         switch (sceneID)
         {
             case 1:
-                tutorialScreen.SetActive(false);
-                playerData.hasPlayedTutorial = true;
+                tutorialScreen1.SetActive(false);
                 Time.timeScale = 1f;
                 break;
 
             case 2:
                 Debug.Log("Start Game");
                 Time.timeScale = 1f;
-                tutorialScreen.SetActive(false);
                 startScreen.SetActive(false);
                 break;
         }
     }
 
+    public void EndTutorial()
+    {
+        playerData.hasPlayedTutorial = true;
+    }
+
+    public void OpenTutorialPage2()
+    {
+        tutorialScreen1.SetActive(false);
+        tutorialScreen2.SetActive(true);
+    }
+
+    public void StartTutorialGameplay()
+    {
+        if (tutorialScreen1.activeSelf == true)
+        {
+            tutorialScreen1.SetActive(false);
+        }
+
+        if(tutorialScreen2.activeSelf == true)
+        {
+            tutorialScreen2.SetActive(false);
+        }
+
+        Time.timeScale = 1f;
+    }
 
     public void OpenPopUpScreen()
     {
@@ -211,7 +244,6 @@ public class GameMenuManager : MonoBehaviour
     {
         playerData.money += playerData.moneyAccumulatedInGame;
         playerData.moneyAccumulatedInGame = 0;
-        currentMenu.SetActive(false);
         json.SaveToJson(0);
         json.SaveToJson(1);
         currentScene = SceneManager.GetActiveScene().buildIndex;

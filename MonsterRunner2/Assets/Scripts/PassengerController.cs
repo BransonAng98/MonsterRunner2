@@ -101,7 +101,7 @@ public class PassengerController : MonoBehaviour
 
     private void AssignPassengerType()
     {
-        passengerType = Random.Range(1, 4); // Assign a random passenger type between 1 and 3
+        passengerType = Random.Range(1, 3); // Assign a random passenger type between 1 and 3
     }
 
     private void SetQuestTypeBasedOnPassengerType()
@@ -114,15 +114,15 @@ public class PassengerController : MonoBehaviour
                 Debug.Log("BeingRun1");
                 break;
             case 2:
-                questgiverScript.quest.goal.goaltype = "Reach";
-                questgiverScript.RunGoalType("Reach");
-               
-                Debug.Log("BeingRun2");
-                break;
-            case 3:
                 questgiverScript.quest.goal.goaltype = "Survive";
                 questgiverScript.RunGoalType("Survive");
                 questgiverScript.countdownStart = true;
+                Debug.Log("BeingRun2");
+                break;
+            case 3:
+                questgiverScript.quest.goal.goaltype = "Reach";
+                questgiverScript.RunGoalType("Reach");
+
                 Debug.Log("BeingRun3");
                 break;
             default:
