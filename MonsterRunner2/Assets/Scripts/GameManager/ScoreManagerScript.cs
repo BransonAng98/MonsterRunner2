@@ -107,6 +107,7 @@ public class ScoreManagerScript : MonoBehaviour
             sideobjectiveDetail.text = "The boss is in a generous mood. If you earn " + SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + " before you die, we'll give you a bonus";
             sideobjectiveReward.text = "Reward: " + SideObjectiveQuestGiverScript.SideObjective.goldReward + "";
             break;
+
         }
     }
 

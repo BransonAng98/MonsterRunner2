@@ -7,9 +7,9 @@ public class SideObjectiveQuestGiver : MonoBehaviour
 {
     public SideObjective SideObjective;
     public int enemykilled;
-    public int currentenemykilled;
+    [SerializeField] public int currentenemykilled;
     public float goldtobeEarned;
-    public float currentGoldAmt;
+    [SerializeField]public float currentGoldAmt;
     public ScoreManagerScript scoreManager;
     public PlayerDataSO playerInfoData;
     public EnemySpawner enemySpawnerScript;
@@ -34,35 +34,37 @@ public class SideObjectiveQuestGiver : MonoBehaviour
         switch (SideObjective.goal.objectiveType)
         {
             case SideObjectiveGoal.ObjectiveType.Kill:
+
+                if (currentenemykilled >= enemykilled)
+                {
+                    CompleteQuest();
+                    Debug.Log("Objective Completed!");
+                }
+
+                hasRunKillObjective = true;
                 scoreManager.sideobjectiveText.text = $"{currentenemykilled}/{enemykilled} killed";
                 if (!hasRunKillObjective)
                 {
                     RunObjectiveFunction(SideObjectiveGoal.ObjectiveType.Kill);
                     scoreManager.sideobjectiveText.text = $"{currentenemykilled}/{enemykilled} killed";
 
-                    if (currentenemykilled >= enemykilled)
-                    {
-                        CompleteQuest();
-                        Debug.Log("Objective Completed!");
-                    }
-
-                    hasRunKillObjective = true;
                 }
                 break;
             case SideObjectiveGoal.ObjectiveType.EarnGold:
+                if (currentGoldAmt >= goldtobeEarned)
+                {
+                    CompleteQuest();
+                    Debug.Log("Objective Completed!");
+                }
+
+                hasRunGoldObjective = true;
                 scoreManager.sideobjectiveText.text = $"{currentGoldAmt}/{goldtobeEarned} earned";
                 if (!hasRunGoldObjective)
                 {
                     RunObjectiveFunction(SideObjectiveGoal.ObjectiveType.EarnGold);
                     
 
-                    if (currentGoldAmt >= goldtobeEarned)
-                    {
-                        CompleteQuest();
-                        Debug.Log("Objective Completed!");
-                    }
-
-                    hasRunGoldObjective = true;
+                    
                 }
                 break;
             case SideObjectiveGoal.ObjectiveType.none:
@@ -77,8 +79,9 @@ public class SideObjectiveQuestGiver : MonoBehaviour
         scoreManager.goldEarned += SideObjective.goldReward;
         playerInfoData.money += SideObjective.goldReward;
         SideObjective.CompleteSideObjective();
-        ResetSideObjectiveValues();
+       
         SideObjective.goal.objectiveType = SideObjectiveGoal.ObjectiveType.none;
+        Debug.Log("No Side Objective For Now");
         // Mark the quest as completed
         questCompleted = true;
     }
@@ -93,9 +96,11 @@ public class SideObjectiveQuestGiver : MonoBehaviour
 
     void ResetSideObjectiveValues()
     {
+       
         currentenemykilled = 0;
         currentGoldAmt = 0;
         questCompleted = false;
+        Debug.Log("ResetSideObjectiveValues0");
     }
 
     void RunObjectiveFunction(SideObjectiveGoal.ObjectiveType objectiveType)
@@ -111,6 +116,7 @@ public class SideObjectiveQuestGiver : MonoBehaviour
                 goldtobeEarned = SideObjective.goal.goldtobeEarnedAmt;
                 break;
             case SideObjectiveGoal.ObjectiveType.none:
+                ResetSideObjectiveValues();
                 GetNewSideObjective();
                 break;
             default:
