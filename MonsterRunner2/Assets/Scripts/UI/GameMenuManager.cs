@@ -136,6 +136,11 @@ public class GameMenuManager : MonoBehaviour
 
     public void RestartGame()
     {
+        playerData.money += playerData.moneyAccumulatedInGame;
+        playerData.moneyAccumulatedInGame = 0;
+        currentMenu.SetActive(false);
+        json.SaveToJson(0);
+        json.SaveToJson(1);
         currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
     }

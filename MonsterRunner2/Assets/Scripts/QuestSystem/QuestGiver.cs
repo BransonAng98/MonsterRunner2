@@ -147,7 +147,7 @@ public class QuestGiver : MonoBehaviour
         questCompleted = true;
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
-        playerInfoData.money += scoreManager.goldEarned;
+        playerInfoData.moneyAccumulatedInGame += scoreManager.goldEarned;
         missionManager.SpawnPassengers();
         enemySpawnerScript.DestroyAllEnemies();
         enemySpawnerScript.startSpawning = false;
