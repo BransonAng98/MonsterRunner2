@@ -41,6 +41,7 @@ public class QuestGiver : MonoBehaviour
 
     private void Start()
     {
+        quest.goal.goaltype = "None";
         StartCoroutine(StartGameSequence());
         questCompleted = false;
         countdownStart = false;
@@ -147,11 +148,11 @@ public class QuestGiver : MonoBehaviour
         questCompleted = true;
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
-        playerInfoData.money += scoreManager.goldEarned;
+        playerInfoData.moneyAccumulatedInGame += scoreManager.goldEarned;
         missionManager.SpawnPassengers();
         enemySpawnerScript.DestroyAllEnemies();
         enemySpawnerScript.startSpawning = false;
-        quest.goal.goaltype = "None";
+        RunGoalType("None");
 
         PrintRewardDialogue();
     }
@@ -226,15 +227,25 @@ public class QuestGiver : MonoBehaviour
                 isInProgress = true;
                 break;
             case "None":
-                survivaltime = 0;
-                currentenemykilled = 0;
-                enemykilled = 0;
-                distancetoDestination = 0;
-                destination = null;
+                ResetQuestValues();
                 break;
             default:
                 break;
         }
+    }
+
+    private void ResetQuestValues()
+    {
+        survivaltime = 0;
+        currentenemykilled = 0;
+        enemykilled = 0;
+        distancetoDestination = 0;
+        destination = null;
+        isInProgress = false;
+        countdownStart = false;
+        questCompleted = false;
+        quest.goal.goaltype = "None";
+        Debug.Log("Reset Quest Values");
     }
 }
 
