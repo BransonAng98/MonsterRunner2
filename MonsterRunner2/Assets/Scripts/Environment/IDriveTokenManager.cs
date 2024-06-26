@@ -8,7 +8,6 @@ public class IDriveTokenManager : MonoBehaviour
     public List<GameObject> deactiveList = new List<GameObject>();
     public List<GameObject> activeList = new List<GameObject>();
     public GameObject letterTokenPrefab;
-    public GameObject uiLetterTokenPrefab;
     public Vector2 uiLetterTarget;
     public Transform uiContainer;
     public List<GameObject> spawnedLetterTokens;
@@ -53,15 +52,15 @@ public class IDriveTokenManager : MonoBehaviour
         }
     }
 
-    public void ActivateUIFeedback(string letter)
-    { 
-        // Instantiate the token prefab
-        GameObject token = Instantiate(uiLetterTokenPrefab, uiContainer);
-        token.GetComponent<IDriveUIToken>().AssignTargetPos(uiLetterTarget, letter);
-        // Set the initial position of the token
-        RectTransform tokenRect = token.GetComponent<RectTransform>();
-        tokenRect.anchoredPosition = uiLetterTarget;
-    }
+    //public void ActivateUIFeedback(string letter)
+    //{ 
+    //    // Instantiate the token prefab
+    //    GameObject token = Instantiate(uiLetterTokenPrefab, uiContainer);
+    //    token.GetComponent<IDriveUIToken>().AssignTargetPos(uiLetterTarget, letter);
+    //    // Set the initial position of the token
+    //    RectTransform tokenRect = token.GetComponent<RectTransform>();
+    //    tokenRect.anchoredPosition = uiLetterTarget;
+    //}
 
     public void DespawnLetterTokens(int id)
     {
