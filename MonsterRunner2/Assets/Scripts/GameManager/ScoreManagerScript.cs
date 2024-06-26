@@ -87,7 +87,9 @@ public class ScoreManagerScript : MonoBehaviour
                 questDetail.text = "Keep the cops busy for " + timeHolder + ". While you do that, we will rob the bank";
                 questReward.text = "Reward: " + questgiverScript.quest.goldReward + "";
                 break;
-            
+            case "None":
+                activeCounter.text = "Find a Quest!";
+                break;
            
         }
     }
