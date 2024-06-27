@@ -128,14 +128,17 @@ public class ScoreManagerScript : MonoBehaviour
         {
             case SideObjectiveGoal.ObjectiveType.Kill:
                 sideobjectiveDetail.text = "The boss says he will give you a bonus if you destroy " + SideObjectiveQuestGiverScript.enemykilled + " of their cars.";
-                sideobjectiveReward.text = "Reward: " + SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + "";
+                sideobjectiveReward.text = "Reward: " + SideObjectiveQuestGiverScript.SideObjective.goldReward + "";
                 break;
 
             case SideObjectiveGoal.ObjectiveType.EarnGold:
                 sideobjectiveDetail.text = "The boss is in a generous mood. If you earn " + SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + " before you die, we'll give you a bonus";
                 sideobjectiveReward.text = "Reward: " + SideObjectiveQuestGiverScript.SideObjective.goldReward + "";
                 break;
-
+            case SideObjectiveGoal.ObjectiveType.none:
+                sideobjectiveDetail.text = "No side objectives for now.";
+                sideobjectiveReward.text = "Reward:0 ";
+                break;
         }
     }
 

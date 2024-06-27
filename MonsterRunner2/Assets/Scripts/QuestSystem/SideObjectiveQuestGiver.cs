@@ -92,6 +92,7 @@ public class SideObjectiveQuestGiver : MonoBehaviour
         SideObjective.goldRewardAmt();
         hasRunKillObjective = false;
         hasRunGoldObjective = false;
+        Debug.Log("Choose a new side objective");
     }
 
     void ResetSideObjectiveValues()
@@ -100,7 +101,7 @@ public class SideObjectiveQuestGiver : MonoBehaviour
         currentenemykilled = 0;
         currentGoldAmt = 0;
         questCompleted = false;
-        Debug.Log("ResetSideObjectiveValues0");
+        Debug.Log("ResetSideObjectiveValues");
     }
 
     void RunObjectiveFunction(SideObjectiveGoal.ObjectiveType objectiveType)
