@@ -108,7 +108,7 @@ public class EnemyCarAI : MonoBehaviour
             {
                 nearbyObstacles.Add(other);
             }
-            Debug.Log("Avoiding: " + other.name);
+           
         }
     }
 
@@ -121,7 +121,7 @@ public class EnemyCarAI : MonoBehaviour
             {
                 isAvoiding = false;
             }
-            Debug.Log("Stopped avoiding: " + other.name);
+           
         }
     }
 
