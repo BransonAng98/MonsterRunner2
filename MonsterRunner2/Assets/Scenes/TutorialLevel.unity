@@ -65490,7 +65490,7 @@ MonoBehaviour:
   playerPos: {fileID: 0}
   threatlvl: 1
   enemyTypesPrefabs:
-  - {fileID: 5039597518212396643, guid: a97911a79f45d1e47a5244bdb12b6262, type: 3}
+  - {fileID: 5039597518212396643, guid: 06b47b1ea8bc6924b81f51703929d5c6, type: 3}
   playerData: {fileID: 0}
   Radius: 0
   SideObjectiveQuestGiverScript: {fileID: 171047682}
