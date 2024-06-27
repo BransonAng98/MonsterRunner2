@@ -159,14 +159,27 @@ public class JsonSystem : MonoBehaviour
         {
             File.Delete(vehicleDataFilePath);
         }
+        else
+        {
+            Debug.LogError("Unable to find vehicle path");
+        }
 
 
         if (File.Exists(playerDataFilePath))
         {
             File.Delete(playerDataFilePath);
         }
+        else
+        {
+            Debug.LogError("Unable to find player path");
+        }
 
         CreateFreshJsonFile();
+        // Get the current scene name
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Reload the current scene
+        SceneManager.LoadScene(currentSceneName);
     }
 }
 
