@@ -9,7 +9,10 @@ public class AOESkill : AbilitySO
     public Transform aoeOrigin;
     public GameObject particleSys;
 
+    //Status effect duration
     public float aoeDuration;
+
+    //
     public float aoeTimer;
 
     public override void LevelUpSkill(int abilityLevel)
@@ -24,12 +27,15 @@ public class AOESkill : AbilitySO
                 break;
             case 3:
                 aoeDuration++;
+                abilityCD--;
                 break;
             case 4:
                 aoeDuration += 2;
+                abilityCD--;
                 break;
             case 5:
-                aoeDuration++;
+                aoeDuration += 2;
+                abilityCD -= 2;
                 break;
         }
 

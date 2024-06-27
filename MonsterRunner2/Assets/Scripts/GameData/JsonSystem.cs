@@ -41,7 +41,6 @@ public class JsonSystem : MonoBehaviour
         {
             //Saving car data
             case 0:
-
                 // Creating and populating the list of VehicleData
                 List<VehicleData> vehicleDataList = new List<VehicleData>();
 
@@ -153,6 +152,21 @@ public class JsonSystem : MonoBehaviour
             Debug.LogError("Unable to find player file path");
             SaveToJson(1);
         }
+    }
+    public void ResetGame()
+    {
+        if (File.Exists(vehicleDataFilePath))
+        {
+            File.Delete(vehicleDataFilePath);
+        }
+
+
+        if (File.Exists(playerDataFilePath))
+        {
+            File.Delete(playerDataFilePath);
+        }
+
+        CreateFreshJsonFile();
     }
 }
 

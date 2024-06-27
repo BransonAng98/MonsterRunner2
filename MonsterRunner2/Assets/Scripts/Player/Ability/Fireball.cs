@@ -32,13 +32,17 @@ public class Fireball : AbilitySO
                 shootingInterval -= 0.5f;
                 break;
             case 3:
+                shootingInterval -= 0.5f;
                 bulletSpeed += 5f;
                 break;
             case 4:
-                shootingInterval -= 0.5f;
+                shootingInterval -= 0.75f;
+                bulletSpeed += 5f;
                 break;
             case 5:
+                shootingInterval -= 0.75f;
                 bulletSpeed += 5f;
+                abilityCD--;
                 break;
         }
 

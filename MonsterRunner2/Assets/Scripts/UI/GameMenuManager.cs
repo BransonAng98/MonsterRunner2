@@ -259,6 +259,8 @@ public class GameMenuManager : MonoBehaviour
                 break;
         }
 
+        playerData.money += playerData.moneyAccumulatedInGame;
+        playerData.moneyAccumulatedInGame = 0;
         json.SaveToJson(1);
         SceneManager.LoadScene("MainMenu");
     }
