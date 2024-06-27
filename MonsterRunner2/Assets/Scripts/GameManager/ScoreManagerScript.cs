@@ -63,14 +63,14 @@ public class ScoreManagerScript : MonoBehaviour
                 currentEnemiesKilled = questgiverScript.currentenemykilled;
                 totalEnemiesKilled = questgiverScript.enemykilled;
                 activeCounter.text = currentEnemiesKilled + "/" + totalEnemiesKilled  + "Killed";
-                questReward.text = questgiverScript.quest.goldReward +  "";
+                questReward.text = "Reward: " + questgiverScript.quest.goldReward + "";
                 break;
             case "Reach":
                 distancetoTarget = questgiverScript.distancetoDestination;
                 int distanceInt = Mathf.FloorToInt(distancetoTarget);
                 questDetail.text = "Take us to the safe house. It's  " + distancetoTarget + " m away. Hurry!"; 
                 activeCounter.text = distanceInt + "m";
-                questReward.text = questgiverScript.quest.goldReward + "";
+                questReward.text = "Reward: " + questgiverScript.quest.goldReward + "";
                 break;
 
             case "Survive":
@@ -99,7 +99,7 @@ public class ScoreManagerScript : MonoBehaviour
         switch(SideObjectiveQuestGiverScript.SideObjective.goal.objectiveType)
         {
             case SideObjectiveGoal.ObjectiveType.Kill:
-            sideobjectiveDetail.text = "The boss says he will give you a bonus if you destroy " + SideObjectiveQuestGiverScript.enemykilled + "of their cars.";
+            sideobjectiveDetail.text = "The boss says he will give you a bonus if you destroy " + SideObjectiveQuestGiverScript.enemykilled + " of their cars.";
             sideobjectiveReward.text = SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + "";
             break;
 

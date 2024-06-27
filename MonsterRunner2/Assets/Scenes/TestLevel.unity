@@ -29470,6 +29470,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 334582850}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &335655237 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 871967544983047583, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &340684791
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -65371,7 +65377,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 1320399616}
   loadingScreen: {fileID: 0}
   popUpScreen: {fileID: 325316002}
-  tutorialScreen: {fileID: 1627485807}
+  tutorialScreen1: {fileID: 1677489659}
+  tutorialScreen2: {fileID: 335655237}
   loadingSlider: {fileID: 0}
   currentMenu: {fileID: 0}
   sceneID: 0
@@ -65501,6 +65508,7 @@ MonoBehaviour:
   startSpawning: 0
   player: {fileID: 0}
   spawnedEnemies: []
+  currentThreatLevel: 0
   roads: []
 --- !u!114 &754238785
 MonoBehaviour:
@@ -65531,9 +65539,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91c3a6a7831fccc44b8a24a1bd3de084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
-  startGameScreen: {fileID: 187753074}
-  tutorialScreen: {fileID: 1677489659}
+  playerManager: {fileID: 0}
+  scoreManager: {fileID: 0}
+  missionManager: {fileID: 0}
+  fadeToBlackImage: {fileID: 0}
+  fadeDuration: 1
 --- !u!114 &754238787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144669,12 +144679,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4f32dfddb033d3e40b5841bc53cc1689,
     type: 3}
   m_PrefabInstance: {fileID: 1627086366}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1627485807 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 871967544542237359, guid: 3ac7158780dca974fb451e592c6934a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 8037539422613460343}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1627942060
 PrefabInstance:
