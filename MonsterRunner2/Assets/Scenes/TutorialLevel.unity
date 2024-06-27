@@ -3832,6 +3832,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 54596734}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &55543212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6017329509532773055, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &55788885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16133,12 +16139,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4dc7028a3a83758439585b7c7c98cb27,
     type: 3}
   m_PrefabInstance: {fileID: 187102407}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &187753074 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7789936772465388802, guid: 3ac7158780dca974fb451e592c6934a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 8037539422613460343}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &188162615
 PrefabInstance:
@@ -65362,7 +65362,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScene: 0
-  startScreen: {fileID: 187753074}
   resultScreen: {fileID: 1413860387}
   mainMenu: {fileID: 0}
   gameplayUI: {fileID: 1736334156}
@@ -92587,7 +92586,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 364351694}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -111185,9 +111184,11 @@ MonoBehaviour:
   sideobjectiveDetail: {fileID: 1609521655}
   sideobjectiveReward: {fileID: 178654729}
   questgiverScript: {fileID: 171047681}
-  distancetoTarget: 0
   SideObjectiveQuestGiverScript: {fileID: 171047682}
   enemySpawnerScript: {fileID: 754238784}
+  timeIcon: {fileID: 1731440757}
+  killIcon: {fileID: 55543212}
+  distancetoTarget: 0
 --- !u!1001 &1242371476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -153509,6 +153510,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1731206699}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1731440757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1547729723817211748, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1731554744
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191652,6 +191659,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 871967544092303060, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 871967544281760468, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -191716,6 +191728,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 871967544542237359, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 871967544983047583, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
