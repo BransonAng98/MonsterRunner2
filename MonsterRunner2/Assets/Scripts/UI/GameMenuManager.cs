@@ -247,13 +247,6 @@ public class GameMenuManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
-        switch (sceneID)
-        {
-            case 1:
-                playerData.hasPlayedTutorial = true;
-                break;
-        }
-
         playerData.money += playerData.moneyAccumulatedInGame;
         playerData.moneyAccumulatedInGame = 0;
         json.SaveToJson(1);

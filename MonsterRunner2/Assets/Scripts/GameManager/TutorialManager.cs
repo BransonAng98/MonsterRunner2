@@ -10,6 +10,7 @@ public class TutorialManager : MonoBehaviour
     public missionManagerScript missionManager;
     public CanvasGroup fadeToBlackImage; 
     public float fadeDuration = 1f; // Duration of the fade effect
+    public PlayerDataSO playerData;
 
     private bool shouldFadeIn = true;
     private float fadeTimer = 0f;
@@ -41,6 +42,7 @@ public class TutorialManager : MonoBehaviour
     void DisplayEndScreen()
     {
         fadeToBlackImage.gameObject.SetActive(false);
+        playerData.hasPlayedTutorial = true;
     }
 
     private void Update()

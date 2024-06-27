@@ -65534,6 +65534,7 @@ MonoBehaviour:
   missionManager: {fileID: 171047678}
   fadeToBlackImage: {fileID: 1029165315}
   fadeDuration: 3
+  playerData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
 --- !u!114 &754238787
 MonoBehaviour:
   m_ObjectHideFlags: 0
