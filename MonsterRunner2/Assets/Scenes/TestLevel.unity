@@ -9053,6 +9053,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 122054997}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &122834028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6017329509532773055, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &123571201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16141,12 +16147,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4dc7028a3a83758439585b7c7c98cb27,
     type: 3}
   m_PrefabInstance: {fileID: 187102407}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &187753074 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7789936772465388802, guid: 3ac7158780dca974fb451e592c6934a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 8037539422613460343}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &188162615
 PrefabInstance:
@@ -65370,7 +65370,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentScene: 0
-  startScreen: {fileID: 187753074}
+  startScreen: {fileID: 0}
   resultScreen: {fileID: 1413860387}
   mainMenu: {fileID: 0}
   gameplayUI: {fileID: 1736334156}
@@ -111105,9 +111105,11 @@ MonoBehaviour:
   sideobjectiveDetail: {fileID: 1609521655}
   sideobjectiveReward: {fileID: 178654729}
   questgiverScript: {fileID: 171047681}
-  distancetoTarget: 0
   SideObjectiveQuestGiverScript: {fileID: 171047682}
   enemySpawnerScript: {fileID: 754238784}
+  timeIcon: {fileID: 1647181813}
+  killIcon: {fileID: 122834028}
+  distancetoTarget: 0
 --- !u!1001 &1242371476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -146010,6 +146012,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: bc532b78ce09f234ea01da2deecfe035,
     type: 3}
   m_PrefabInstance: {fileID: 1644738698}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1647181813 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1547729723817211748, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1647448761
 PrefabInstance:
@@ -191626,6 +191634,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 871967545059545718, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 35.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 871967545059545718, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.6899
+      objectReference: {fileID: 0}
+    - target: {fileID: 871967545157882968, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_Name
+      value: Obj_Text
+      objectReference: {fileID: 0}
     - target: {fileID: 871967545157882971, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -191666,6 +191689,17 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 871967545678579675, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 871967545678579675, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1b1d464d04a75424dbfcaf599953e38f,
+        type: 3}
     - target: {fileID: 6103353794633576816, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
