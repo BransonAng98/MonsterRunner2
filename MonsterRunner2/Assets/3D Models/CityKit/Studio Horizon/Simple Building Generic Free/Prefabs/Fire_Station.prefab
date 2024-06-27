@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3160125538751572972}
   - component: {fileID: 2601602220111019847}
   - component: {fileID: 338944677944359289}
+  - component: {fileID: 7838765031556541562}
   m_Layer: 6
   m_Name: Fire_Station
   m_TagString: Obstacle
@@ -111,3 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.6489663, y: 6.1749907, z: 14.015805}
   m_Center: {x: 4.6702046, y: 3.087494, z: 1.0190744}
+--- !u!114 &7838765031556541562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3520681445263854137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

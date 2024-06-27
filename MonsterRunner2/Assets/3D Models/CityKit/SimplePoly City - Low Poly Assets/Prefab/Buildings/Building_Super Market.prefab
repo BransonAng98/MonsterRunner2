@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 3181990267642147538}
   - component: {fileID: 4927238286901978303}
+  - component: {fileID: -142860080686298312}
   m_Layer: 6
   m_Name: Building_Super Market
   m_TagString: Obstacle
@@ -111,3 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.219473, y: 7.5784726, z: 1.5181923}
   m_Center: {x: 0.008385658, y: 3.7887337, z: 4.9417152}
+--- !u!114 &-142860080686298312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

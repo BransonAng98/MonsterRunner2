@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: -4429348131140246063}
   - component: {fileID: 6746826682748197174}
+  - component: {fileID: -2209485922392978642}
   m_Layer: 6
   m_Name: Building_House_03_color03
   m_TagString: Obstacle
@@ -111,3 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.203989, y: 9.610818, z: 3.9080439}
   m_Center: {x: -0.10840464, y: 4.7428584, z: 5.0699716}
+--- !u!114 &-2209485922392978642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

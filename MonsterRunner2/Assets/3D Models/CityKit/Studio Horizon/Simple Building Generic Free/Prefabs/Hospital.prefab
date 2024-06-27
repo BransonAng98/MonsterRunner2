@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2784511843853047271}
   - component: {fileID: 721854713790722199}
   - component: {fileID: 3683662449881599633}
+  - component: {fileID: 299716527024877564}
   m_Layer: 6
   m_Name: Hospital
   m_TagString: Obstacle
@@ -167,3 +168,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3416791, y: 5.4019837, z: 1.2555964}
   m_Center: {x: -10.461884, y: 2.686682, z: 11.040787}
+--- !u!114 &299716527024877564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363025940278517486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

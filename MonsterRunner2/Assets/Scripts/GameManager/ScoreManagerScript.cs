@@ -62,7 +62,7 @@ public class ScoreManagerScript : MonoBehaviour
                 questDetail.text = "Take out " + totalEnemiesKilled + " enemies and keep the cops distracted for us";
                 currentEnemiesKilled = questgiverScript.currentenemykilled;
                 totalEnemiesKilled = questgiverScript.enemykilled;
-                activeCounter.text = currentEnemiesKilled + "/" + totalEnemiesKilled  + "Killed";
+                activeCounter.text = currentEnemiesKilled + "/" + totalEnemiesKilled  + " Killed";
                 questReward.text = "Reward: " + questgiverScript.quest.goldReward + "";
                 break;
             case "Reach":

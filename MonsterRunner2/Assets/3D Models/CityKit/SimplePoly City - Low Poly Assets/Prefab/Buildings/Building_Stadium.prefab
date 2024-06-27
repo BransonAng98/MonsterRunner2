@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7626702865105273126}
   - component: {fileID: 7960042799331685368}
   - component: {fileID: 4922941962260111242}
+  - component: {fileID: -7843242011585373243}
   m_Layer: 6
   m_Name: Building_Stadium
   m_TagString: Obstacle
@@ -156,6 +157,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 17.252163, y: 11.730206, z: 6.119158}
   m_Center: {x: 2.7384586, y: 5.823163, z: -17.24302}
+--- !u!114 &-7843242011585373243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &2614469310144763476
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5377266927130576437}
   - component: {fileID: 7888921773797012223}
   - component: {fileID: 7737772714803394742}
+  - component: {fileID: -7978093479793920551}
   m_Layer: 6
   m_Name: Workshop
   m_TagString: Obstacle
@@ -97,3 +98,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 24.771229, y: 11.471389, z: 13.509495}
   m_Center: {x: -0.14792013, y: 5.734594, z: 0.2072804}
+--- !u!114 &-7978093479793920551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8537673697885705002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

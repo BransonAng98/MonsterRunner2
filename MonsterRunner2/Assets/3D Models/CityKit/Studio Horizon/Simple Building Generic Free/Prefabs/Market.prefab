@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1241753849019316273}
   - component: {fileID: 4927796164026264566}
   - component: {fileID: 8906336202318688310}
+  - component: {fileID: -3029627650936520742}
   m_Layer: 6
   m_Name: Market
   m_TagString: Obstacle
@@ -167,3 +168,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.2618775, y: 2.3576667, z: 0.42742252}
   m_Center: {x: 8.712569, y: 1.1724229, z: 6.576636}
+--- !u!114 &-3029627650936520742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722627683411591535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

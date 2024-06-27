@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 2374598875505220387}
   - component: {fileID: 242884170442032814}
+  - component: {fileID: 1901805622943151529}
   m_Layer: 6
   m_Name: Building_Bakery
   m_TagString: Obstacle
@@ -111,3 +112,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.249794, y: 6.178705, z: 1.8210297}
   m_Center: {x: -0.031099439, y: 3.0893526, z: 5.005481}
+--- !u!114 &1901805622943151529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
