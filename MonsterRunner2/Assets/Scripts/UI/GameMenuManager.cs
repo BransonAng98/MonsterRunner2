@@ -249,6 +249,7 @@ public class GameMenuManager : MonoBehaviour
     {
         playerData.money += playerData.moneyAccumulatedInGame;
         playerData.moneyAccumulatedInGame = 0;
+        Time.timeScale = 1f;
         json.SaveToJson(1);
         SceneManager.LoadScene("MainMenu");
     }
