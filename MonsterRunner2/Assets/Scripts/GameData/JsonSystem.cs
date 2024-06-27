@@ -27,6 +27,7 @@ public class JsonSystem : MonoBehaviour
         {
             //Creating a new data for playerSO and vehicleSos and saving it to Json
             CreateFreshJsonFile();
+            LoadFromJson();
         }
         else
         {
@@ -90,9 +91,8 @@ public class JsonSystem : MonoBehaviour
             carData.vehicleName = vehicleData.vehicleName;
             carData.vehicleID = vehicleData.vehicleID;
             carData.speed = vehicleData.maxSpeed;
-            carData.ability1Level = vehicleData.ability1Level;
-            carData.ability2Level = vehicleData.ability2Level;
-
+            carData.ability1Level = 1;
+            carData.ability2Level = 0;
             vehicleDataList.Add(carData);
         }
 
@@ -118,18 +118,29 @@ public class JsonSystem : MonoBehaviour
         {
             string json = File.ReadAllText(vehicleDataFilePath);
             VehicleData[] dataArray = JsonHelper.FromJson<VehicleData>(json);
-            allVehicleDataList = new List<PlayerSO>();
 
             foreach (var data in dataArray)
             {
-                PlayerSO vehicleData = ScriptableObject.CreateInstance<PlayerSO>();
-                vehicleData.vehicleName = data.vehicleName;
-                vehicleData.vehicleID = data.vehicleID;
-                vehicleData.maxSpeed = data.speed;
-                vehicleData.ability1Level = data.ability1Level;
-                vehicleData.ability2Level = data.ability2Level;
+                PlayerSO vehicleData = allVehicleDataList.Find(v => v.vehicleID == data.vehicleID);
 
-                allVehicleDataList.Add(vehicleData);
+                if (vehicleData != null)
+                {
+                    vehicleData.vehicleName = data.vehicleName;
+                    vehicleData.maxSpeed = data.speed;
+                    vehicleData.ability1Level = data.ability1Level;
+                    vehicleData.ability2Level = data.ability2Level;
+                }
+                else
+                {
+                    // If vehicleData not found, create a new one
+                    vehicleData = ScriptableObject.CreateInstance<PlayerSO>();
+                    vehicleData.vehicleName = data.vehicleName;
+                    vehicleData.vehicleID = data.vehicleID;
+                    vehicleData.maxSpeed = data.speed;
+                    vehicleData.ability1Level = 1;
+                    vehicleData.ability2Level = 0;
+                    allVehicleDataList.Add(vehicleData);
+                }
             }
         }
         else
@@ -173,8 +184,6 @@ public class JsonSystem : MonoBehaviour
         {
             Debug.LogError("Unable to find player path");
         }
-
-        CreateFreshJsonFile();
         // Get the current scene name
         string currentSceneName = SceneManager.GetActiveScene().name;
 

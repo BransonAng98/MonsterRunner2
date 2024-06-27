@@ -120,6 +120,15 @@ public class UpgradeManager : MonoBehaviour
         ability2Icon.sprite = carDisplay.ability2Sprite;
         ability2LockedIcon.sprite = carDisplay.ability2Sprite;
 
+        if(carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level > 0)
+        {
+            ability2Icon.gameObject.SetActive(true);
+        }
+        else
+        {
+            ability2Icon.gameObject.SetActive(false);
+        }
+
         if (carDisplay.selectedCarID == playerData.selectedVehicleID)
         {
             activeIndicator.interactable = false;
@@ -153,12 +162,14 @@ public class UpgradeManager : MonoBehaviour
         }
 
         ActiveIconDisplay();
+        UpdateUI();
     }
 
     void UnlockSkill()
     {
         if (!lockedSkill.unlocked && currency >= lockedSkill.cost)
         {
+            carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level++;
             currency -= lockedSkill.cost;
             lockedSkill.unlocked = true;
             lockedSkillOverlay.SetActive(true);
