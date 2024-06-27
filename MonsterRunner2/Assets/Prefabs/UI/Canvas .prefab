@@ -2372,7 +2372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &871967544835735723
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3225,8 +3225,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_AnchoredPosition: {x: 0, y: 7.6899}
+  m_SizeDelta: {x: 160, y: 35.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &871967545059545713
 MonoBehaviour:
@@ -3724,7 +3724,7 @@ GameObject:
   - component: {fileID: 871967545157882965}
   - component: {fileID: 871967545157882970}
   m_Layer: 5
-  m_Name: Objective_Text
+  m_Name: Obj_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3858,6 +3858,7 @@ GameObject:
   m_Component:
   - component: {fileID: 871967545178434036}
   - component: {fileID: 871967545178434039}
+  - component: {fileID: 8037539422613460347}
   m_Layer: 5
   m_Name: SusSlider
   m_TagString: Untagged
@@ -3934,12 +3935,32 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 30
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8037539422613460347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871967545178434037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cbd515645e40d04c9a07ce766e82114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 0}
+  barValue: 0
+  maximumValue: 60
+  decreaseMultiplier: 2.5
+  isIncreasing: 0
+  player: {fileID: 0}
+  eyeOpen: {fileID: 871967545748864868}
+  eyeClose: {fileID: 871967545054464855}
 --- !u!1 &871967545194271720
 GameObject:
   m_ObjectHideFlags: 0
@@ -5037,8 +5058,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.184}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.27999878, y: 34.6858}
-  m_SizeDelta: {x: 0, y: -69.3739}
+  m_AnchoredPosition: {x: 15.287289, y: 34.73576}
+  m_SizeDelta: {x: -111.0466, y: -69.3739}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &871967545520004706
 CanvasRenderer:
@@ -8950,18 +8971,6 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: JsonSystem, Assembly-CSharp
-        m_MethodName: SaveToJson
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

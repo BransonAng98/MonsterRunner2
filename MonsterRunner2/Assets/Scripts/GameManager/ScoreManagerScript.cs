@@ -115,6 +115,8 @@ public class ScoreManagerScript : MonoBehaviour
                 break;
             case "None":
                 activeCounter.text = "Find a Quest!";
+                questDetail.text = "No current contract. Collect a passenger to start";
+                questReward.text = "Reward: 0";
                 break;
 
         }
@@ -126,7 +128,7 @@ public class ScoreManagerScript : MonoBehaviour
         {
             case SideObjectiveGoal.ObjectiveType.Kill:
                 sideobjectiveDetail.text = "The boss says he will give you a bonus if you destroy " + SideObjectiveQuestGiverScript.enemykilled + " of their cars.";
-                sideobjectiveReward.text = SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + "";
+                sideobjectiveReward.text = "Reward: " + SideObjectiveQuestGiverScript.SideObjective.goal.goldtobeEarnedAmt + "";
                 break;
 
             case SideObjectiveGoal.ObjectiveType.EarnGold:

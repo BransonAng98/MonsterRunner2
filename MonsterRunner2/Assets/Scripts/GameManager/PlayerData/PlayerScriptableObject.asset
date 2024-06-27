@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PlayerScriptableObject
   m_EditorClassIdentifier: 
   selectedVehicleID: 0
-  money: 0
+  money: 690
   moneyAccumulatedInGame: 0
   gems: 0
   gameStart: 0
-  hasPlayedTutorial: 0
+  hasPlayedTutorial: 1

@@ -58,7 +58,7 @@ public class GameMenuManager : MonoBehaviour
             case "TutorialLevel":
                 sceneID = 1;
                 break;
-            case "TestLevel":
+            case "TheCity":
                 sceneID = 2;
                 break;
         }
@@ -98,7 +98,7 @@ public class GameMenuManager : MonoBehaviour
     {
         if (playerData.hasPlayedTutorial)
         {
-            StartCoroutine(LoadLevelAsync("TestLevel"));
+            StartCoroutine(LoadLevelAsync("TheCity"));
         }
         else
         {
