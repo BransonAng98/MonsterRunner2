@@ -26651,6 +26651,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3300000, guid: d34e8533c8de8ec45869f9144584d929, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4300000, guid: 7b654bd76adcefd44b4799d4290822fb, type: 3}
     m_RemovedComponents:
     - {fileID: 6755028280265089380, guid: d34e8533c8de8ec45869f9144584d929, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d34e8533c8de8ec45869f9144584d929, type: 3}
@@ -192100,7 +192104,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8037539422613460347, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: maximumValue
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8037539422613460347, guid: 3ac7158780dca974fb451e592c6934a0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3ac7158780dca974fb451e592c6934a0, type: 3}
 --- !u!1 &8037539422613460344 stripped
 GameObject:
@@ -192134,7 +192144,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   barValue: 0
-  maximumValue: 60
+  maximumValue: 120
   decreaseMultiplier: 2.5
   isIncreasing: 0
   player: {fileID: 0}
