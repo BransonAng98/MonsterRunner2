@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7615801959409793012}
   - component: {fileID: 8815739416803991201}
   - component: {fileID: 5695780697828304965}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Thundercracker
   m_TagString: Untagged
   m_Icon: {fileID: 0}

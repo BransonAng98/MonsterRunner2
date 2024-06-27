@@ -36,7 +36,7 @@ public class TutorialManager : MonoBehaviour
     void StopPlayerMovement()
     {
         playerManager.playerData.TakeDamage(1000);
-        Invoke("DisplayEndScreen", 3f);
+        Invoke("DisplayEndScreen", 3.2f);
     }
 
     void DisplayEndScreen()
