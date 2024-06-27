@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameMenuManager : MonoBehaviour
 {
     public int currentScene;
-    public GameObject startScreen;
     public GameObject resultScreen;
     public GameObject mainMenu;
     public GameObject gameplayUI;
@@ -39,8 +38,6 @@ public class GameMenuManager : MonoBehaviour
         {
             return;
         }
-
-        Time.timeScale = 0f;
     }
 
     private void Start()
@@ -72,7 +69,6 @@ public class GameMenuManager : MonoBehaviour
         switch (sceneID)
         {
             case 1:
-                startScreen.SetActive(false);
                 tutorialScreen2.SetActive(false);
                 break;
 
@@ -88,9 +84,9 @@ public class GameMenuManager : MonoBehaviour
         switch (sceneID)
         {
             case 1:
+                Time.timeScale = 0f;
                 tutorialScreen1.SetActive(true);
                 tutorialScreen2.SetActive(false);
-                startScreen.SetActive(false);
                 break;
 
             case 2:
@@ -180,7 +176,6 @@ public class GameMenuManager : MonoBehaviour
             case 2:
                 Debug.Log("Start Game");
                 Time.timeScale = 1f;
-                startScreen.SetActive(false);
                 break;
         }
     }
