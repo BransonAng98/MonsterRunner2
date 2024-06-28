@@ -68016,6 +68016,9 @@ MonoBehaviour:
   offScreenPosition: {fileID: 2122660609}
   targetPosition: {fileID: 1948972475}
   moveDuration: 0.5
+  swordSprite: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
+  shieldSprite: {fileID: 21300000, guid: c28d54c4733dc4fc7bedc4189f66bfbc, type: 3}
+  abilityIconIndicator: {fileID: 8037539422613460348}
   ability: []
 --- !u!114 &754238782
 MonoBehaviour:
@@ -198451,8 +198454,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   barValue: 0
-  maximumValue: 120
-  decreaseMultiplier: 2.5
+  maximumValue: 180
+  decreaseMultiplier: 5
   isIncreasing: 0
   player: {fileID: 0}
   dialogueManager: {fileID: 171047680}
@@ -198461,3 +198464,15 @@ MonoBehaviour:
   eyeClose: {fileID: 8037539422613460345}
   pulsatingImage: {fileID: 1517746087}
   pulsateDuration: 0.2
+--- !u!114 &8037539422613460348 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1257039495, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -25,7 +25,10 @@ public class PlayerAbilityManager : MonoBehaviour
     public TextMeshProUGUI abilityName;
     public RectTransform offScreenPosition;   // Position off the screen
     public RectTransform targetPosition;      // Designated target position
-    public float moveDuration;        
+    public float moveDuration;
+    public Sprite swordSprite;
+    public Sprite shieldSprite;
+    public Image abilityIconIndicator;
 
     // Private Variables
     private float cooldown;
@@ -70,9 +73,11 @@ public class PlayerAbilityManager : MonoBehaviour
         {
             case 0:
                 abilityIcon.sprite = player.playerData.ability1Sprite;
+                abilityIconIndicator.sprite = swordSprite;
                 break;
             case 1:
                 abilityIcon.sprite = player.playerData.ability2Sprite;
+                abilityIconIndicator.sprite = shieldSprite;
                 break;
         }
 
@@ -124,6 +129,7 @@ public class PlayerAbilityManager : MonoBehaviour
                     abilityState = AbilityState.Cooldown;
                     ability[abilityID].Deactive();
                     cooldown = ability[abilityID].abilityCD;
+                    player.skillCDParticles[abilityID].SetActive(true);
                     // Reset the slider value
                     if (abilityActiveSlider != null)
                     {
