@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class TutorialManager : MonoBehaviour
     public CanvasGroup fadeToBlackImage; 
     public float fadeDuration = 1f; // Duration of the fade effect
     public PlayerDataSO playerData;
+    public GameObject exitButton;
+    public GameObject retryButton;
 
     private bool shouldFadeIn = true;
     private float fadeTimer = 0f;
@@ -18,7 +21,7 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         fadeToBlackImage.alpha = 0f;
-        
+        exitButton.SetActive(false);
     }
 
     void StartFade()
@@ -35,6 +38,8 @@ public class TutorialManager : MonoBehaviour
 
     void StopPlayerMovement()
     {
+        exitButton.SetActive(true);
+        retryButton.SetActive(false);
         playerManager.playerData.TakeDamage(1000);
         Invoke("DisplayEndScreen", 3.2f);
     }

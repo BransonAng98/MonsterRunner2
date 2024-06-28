@@ -26,13 +26,13 @@ public class Quest
         switch (enemyspawnerScript.threatlvl)
         {
             case 1:
-                possibleGoldAmounts = new float[] { 50f, 60f, 70f };
+                possibleGoldAmounts = new float[] { 100f, 150f, 175f };
                 break;
             case 2:
-                possibleGoldAmounts = new float[] { 100f, 110f, 120f };
+                possibleGoldAmounts = new float[] { 200f, 250f, 275f };
                 break;
             default:
-                possibleGoldAmounts = new float[] { 0f }; // Default case if needed
+                possibleGoldAmounts = new float[] { 300f, 320f, 350f }; // Default case if needed
                 break;
         }
 

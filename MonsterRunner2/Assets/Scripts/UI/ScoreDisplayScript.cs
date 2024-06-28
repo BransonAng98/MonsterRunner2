@@ -16,6 +16,7 @@ public class ScoreDisplayScript : MonoBehaviour
     private float lerpDuration = 2.0f;
 
     public ScoreManagerScript scoreManager;
+    public PlayerDataSO playerData;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +30,7 @@ public class ScoreDisplayScript : MonoBehaviour
         float initialMissionScore = 0;
         float initialTimeScore = 0;
 
-        float targetEnemyScore = scoreManager.goldEarned;
+        float targetEnemyScore = playerData.moneyAccumulatedInGame;
         float targetMissionScore = scoreManager.missionsCompleted;
         float targetTimeScore = scoreManager.stopwatchTime;
 

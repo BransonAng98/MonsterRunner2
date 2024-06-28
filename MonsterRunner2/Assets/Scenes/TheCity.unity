@@ -14523,6 +14523,7 @@ MonoBehaviour:
       playerIsAlive: 0
       requiredKillAmount: 0
       currentAmount: 0
+      playerDataSO: {fileID: 0}
     enemyspawnerScript: {fileID: 0}
   questGoalScript:
     goaltype: 0
@@ -14531,6 +14532,7 @@ MonoBehaviour:
     playerIsAlive: 0
     requiredKillAmount: 0
     currentAmount: 0
+    playerDataSO: {fileID: 0}
   player: {fileID: 0}
   destination: {fileID: 0}
   redDot: {fileID: 1294074862}
@@ -67755,6 +67757,8 @@ MonoBehaviour:
   fadeToBlackImage: {fileID: 0}
   fadeDuration: 1
   playerData: {fileID: 0}
+  exitButton: {fileID: 0}
+  retryButton: {fileID: 0}
 --- !u!114 &754238787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197974,6 +197978,12 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 754238777}
+    - target: {fileID: 6327423416695742410, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff,
+        type: 2}
     - target: {fileID: 6327423416695742410, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: scoreManager
