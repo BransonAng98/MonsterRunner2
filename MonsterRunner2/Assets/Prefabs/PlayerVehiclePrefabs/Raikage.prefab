@@ -2446,10 +2446,35 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7779759806700625051}
     m_Modifications:
+    - target: {fileID: 651671973585224488, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 651671973585224488, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
         type: 3}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
         type: 3}
@@ -2464,7 +2489,7 @@ PrefabInstance:
     - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 9.533333
       objectReference: {fileID: 0}
     - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
         type: 3}
@@ -2501,15 +2526,115 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 749521912359382538, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3618964646253771753, guid: ccf33d8f729212b4191d6eaca17bfd8b,
         type: 3}
       propertyPath: InitialModule.size3D
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3618964646253771753, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 4929160230478827091, guid: ccf33d8f729212b4191d6eaca17bfd8b,
         type: 3}
       propertyPath: m_Name
       value: FX_Flare_AA
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518263680159334935, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518263680159334935, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518263680178788563, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518263680178788563, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518263680178788563, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5518263680178788563, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999113938847721317, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999113938847721317, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999113938866127505, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999113938866127505, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999113938866127505, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5999113938866127505, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589261891788672185, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589261891788672185, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589261891808101887, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589261891808101887, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589261891808101887, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589261891808101887, guid: ccf33d8f729212b4191d6eaca17bfd8b,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccf33d8f729212b4191d6eaca17bfd8b, type: 3}
