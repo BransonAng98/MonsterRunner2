@@ -13,13 +13,23 @@ public class QuestGoal
     [SerializeField] private bool playerIsAlive; // To track player's status
     [SerializeField] public int requiredKillAmount;
     [SerializeField] public int currentAmount;
-
+    public PlayerDataSO playerDataSO;
     public void EnemyKilled()
     {
         if (goaltype == "Kill")
         {
-            int[] killCount = { 4, 6, 8 };
-            requiredKillAmount = killCount[UnityEngine.Random.Range(0, killCount.Length)];
+            if(playerDataSO.hasPlayedTutorial == true)
+            {
+                int[] killCount = { 4, 6, 8 };
+                requiredKillAmount = killCount[UnityEngine.Random.Range(0, killCount.Length)];
+            }
+            else
+            {
+                int[] killCount = {2};
+                requiredKillAmount = killCount[UnityEngine.Random.Range(0, killCount.Length)];
+            }
+           
+           
             Debug.Log("EnemyKilled function called. Required Kill Amount: " + requiredKillAmount);
         }
 
@@ -40,9 +50,19 @@ public class QuestGoal
         if (goaltype == "Survive")
         {
 
-            float[] possibleTimes = { 30f, 60f, 60f };
-            survivalTime = possibleTimes[UnityEngine.Random.Range(0, possibleTimes.Length)];
-            playerIsAlive = true;  // Assume player is alive initially
+            if(playerDataSO.hasPlayedTutorial == true)
+            {
+                float[] possibleTimes = { 30f, 60f, 60f };
+                survivalTime = possibleTimes[UnityEngine.Random.Range(0, possibleTimes.Length)];
+                playerIsAlive = true;  // Assume player is alive initially
+            }
+
+            if (playerDataSO.hasPlayedTutorial == false)
+            {
+                float[] possibleTimes = {20f};
+                survivalTime = possibleTimes[UnityEngine.Random.Range(0, possibleTimes.Length)];
+                playerIsAlive = true;  // Assume player is alive initially
+            }
 
         }
     }
