@@ -43,6 +43,7 @@ public class QuestGiver : MonoBehaviour
 
     private void Start()
     {
+        quest.goal.playerDataSO = playerInfoData;
         quest.goal.goaltype = "None";
         StartCoroutine(StartGameSequence());
         questCompleted = false;
