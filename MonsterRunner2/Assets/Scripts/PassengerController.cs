@@ -29,38 +29,44 @@ public class PassengerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            // Check if passenger has reached destination
-            float distanceToDestination = Vector3.Distance(transform.position, passengerDestination.transform.position);
-            if (distanceToDestination <= 20f) // Adjust the threshold as needed
+
+            if(questgiverScript.questCompleted == true)
             {
-              
-                // Unparent from other.transform
-                transform.SetParent(null);
-
-                // Set all children to active
-                foreach (Transform child in transform)
-                {
-                    child.gameObject.SetActive(true);
-                }
-             
-                questgiverScript.CompleteQuest();
-                Debug.Log("ReachedHome");
-            // Calculate direction towards the destination
-                 Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
-
-                // Move towards the destination
-                transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
-
-                // Rotate towards the direction of movement
-                if (direction != Vector3.zero)
-                {
-                    Quaternion lookRotation = Quaternion.LookRotation(direction);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-                }
-                //TriggerHouse(false);
-                
-                DestroyPassenger();
+            DestroyPassenger();
+            Debug.Log("KillCurrentPassenger");
             }
+            // Check if passenger has reached destination
+            //float distanceToDestination = Vector3.Distance(transform.position, passengerDestination.transform.position);
+            //if (distanceToDestination <= 20f) // Adjust the threshold as needed
+            //{
+              
+            //    // Unparent from other.transform
+            //    transform.SetParent(null);
+
+            //    // Set all children to active
+            //    foreach (Transform child in transform)
+            //    {
+            //        child.gameObject.SetActive(true);
+            //    }
+             
+            //    questgiverScript.CompleteQuest();
+            //    Debug.Log("ReachedHome");
+            //// Calculate direction towards the destination
+            //     Vector3 direction = (passengerDestination.transform.position - transform.position).normalized;
+
+            //    // Move towards the destination
+            //    transform.Translate(direction * moveSpeed * Time.deltaTime, Space.World);
+
+            //    // Rotate towards the direction of movement
+            //    if (direction != Vector3.zero)
+            //    {
+            //        Quaternion lookRotation = Quaternion.LookRotation(direction);
+            //        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+            //    }
+            //    //TriggerHouse(false);
+                
+            //    DestroyPassenger();
+            //}
         
     }
 
@@ -85,17 +91,18 @@ public class PassengerController : MonoBehaviour
                 }
             }
             Debug.Log("PassengerPickedUp");
-            transform.SetParent(other.transform);
-            Rigidbody rb = GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.isKinematic = true;
-            }
-            foreach (Transform child in transform)
-            {
-                pickedUp = true;
-                child.gameObject.SetActive(false);
-            }
+            DestroyPassenger();
+            //transform.SetParent(other.transform);
+            //Rigidbody rb = GetComponent<Rigidbody>();
+            //if (rb != null)
+            //{
+            //    rb.isKinematic = true;
+            //}
+            //foreach (Transform child in transform)
+            //{
+            //    pickedUp = true;
+            //    child.gameObject.SetActive(false);
+            //}
         }
     }
 

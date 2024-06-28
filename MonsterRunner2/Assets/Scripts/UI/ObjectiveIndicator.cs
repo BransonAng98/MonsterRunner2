@@ -50,7 +50,14 @@ public class ObjectiveIndicator : MonoBehaviour
     }
     void RotateUIElement(Transform goal)
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(goal.position - transform.position), rotationSpeed * Time.deltaTime);
+        Vector3 directionToGoal = goal.position - playerTransform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(directionToGoal);
+
+        // Maintain the original x rotation while updating y and z rotations
+        targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, targetRotation.eulerAngles.z);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(goal.position - transform.position), rotationSpeed * Time.deltaTime);
     }
 
     // Update is called once per frame

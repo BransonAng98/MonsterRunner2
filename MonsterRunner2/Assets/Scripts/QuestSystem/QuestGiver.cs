@@ -28,7 +28,7 @@ public class QuestGiver : MonoBehaviour
     public List<GameObject> buildingObjects;
 
     public PlayerDataSO playerInfoData;
-    [SerializeField]private bool questCompleted; // Add this variable to track quest completion
+    [SerializeField]public bool questCompleted; // Add this variable to track quest completion
     public EnemySpawner enemySpawnerScript;
 
     [SerializeField]public bool countdownStart;
@@ -39,7 +39,7 @@ public class QuestGiver : MonoBehaviour
 
     public DetectionBar dectectionBar;
 
-    private bool questcompleted = false;
+
 
     private void Start()
     {
