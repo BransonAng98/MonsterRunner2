@@ -14493,7 +14493,10 @@ MonoBehaviour:
   - Masterful distraction! Time to cash in.
   - You nailed it! The loot is yours.
   - Smooth moves! The haul is yours
-  warningText: []
+  warningText:
+  - 'Time is ticking. Get to the contract. '
+  - What are you doing? Follow the arrow!
+  - Get the contract! The cops are on our tail.
   textSpd: 0.05
   isAccepting: 0
   isWarningTyping: 0
@@ -197918,6 +197921,11 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 871967544835735720, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 871967545157882971, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -198133,6 +198141,11 @@ PrefabInstance:
       propertyPath: pulsatingImage
       value: 
       objectReference: {fileID: 1024736951}
+    - target: {fileID: 8037539422613460347, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 171047680}
     - target: {fileID: 8037539422613460347, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: pulsateDuration

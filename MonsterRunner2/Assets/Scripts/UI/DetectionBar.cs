@@ -12,6 +12,7 @@ public class DetectionBar : MonoBehaviour
     public bool isIncreasing;
     public DemoPlayer player;
     public QuestDialogueManager dialogueManager;
+    public float sliderValuePercentage;
 
     public GameObject eyeOpen;
     public GameObject eyeClose;
@@ -107,16 +108,18 @@ public class DetectionBar : MonoBehaviour
         }
     }
 
-    void TriggerWarning(float sliderValue)
+    void TriggerWarning()
     {
-        switch (sliderValue)
+        float sliderPercentage = Mathf.Floor((barValue / slider.maxValue) * 100f);
+        Debug.Log(sliderPercentage);
+        switch (sliderPercentage)
         {
-            case 60:
+            case 45:
                 dialogueManager.isWarningTyping = true;
                 dialogueManager.TypeText(false, 0);
                 break;
 
-            case 75:
+            case 65:
                 dialogueManager.isWarningTyping = true;
                 dialogueManager.TypeText(false, 1);
                 break;
@@ -128,17 +131,17 @@ public class DetectionBar : MonoBehaviour
         }
     }
 
-
     // Update is called once per frame
     void Update()
     {
+
         if (isIncreasing)
         {
             if (slider.value != slider.maxValue)
             {
                 // Increase bar timing
                 StartBar();
-                TriggerWarning(slider.value);
+                TriggerWarning();
             }
             else
             {
@@ -162,7 +165,7 @@ public class DetectionBar : MonoBehaviour
         }
 
         // Check if the slider value is more than 70%
-        if (slider.value > slider.maxValue * 0.70f)
+        if (slider.value > slider.maxValue * 0.65f)
         {
             if (!isPulsating)
             {
