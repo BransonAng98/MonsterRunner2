@@ -46,6 +46,11 @@ public class DetectionBar : MonoBehaviour
 
     IEnumerator FadeToAlpha(float targetAlpha)
     {
+        if (!pulsatingImage.gameObject.activeSelf)
+        {
+            pulsatingImage.gameObject.SetActive(true);
+        }
+
         float elapsedTime = 0f;
         float startAlpha = pulsatingImage.color.a;
         Color color = originalColor;
@@ -92,6 +97,7 @@ public class DetectionBar : MonoBehaviour
 
     public void ResetBar()
     {
+        SetPulsatingImageAlpha(0);
         eyeClose.SetActive(true);
         eyeOpen.SetActive(false);
         barValue -= Time.deltaTime * decreaseMultiplier;
@@ -111,7 +117,6 @@ public class DetectionBar : MonoBehaviour
     void TriggerWarning()
     {
         float sliderPercentage = Mathf.Floor((barValue / slider.maxValue) * 100f);
-        Debug.Log(sliderPercentage);
         switch (sliderPercentage)
         {
             case 45:
@@ -155,7 +160,8 @@ public class DetectionBar : MonoBehaviour
         {
             if (slider.value > 0)
             {
-                ResetBar();
+                pulsatingImage.gameObject.SetActive(false);
+                Debug.Log("Reduce puslate");
             }
             else
             {
@@ -171,15 +177,6 @@ public class DetectionBar : MonoBehaviour
             {
                 isPulsating = true;
                 StartCoroutine(PulsateColor());
-            }
-        }
-        else
-        {
-            if (isPulsating)
-            {
-                isPulsating = false;
-                StopCoroutine(PulsateColor());
-                SetPulsatingImageAlpha(0);
             }
         }
     }
