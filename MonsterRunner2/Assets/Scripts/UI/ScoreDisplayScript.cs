@@ -51,7 +51,7 @@ public class ScoreDisplayScript : MonoBehaviour
         }
 
         // Ensure the final scores match the actual values
-        UpdateScoreUI(scoreManager.goldEarned, scoreManager.missionsCompleted, scoreManager.stopwatchTime);
+        UpdateScoreUI(playerData.moneyAccumulatedInGame, scoreManager.missionsCompleted, scoreManager.stopwatchTime);
     }
 
     private void UpdateScoreUI(float killscore, int missionScore, float time)
