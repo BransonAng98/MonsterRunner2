@@ -12,7 +12,8 @@ public class TutorialManager : MonoBehaviour
     public CanvasGroup fadeToBlackImage; 
     public float fadeDuration = 1f; // Duration of the fade effect
     public PlayerDataSO playerData;
-    public TextMeshProUGUI text;
+    public GameObject exitButton;
+    public GameObject retryButton;
 
     private bool shouldFadeIn = true;
     private float fadeTimer = 0f;
@@ -20,7 +21,7 @@ public class TutorialManager : MonoBehaviour
     private void Start()
     {
         fadeToBlackImage.alpha = 0f;
-        
+        exitButton.SetActive(false);
     }
 
     void StartFade()
@@ -37,7 +38,8 @@ public class TutorialManager : MonoBehaviour
 
     void StopPlayerMovement()
     {
-        text.text = "EXIT";
+        exitButton.SetActive(true);
+        retryButton.SetActive(false);
         playerManager.playerData.TakeDamage(1000);
         Invoke("DisplayEndScreen", 3.2f);
     }
