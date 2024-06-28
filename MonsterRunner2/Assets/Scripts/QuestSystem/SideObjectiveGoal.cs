@@ -29,7 +29,7 @@ public class SideObjectiveGoal
     {
         if (objectiveType == ObjectiveType.EarnGold)
         {
-            float[] goldtobeEarned = { 100f, 150f, 200f };
+            float[] goldtobeEarned = { 400f, 500f, 600f };
             goldtobeEarnedAmt = goldtobeEarned[UnityEngine.Random.Range(0, goldtobeEarned.Length)];
             Debug.Log("ReachDestination function called. Distance Travelled: " + goldtobeEarnedAmt);
         }
