@@ -117,8 +117,9 @@ public class SideObjectiveQuestGiver : MonoBehaviour
                 goldtobeEarned = SideObjective.goal.goldtobeEarnedAmt;
                 break;
             case SideObjectiveGoal.ObjectiveType.none:
-                ResetSideObjectiveValues();
+               
                 GetNewSideObjective();
+                ResetSideObjectiveValues();
                 break;
             default:
                 break;
