@@ -150,6 +150,7 @@ public class QuestGiver : MonoBehaviour
     public void CompleteQuest()
     {
         Debug.Log("QuestCompleted");
+        player.contractCompleteVFX.SetActive(true);
         questCompleted = true;
         GetDestination();
         scoreManager.goldEarned += quest.goldReward;

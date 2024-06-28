@@ -78,6 +78,7 @@ public class DemoPlayer : MonoBehaviour
     public List<Smoke> smokes;
     public List<HealthState> healthSmoke;
     public GameObject[] skillCDParticles;
+    public GameObject contractCompleteVFX;
 
     public Joystick joystick;
     public Vector3 lastKnownVector;
@@ -129,8 +130,8 @@ public class DemoPlayer : MonoBehaviour
         GetComponent<WeaponScript>().enabled = false;
         healingVFX.Stop();
         lastKnownVector = transform.forward * maxSpeed;
-
-        foreach(GameObject particles in skillCDParticles)
+        contractCompleteVFX.SetActive(false);
+        foreach (GameObject particles in skillCDParticles)
         {
             particles.SetActive(false);
         }
