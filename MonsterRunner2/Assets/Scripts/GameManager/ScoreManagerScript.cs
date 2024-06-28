@@ -86,7 +86,7 @@ public class ScoreManagerScript : MonoBehaviour
                 questDetail.text = "Take out " + totalEnemiesKilled + " enemies and keep the cops distracted for us";
                 currentEnemiesKilled = questgiverScript.currentenemykilled;
                 totalEnemiesKilled = questgiverScript.enemykilled;
-                activeCounter.text = currentEnemiesKilled + "/" + totalEnemiesKilled + " Killed";
+                activeCounter.text = "Kill " + (totalEnemiesKilled - currentEnemiesKilled) + " Police";
                 questReward.text = "Reward: " + questgiverScript.quest.goldReward + "";
                 killQuest = true;
                 break;
@@ -108,14 +108,14 @@ public class ScoreManagerScript : MonoBehaviour
                 // Update the active counter display
                 string timeHolder;
                 timeHolder = string.Format("{0:00}:{1:00}", minutes, seconds);
-                activeCounter.text = timeHolder;
+                activeCounter.text = "Survive for " + timeHolder;
                 questDetail.text = "Keep the cops busy for " + timeHolder + ". While you do that, we will rob the bank";
                 questReward.text = "Reward: " + questgiverScript.quest.goldReward + "";
                 killQuest = false;
                 break;
             case "None":
-                activeCounter.text = "Find a Quest!";
-                questDetail.text = "No current contract. Collect a passenger to start";
+                activeCounter.text = " Follow the Arrow!";
+                questDetail.text = "No current contract. Follow the arrow to collect a passenger.";
                 questReward.text = "Reward: 0";
                 break;
 

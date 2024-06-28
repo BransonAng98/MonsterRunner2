@@ -18,7 +18,7 @@ public class QuestGoal
     {
         if (goaltype == "Kill")
         {
-            int[] killCount = { 2, 3, 4 };
+            int[] killCount = { 4, 6, 8 };
             requiredKillAmount = killCount[UnityEngine.Random.Range(0, killCount.Length)];
             Debug.Log("EnemyKilled function called. Required Kill Amount: " + requiredKillAmount);
         }
