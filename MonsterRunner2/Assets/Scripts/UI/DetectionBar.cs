@@ -11,6 +11,7 @@ public class DetectionBar : MonoBehaviour
     public float decreaseMultiplier;
     public bool isIncreasing;
     public DemoPlayer player;
+    public QuestDialogueManager dialogueManger;
 
     public GameObject eyeOpen;
     public GameObject eyeClose;
@@ -19,6 +20,27 @@ public class DetectionBar : MonoBehaviour
     {
         slider = GetComponent<Slider>();
         slider.maxValue = maximumValue;
+    }
+
+    void TriggerWarning(float sliderValue)
+    {
+        switch (sliderValue)
+        {
+            case 60:
+                dialogueManger.isWarningTyping = true;
+                dialogueManger.TypeText(false, 0);
+                break;
+
+            case 75:
+                dialogueManger.isWarningTyping = true;
+                dialogueManger.TypeText(false, 1);
+                break;
+
+            case 85:
+                dialogueManger.isWarningTyping = true;
+                dialogueManger.TypeText(false, 2);
+                break;
+        }
     }
 
     public void StartBar()
@@ -69,6 +91,7 @@ public class DetectionBar : MonoBehaviour
             {
                 //Increase bar timing
                 StartBar();
+                TriggerWarning(slider.value);
             }
 
             else

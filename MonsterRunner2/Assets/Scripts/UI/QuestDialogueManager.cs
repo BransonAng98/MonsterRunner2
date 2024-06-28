@@ -11,9 +11,11 @@ public class QuestDialogueManager : MonoBehaviour
     public string[] introText;
     public string[] questText;
     public string[] rewardText;
+    public string[] warningText;
 
     public float textSpd;
     public bool isAccepting;
+    public bool isWarningTyping;
 
     private Coroutine typingCoroutine; // Reference to the current coroutine
 
@@ -28,21 +30,36 @@ public class QuestDialogueManager : MonoBehaviour
         descriptionText.text = string.Empty;
         this.isAccepting = isAccepting;
 
-        if (isAccepting)
+        
+
+        if(!isWarningTyping)
         {
-            if (typingCoroutine != null)
+            if (isAccepting)
             {
-                StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
+                if (typingCoroutine != null)
+                {
+                    StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
+                }
+                typingCoroutine = StartCoroutine(TypeQuest(index));
             }
-            typingCoroutine = StartCoroutine(TypeQuest(index));
+            else
+            {
+                if (typingCoroutine != null)
+                {
+                    StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
+                }
+                typingCoroutine = StartCoroutine(TypeReward(index));
+            }
         }
+
         else
         {
             if (typingCoroutine != null)
             {
                 StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
             }
-            typingCoroutine = StartCoroutine(TypeReward(index));
+            typingCoroutine = StartCoroutine(TypeWarning(index));
+            isWarningTyping = false;
         }
     }
 
@@ -74,6 +91,19 @@ public class QuestDialogueManager : MonoBehaviour
         CloseWindow();
     }
 
+    IEnumerator TypeWarning(int index)
+    {
+        foreach (char letter in warningText[index].ToCharArray())
+        {
+            descriptionText.text += letter;
+            yield return new WaitForSeconds(textSpd);
+        }
+
+        typingCoroutine = null; // Reset coroutine reference
+        // Wait a bit longer before closing to ensure the player can read the text
+        yield return new WaitForSeconds(1f);
+        CloseWindow();
+    }
     public void TypeIntro(int index)
     {
         questWindow.SetActive(true);
