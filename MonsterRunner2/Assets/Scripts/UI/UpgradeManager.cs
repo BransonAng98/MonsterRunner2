@@ -46,8 +46,8 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         currency = playerData.money;
-        activeSkill = new Skill(true, 100);  // Initial cost is 5
-        lockedSkill = new Skill(false, 100); // Initial cost is 5
+        activeSkill = new Skill(true, 300);  
+        lockedSkill = new Skill(false, 600); 
 
         UpdateUI();
 
@@ -86,7 +86,7 @@ public class UpgradeManager : MonoBehaviour
         {
             currency -= skill.cost;
             skill.level++;
-            skill.cost += 100; // Increase cost by x for each upgrade
+            skill.cost += 750; // Increase cost by x for each upgrade
 
             switch (abilityID)
             {
