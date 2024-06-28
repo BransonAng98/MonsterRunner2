@@ -12,6 +12,7 @@ public class DetectionBar : MonoBehaviour
     public bool isIncreasing;
     public DemoPlayer player;
     public QuestDialogueManager dialogueManager;
+    public float sliderValuePercentage;
 
     public GameObject eyeOpen;
     public GameObject eyeClose;
@@ -45,6 +46,11 @@ public class DetectionBar : MonoBehaviour
 
     IEnumerator FadeToAlpha(float targetAlpha)
     {
+        if (!pulsatingImage.gameObject.activeSelf)
+        {
+            pulsatingImage.gameObject.SetActive(true);
+        }
+
         float elapsedTime = 0f;
         float startAlpha = pulsatingImage.color.a;
         Color color = originalColor;
@@ -91,6 +97,7 @@ public class DetectionBar : MonoBehaviour
 
     public void ResetBar()
     {
+        SetPulsatingImageAlpha(0);
         eyeClose.SetActive(true);
         eyeOpen.SetActive(false);
         barValue -= Time.deltaTime * decreaseMultiplier;
@@ -107,16 +114,17 @@ public class DetectionBar : MonoBehaviour
         }
     }
 
-    void TriggerWarning(float sliderValue)
+    void TriggerWarning()
     {
-        switch (sliderValue)
+        float sliderPercentage = Mathf.Floor((barValue / slider.maxValue) * 100f);
+        switch (sliderPercentage)
         {
-            case 60:
+            case 45:
                 dialogueManager.isWarningTyping = true;
                 dialogueManager.TypeText(false, 0);
                 break;
 
-            case 75:
+            case 65:
                 dialogueManager.isWarningTyping = true;
                 dialogueManager.TypeText(false, 1);
                 break;
@@ -128,17 +136,17 @@ public class DetectionBar : MonoBehaviour
         }
     }
 
-
     // Update is called once per frame
     void Update()
     {
+
         if (isIncreasing)
         {
             if (slider.value != slider.maxValue)
             {
                 // Increase bar timing
                 StartBar();
-                TriggerWarning(slider.value);
+                TriggerWarning();
             }
             else
             {
@@ -152,7 +160,8 @@ public class DetectionBar : MonoBehaviour
         {
             if (slider.value > 0)
             {
-                ResetBar();
+                pulsatingImage.gameObject.SetActive(false);
+                Debug.Log("Reduce puslate");
             }
             else
             {
@@ -162,21 +171,12 @@ public class DetectionBar : MonoBehaviour
         }
 
         // Check if the slider value is more than 70%
-        if (slider.value > slider.maxValue * 0.70f)
+        if (slider.value > slider.maxValue * 0.65f)
         {
             if (!isPulsating)
             {
                 isPulsating = true;
                 StartCoroutine(PulsateColor());
-            }
-        }
-        else
-        {
-            if (isPulsating)
-            {
-                isPulsating = false;
-                StopCoroutine(PulsateColor());
-                SetPulsatingImageAlpha(0);
             }
         }
     }

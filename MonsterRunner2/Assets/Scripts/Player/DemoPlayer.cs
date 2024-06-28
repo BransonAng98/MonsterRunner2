@@ -77,6 +77,7 @@ public class DemoPlayer : MonoBehaviour
     public List<Trail> trails;
     public List<Smoke> smokes;
     public List<HealthState> healthSmoke;
+    public GameObject[] skillCDParticles;
 
     public Joystick joystick;
     public Vector3 lastKnownVector;
@@ -128,6 +129,11 @@ public class DemoPlayer : MonoBehaviour
         GetComponent<WeaponScript>().enabled = false;
         healingVFX.Stop();
         lastKnownVector = transform.forward * maxSpeed;
+
+        foreach(GameObject particles in skillCDParticles)
+        {
+            particles.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

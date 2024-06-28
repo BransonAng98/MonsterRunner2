@@ -14493,7 +14493,10 @@ MonoBehaviour:
   - Masterful distraction! Time to cash in.
   - You nailed it! The loot is yours.
   - Smooth moves! The haul is yours
-  warningText: []
+  warningText:
+  - 'Time is ticking. Get to the contract. '
+  - What are you doing? Follow the arrow!
+  - Get the contract! The cops are on our tail.
   textSpd: 0.05
   isAccepting: 0
   isWarningTyping: 0
@@ -67657,6 +67660,9 @@ MonoBehaviour:
   offScreenPosition: {fileID: 834061698}
   targetPosition: {fileID: 2113087821}
   moveDuration: 0.3
+  swordSprite: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
+  shieldSprite: {fileID: 21300000, guid: c28d54c4733dc4fc7bedc4189f66bfbc, type: 3}
+  abilityIconIndicator: {fileID: 1257039495}
   ability: []
 --- !u!114 &754238782
 MonoBehaviour:
@@ -95163,18 +95169,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1024532459}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1024736951 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2195267919951233531, guid: 3ac7158780dca974fb451e592c6934a0,
-    type: 3}
-  m_PrefabInstance: {fileID: 8037539422613460343}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1025932925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115961,6 +115955,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1256480480}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1257039495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1257039495, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1257080992
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197953,51 +197959,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 754238777}
-    - target: {fileID: 2195267919951233531, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2195267919951233531, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002595530521618726, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002595530521618726, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002595530521618726, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002595530521618726, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002595530521618726, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002595530521618726, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3002595530521618726, guid: 3ac7158780dca974fb451e592c6934a0,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3423200622254860410, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -198130,13 +198091,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8037539422613460347, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
-      propertyPath: pulsatingImage
-      value: 
-      objectReference: {fileID: 1024736951}
+      propertyPath: maximumValue
+      value: 120
+      objectReference: {fileID: 0}
     - target: {fileID: 8037539422613460347, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
-      propertyPath: pulsateDuration
-      value: 0.2
+      propertyPath: dialogueManager
+      value: 
+      objectReference: {fileID: 171047680}
+    - target: {fileID: 8037539422613460347, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: decreaseMultiplier
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ac7158780dca974fb451e592c6934a0, type: 3}

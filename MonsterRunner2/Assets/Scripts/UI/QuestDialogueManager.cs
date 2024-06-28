@@ -79,6 +79,7 @@ public class QuestDialogueManager : MonoBehaviour
 
     IEnumerator TypeReward(int index)
     {
+
         foreach (char letter in rewardText[index].ToCharArray())
         {
             descriptionText.text += letter;
@@ -93,6 +94,9 @@ public class QuestDialogueManager : MonoBehaviour
 
     IEnumerator TypeWarning(int index)
     {
+        questWindow.SetActive(true);
+        descriptionText.text = string.Empty;
+
         foreach (char letter in warningText[index].ToCharArray())
         {
             descriptionText.text += letter;

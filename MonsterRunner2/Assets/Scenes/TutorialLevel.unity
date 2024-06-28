@@ -13639,16 +13639,20 @@ MonoBehaviour:
   descriptionText: {fileID: 739576272}
   introText:
   - 'Let''s do a little practice run before the actual thing. I hope you read the
-    tutorial manual. '
-  - This will be a quick run through on tonight's plan. Try to keep the cops distracted
-    as long as possible.
+    tutorial. '
+  - This will be a quick run through on tonight's plan. Try to keep the cops distracted.
   questText:
   - You'll be able to accept one of three quests. Now try to complete it.
   rewardText:
   - Now that you have familiarized with the plan. Its time for the real thing.
   - That's its for the tutorial, now get ready for the real thing!
+  warningText:
+  - You're halfway through the bar. You must find a quest.
+  - Follow the arrow to find a quest.
+  - If you are seeing this, you are about to lose.
   textSpd: 0.05
   isAccepting: 0
+  isWarningTyping: 0
 --- !u!114 &171047681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68012,6 +68016,9 @@ MonoBehaviour:
   offScreenPosition: {fileID: 2122660609}
   targetPosition: {fileID: 1948972475}
   moveDuration: 0.5
+  swordSprite: {fileID: 21300000, guid: 169d45648e00348038299fc345aa6b4f, type: 3}
+  shieldSprite: {fileID: 21300000, guid: c28d54c4733dc4fc7bedc4189f66bfbc, type: 3}
+  abilityIconIndicator: {fileID: 8037539422613460348}
   ability: []
 --- !u!114 &754238782
 MonoBehaviour:
@@ -140426,6 +140433,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1514808063}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1517746087 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2195267919951233531, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1518528188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -198175,6 +198194,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2195267919951233531, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2315373491745759149, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_IsActive
@@ -198430,9 +198454,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 0}
   barValue: 0
-  maximumValue: 120
-  decreaseMultiplier: 2.5
+  maximumValue: 180
+  decreaseMultiplier: 5
   isIncreasing: 0
   player: {fileID: 0}
+  dialogueManager: {fileID: 171047680}
+  sliderValuePercentage: 0
   eyeOpen: {fileID: 8037539422613460346}
   eyeClose: {fileID: 8037539422613460345}
+  pulsatingImage: {fileID: 1517746087}
+  pulsateDuration: 0.2
+--- !u!114 &8037539422613460348 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1257039495, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
