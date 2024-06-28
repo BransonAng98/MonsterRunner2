@@ -61,7 +61,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerscript: {fileID: 0}
-  questgiver: {fileID: 0}
   idleVFX: {fileID: 2230594769260699487}
   PickupVFX: {fileID: 8213002756312529545, guid: a592cfbe01fb3314a92736d7024e9fdc,
     type: 3}
@@ -70,6 +69,7 @@ MonoBehaviour:
   missionmanager: {fileID: 0}
   scoreManager: {fileID: 0}
   pickedUp: 0
+  passengerType: 0
 --- !u!1001 &1493095032651872094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90,17 +90,17 @@ PrefabInstance:
     - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 742003337447975422, guid: fdc7b0f4b3695784782c2aa9d182de22,
         type: 3}
@@ -180,6 +180,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 21e53c5edbf665e4a8c5e8beb93cdc83,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 21e53c5edbf665e4a8c5e8beb93cdc83,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 21e53c5edbf665e4a8c5e8beb93cdc83,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 21e53c5edbf665e4a8c5e8beb93cdc83,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -227,6 +242,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 21e53c5edbf665e4a8c5e8beb93cdc83,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 21e53c5edbf665e4a8c5e8beb93cdc83,
         type: 3}
