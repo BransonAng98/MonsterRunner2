@@ -362,9 +362,10 @@ MonoBehaviour:
     goal:
       goaltype: 0
       DestinationReached: 0
-      destination: {fileID: 0}
       survivalTime: 0
       playerIsAlive: 0
+      requiredKillAmount: 0
+      currentAmount: 0
     enemyspawnerScript: {fileID: 0}
   questdialogueScript: {fileID: 0}
   destination: {fileID: 0}
@@ -1155,7 +1156,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5255493192184945665
 Transform:
   m_ObjectHideFlags: 0

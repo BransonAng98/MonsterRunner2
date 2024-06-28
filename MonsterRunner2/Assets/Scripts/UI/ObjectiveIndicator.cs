@@ -8,7 +8,7 @@ public class ObjectiveIndicator : MonoBehaviour
     public MeshRenderer arrowImage;
     public float rotationSpeed;
 
-    [SerializeField] Transform objectiveLoc;
+    [SerializeField] public Transform objectiveLoc;
     public Transform passengerLoc;
     [SerializeField] Transform playerTransform;
 
