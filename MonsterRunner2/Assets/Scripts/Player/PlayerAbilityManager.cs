@@ -19,6 +19,7 @@ public class PlayerAbilityManager : MonoBehaviour
     public DemoPlayer player;
     public AbilityTokenManager abTokenManager;
     public Slider abilityActiveSlider;
+    public GameObject abilityPopUpDisplay;
 
     //Private Variable
     private float cooldown;
@@ -35,6 +36,7 @@ public class PlayerAbilityManager : MonoBehaviour
         {
             ability.Add(player.ability1);
             ability.Add(player.ability2);
+            abilityPopUpDisplay.SetActive(false);
         }
 
         // Initialize the slider
@@ -59,7 +61,7 @@ public class PlayerAbilityManager : MonoBehaviour
                     //Sets the state to activate so the abilty is triggered
                     abilityState = AbilityState.Active;
                     activeTime = ability[abilityID].abilityActive;
-
+                    abilityPopUpDisplay.SetActive(true);
                     if (abilityActiveSlider != null)
                     {
                         abilityActiveSlider.maxValue = activeTime;
@@ -88,7 +90,7 @@ public class PlayerAbilityManager : MonoBehaviour
                     abilityState = AbilityState.Cooldown;
                     ability[abilityID].Deactive();
                     cooldown = ability[abilityID].abilityCD;
-
+                    abilityPopUpDisplay.SetActive(false);
                     // Reset the slider value
                     if (abilityActiveSlider != null)
                     {
@@ -121,4 +123,6 @@ public class PlayerAbilityManager : MonoBehaviour
             sliderRectTransform.position = Vector3.Lerp(sliderRectTransform.position, screenPos, Time.deltaTime * 10f);
         }
     }
+
+
 }
