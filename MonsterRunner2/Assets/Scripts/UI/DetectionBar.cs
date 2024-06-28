@@ -161,6 +161,7 @@ public class DetectionBar : MonoBehaviour
             if (slider.value > 0)
             {
                 pulsatingImage.gameObject.SetActive(false);
+                ResetBar();
                 Debug.Log("Reduce puslate");
             }
             else

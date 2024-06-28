@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
-  money: 10
+  money: 5
   particles: {fileID: 8734376389421901152, guid: 0527503468188df4e9e38ba797f74f8d,
     type: 3}
   respawnTime: 15
