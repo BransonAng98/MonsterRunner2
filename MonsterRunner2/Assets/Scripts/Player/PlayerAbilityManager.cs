@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerAbilityManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class PlayerAbilityManager : MonoBehaviour
         Cooldown,
     }
 
-    //Public Variable
+    // Public Variables
     public AbilityState abilityState = AbilityState.Ready;
     public bool isTriggered;
     public int abilityID;
@@ -20,19 +21,25 @@ public class PlayerAbilityManager : MonoBehaviour
     public AbilityTokenManager abTokenManager;
     public Slider abilityActiveSlider;
     public GameObject abilityPopUpDisplay;
+    public Image abilityIcon;
+    public TextMeshProUGUI abilityName;
+    public RectTransform offScreenPosition;   // Position off the screen
+    public RectTransform targetPosition;      // Designated target position
+    public float moveDuration;        
 
-    //Private Variable
+    // Private Variables
     private float cooldown;
     private float activeTime;
     private RectTransform sliderRectTransform;
     private Vector3 sliderOffset = new Vector3(0, 100, 0);  // Adjust this value to position the slider above the player
+    private bool isMoving = false;  // To check if the pop-up is currently moving
 
-    //Serializable Variables
+    // Serializable Variables
     [SerializeField] List<AbilitySO> ability = new List<AbilitySO>();
 
     private void Start()
     {
-        if(player != null)
+        if (player != null)
         {
             ability.Add(player.ability1);
             ability.Add(player.ability2);
@@ -47,6 +54,33 @@ public class PlayerAbilityManager : MonoBehaviour
             sliderRectTransform = abilityActiveSlider.GetComponent<RectTransform>();
             abilityActiveSlider.gameObject.SetActive(false);
         }
+
+        // Initialize the pop-up off screen
+        if (offScreenPosition != null && abilityPopUpDisplay != null)
+        {
+            abilityPopUpDisplay.GetComponent<RectTransform>().anchoredPosition = offScreenPosition.anchoredPosition;
+        }
+    }
+
+    void UpdatePopUp(int abilityID)
+    {
+        abilityPopUpDisplay.SetActive(true);
+        abilityName.text = ability[abilityID].abilityName;
+        switch (abilityID)
+        {
+            case 0:
+                abilityIcon.sprite = player.playerData.ability1Sprite;
+                break;
+            case 1:
+                abilityIcon.sprite = player.playerData.ability2Sprite;
+                break;
+        }
+
+        // Move the pop-up to the target position
+        if (targetPosition != null)
+        {
+            StartCoroutine(MoveToPosition(abilityPopUpDisplay.GetComponent<RectTransform>(), targetPosition.anchoredPosition, moveDuration));
+        }
     }
 
     // Update is called once per frame
@@ -58,10 +92,10 @@ public class PlayerAbilityManager : MonoBehaviour
                 if (isTriggered)
                 {
                     abTokenManager.DespawnTokens();
-                    //Sets the state to activate so the abilty is triggered
+                    // Sets the state to activate so the ability is triggered
                     abilityState = AbilityState.Active;
                     activeTime = ability[abilityID].abilityActive;
-                    abilityPopUpDisplay.SetActive(true);
+                    UpdatePopUp(abilityID);
                     if (abilityActiveSlider != null)
                     {
                         abilityActiveSlider.maxValue = activeTime;
@@ -71,11 +105,11 @@ public class PlayerAbilityManager : MonoBehaviour
                 break;
 
             case AbilityState.Active:
-                if(activeTime > 0)
+                if (activeTime > 0)
                 {
-                    //Countdown from the ability's activation time
+                    // Countdown from the ability's activation time
                     activeTime -= Time.deltaTime;
-                    //Activates the corresponding ability SO within the ability list
+                    // Activates the corresponding ability SO within the ability list
                     ability[abilityID].Activate();
 
                     if (abilityActiveSlider != null)
@@ -86,29 +120,34 @@ public class PlayerAbilityManager : MonoBehaviour
                 }
                 else
                 {
-                    //When the ability has reached the end of its activation period transit the state to cooldown
+                    // When the ability has reached the end of its activation period transit the state to cooldown
                     abilityState = AbilityState.Cooldown;
                     ability[abilityID].Deactive();
                     cooldown = ability[abilityID].abilityCD;
-                    abilityPopUpDisplay.SetActive(false);
                     // Reset the slider value
                     if (abilityActiveSlider != null)
                     {
                         abilityActiveSlider.gameObject.SetActive(false);
                         abilityActiveSlider.value = 0;
                     }
+
+                    // Move the pop-up off screen
+                    if (offScreenPosition != null)
+                    {
+                        StartCoroutine(MoveToPosition(abilityPopUpDisplay.GetComponent<RectTransform>(), offScreenPosition.anchoredPosition, moveDuration));
+                    }
                 }
                 break;
 
             case AbilityState.Cooldown:
-                if(cooldown > 0)
+                if (cooldown > 0)
                 {
-                    //Cooldown after the end of the ability's activation
+                    // Cooldown after the end of the ability's activation
                     cooldown -= Time.deltaTime;
                 }
                 else
                 {
-                    //Reset the trigger to be false so the ability won't be activate when transitioning to ready state
+                    // Reset the trigger to be false so the ability won't be activated when transitioning to ready state
                     abTokenManager.SpawnPowerUps();
                     isTriggered = false;
                     abilityState = AbilityState.Ready;
@@ -124,5 +163,18 @@ public class PlayerAbilityManager : MonoBehaviour
         }
     }
 
+    private IEnumerator MoveToPosition(RectTransform rectTransform, Vector2 target, float duration)
+    {
+        Vector2 initialPosition = rectTransform.anchoredPosition;
+        float elapsedTime = 0;
 
+        while (elapsedTime < duration)
+        {
+            rectTransform.anchoredPosition = Vector2.Lerp(initialPosition, target, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rectTransform.anchoredPosition = target;
+    }
 }
