@@ -221,6 +221,7 @@ Transform:
   - {fileID: 553418997}
   - {fileID: 590558094}
   - {fileID: 943567818}
+  - {fileID: 583815460}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -354,7 +355,7 @@ Transform:
   - {fileID: 1810159059}
   - {fileID: 1818320852}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &31227458
 PrefabInstance:
@@ -2084,6 +2085,7 @@ MonoBehaviour:
   scoreManager: {fileID: 1242281396}
   missionManager: {fileID: 171047678}
   buildingObjects: []
+  menuManager: {fileID: 754238777}
   playerInfoData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
   questCompleted: 0
   enemySpawnerScript: {fileID: 754238784}
@@ -2981,7 +2983,7 @@ Transform:
   m_Children:
   - {fileID: 1922539007}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &227362562
 PrefabInstance:
@@ -6909,7 +6911,7 @@ Transform:
   m_Children:
   - {fileID: 1820639518}
   - {fileID: 1273072639}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 14121144}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &586569299
@@ -14859,7 +14861,7 @@ Transform:
   m_Children:
   - {fileID: 16530622}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1231125663
 PrefabInstance:
@@ -16427,7 +16429,7 @@ Transform:
   m_Children:
   - {fileID: 616238385}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1359504762
 PrefabInstance:
@@ -18679,7 +18681,7 @@ Transform:
   - {fileID: 316588550}
   - {fileID: 634082496}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1629039598
 PrefabInstance:
@@ -22573,7 +22575,7 @@ Transform:
   - {fileID: 896612762}
   - {fileID: 451679177}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2026361255
 GameObject:
