@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 7018376225762091271}
   - component: {fileID: -79976005947643552}
+  - component: {fileID: 2147458301603179925}
   m_Layer: 6
   m_Name: Building Sky_big_color01
   m_TagString: Obstacle
@@ -114,3 +115,18 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &2147458301603179925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  fadeAmount: 0.5
+  DoFade: 0

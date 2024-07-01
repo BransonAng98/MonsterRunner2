@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -7274603398325554288}
   - component: {fileID: 6419565209514125720}
   - component: {fileID: 8245306573430300062}
+  - component: {fileID: -6871265837764010935}
   m_Layer: 6
   m_Name: Building_House_04_color02
   m_TagString: Obstacle
@@ -128,3 +129,18 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &-6871265837764010935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  fadeAmount: 0.5
+  DoFade: 0

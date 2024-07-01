@@ -41,6 +41,7 @@ public class PlayerDataManager : MonoBehaviour
     public missionManagerScript missionManager;
     public PlayerAbilityManager abilityManager;
     public AbilityTokenManager tokenManager;
+    public CameraFade cameraFaderManager;
     public QuestGiver questgiverManager;
     private string vehicleDataFilePath;
     private string playerDataFilePath;
@@ -87,7 +88,7 @@ public class PlayerDataManager : MonoBehaviour
                     questgiverManager.player = playerData;
                     enemySpawnerScript.playerPos = playerData.transform;
                     enemySpawnerScript.playerData = playerData;
-
+                    cameraFaderManager.player = playerData.gameObject;
                     if (ab2 > 0)
                     {
                         tokenManager.spawnType2 = true;

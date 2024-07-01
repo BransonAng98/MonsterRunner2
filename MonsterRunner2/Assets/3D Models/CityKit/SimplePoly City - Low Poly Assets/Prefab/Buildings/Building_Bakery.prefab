@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2374598875505220387}
   - component: {fileID: 242884170442032814}
   - component: {fileID: 1901805622943151529}
+  - component: {fileID: 473940397389826510}
   m_Layer: 6
   m_Name: Building_Bakery
   m_TagString: Obstacle
@@ -128,3 +129,18 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &473940397389826510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  fadeAmount: 0.5
+  DoFade: 0
