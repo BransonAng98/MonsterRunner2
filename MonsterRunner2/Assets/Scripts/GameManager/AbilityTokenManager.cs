@@ -8,6 +8,9 @@ public class AbilityTokenManager : MonoBehaviour
     public GameObject powerUpType2Prefab; // Second power-up prefab
     public List<Transform> spawnLocations; // List of spawn locations
     public List<GameObject> spawnedTokens;
+
+    public GameMenuManager menuManager;
+
     public bool spawnType2; // Flag to determine if the second power-up should be spawned
     private int nextSpawnLocationIndex; // Index of the next spawn location to be used
 
@@ -16,8 +19,10 @@ public class AbilityTokenManager : MonoBehaviour
         // Initialize the index of the next spawn location to be used
         nextSpawnLocationIndex = 0;
 
-        // Spawn power-ups at alternating locations
-        SpawnPowerUps();
+        if (menuManager.sceneID != 1)
+        {
+            SpawnPowerUps();
+        }
     }
 
     // Method to spawn power-ups at alternating locations

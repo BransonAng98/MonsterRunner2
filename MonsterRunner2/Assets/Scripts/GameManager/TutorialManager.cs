@@ -2,27 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
     public PlayerDataManager playerManager;
+    public PlayerDataSO playerData;
+
     public ScoreManagerScript scoreManager;
     public missionManagerScript missionManager;
+    public QuestDialogueManager questDialogue;
+    public AbilityTokenManager tokenManager;
+    
     public CanvasGroup fadeToBlackImage; 
     public float fadeDuration = 1f; // Duration of the fade effect
-    public PlayerDataSO playerData;
+
     public GameObject exitButton;
     public GameObject retryButton;
 
     private bool shouldFadeIn = true;
     private float fadeTimer = 0f;
 
+    [SerializeField] private bool hasSpawned = false;
+
     private void Start()
     {
         fadeToBlackImage.alpha = 0f;
         exitButton.SetActive(false);
     }
+
+    void SpawnTutorialPassenger()
+    {
+        if (questDialogue.introSequenceComplete == true)
+        {
+            missionManager.SpawnPassengers();
+            tokenManager.SpawnPowerUps();
+            hasSpawned = true;
+        }
+    }
+
 
     void StartFade()
     {
@@ -52,7 +71,13 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(scoreManager.missionsCompleted == 1)
+        if(hasSpawned!= true)
+        {
+            SpawnTutorialPassenger();
+        }
+   
+
+        if (scoreManager.missionsCompleted == 1)
         {
             if (shouldFadeIn)
             {
@@ -72,5 +97,6 @@ public class TutorialManager : MonoBehaviour
         {
             Debug.Log("Waiting for player to complete the mission");
         }
+
     }
 }

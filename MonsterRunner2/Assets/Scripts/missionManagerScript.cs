@@ -8,7 +8,6 @@ public class missionManagerScript : MonoBehaviour
     public GameObject player; // Reference to the player GameObject
     public GameObject passengerPrefab;
     public Transform passengerLocation;
-   
 
     public ObjectiveIndicator objectiveIndicator;
 
@@ -26,23 +25,25 @@ public class missionManagerScript : MonoBehaviour
     public DemoPlayer demoPlayer;
     public ScoreManagerScript scoreManager;
     public missionManagerScript missionManager;
+    public GameMenuManager menuManager;
     public List<GameObject> buildingObjects;
 
     public PlayerDataSO playerInfoData;
     public EnemySpawner enemySpawnerScript;
 
     public List<Transform> SpawnLocations;
-
     // List to hold references to instantiated passengers
     public List<GameObject> passengers = new List<GameObject>();
-
-    
 
     void Start()
     {
         CollectBuildingObjects();
-        SpawnPassengers();
         objectiveIndicator = player.GetComponentInChildren<ObjectiveIndicator>();
+        
+        if(menuManager.sceneID != 1)
+        {
+            SpawnPassengers();
+        }
     }
 
     public void SpawnPassengers()

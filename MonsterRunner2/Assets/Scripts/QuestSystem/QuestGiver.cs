@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 
@@ -31,9 +32,9 @@ public class QuestGiver : MonoBehaviour
     [SerializeField]public bool questCompleted; // Add this variable to track quest completion
     public EnemySpawner enemySpawnerScript;
 
-    [SerializeField]public bool countdownStart;
+    [SerializeField] public bool countdownStart;
     [SerializeField] private bool isOnCooldown;
-    private bool isFirstQuest = true;
+    public bool isTutorial = true;
     public bool isInProgress = false;
     public bool gameStarted;
 
@@ -53,9 +54,7 @@ public class QuestGiver : MonoBehaviour
         quest.enemyspawnerScript = enemySpawnerScript;
         buildingObjects = missionManager.buildingObjectsList;
 
-        //StartCoroutine(StartGameSequence());
         GetDestination();
-       
     }
 
     private IEnumerator StartGameSequence()
@@ -138,16 +137,6 @@ public class QuestGiver : MonoBehaviour
         }
     }
 
-    private IEnumerator CooldownBeforeNextMission()
-    {
-        isOnCooldown = true;
-        yield return new WaitForSeconds(questCooldownTime);
-       
-        isOnCooldown = false;
-    }
-
-   
-
     public void CompleteQuest()
     {
         Debug.Log("QuestCompleted");
@@ -182,8 +171,7 @@ public class QuestGiver : MonoBehaviour
 
     void PrintIntroDialogue()
     {
-        int introIndex = Random.Range(0, questDialogue.introText.Length);
-        questDialogue.TypeIntro(introIndex);
+        questDialogue.TypeIntro();
     }
 
     void PrintQuestDialogue()

@@ -18,7 +18,7 @@ public class GameMenuManager : MonoBehaviour
     public Slider loadingSlider;
 
     [SerializeField] GameObject currentMenu;
-    [SerializeField] int sceneID;
+    public int sceneID;
 
     public PlayerDataSO playerData;
     public PlayerCarDisplay carDisplay;
@@ -49,7 +49,7 @@ public class GameMenuManager : MonoBehaviour
     void AssignSceneID()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-
+        Debug.Log(sceneName);
         switch (sceneName)
         {
             case "MainMenu":
