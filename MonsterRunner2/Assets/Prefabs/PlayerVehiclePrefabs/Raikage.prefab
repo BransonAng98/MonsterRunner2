@@ -1248,7 +1248,7 @@ MonoBehaviour:
   passengerLoc: {fileID: 0}
   playerTransform: {fileID: 0}
   path: {fileID: 0}
-  pathHeightOffset: 0.5
+  pathHeightOffset: 0.2
   pathUpdateSpeed: 0.0041
 --- !u!1 &5344260560559697022
 GameObject:

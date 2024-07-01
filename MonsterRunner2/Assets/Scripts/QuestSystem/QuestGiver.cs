@@ -27,6 +27,7 @@ public class QuestGiver : MonoBehaviour
     public ScoreManagerScript scoreManager;
     public missionManagerScript missionManager;
     public List<GameObject> buildingObjects;
+    public GameMenuManager menuManager;
 
     public PlayerDataSO playerInfoData;
     [SerializeField]public bool questCompleted; // Add this variable to track quest completion
@@ -146,7 +147,10 @@ public class QuestGiver : MonoBehaviour
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
         playerInfoData.moneyAccumulatedInGame += scoreManager.goldEarned;
-        missionManager.SpawnPassengers();
+        if(menuManager.sceneID != 1)
+        {
+            missionManager.SpawnPassengers();
+        }
         enemySpawnerScript.DestroyAllEnemies();
         enemySpawnerScript.startSpawning = false;
         RunGoalType("None");

@@ -24,7 +24,7 @@ public class TutorialManager : MonoBehaviour
     private bool shouldFadeIn = true;
     private float fadeTimer = 0f;
 
-    [SerializeField] private bool hasSpawned = false;
+    [SerializeField] private bool hasSpawned;
 
     private void Start()
     {
@@ -71,7 +71,7 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(hasSpawned!= true)
+        if(!hasSpawned)
         {
             SpawnTutorialPassenger();
         }
