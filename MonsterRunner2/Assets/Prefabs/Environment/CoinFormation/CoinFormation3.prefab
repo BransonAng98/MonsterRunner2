@@ -101,6 +101,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinModel (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8313301485349755556, guid: 03f4d35c9c3682349908ad7b04c219f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f4d35c9c3682349908ad7b04c219f6, type: 3}
 --- !u!4 &4682965108922121197 stripped
@@ -176,6 +181,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinModel (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8313301485349755556, guid: 03f4d35c9c3682349908ad7b04c219f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f4d35c9c3682349908ad7b04c219f6, type: 3}
 --- !u!4 &4682965109887663356 stripped
@@ -250,6 +260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CoinModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 8313301485349755556, guid: 03f4d35c9c3682349908ad7b04c219f6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03f4d35c9c3682349908ad7b04c219f6, type: 3}

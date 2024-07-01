@@ -88,6 +88,8 @@ public class missionManagerScript : MonoBehaviour
 
     public void DestroyOtherPassengers(GameObject currentPassenger)
     {
+
+        objectiveIndicator.UpdateObjective(1, passengerLocation);
         objectiveIndicator.UpdateObjective(3, passengerLocation);
         for (int i = passengers.Count - 1; i >= 0; i--)
         {
