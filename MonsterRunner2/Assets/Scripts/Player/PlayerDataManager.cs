@@ -33,6 +33,7 @@ public class PlayerDataManager : MonoBehaviour
     public GameMenuManager menuManager;
     public EnemySpawner enemySpawnerScript;
     public DetectionBar detectionBar;
+    public LineRenderer lineRenderer;
 
     //Scriptst that require player data
     public CinemachineVirtualCamera mainCam;
@@ -65,6 +66,9 @@ public class PlayerDataManager : MonoBehaviour
                     GameObject playerCar = Instantiate(vehicle.playerPrefab, spawnPosition.position, spawnPosition.rotation);
                     playerCar.transform.SetParent(entityHolder.transform);
                     playerData = playerCar.GetComponent<DemoPlayer>();
+                    ObjectiveIndicator objectiveData = playerCar.GetComponentInChildren<ObjectiveIndicator>();
+                    objectiveData.path = lineRenderer;
+                    objectiveData.playerTransform = playerData.transform;
                     ab2 = playerData.playerData.ability2Level;
 
                     mainCam.Follow = playerCar.transform;

@@ -1195,7 +1195,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5255493192184945664}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1247,6 +1247,9 @@ MonoBehaviour:
   objectiveLoc: {fileID: 0}
   passengerLoc: {fileID: 0}
   playerTransform: {fileID: 0}
+  path: {fileID: 0}
+  pathHeightOffset: 0.5
+  pathUpdateSpeed: 0.0041
 --- !u!1 &5344260560559697022
 GameObject:
   m_ObjectHideFlags: 0
