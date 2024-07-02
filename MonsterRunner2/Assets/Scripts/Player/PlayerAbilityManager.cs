@@ -116,7 +116,7 @@ public class PlayerAbilityManager : MonoBehaviour
                     activeTime -= Time.deltaTime;
                     // Activates the corresponding ability SO within the ability list
                     ability[abilityID].Activate();
-
+                    player.abilityActivatedVFX.SetActive(true);
                     if (abilityActiveSlider != null)
                     {
                         abilityActiveSlider.gameObject.SetActive(true);
@@ -129,6 +129,7 @@ public class PlayerAbilityManager : MonoBehaviour
                     abilityState = AbilityState.Cooldown;
                     ability[abilityID].Deactive();
                     cooldown = ability[abilityID].abilityCD;
+                    player.abilityActivatedVFX.SetActive(false);
                     player.skillCDParticles[abilityID].SetActive(true);
                     // Reset the slider value
                     if (abilityActiveSlider != null)

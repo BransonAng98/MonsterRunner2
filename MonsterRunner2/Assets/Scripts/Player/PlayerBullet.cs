@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
+    public GameObject bulletImpactVFX;
+    [SerializeField] private MeshRenderer renderer;
+
+    private void Start()
+    {
+        bulletImpactVFX.SetActive(false);
+        renderer = GetComponent<MeshRenderer>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -11,7 +20,9 @@ public class PlayerBullet : MonoBehaviour
             enemyCarDriver hitEntity = collision.gameObject.GetComponent<enemyCarDriver>();
             //Kill enemy
             hitEntity.CarDeath(1);
-            Destroy(gameObject);
+            renderer.enabled = false;
+            bulletImpactVFX.SetActive(true);
+            Destroy(gameObject, 2f);
         }
 
         if (collision.gameObject.CompareTag("Obstacle"))

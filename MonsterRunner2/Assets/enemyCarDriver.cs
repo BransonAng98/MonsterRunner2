@@ -18,7 +18,8 @@ public class enemyCarDriver : MonoBehaviour
     private float turnSpeedAcceleration = 400f;
     private float turnIdleSlowdown = 500f;
 
-   
+    public List<GameObject> particleList = new List<GameObject>();
+    [SerializeField] int particleID;
 
     public DemoPlayer playerscript;
     [SerializeField] public bool isDead;
@@ -48,6 +49,10 @@ public class enemyCarDriver : MonoBehaviour
         ogSpeedHolder = speed;
         acceleration = Random.Range(20f, 22f); // Set the acceleration to a random value between x and y
       
+        foreach(GameObject particle in particleList)
+        {
+            particle.SetActive(false);
+        }
     }
 
     private void Update()
@@ -186,6 +191,9 @@ public class enemyCarDriver : MonoBehaviour
                 speed /= 2;
                 break;
         }
+
+        particleList[condition].SetActive(true);
+        particleID = condition;
     }
 
     public void StartCCTimer(float duration)
@@ -196,6 +204,7 @@ public class enemyCarDriver : MonoBehaviour
 
     public void RevertCCState()
     {
+        particleList[particleID].SetActive(false);
         isCCed = false;
         ccDuration = 0f;
     }
