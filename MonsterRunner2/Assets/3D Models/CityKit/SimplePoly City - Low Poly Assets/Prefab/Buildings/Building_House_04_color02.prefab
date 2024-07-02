@@ -86,7 +86,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
   m_Name: 
@@ -95,6 +95,8 @@ MonoBehaviour:
   fadeAmount: 0.3
   currentalpha: 0
   DoFade: 0
+  solidMesh: {fileID: 0}
+  transparentMesh: {fileID: 0}
   opaqueMaterial: {fileID: 2100000, guid: 5969c1f4dba612842ac19dbf345dd211, type: 2}
   transparentMaterial: {fileID: 2100000, guid: 8696dd4e144e5e5469142b2841adb732, type: 2}
 --- !u!1 &4767866509220805378

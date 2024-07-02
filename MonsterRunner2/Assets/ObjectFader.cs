@@ -8,7 +8,7 @@ public class ObjectFader : MonoBehaviour
     public float fadeAmount;
     [SerializeField ]private float currentalpha;
     float originalOpacity;
-    Material mat;
+    //Material mat;
     //Renderer ren;
     public bool DoFade = false;
     // Start is called before the first frame update
@@ -18,17 +18,20 @@ public class ObjectFader : MonoBehaviour
 
     public Material opaqueMaterial;
     public Material transparentMaterial;
+
     void Start()
     {
+        Material mat = transparentMesh.GetComponentInChildren<Renderer>().material;
         //ren = GetComponent<Renderer>();
         //mat = GetComponent<Renderer>().material;
-        //originalOpacity = mat.color.a;
+        originalOpacity = mat.color.a;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //currentalpha = mat.color.a;
+        Material mat = transparentMesh.GetComponentInChildren<Renderer>().material;
+        currentalpha = mat.color.a;
         if(DoFade)
         {
             FadeNow();
@@ -41,6 +44,7 @@ public class ObjectFader : MonoBehaviour
 
     void FadeNow()
     {
+     
         //ren.material = transparentMaterial;
         //mat = transparentMaterial;
         //Color currentcolour = mat.color;
@@ -48,7 +52,11 @@ public class ObjectFader : MonoBehaviour
         //mat.color = smoothColour;
         solidMesh.SetActive(false);
         transparentMesh.SetActive(true);
-        
+        Material mat = transparentMesh.GetComponent<Renderer>().material;
+        Color currentcolour = mat.color;
+        Color smoothColour = new Color(currentcolour.r, currentcolour.g, currentcolour.b, Mathf.Lerp(currentcolour.a, fadeAmount, fadeSpeed * Time.deltaTime)); ;
+        mat.color = smoothColour;
+
 
     }
 
@@ -59,7 +67,12 @@ public class ObjectFader : MonoBehaviour
         //Color currentcolour = mat.color;
         //Color smoothColour = new Color(currentcolour.r, currentcolour.g, currentcolour.b, Mathf.Lerp(currentcolour.a, originalOpacity, fadeSpeed * Time.deltaTime));
         //mat.color = smoothColour;
+        Material mat = transparentMesh.GetComponent<Renderer>().material;
+        Color currentcolour = mat.color;
+        Color smoothColour = new Color(currentcolour.r, currentcolour.g, currentcolour.b, Mathf.Lerp(currentcolour.a, originalOpacity, fadeSpeed * Time.deltaTime)); ;
+        mat.color = smoothColour;
         transparentMesh.SetActive(false);
         solidMesh.SetActive(true);
+
     }
 }
