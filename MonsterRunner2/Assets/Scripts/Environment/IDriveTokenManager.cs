@@ -12,6 +12,9 @@ public class IDriveTokenManager : MonoBehaviour
     public Transform uiContainer;
     public List<GameObject> spawnedLetterTokens;
 
+    public float invunDuration;
+    public DemoPlayer playerData;
+
     [SerializeField] private bool i1;
     [SerializeField] private bool d;
     [SerializeField] private bool r;
@@ -50,6 +53,11 @@ public class IDriveTokenManager : MonoBehaviour
         {
             entity.SetActive(false);
         }
+
+        foreach (GameObject entity in deactiveList)
+        {
+            entity.SetActive(true);
+        }
     }
 
     //public void ActivateUIFeedback(string letter)
@@ -67,8 +75,7 @@ public class IDriveTokenManager : MonoBehaviour
         if (spawnedLetterTokens.Count > 0)
         {
             GameObject token = spawnedLetterTokens[id];
-            spawnedLetterTokens.RemoveAt(id);
-            Destroy(token);
+            token.SetActive(false);
         }
     }
 
@@ -100,7 +107,42 @@ public class IDriveTokenManager : MonoBehaviour
 
         if(i1 && d && r && i2 && v && e)
         {
-            //trigger effect when player collects all of the idrive token
+            StartCoroutine(TriggerInvunerability());
         }
+    }
+
+    private IEnumerator TriggerInvunerability()
+    {
+        // Set invulnerability on and reset the invulnerability duration
+        playerData.invunSphere.SetActive(true);
+        float remainingDuration = invunDuration;
+
+        // Loop until the duration runs out
+        while (remainingDuration > 0f)
+        {
+            remainingDuration -= Time.deltaTime;
+            yield return null; // Wait until the next frame
+        }
+
+        // Time out reached
+        Debug.Log("Time out");
+        playerData.invunSphere.SetActive(false);
+
+        // Reset all booleans
+        i1 = false; d = false; r = false; i2 = false; v = false; e = false;
+
+        // Destroy all spawned letter tokens
+        if (spawnedLetterTokens.Count > 0)
+        {
+            for (int i = spawnedLetterTokens.Count - 1; i >= 0; i--)
+            {
+                GameObject token = spawnedLetterTokens[i];
+                spawnedLetterTokens.RemoveAt(i);
+                Destroy(token);
+            }
+        }
+
+        // Respawn letter tokens
+        SpawnLetterTokens();
     }
 }

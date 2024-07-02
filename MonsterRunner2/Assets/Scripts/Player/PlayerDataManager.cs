@@ -34,6 +34,7 @@ public class PlayerDataManager : MonoBehaviour
     public EnemySpawner enemySpawnerScript;
     public DetectionBar detectionBar;
     public LineRenderer lineRenderer;
+    public IDriveTokenManager driveTokenManager;
 
     //Scriptst that require player data
     public CinemachineVirtualCamera mainCam;
@@ -71,6 +72,7 @@ public class PlayerDataManager : MonoBehaviour
                     objectiveData.path = lineRenderer;
                     objectiveData.playerTransform = playerData.transform;
                     ab2 = playerData.playerData.ability2Level;
+                    driveTokenManager.playerData = playerData;
 
                     mainCam.Follow = playerCar.transform;
 

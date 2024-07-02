@@ -44,12 +44,11 @@ public class IDriveToken : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            TriggerEffect(tokenID);
-            //iDriveTokenManager.ActivateUIFeedback(letter);
+            TriggerEffect();
         }
     }
 
-    void TriggerEffect(int id)
+    void TriggerEffect()
     {
         iDriveTokenManager.ActivateUIElement(tokenID);
         iDriveTokenManager.DespawnLetterTokens(tokenID);

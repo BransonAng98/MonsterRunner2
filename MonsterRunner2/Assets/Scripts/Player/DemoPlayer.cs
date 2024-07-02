@@ -110,6 +110,7 @@ public class DemoPlayer : MonoBehaviour
 
     public Transform abillityOrigin;
     public GameObject particleSystem;
+    public GameObject invunSphere;
     public GameObject abilityActivatedVFX;
 
     private void Awake()
@@ -123,6 +124,7 @@ public class DemoPlayer : MonoBehaviour
         ability2.LevelUpSkill(playerData.ability2Level);
         ability2.AssignVariables(this.transform, this.transform);
         abilityActivatedVFX.SetActive(false);
+        invunSphere.SetActive(false);
     }
 
     void Start()

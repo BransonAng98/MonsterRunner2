@@ -20,7 +20,7 @@ public class DetectionBar : MonoBehaviour
     public float pulsateDuration;
 
     private Color originalColor;
-    private bool isPulsating = false;
+    [SerializeField] private bool isPulsating = false;
 
     // Start is called before the first frame update
     void Start()
@@ -46,26 +46,29 @@ public class DetectionBar : MonoBehaviour
 
     IEnumerator FadeToAlpha(float targetAlpha)
     {
-        if (!pulsatingImage.gameObject.activeSelf)
+        if (isPulsating)
         {
-            pulsatingImage.gameObject.SetActive(true);
-        }
+            if (!pulsatingImage.gameObject.activeSelf)
+            {
+                pulsatingImage.gameObject.SetActive(true);
+            }
 
-        float elapsedTime = 0f;
-        float startAlpha = pulsatingImage.color.a;
-        Color color = originalColor;
+            float elapsedTime = 0f;
+            float startAlpha = pulsatingImage.color.a;
+            Color color = originalColor;
 
-        while (elapsedTime < pulsateDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / pulsateDuration);
-            color.a = newAlpha;
+            while (elapsedTime < pulsateDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / pulsateDuration);
+                color.a = newAlpha;
+                pulsatingImage.color = color;
+            }
+
+            color.a = targetAlpha;
             pulsatingImage.color = color;
-            yield return null;
         }
-
-        color.a = targetAlpha;
-        pulsatingImage.color = color;
+        yield return null;
     }
 
     void SetPulsatingImageAlpha(float alpha)
@@ -97,7 +100,6 @@ public class DetectionBar : MonoBehaviour
 
     public void ResetBar()
     {
-        SetPulsatingImageAlpha(0);
         eyeClose.SetActive(true);
         eyeOpen.SetActive(false);
         barValue -= Time.deltaTime * decreaseMultiplier;
@@ -160,12 +162,13 @@ public class DetectionBar : MonoBehaviour
         {
             if (slider.value > 0)
             {
-                pulsatingImage.gameObject.SetActive(false);
                 ResetBar();
                 Debug.Log("Reduce puslate");
             }
             else
             {
+                isPulsating = false;
+                SetPulsatingImageAlpha(0);
                 slider.value = 0;
                 barValue = 0;
             }
