@@ -128,5 +128,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 10
-  fadeAmount: 0.5
+  fadeAmount: 0.3
+  currentalpha: 0
   DoFade: 0
+  opaqueMaterial: {fileID: 2100000, guid: cf528230e5d0dcd42ab2d20dcda96917, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: e609ea976da0f2e45bfb27f597ca5bc7, type: 2}

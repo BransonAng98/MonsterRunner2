@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4927796164026264566}
   - component: {fileID: 8906336202318688310}
   - component: {fileID: -3029627650936520742}
+  - component: {fileID: -7413211918763571855}
   m_Layer: 6
   m_Name: Market
   m_TagString: Obstacle
@@ -184,3 +185,20 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &-7413211918763571855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4722627683411591535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  fadeAmount: 0.9
+  DoFade: 0
+  opaqueMaterial: {fileID: 2100000, guid: 5a152fc5bea4c044aa9e38f3116a3bc9, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: bbcb557f3cae22741a9865a5dea593c4, type: 2}

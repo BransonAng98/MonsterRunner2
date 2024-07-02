@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 721854713790722199}
   - component: {fileID: 3683662449881599633}
   - component: {fileID: 299716527024877564}
+  - component: {fileID: -1575943673363959709}
   m_Layer: 6
   m_Name: Hospital
   m_TagString: Obstacle
@@ -184,3 +185,20 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &-1575943673363959709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363025940278517486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  fadeAmount: 0.9
+  DoFade: 0
+  opaqueMaterial: {fileID: 2100000, guid: 5a152fc5bea4c044aa9e38f3116a3bc9, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: bbcb557f3cae22741a9865a5dea593c4, type: 2}

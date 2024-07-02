@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2601602220111019847}
   - component: {fileID: 338944677944359289}
   - component: {fileID: 7838765031556541562}
+  - component: {fileID: -5192298935432798940}
   m_Layer: 6
   m_Name: Fire_Station
   m_TagString: Obstacle
@@ -128,3 +129,20 @@ MonoBehaviour:
   m_Area: 1
   m_IgnoreFromBuild: 0
   m_AffectedAgents: ffffffff
+--- !u!114 &-5192298935432798940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3520681445263854137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeSpeed: 10
+  fadeAmount: 0.9
+  DoFade: 0
+  opaqueMaterial: {fileID: 2100000, guid: 5a152fc5bea4c044aa9e38f3116a3bc9, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: bbcb557f3cae22741a9865a5dea593c4, type: 2}

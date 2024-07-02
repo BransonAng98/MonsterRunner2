@@ -187,8 +187,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeSpeed: 10
-  fadeAmount: 0.5
+  fadeAmount: 0.3
+  currentalpha: 0
   DoFade: 0
+  opaqueMaterial: {fileID: 2100000, guid: 748bc3a1eddacab499ba4248377c18a3, type: 2}
+  transparentMaterial: {fileID: 2100000, guid: 6dc8088d884794d4380a56dfb4ce7858, type: 2}
 --- !u!1 &2614469310144763476
 GameObject:
   m_ObjectHideFlags: 0

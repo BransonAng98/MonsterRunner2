@@ -4,13 +4,8 @@ using UnityEngine;
 
 public class CameraFade : MonoBehaviour
 {
-    private ObjectFader objectfaderScript;
+    [SerializeField]private List<ObjectFader> fadingObjects = new List<ObjectFader>();
     public GameObject player;
-
-    void Start()
-    {
-        // Initialization if needed
-    }
 
     void Update()
     {
@@ -21,38 +16,31 @@ public class CameraFade : MonoBehaviour
 
             RaycastHit[] hits = Physics.RaycastAll(ray);
 
-            bool playerHit = false;
+            List<ObjectFader> hitObjects = new List<ObjectFader>();
 
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider == null)
-                    continue;
-
-                if (hit.collider.gameObject == player)
+                if (hit.collider != null && hit.collider.gameObject != player)
                 {
-                    playerHit = true;
-
-                    if (objectfaderScript != null)
-                    {
-                        objectfaderScript.DoFade = false;
-                    }
-                }
-                else
-                {
-                    objectfaderScript = hit.collider.gameObject.GetComponent<ObjectFader>();
+                    ObjectFader objectfaderScript = hit.collider.gameObject.GetComponent<ObjectFader>();
                     if (objectfaderScript != null)
                     {
                         objectfaderScript.DoFade = true;
+                        hitObjects.Add(objectfaderScript);
                     }
                 }
             }
 
-            // If the player was not hit, ensure the objectfaderScript is reset
-            if (!playerHit && objectfaderScript != null)
+            // Disable fading for objects that were faded but are no longer hit
+            foreach (ObjectFader fader in fadingObjects)
             {
-                objectfaderScript.DoFade = false;
-                objectfaderScript = null;
+                if (!hitObjects.Contains(fader))
+                {
+                    fader.DoFade = false;
+                }
             }
+
+            fadingObjects = hitObjects;
         }
     }
 
