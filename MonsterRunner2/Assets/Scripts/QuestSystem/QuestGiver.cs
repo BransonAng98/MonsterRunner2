@@ -147,6 +147,7 @@ public class QuestGiver : MonoBehaviour
         scoreManager.goldEarned += quest.goldReward;
         scoreManager.missionsCompleted++;
         playerInfoData.moneyAccumulatedInGame += scoreManager.goldEarned;
+        playerInfoData.contractCompleted++;
         if(menuManager.sceneID != 1)
         {
             missionManager.SpawnPassengers();

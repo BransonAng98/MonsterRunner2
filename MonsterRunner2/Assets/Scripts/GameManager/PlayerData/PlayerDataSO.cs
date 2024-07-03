@@ -11,4 +11,7 @@ public class PlayerDataSO : ScriptableObject
     public int gems;
     public bool gameStart;
     public bool hasPlayedTutorial;
+
+    public int contractCompleted;
+    public int distanceTraveled;
 }
