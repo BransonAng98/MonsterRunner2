@@ -63,12 +63,12 @@ public class DetectionBar : MonoBehaviour
                 float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / pulsateDuration);
                 color.a = newAlpha;
                 pulsatingImage.color = color;
+                yield return null; // Ensure coroutine yields every frame
             }
 
             color.a = targetAlpha;
             pulsatingImage.color = color;
         }
-        yield return null;
     }
 
     void SetPulsatingImageAlpha(float alpha)

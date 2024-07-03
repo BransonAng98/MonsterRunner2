@@ -23397,9 +23397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadingObjects: []
   player: {fileID: 0}
-  numberOfRays: 10
-  arcAngle: 45
-  rayDistance: 10
+  numberOfRays: 20
+  arcAngle: 250
+  rayDistance: 17
 --- !u!4 &2099032819
 Transform:
   m_ObjectHideFlags: 0
@@ -23408,7 +23408,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099032817}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -25, z: -40}
+  m_LocalPosition: {x: 360, y: 80, z: 130}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
