@@ -49403,7 +49403,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 476369022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 2.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49429,7 +49429,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 29815
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
@@ -80079,6 +80079,8 @@ MonoBehaviour:
     gems: 0
     gameStart: 0
     hasPlayedTutorial: 0
+    contractCompleted: 0
+    distanceTraveled: 0
   joystick: {fileID: 1124448234}
   questDManager: {fileID: 171047680}
   menuManager: {fileID: 754238777}
@@ -103154,7 +103156,7 @@ GameObject:
   - component: {fileID: 948625532}
   - component: {fileID: 948625531}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CameraFade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103174,9 +103176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadingObjects: []
   player: {fileID: 0}
-  numberOfRays: 10
-  arcAngle: 45
-  rayDistance: 10
+  numberOfRays: 20
+  arcAngle: 250
+  rayDistance: 17
 --- !u!4 &948625532
 Transform:
   m_ObjectHideFlags: 0
@@ -103185,7 +103187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948625530}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -25, z: -40}
+  m_LocalPosition: {x: 360, y: 80, z: 130}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
