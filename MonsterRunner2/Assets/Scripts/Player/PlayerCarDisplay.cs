@@ -23,6 +23,7 @@ public class PlayerCarDisplay : MonoBehaviour
     public Sprite ability1Sprite;
     public Sprite ability2Sprite;
     public List<GameObject> displayCars = new List<GameObject>();
+    public List<GameObject> upgradeDisplayCars = new List<GameObject>();
     public TextMeshProUGUI upgradeCarDisplayName;
     public PlayerDataSO playerData;
 
@@ -36,16 +37,20 @@ public class PlayerCarDisplay : MonoBehaviour
 
     public void UpdateCarSkin(int id)
     {
-        foreach(GameObject dCars in displayCars)
+        for (int i = 0; i < displayCars.Count; i++)
         {
-            MeshFilter mesh = dCars.GetComponent<MeshFilter>();
-            mesh.mesh = cars[id].vehicleBody;
-
-            MeshRenderer mat = dCars.GetComponent<MeshRenderer>();
-            mat.material = cars[id].bodyMaterial;
-
-            ability1Sprite = cars[id].vehicleData.ability1Sprite;
-            ability2Sprite = cars[id].vehicleData.ability2Sprite;
+            if (i == id)
+            {
+                displayCars[i].SetActive(true);
+                upgradeDisplayCars[i].SetActive(true);
+                ability1Sprite = cars[id].vehicleData.ability1Sprite;
+                ability2Sprite = cars[id].vehicleData.ability2Sprite;
+            }
+            else
+            {
+                displayCars[i].SetActive(false);
+                upgradeDisplayCars[i].SetActive(false);
+            }
         }
 
         upgradeCarDisplayName.text = cars[id].vehicleName;

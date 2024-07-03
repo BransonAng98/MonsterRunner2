@@ -138,6 +138,27 @@ public class UpgradeManager : MonoBehaviour
         {
             activeIndicator.interactable = true;
         }
+
+        if(carDisplay.selectedCarID == 0)
+        {
+            leftArrow.interactable = false;
+        }
+
+        else 
+        { 
+            leftArrow.interactable = true; 
+        }
+
+        if(carDisplay.selectedCarID == carDisplay.upgradeDisplayCars.Count - 1)
+        {
+            rightArrow.interactable = false;
+        }
+
+        else
+        {
+            rightArrow.interactable = true;
+        }
+
     }
 
     public void SwitchCar(int dir)
