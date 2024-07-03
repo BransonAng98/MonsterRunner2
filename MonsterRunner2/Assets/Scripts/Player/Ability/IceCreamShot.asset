@@ -19,7 +19,7 @@ MonoBehaviour:
     type: 3}
   bulletSpawnLoc: {fileID: 0}
   player: {fileID: 0}
-  bulletSpeed: 30
+  bulletSpeed: 15
   directionInput: 3
-  shootingTimer: 1.0968026
+  shootingTimer: 0.2738592
   shootingInterval: 1.2
