@@ -73,6 +73,7 @@ public class JsonSystem : MonoBehaviour
                 playerData.money = playerInfoData.money;
                 playerData.gems = playerInfoData.gems;
                 playerData.hasPlayedTutorial = playerInfoData.hasPlayedTutorial;
+                playerData.contractCompleted = playerInfoData.contractCompleted;
                 string playerJson = JsonUtility.ToJson(playerData, true);
                 File.WriteAllText(playerDataFilePath, playerJson);
                 break;
@@ -108,6 +109,8 @@ public class JsonSystem : MonoBehaviour
         playerData.money = 0;
         playerData.gems = 0;
         playerData.hasPlayedTutorial = false;
+        playerData.contractCompleted = 0;
+        playerData.distanceTraveled = 0;
         string playerJson = JsonUtility.ToJson(playerData, true);
         File.WriteAllText(playerDataFilePath, playerJson);
     }
@@ -157,6 +160,7 @@ public class JsonSystem : MonoBehaviour
             playerInfoData.money = playerData.money;
             playerInfoData.gems = playerData.gems;
             playerInfoData.hasPlayedTutorial = playerData.hasPlayedTutorial;
+            playerInfoData.contractCompleted = playerData.contractCompleted;
         }
         else
         {

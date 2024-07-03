@@ -15,7 +15,7 @@ MonoBehaviour:
   abilityName: Thundercracker
   abilityCD: 10
   abilityActive: 5
-  bulletPf: {fileID: 7615801959409793019, guid: 48797bd93f4db344ca52d21ffc699baa,
+  bulletPf: {fileID: 8711256197896865862, guid: b4fba04539440954f8c122315127a852,
     type: 3}
   bulletSpawnLoc: {fileID: 0}
   player: {fileID: 0}

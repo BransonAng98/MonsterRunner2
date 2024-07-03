@@ -3948,6 +3948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 591658461}
+  - component: {fileID: 591658462}
   m_Layer: 5
   m_Name: ProfileMenuGroup
   m_TagString: Untagged
@@ -3981,6 +3982,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &591658462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591658460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75edfe778b714046b95a287c421784e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: 35556629dbf4a614b84f4081179491ff, type: 2}
+  moneyText: {fileID: 555899112}
+  contractText: {fileID: 2068098675}
 --- !u!1 &594293552
 GameObject:
   m_ObjectHideFlags: 0
@@ -5047,7 +5063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Cars Unlocked: xx/xx'
+  m_text: 'Cars Unlocked: 2/2'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c5ee151f9307453bad78be36b51a077, type: 2}
   m_sharedMaterial: {fileID: 2517202264660172603, guid: 5c5ee151f9307453bad78be36b51a077,
@@ -5735,7 +5751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Gem: xxx'
+  m_text: 'Gem: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5c5ee151f9307453bad78be36b51a077, type: 2}
   m_sharedMaterial: {fileID: 2517202264660172603, guid: 5c5ee151f9307453bad78be36b51a077,
