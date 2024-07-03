@@ -5,6 +5,7 @@ using UnityEngine;
 public class ObjectFader : MonoBehaviour
 {
     public float fadeSpeed;
+    private float returnSpeed = 5f;
     public float fadeAmount;
     [SerializeField ]private float currentalpha;
     float originalOpacity;
@@ -36,7 +37,7 @@ public class ObjectFader : MonoBehaviour
         {
             FadeNow();
         }
-        else
+        else //if (currentalpha <= fadeAmount && DoFade == false)
         {
             ResetFade();
         }
@@ -69,10 +70,14 @@ public class ObjectFader : MonoBehaviour
         //mat.color = smoothColour;
         Material mat = transparentMesh.GetComponent<Renderer>().material;
         Color currentcolour = mat.color;
-        Color smoothColour = new Color(currentcolour.r, currentcolour.g, currentcolour.b, Mathf.Lerp(currentcolour.a, originalOpacity, fadeSpeed * Time.deltaTime)); ;
+        Color smoothColour = new Color(currentcolour.r, currentcolour.g, currentcolour.b, Mathf.Lerp(currentcolour.a, originalOpacity, fadeSpeed * Time.deltaTime));
         mat.color = smoothColour;
-        transparentMesh.SetActive(false);
-        solidMesh.SetActive(true);
+
+        if (mat.color.a >= 0.9f)
+        {
+            transparentMesh.SetActive(false);
+            solidMesh.SetActive(true);
+        }
 
     }
 }

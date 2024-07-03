@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c23ccc6c8975d2946bab21fefce3096a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeSpeed: 10
-  fadeAmount: 0.9
+  fadeSpeed: 3
+  fadeAmount: 0.3
   currentalpha: 0
   DoFade: 0
   solidMesh: {fileID: 6555826901661688795}
