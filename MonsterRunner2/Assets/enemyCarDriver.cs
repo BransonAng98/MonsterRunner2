@@ -40,6 +40,12 @@ public class enemyCarDriver : MonoBehaviour
     public int enemyType;
     public SideObjectiveQuestGiver sideobjective;
     public QuestGiver questgiverScript;
+
+    private float elapsedTime = 0f;
+    public float initialSpeedDuration = 3f;
+    public float initialSpeed = 10f; // Replace with your desired initial speed
+
+    private bool setInitialSpeed = true;
     #endregion
 
     private void Awake()
@@ -47,8 +53,8 @@ public class enemyCarDriver : MonoBehaviour
         isDead = false;
         carRigidbody = GetComponent<Rigidbody>();
         ogSpeedHolder = speed;
-        acceleration = Random.Range(20f, 22f); // Set the acceleration to a random value between x and y
-      
+        acceleration = Random.Range(25f, 27f); // Set the acceleration to a random value between x and y
+        SetInitialSpeed(10f);
         foreach(GameObject particle in particleList)
         {
             particle.SetActive(false);
@@ -57,32 +63,44 @@ public class enemyCarDriver : MonoBehaviour
 
     private void Update()
     {
-        if (playerscript.isDead)
+        elapsedTime += Time.deltaTime;
+
+        if (setInitialSpeed && elapsedTime < initialSpeedDuration)
         {
-            // Reduce speed and turn speed to zero when player is dead
-            speed = Mathf.Lerp(speed, 0, Time.deltaTime * 2f);
-            turnSpeed = Mathf.Lerp(turnSpeed, 0, Time.deltaTime * 2f);
-
-            carRigidbody.velocity = transform.forward * speed;
-            carRigidbody.angularVelocity = new Vector3(0, turnSpeed * Mathf.Deg2Rad, 0);
-
-            return;
+            // Keep setting speed to initialSpeed for the first initialSpeedDuration seconds
+            speed = initialSpeed;
         }
-
-        if (isCCed)
+        else
         {
-            ccDuration -= Time.deltaTime;
-            if (ccDuration <= 0)
-            {
-                isCCed = false;
-            }
-            else
-            {
-                // Apply crowd control effect
-                CCEffect(0);
-            }
-        }
 
+            if (playerscript.isDead)
+            {
+                // Reduce speed and turn speed to zero when player is dead
+                speed = Mathf.Lerp(speed, 0, Time.deltaTime * 2f);
+                turnSpeed = Mathf.Lerp(turnSpeed, 0, Time.deltaTime * 2f);
+
+                carRigidbody.velocity = transform.forward * speed;
+                carRigidbody.angularVelocity = new Vector3(0, turnSpeed * Mathf.Deg2Rad, 0);
+
+                return;
+            }
+
+            if (isCCed)
+            {
+                ccDuration -= Time.deltaTime;
+                if (ccDuration <= 0)
+                {
+                    isCCed = false;
+                }
+                else
+                {
+                    // Apply crowd control effect
+                    CCEffect(0);
+                }
+            }
+
+            
+        }
         if (!isDead) //check if need CC PLEASE KEITH DELVIN BRANSON
         {
             HandleMovement();
@@ -173,6 +191,14 @@ public class enemyCarDriver : MonoBehaviour
             transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         }
     }
+
+    public void SetInitialSpeed(float newInitialSpeed)
+    {
+        initialSpeed = newInitialSpeed;
+        setInitialSpeed = true;
+        elapsedTime = 0f;
+    }
+
 
     public void CCEffect(int condition)
     {

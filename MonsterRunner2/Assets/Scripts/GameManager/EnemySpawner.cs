@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI; // Import NavMesh
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -11,11 +12,11 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float Radius;
     [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
     [SerializeField] public QuestGiver QuestGiverScript;
-
     [SerializeField] public bool startSpawning;
     public GameObject player;
-   [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
-    [SerializeField]private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
+    [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
+    [SerializeField]
+    private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
         { 1, new List<int> { 4, 0 } }, // 4 of type 1, 0 of type 2
         { 2, new List<int> { 6, 0 } }, // 4 of type 1, 2 of type 2
@@ -25,16 +26,11 @@ public class EnemySpawner : MonoBehaviour
         // Add more threat levels as needed
     };
 
-    [SerializeField]private int currentThreatLevel = 0;
-    [SerializeField]private List<GameObject> roads = new List<GameObject>(); // List to store road objects
+    [SerializeField] private int currentThreatLevel = 0;
 
     private void Start()
     {
-        // Assign the player transform by finding the object with the tag "Player"
-
         startSpawning = false;
-      
-        //UpdateEnemiesForThreatLevel();
     }
 
     private void Update()
@@ -51,13 +47,12 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        if (allNull & startSpawning == true)
+        if (allNull && startSpawning)
         {
             UpdateEnemiesForThreatLevel();
         }
-     
     }
-       
+
     public void UpdateEnemiesForThreatLevel()
     {
         Debug.Log("Updating Enemies for Threat Level: " + currentThreatLevel);
@@ -85,7 +80,6 @@ public class EnemySpawner : MonoBehaviour
                     enemy.transform.LookAt(playerPos);
                     newSpawnedEnemies.Add(enemy);
                     AssignEnemyProperties(enemy);
-                    
                 }
             }
             else if (currentCount > requiredCount)
@@ -96,7 +90,6 @@ public class EnemySpawner : MonoBehaviour
                     if (enemyToRemove != null)
                     {
                         newSpawnedEnemies.Remove(enemyToRemove);
-                      
                     }
                 }
             }
@@ -154,7 +147,6 @@ public class EnemySpawner : MonoBehaviour
                 enemy.transform.LookAt(playerPos);
                 spawnedEnemies.Add(enemy);
                 AssignEnemyProperties(enemy);
-                //StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
             }
         }
     }
@@ -180,7 +172,6 @@ public class EnemySpawner : MonoBehaviour
         enemy.transform.LookAt(playerPos);
         spawnedEnemies.Add(enemy);
         AssignEnemyProperties(enemy);
-        //StartCoroutine(enemy.GetComponent<EnemyCarAI>().FlashTransparent(4f, 1f)); // Call FlashTransparent
     }
 
     public void RemoveEnemyFromList(GameObject enemyToRemove)
@@ -188,7 +179,7 @@ public class EnemySpawner : MonoBehaviour
         if (spawnedEnemies.Contains(enemyToRemove))
         {
             spawnedEnemies.Remove(enemyToRemove); // Remove the enemy car from the list
-          
+
             enemyCarDriver enemyAI = enemyToRemove.GetComponent<enemyCarDriver>();
             if (enemyAI != null)
             {
@@ -203,80 +194,48 @@ public class EnemySpawner : MonoBehaviour
         float spawnRadius = 140f;
         float minSpacing = 30f;
         float minDistanceFromPlayer = 100f; // Minimum distance from the player
-
-        List<Vector3> validSpawnPositions = new List<Vector3>();
-        int attempts = 0;
         int maxAttempts = 100; // Avoid infinite loops
 
-        // Check if any road objects are within the spawn area
-        foreach (var road in roads)
+        for (int attempts = 0; attempts < maxAttempts; attempts++)
         {
-            Vector3 roadPos = road.transform.position;
-            float distanceToPlayer = Vector3.Distance(roadPos, playerPos.position);
-
-            if (distanceToPlayer >= minDistanceFromPlayer && distanceToPlayer <= spawnRadius)
-            {
-                // Check if the road position meets spacing criteria
-                bool isValidRoadPos = true;
-                foreach (var pos in spawnedEnemies)
-                {
-                    if (Vector3.Distance(roadPos, pos.transform.position) < minSpacing)
-                    {
-                        isValidRoadPos = false;
-                        break;
-                    }
-                }
-
-                if (isValidRoadPos)
-                {
-                    validSpawnPositions.Add(roadPos);
-                }
-            }
-        }
-
-        while (validSpawnPositions.Count == 0 && attempts < maxAttempts)
-        {
-            attempts++;
             Vector3 randomDirection = Random.insideUnitSphere * spawnRadius;
             randomDirection += playerPos.position;
             randomDirection.y = 0f; // Set the Y position to 0
 
-            bool isValid = true;
-
             if (Vector3.Distance(randomDirection, playerPos.position) < minDistanceFromPlayer)
-            {
-                isValid = false;
-            }
+                continue;
 
-            foreach (var pos in spawnedEnemies)
+            if (IsPositionOnNavMesh(randomDirection, minSpacing))
             {
-                if (Vector3.Distance(randomDirection, pos.transform.position) < minSpacing)
+                return randomDirection;
+            }
+        }
+
+        Debug.LogError("No valid spawn positions found!");
+        return playerPos.position + new Vector3(minDistanceFromPlayer, 0, 0); // Default to a position if none found
+    }
+
+    private bool IsPositionOnNavMesh(Vector3 position, float minSpacing)
+    {
+        NavMeshHit hit;
+        bool onNavMesh = NavMesh.SamplePosition(position, out hit, 1.0f, NavMesh.AllAreas);
+
+        if (onNavMesh)
+        {
+            foreach (var enemy in spawnedEnemies)
+            {
+                if (Vector3.Distance(hit.position, enemy.transform.position) < minSpacing)
                 {
-                    isValid = false;
-                    break; // No need to check further, this position is invalid
+                    return false;
                 }
             }
-
-            if (isValid)
-            {
-                validSpawnPositions.Add(randomDirection);
-            }
         }
 
-        if (validSpawnPositions.Count == 0)
-        {
-            Debug.LogError("No valid spawn positions found!");
-            return playerPos.position + new Vector3(minDistanceFromPlayer, 0, 0); // Default to a position if none found
-        }
-
-        // Pick a random valid spawn position from the list
-        int randomIndex = Random.Range(0, validSpawnPositions.Count);
-        return validSpawnPositions[randomIndex];
+        return onNavMesh;
     }
 
     public void DestroyAllEnemies()
     {
-        // Create a temporary list to store enemies to be destroyed
         List<GameObject> enemiesToDestroy = new List<GameObject>(spawnedEnemies);
 
         foreach (var enemy in enemiesToDestroy)
@@ -290,17 +249,16 @@ public class EnemySpawner : MonoBehaviour
                 }
             }
         }
-        foreach(var enemy in spawnedEnemies)
+
+        foreach (var enemy in spawnedEnemies)
         {
-            if(enemy != null)
+            if (enemy != null)
             {
                 Destroy(enemy);
             }
         }
         spawnedEnemies.Clear();
         startSpawning = false;
-        // Clear the original list after destroying all enemies
-        //
     }
 
     private void AssignEnemyProperties(GameObject spawnedEnemy)
@@ -308,11 +266,16 @@ public class EnemySpawner : MonoBehaviour
         EnemyCarAI enemyAI = spawnedEnemy.GetComponent<EnemyCarAI>();
         enemyCarDriver enemyDriverlogic = spawnedEnemy.GetComponent<enemyCarDriver>();
         EnemyGunnerScript enemyGunnerAI = spawnedEnemy.GetComponent<EnemyGunnerScript>();
+        NavmeshChasePlayer navmeshAi = spawnedEnemy.GetComponent<NavmeshChasePlayer>();
+
+        if (navmeshAi != null)
+        {
+            navmeshAi.target = playerPos;
+        }
 
         if (enemyAI != null)
         {
             enemyAI.targetPositionTranform = playerPos;
-            // Assign other necessary properties to enemyAI
         }
         if (enemyDriverlogic != null)
         {
@@ -320,12 +283,10 @@ public class EnemySpawner : MonoBehaviour
             enemyDriverlogic.enemySpawnerScript = this;
             enemyDriverlogic.sideobjective = SideObjectiveQuestGiverScript;
             enemyDriverlogic.questgiverScript = QuestGiverScript;
-            // Assign other necessary properties to enemyDriverlogic
         }
         if (enemyGunnerAI != null)
         {
             enemyGunnerAI.playerdata = playerData;
-            // Assign other necessary properties to enemyGunnerAI
         }
     }
 }
