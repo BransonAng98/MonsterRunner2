@@ -5,9 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerScriptableObject", menuName = "ScriptableObjects/Player")]
 public class PlayerSO : ScriptableObject
 {
+    public int speedRating;
+    public int accelRating;
+
     public float health;
     public float maxSpeed;
     public float acceleration;
+    public float decceleration;
     public float damage;
     public float crashResistance;
 

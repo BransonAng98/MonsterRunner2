@@ -25,8 +25,7 @@ public class EnemyCarAI : MonoBehaviour
     public Material transparentTexture;
     private void Start()
     {
-        ChangeToTransparentTexture();
-        StartCoroutine(FlashTransparent(4f, 0.5f));
+      
     }
     private void Update()
     {
@@ -101,7 +100,7 @@ public class EnemyCarAI : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("Obstacle"))
+        if (other.CompareTag("Enemy") /*|| other.CompareTag("Obstacle")*/)
         {
             isAvoiding = true;
             if (!nearbyObstacles.Contains(other))
@@ -114,7 +113,7 @@ public class EnemyCarAI : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("Obstacle"))
+        if (other.CompareTag("Enemy") /*|| other.CompareTag("Obstacle")*/)
         {
             nearbyObstacles.Remove(other);
             if (nearbyObstacles.Count == 0)
@@ -143,61 +142,5 @@ public class EnemyCarAI : MonoBehaviour
     }
 
     // Function to flash the material transparent
-    public IEnumerator FlashTransparent(float duration, float flashSpeed)
-    {
-        gameObject.layer = 14;
-        Renderer renderer = GetComponentInChildren<Renderer>();
-        if (renderer == null)
-        {
-            Debug.LogError("Renderer component not found!");
-            yield break;
-        }
-
-        Material material = renderer.material;
-        if (material == null)
-        {
-            Debug.LogError("Material not found on Renderer!");
-            yield break;
-        }
-
-        material = mainTexture; // Start with the main texture
-
-        bool switchMaterial = false;
-        float flashElapsedTime = 0f; // Local elapsed time for flashing
-
-        while (true) // Infinite loop
-        {
-            elapsedTime += Time.deltaTime;
-            flashElapsedTime += Time.deltaTime;
-
-            if (flashElapsedTime >= flashSpeed)
-            {
-                switchMaterial = !switchMaterial;
-                material = switchMaterial ? transparentTexture : mainTexture;
-                renderer.material = material;
-                flashElapsedTime = 0f; // Reset flash elapsed time
-            }
-
-            if (elapsedTime >= duration) // Check if duration is reached
-            {
-                gameObject.layer = 11;
-                break; // Exit the loop
-            }
-
-            yield return null;
-        }
-
-        // Ensure the material is set back to the main texture at the end of the flash duration
-        renderer.material = mainTexture;
-    }
-
-    public void ChangeToTransparentTexture()
-    {
-        GetComponentInChildren<Renderer>().material = transparentTexture;
-    }
-
-    public void ChangeToMainTexture()
-    {
-        GetComponentInChildren<Renderer>().material = mainTexture;
-    }
+   
 }

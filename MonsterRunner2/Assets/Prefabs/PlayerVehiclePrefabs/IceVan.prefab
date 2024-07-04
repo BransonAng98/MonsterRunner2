@@ -985,6 +985,10 @@ MonoBehaviour:
   joystick: {fileID: 0}
   lastKnownVector: {x: 0, y: 0, z: 0}
   joystickInput: {x: 0, y: 0}
+  acceleration: 0
+  collisionSpeedReduction: 0
+  currentSpeed: 0
+  isColliding: 0
   healingVFX: {fileID: 6660763168241695593}
   quest:
     isActive: 0
@@ -1005,7 +1009,6 @@ MonoBehaviour:
   impactVFX: {fileID: 4661394443100670, guid: 0763f718c04adb34ca119915b22e53e6, type: 3}
   distanceThreshold: 30
   menuManager: {fileID: 0}
-  destinationReached: 0
   meshFilter: {fileID: 814978292844326937}
   vehicleMaterial: {fileID: 5028679620144609091}
   meshCollider: {fileID: 5028679620144609090}
@@ -1014,6 +1017,8 @@ MonoBehaviour:
   questIndicator: {fileID: 6901216935879526369}
   abillityOrigin: {fileID: 7178271502345445823}
   particleSystem: {fileID: 7063904045132618362}
+  collisionVFXPrefab: {fileID: 1000011945391522, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e,
+    type: 3}
   invunSphere: {fileID: 262477122218594076}
   abilityActivatedVFX: {fileID: 2343901729571804645}
 --- !u!120 &6901216936559944770
@@ -1942,8 +1947,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: -1972088415364713067, guid: cdc55ac9a8d66064286544c13d5b3450,
-        type: 3}
+      objectReference: {fileID: 2100000, guid: 26bc8648a85c6b041a5d5b00ca61062b, type: 2}
     - target: {fileID: 919132149155446097, guid: e88a949b3713fb04dae8f150d442a8b0,
         type: 3}
       propertyPath: m_Name

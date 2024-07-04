@@ -84,6 +84,12 @@ public class DemoPlayer : MonoBehaviour
     public Vector3 lastKnownVector;
     public Vector2 joystickInput;
 
+    [SerializeField] private float acceleration;
+    [SerializeField] private float collisionSpeedReduction;
+    [SerializeField] private float currentSpeed = 0f;
+    private float originalSpeed;
+    [SerializeField] private bool isColliding;
+
     public ParticleSystem healingVFX;
 
     public Quest quest;
@@ -98,8 +104,6 @@ public class DemoPlayer : MonoBehaviour
     public GameMenuManager menuManager;
     private Rigidbody rb;
 
-    public bool destinationReached;
-
     public MeshFilter meshFilter;
     public MeshRenderer vehicleMaterial;
     public MeshCollider meshCollider;
@@ -110,6 +114,10 @@ public class DemoPlayer : MonoBehaviour
 
     public Transform abillityOrigin;
     public GameObject particleSystem;
+    public GameObject collisionVFXPrefab;
+    private GameObject instantiatedVFX;
+    private int obstacleCollisionCount = 0;
+
     public GameObject invunSphere;
     public GameObject abilityActivatedVFX;
 
@@ -118,6 +126,8 @@ public class DemoPlayer : MonoBehaviour
         health = playerData.health;
         maxHealth = playerData.health;
         maxSpeed = playerData.maxSpeed;
+        acceleration = playerData.acceleration;
+        collisionSpeedReduction = playerData.decceleration;
         crashDamage = 150f - playerData.crashResistance;
         ability1.AssignVariables(abillityOrigin, this.transform);
         ability1.LevelUpSkill(playerData.ability1Level);
@@ -141,26 +151,8 @@ public class DemoPlayer : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Obstacle"))
-        {
-            if (!isTriggered)
-            {
-                isTriggered = true;
-                TakeDamage(crashDamage);
-            }
-        }
-
-       
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Border"))
-        {
-            TakeDamage(1000);
-        }
 
         if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -169,7 +161,6 @@ public class DemoPlayer : MonoBehaviour
                 TakeDamage(1000);
                 Vector3 ExplodePos = new Vector3 (transform.position.x, transform.position.y + 2f, transform.position.z);
                 Instantiate(impactVFX, ExplodePos, Quaternion.identity);
-                Debug.Log("Death by cops");
             }
         }
 
@@ -180,32 +171,84 @@ public class DemoPlayer : MonoBehaviour
             PowerUp triggerCollectedVFX = collision.gameObject.GetComponent<PowerUp>();
             triggerCollectedVFX.Pickup();
         }
+
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            if (obstacleCollisionCount == 0) // First obstacle collision
+            {
+                Vector3 contactPoint = collision.contacts[0].point; // Get the first contact point
+                InstantiateCollisionVFX(contactPoint);
+            }
+            obstacleCollisionCount++;
+            isColliding = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            obstacleCollisionCount--;
+            isColliding = false;
+            if (obstacleCollisionCount == 0)
+            {
+                DestroyCollisionVFX();
+            }
+        }
     }
 
     void GetInput()
     {
         joystickInput = new Vector2(joystick.Horizontal, joystick.Vertical).normalized;
     }
-
     void NewMove()
     {
+        if (!isColliding)
+        {
+            currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
+        }
+
+        else
+        {
+            currentSpeed *= collisionSpeedReduction;
+        }
+
         Vector3 rotatedInputDirection = Quaternion.Euler(0, 45, 0) * new Vector3(joystickInput.x, 0, joystickInput.y);
         if (rotatedInputDirection.magnitude >= maxSteeringAngle)
         {
             Vector3 targetDirection = rotatedInputDirection;
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSensitivity);
-            Vector3 targetVelocity = transform.forward * maxSpeed;
+            Vector3 targetVelocity = transform.forward * currentSpeed;
             targetVelocity.y = rb.velocity.y;
             rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, velocityLerpFactor);
-            lastKnownVector = rb.velocity;
+            lastKnownVector = targetDirection;
         }
         else
         {
-            Vector3 targetVelocity = lastKnownVector;
+            Quaternion targetRotation = Quaternion.LookRotation(lastKnownVector, Vector3.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSensitivity);
+            Vector3 targetVelocity = transform.forward * currentSpeed;
             targetVelocity.y = rb.velocity.y;
-            rb.velocity = targetVelocity;
+            rb.velocity = Vector3.Lerp(rb.velocity, targetVelocity, velocityLerpFactor);
             rb.rotation = Quaternion.LookRotation(lastKnownVector);
+        }
+    }
+
+    void InstantiateCollisionVFX(Vector3 contactPoint)
+    {
+        if (collisionVFXPrefab != null && instantiatedVFX == null)
+        {
+            instantiatedVFX = Instantiate(collisionVFXPrefab, contactPoint, Quaternion.identity);
+            instantiatedVFX.transform.SetParent(transform);
+        }
+    }
+
+    void DestroyCollisionVFX()
+    {
+        if (instantiatedVFX != null)
+        {
+            Destroy(instantiatedVFX);
+            instantiatedVFX = null;
         }
     }
 
@@ -312,16 +355,6 @@ public class DemoPlayer : MonoBehaviour
     {
         GetInput();
         CheckHealthState();
-
-        if (!destinationReached && destination != null)
-        {
-            distance = Vector3.Distance(transform.position, destination.transform.position);
-            if (distance <= distanceThreshold)
-            {
-                DestinationReached();
-                destinationReached = true;
-            }
-        }
     }
 
     private void FixedUpdate()
@@ -329,19 +362,6 @@ public class DemoPlayer : MonoBehaviour
         if (!isDead)
         {
             NewMove();
-        }
-    }
-
-    public void DestinationReached()
-    {
-        if (passenger != null)
-        {
-            int index = UnityEngine.Random.Range(0, 1);
-            questdialogueScript.TypeText(false, index);
-            quest.Complete();
-            passenger.SetActive(true);
-            passenger.transform.parent = null;
-            passenger = null;
         }
     }
 

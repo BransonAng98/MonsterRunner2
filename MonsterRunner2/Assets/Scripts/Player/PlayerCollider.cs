@@ -32,8 +32,6 @@ public class PlayerCollider : MonoBehaviour
 
         if(other.CompareTag("Passenger"))
         {
-            //player.GetDestination();
-           player.destinationReached = false;
            colliderpassenger = other.gameObject;
            player.passenger = other.gameObject;
            QuestGiver questGiver = other.transform.GetComponent<QuestGiver>();

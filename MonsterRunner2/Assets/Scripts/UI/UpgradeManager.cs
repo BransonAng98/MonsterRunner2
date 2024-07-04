@@ -27,6 +27,9 @@ public class UpgradeManager : MonoBehaviour
     public TextMeshProUGUI activeSkillLevelText;
     public TextMeshProUGUI lockedSkillLevelText;
 
+    public Slider speedSlider;
+    public Slider accelSlider;
+
     public Image ability1Icon;
     public Image ability2Icon;
     public Image ability2LockedIcon;
@@ -119,8 +122,10 @@ public class UpgradeManager : MonoBehaviour
         ability1Icon.sprite = carDisplay.ability1Sprite;
         ability2Icon.sprite = carDisplay.ability2Sprite;
         ability2LockedIcon.sprite = carDisplay.ability2Sprite;
+        speedSlider.value = carDisplay.cars[carDisplay.selectedCarID].vehicleData.speedRating;
+        accelSlider.value = carDisplay.cars[carDisplay.selectedCarID].vehicleData.accelRating;
 
-        if(carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level > 0)
+        if (carDisplay.cars[carDisplay.selectedCarID].vehicleData.ability2Level > 0)
         {
             ability2Icon.gameObject.SetActive(true);
         }

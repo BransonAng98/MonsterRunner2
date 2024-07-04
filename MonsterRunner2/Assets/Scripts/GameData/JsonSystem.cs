@@ -54,6 +54,8 @@ public class JsonSystem : MonoBehaviour
                     carData.speed = vehicleData.maxSpeed;
                     carData.ability1Level = vehicleData.ability1Level;
                     carData.ability2Level = vehicleData.ability2Level;
+                    carData.speedRating = vehicleData.speedRating;
+                    carData.accelRating = vehicleData.accelRating;
 
                     vehicleDataList.Add(carData);
                 }
@@ -92,6 +94,8 @@ public class JsonSystem : MonoBehaviour
             carData.vehicleName = vehicleData.vehicleName;
             carData.vehicleID = vehicleData.vehicleID;
             carData.speed = vehicleData.maxSpeed;
+            carData.speedRating = vehicleData.speedRating;
+            carData.accelRating = vehicleData.accelRating;
             carData.ability1Level = 1;
             carData.ability2Level = 0;
             vehicleDataList.Add(carData);
@@ -132,6 +136,8 @@ public class JsonSystem : MonoBehaviour
                     vehicleData.maxSpeed = data.speed;
                     vehicleData.ability1Level = data.ability1Level;
                     vehicleData.ability2Level = data.ability2Level;
+                    vehicleData.speedRating = data.speedRating;
+                    vehicleData.accelRating = data.accelRating;
                 }
                 else
                 {
@@ -140,6 +146,8 @@ public class JsonSystem : MonoBehaviour
                     vehicleData.vehicleName = data.vehicleName;
                     vehicleData.vehicleID = data.vehicleID;
                     vehicleData.maxSpeed = data.speed;
+                    vehicleData.speedRating = data.speedRating;
+                    vehicleData.accelRating = data.accelRating;
                     vehicleData.ability1Level = 1;
                     vehicleData.ability2Level = 0;
                     allVehicleDataList.Add(vehicleData);
