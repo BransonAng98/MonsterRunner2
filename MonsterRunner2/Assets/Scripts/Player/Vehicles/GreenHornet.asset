@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f811ceeba0b66754cb98bd69e0f4a100, type: 3}
   m_Name: GreenHornet
   m_EditorClassIdentifier: 
+  speedRating: 7
+  accelRating: 4
   health: 1000
   maxSpeed: 28
   acceleration: 12

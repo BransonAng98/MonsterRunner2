@@ -13,4 +13,6 @@ public class VehicleData
     public Sprite ability1Sprite;
     public int ability2Level;
     public Sprite ability2Sprite;
+    public int speedRating;
+    public int accelRating;
 }
