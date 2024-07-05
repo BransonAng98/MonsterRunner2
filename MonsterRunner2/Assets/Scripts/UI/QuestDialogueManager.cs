@@ -27,11 +27,19 @@ public class QuestDialogueManager : MonoBehaviour
 
     private Coroutine typingCoroutine; // Reference to the current coroutine
     private Coroutine flickeringCouroutine; 
-    private void Awake()
-    {
-    }
+ 
     private void Start()
     {
+        switch (menuManager.sceneID)
+        {
+            case 1:
+                player.canMove = false;
+                break;
+            case 2:
+                player.canMove = true;
+                break;
+        }
+
         CloseWindow();
     }
 
@@ -236,16 +244,6 @@ public class QuestDialogueManager : MonoBehaviour
         }
         speechFX.gameObject.SetActive(false);
         Debug.Log("Flicker closed");
-
-        switch (menuManager.sceneID)
-        {
-            case 1:
-                player.canMove = false;
-                break;
-            case 2:
-                player.canMove = true;
-                break;
-        }
     }
 }
 

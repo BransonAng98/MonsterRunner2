@@ -249,7 +249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16530621}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 720.85, y: 0, z: -251.99}
+  m_LocalPosition: {x: 682.5, y: 0, z: -152.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2015,6 +2015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699a790167dec074e9247020bb731877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   questWindow: {fileID: 860254789}
   menuManager: {fileID: 754238777}
   descriptionText: {fileID: 739576272}
@@ -5616,7 +5617,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.5
+  m_VoxelSize: 1
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 6adbece3469e4234b874766cab3e901a, type: 2}
 --- !u!4 &477148364 stripped
@@ -9686,7 +9687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPos: {fileID: 0}
-  threatlvl: 1
+  threatlvl: 0
   enemyTypesPrefabs:
   - {fileID: 5039597518212396643, guid: 06b47b1ea8bc6924b81f51703929d5c6, type: 3}
   playerData: {fileID: 0}
@@ -24319,7 +24320,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 2
     widthCurve:
       serializedVersion: 2
       m_Curve:

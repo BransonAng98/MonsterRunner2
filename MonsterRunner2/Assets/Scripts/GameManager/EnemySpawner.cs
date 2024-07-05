@@ -14,10 +14,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public QuestGiver QuestGiverScript;
     [SerializeField] public bool startSpawning;
     public GameObject player;
+    private float spawnRadius = 140f;
     [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
-    [SerializeField]
-    private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
+    [SerializeField] private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
+
     {
+        { 0, new List<int> { 2, 0 } }, // 4 of type 1, 0 of type 2
         { 1, new List<int> { 4, 0 } }, // 4 of type 1, 0 of type 2
         { 2, new List<int> { 6, 0 } }, // 4 of type 1, 2 of type 2
         { 3, new List<int> { 8, 0 } },
@@ -125,31 +127,31 @@ public class EnemySpawner : MonoBehaviour
         return null;
     }
 
-    private void SpawnEnemies()
-    {
-        Debug.Log("Spawn Wave");
-        spawnedEnemies.Clear();
+    //private void SpawnEnemies()
+    //{
+    //    Debug.Log("Spawn Wave");
+    //    spawnedEnemies.Clear();
 
-        if (!threatLevelEnemies.ContainsKey(threatlvl))
-        {
-            Debug.LogError("Threat level not defined!");
-            return;
-        }
+    //    if (!threatLevelEnemies.ContainsKey(threatlvl))
+    //    {
+    //        Debug.LogError("Threat level not defined!");
+    //        return;
+    //    }
 
-        List<int> enemyCounts = threatLevelEnemies[threatlvl];
+    //    List<int> enemyCounts = threatLevelEnemies[threatlvl];
 
-        for (int i = 0; i < enemyCounts.Count; i++)
-        {
-            for (int j = 0; j < enemyCounts[i]; j++)
-            {
-                Vector3 spawnPosition = GetRandomSpawnPosition();
-                GameObject enemy = Instantiate(enemyTypesPrefabs[i], spawnPosition, Quaternion.identity);
-                enemy.transform.LookAt(playerPos);
-                spawnedEnemies.Add(enemy);
-                AssignEnemyProperties(enemy);
-            }
-        }
-    }
+    //    for (int i = 0; i < enemyCounts.Count; i++)
+    //    {
+    //        for (int j = 0; j < enemyCounts[i]; j++)
+    //        {
+    //            Vector3 spawnPosition = GetRandomSpawnPosition();
+    //            GameObject enemy = Instantiate(enemyTypesPrefabs[i], spawnPosition, Quaternion.identity);
+    //            enemy.transform.LookAt(playerPos);
+    //            spawnedEnemies.Add(enemy);
+    //            AssignEnemyProperties(enemy);
+    //        }
+    //    }
+    //}
 
     public void SpawnSingleEnemy(int enemyType)
     {
@@ -191,9 +193,9 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPosition()
     {
-        float spawnRadius = 140f;
+       
         float minSpacing = 30f;
-        float minDistanceFromPlayer = 100f; // Minimum distance from the player
+        float minDistanceFromPlayer = 120f; // Minimum distance from the player
         int maxAttempts = 100; // Avoid infinite loops
 
         for (int attempts = 0; attempts < maxAttempts; attempts++)
@@ -288,5 +290,11 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyGunnerAI.playerdata = playerData;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(playerPos.position, spawnRadius);
     }
 }
