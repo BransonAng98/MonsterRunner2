@@ -548,8 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a418ff78701a274eaa717a5bf67a799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minSpeed: 0
-  maxSpeed: 30
+  minSpeed: 0.3
+  maxSpeed: 40
   currentSpeed: 0
   carAudio: {fileID: 6211136588485126674}
   minPitch: 0.2
@@ -566,9 +566,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 69bbeca15b9aef544a37ffd3822f86e3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 61d5e7a6e94f474409eecde01b4c9c92, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
