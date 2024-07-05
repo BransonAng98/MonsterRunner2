@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7621207150434823679}
   - component: {fileID: 6803861597289357914}
   - component: {fileID: 8757490658996541072}
+  - component: {fileID: 2103281694}
   m_Layer: 0
   m_Name: Bus Stop
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2103281694
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7099967877580977989}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.062695, y: 2.7675705, z: 1.4146945}
+  m_Center: {x: 0, y: 1.3837852, z: 0}
