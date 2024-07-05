@@ -9,6 +9,8 @@ public class QuestDialogueManager : MonoBehaviour
     public GameObject questWindow;
         public GameMenuManager menuManager;
     public TextMeshProUGUI descriptionText;
+    public Image speechFX;
+    public float flickerDuration;
 
     public string[] introText;
     public string[] questText;
@@ -22,6 +24,7 @@ public class QuestDialogueManager : MonoBehaviour
     public bool introSequenceComplete = false;
 
     private Coroutine typingCoroutine; // Reference to the current coroutine
+    private Coroutine flickeringCouroutine; 
     private void Awake()
     {
         CloseWindow();
@@ -32,9 +35,15 @@ public class QuestDialogueManager : MonoBehaviour
         questWindow.SetActive(true);
         descriptionText.text = string.Empty;
         this.isAccepting = isAccepting;
-
+        
         if (!isWarningTyping)
         {
+            if (flickeringCouroutine != null)
+            {
+                StopCoroutine(flickeringCouroutine);
+            }
+            flickeringCouroutine = StartCoroutine(FlickerFX());
+
             if (isAccepting)
             {
                 if (typingCoroutine != null)
@@ -54,6 +63,12 @@ public class QuestDialogueManager : MonoBehaviour
         }
         else
         {
+            if (flickeringCouroutine != null)
+            {
+                StopCoroutine(flickeringCouroutine);
+            }
+            flickeringCouroutine = StartCoroutine(FlickerFX());
+
             if (typingCoroutine != null)
             {
                 StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
@@ -61,6 +76,29 @@ public class QuestDialogueManager : MonoBehaviour
             typingCoroutine = StartCoroutine(TypeWarning(index));
             isWarningTyping = false;
         }
+    }
+
+    private IEnumerator FlickerFX()
+    {
+        while (true)
+        {
+            if (!speechFX.gameObject.activeSelf)
+            {
+                speechFX.gameObject.SetActive(true);
+            }
+
+            SetImageAlpha(speechFX, 0.3f); // Set alpha to 0
+            yield return new WaitForSeconds(flickerDuration);
+            SetImageAlpha(speechFX, 1f); // Set alpha to 1
+            yield return new WaitForSeconds(flickerDuration);
+        }
+    }
+
+    void SetImageAlpha(Image image, float alpha)
+    {
+        Color color = image.color;
+        color.a = alpha;
+        image.color = color;
     }
 
     IEnumerator TypeQuest(int index)
@@ -94,7 +132,6 @@ public class QuestDialogueManager : MonoBehaviour
         // Wait a bit longer before closing to ensure the player can read the text
         yield return new WaitForSeconds(1f);
         CloseWindow();
-        
     }
 
 
@@ -147,6 +184,12 @@ public class QuestDialogueManager : MonoBehaviour
             questWindow.SetActive(true);
             descriptionText.text = string.Empty;
 
+            if (flickeringCouroutine != null)
+            {
+                StopCoroutine(flickeringCouroutine);
+            }
+            flickeringCouroutine = StartCoroutine(FlickerFX());
+
             if (typingCoroutine != null)
             {
                 StopCoroutine(typingCoroutine); // Stop previous coroutine if still running
@@ -178,7 +221,14 @@ public class QuestDialogueManager : MonoBehaviour
 
     void CloseWindow()
     {
-        questWindow.SetActive(false);
+        questWindow.SetActive(false); 
+        if (flickeringCouroutine != null)
+        {
+            StopCoroutine(flickeringCouroutine);
+            flickeringCouroutine = null;
+        }
+        speechFX.gameObject.SetActive(false);
+        Debug.Log("Flicker closed");
     }
 }
 

@@ -16,7 +16,7 @@ MonoBehaviour:
   accelRating: 4
   health: 1000
   maxSpeed: 28
-  acceleration: 12
+  acceleration: 14
   decceleration: 0.4
   damage: 0
   crashResistance: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2300000}
   - component: {fileID: 978363543384882581}
   - component: {fileID: -708710186806546636}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Natures_Pot Bush_small
   m_TagString: Untagged
   m_Icon: {fileID: 0}

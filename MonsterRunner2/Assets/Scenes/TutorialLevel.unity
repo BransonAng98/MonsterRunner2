@@ -2018,6 +2018,8 @@ MonoBehaviour:
   questWindow: {fileID: 860254789}
   menuManager: {fileID: 754238777}
   descriptionText: {fileID: 739576272}
+  speechFX: {fileID: 1281663176}
+  flickerDuration: 0.2
   introText:
   - Welcome aboard, rookie. Let's see if you've got what it takes to join the team.
   - Before we hit the big leagues, let's run through a practice heist.
@@ -9695,7 +9697,6 @@ MonoBehaviour:
   player: {fileID: 0}
   spawnedEnemies: []
   currentThreatLevel: 0
-  roads: []
 --- !u!114 &754238785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15582,6 +15583,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1280169383}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1281663176 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4381543149561992834, guid: 3ac7158780dca974fb451e592c6934a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8037539422613460343}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1291128239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24740,6 +24753,11 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 871967546065630810, guid: 3ac7158780dca974fb451e592c6934a0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2193813188058433061, guid: 3ac7158780dca974fb451e592c6934a0,
         type: 3}
       propertyPath: m_IsActive
       value: 1
