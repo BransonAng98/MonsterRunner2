@@ -6,8 +6,10 @@ using TMPro;
 
 public class QuestDialogueManager : MonoBehaviour
 {
+    public DemoPlayer player;
+
     public GameObject questWindow;
-        public GameMenuManager menuManager;
+    public GameMenuManager menuManager;
     public TextMeshProUGUI descriptionText;
     public Image speechFX;
     public float flickerDuration;
@@ -26,6 +28,9 @@ public class QuestDialogueManager : MonoBehaviour
     private Coroutine typingCoroutine; // Reference to the current coroutine
     private Coroutine flickeringCouroutine; 
     private void Awake()
+    {
+    }
+    private void Start()
     {
         CloseWindow();
     }
@@ -217,6 +222,8 @@ public class QuestDialogueManager : MonoBehaviour
 
         typingCoroutine = null; // Reset coroutine reference
         CloseWindow();
+        player.canMove = true;
+        
     }
 
     void CloseWindow()
@@ -229,6 +236,16 @@ public class QuestDialogueManager : MonoBehaviour
         }
         speechFX.gameObject.SetActive(false);
         Debug.Log("Flicker closed");
+
+        switch (menuManager.sceneID)
+        {
+            case 1:
+                player.canMove = false;
+                break;
+            case 2:
+                player.canMove = true;
+                break;
+        }
     }
 }
 

@@ -67,6 +67,7 @@ public class DemoPlayer : MonoBehaviour
 
     public bool isDead;
     public bool isTriggered;
+    public bool canMove;
 
     public Vector3 centerOfMass;
     public PlayerAbilityManager abilityManager;
@@ -76,6 +77,7 @@ public class DemoPlayer : MonoBehaviour
     public List<Wheel> wheels;
     public List<Trail> trails;
     public List<Smoke> smokes;
+    public List<GameObject> secondarySmokeTrail;
     public List<HealthState> healthSmoke;
     public GameObject[] skillCDParticles;
     public GameObject contractCompleteVFX;
@@ -84,7 +86,7 @@ public class DemoPlayer : MonoBehaviour
     public Vector3 lastKnownVector;
     public Vector2 joystickInput;
 
-    [SerializeField] private float acceleration;
+    public float acceleration;
     [SerializeField] private float collisionSpeedReduction;
     [SerializeField] private float currentSpeed = 0f;
     private float originalSpeed;
@@ -202,6 +204,15 @@ public class DemoPlayer : MonoBehaviour
     }
     void NewMove()
     {
+        for (int i = 0; i < trails.Count; i++)
+        {
+            if (!trails[i].renderer.gameObject.activeSelf)
+            {
+                trails[i].renderer.gameObject.SetActive(true);
+                secondarySmokeTrail[i].SetActive(true);
+            }
+        }
+
         if (!isColliding)
         {
             currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
@@ -341,6 +352,7 @@ public class DemoPlayer : MonoBehaviour
             {
                 Vector3 direction = (collider.transform.position - transform.position).normalized;
                 rb.AddForce(direction * explosionForce, ForceMode.Impulse);
+                canMove = false;
             }
         }
     }
@@ -361,7 +373,21 @@ public class DemoPlayer : MonoBehaviour
     {
         if (!isDead)
         {
-            NewMove();
+            if (canMove)
+            {
+                NewMove();
+            }
+            else
+            {
+                for (int i = 0; i < trails.Count; i++)
+                {
+                    if (trails[i].renderer.gameObject.activeSelf)
+                    {
+                        trails[i].renderer.gameObject.SetActive(false);
+                        secondarySmokeTrail[i].SetActive(false);
+                    }
+                }
+            }
         }
     }
 

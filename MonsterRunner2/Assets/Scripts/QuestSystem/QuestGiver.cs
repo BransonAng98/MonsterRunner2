@@ -62,7 +62,6 @@ public class QuestGiver : MonoBehaviour
     {
         yield return new WaitForSeconds(initialIntroDelay);
         PrintIntroDialogue();
-      
     }
 
     private void Update()

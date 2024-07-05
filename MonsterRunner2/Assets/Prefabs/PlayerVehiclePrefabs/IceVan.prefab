@@ -939,6 +939,7 @@ MonoBehaviour:
   velocityLerpFactor: 1
   isDead: 0
   isTriggered: 0
+  canMove: 1
   centerOfMass: {x: 0, y: 0, z: -0.3}
   abilityManager: {fileID: 0}
   playerDataManager: {fileID: 0}
@@ -969,6 +970,9 @@ MonoBehaviour:
     smoke: 1
   - smokeRenderer: {fileID: 615809492892182900}
     smoke: 1
+  secondarySmokeTrail:
+  - {fileID: 5563172534458057394}
+  - {fileID: 3688100793549000837}
   healthSmoke:
   - carSmoke: {fileID: 3516014645106359448}
     playerHealth: 1
@@ -2362,6 +2366,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c, type: 3}
+--- !u!1 &3688100793549000837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1196950356126277099, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2572303193815649646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3688100793549297469 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1196950356126046803, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
@@ -2986,6 +2996,12 @@ PrefabInstance:
 --- !u!4 &5563172534457828618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1196950356126046803, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
+    type: 3}
+  m_PrefabInstance: {fileID: 6748705546120601433}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5563172534458057394 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1196950356126277099, guid: 3d34e76abb2ba9e4fa03a8cc7c285c3c,
     type: 3}
   m_PrefabInstance: {fileID: 6748705546120601433}
   m_PrefabAsset: {fileID: 0}

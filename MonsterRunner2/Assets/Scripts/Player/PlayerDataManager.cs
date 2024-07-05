@@ -73,7 +73,7 @@ public class PlayerDataManager : MonoBehaviour
                     objectiveData.playerTransform = playerData.transform;
                     ab2 = playerData.playerData.ability2Level;
                     driveTokenManager.playerData = playerData;
-
+                    questDManager.player = playerData;
                     mainCam.Follow = playerCar.transform;
 
                     missionManager.demoPlayer = playerData;
