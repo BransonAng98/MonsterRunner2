@@ -15,8 +15,6 @@ public class CarSounds : MonoBehaviour
     private float pitchfromCar;
     public DemoPlayer playerScript;
     public Rigidbody carRb;
-    public Joystick joystick;
-    public Vector2 joystickInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +25,7 @@ public class CarSounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        joystick = playerScript.joystick;
-        joystickInput = new Vector2(joystick.Horizontal, joystick.Vertical).normalized;
+      
         EngineSound();
     }
 
@@ -48,10 +45,6 @@ public class CarSounds : MonoBehaviour
             carAudio.pitch = minPitch + pitchfromCar;
         }
 
-        if (joystickInput.magnitude > 0.1f) // Adjust the threshold as needed
-        {
-            carAudio.pitch = minPitch + pitchfromCar;
-        }
 
         if (currentSpeed > maxSpeed)
         {
