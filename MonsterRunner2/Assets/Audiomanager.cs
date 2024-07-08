@@ -8,11 +8,13 @@ public class Audiomanager : MonoBehaviour
     public AudioSource bgmSource;
     public AudioSource feedbackAudioSource;
     public AudioSource policeDeath;
+    public AudioSource policeSiren;
 
     //AUDIO CLIP
     public AudioClip[] bgmClip;
     public AudioClip[] feedbackSFX;
     public AudioClip[] policeDeathSFX;
+    public AudioClip policeSirenSFX;
 
 
     //BOOLS
@@ -47,6 +49,34 @@ public class Audiomanager : MonoBehaviour
     {
         AudioClip soundtoPlay = feedbackSFX[Random.Range(0, 1)];
         feedbackAudioSource.PlayOneShot(soundtoPlay);
+    }
+
+    public void PlayPoliceSiren()
+    {
+        policeSiren.volume = 0.7f;
+        policeSiren.clip = policeSirenSFX;
+        policeSiren.loop = true;
+        policeSiren.Play();
+    }
+
+    public void StopPoliceSiren(float duration)
+    {
+        StartCoroutine(FadeOutSiren(duration));
+    }
+
+    private IEnumerator FadeOutSiren(float duration)
+    {
+        float elaspedTime = 0f;
+        float startvolume = policeSiren.volume;
+
+        while(elaspedTime < duration)
+        {
+            policeSiren.volume = Mathf.Lerp(startvolume, 0f, elaspedTime / duration);
+            elaspedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        policeSiren.volume = 0f;
     }
 
     public void playPoliceDeathSFX()

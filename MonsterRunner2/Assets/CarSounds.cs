@@ -51,4 +51,30 @@ public class CarSounds : MonoBehaviour
             carAudio.pitch = maxPitch;
         }
     }
+
+    public void StartSound()
+    {
+        carAudio.Play();
+        carAudio.loop = true;
+    }
+
+    public void StopEngine(float duration)
+    {
+        StartCoroutine(FadeSound(duration));
+    }
+
+    private IEnumerator FadeSound( float duration)
+    {
+        float elaspedTime = 0f;
+        float startvolume = carAudio.volume;
+
+        while (elaspedTime < duration)
+        {
+            carAudio.volume = Mathf.Lerp(startvolume, 0f, elaspedTime / duration);
+            elaspedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        carAudio.volume = 0f;
+    }
 }

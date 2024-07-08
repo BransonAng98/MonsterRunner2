@@ -405,6 +405,7 @@ MonoBehaviour:
     type: 3}
   invunSphere: {fileID: 3038933502835637131}
   abilityActivatedVFX: {fileID: 2362068236442847386}
+  carsoundScript: {fileID: 7354811530531682816}
 --- !u!65 &5255493193116958649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -571,10 +572,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 61d5e7a6e94f474409eecde01b4c9c92, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
