@@ -66,7 +66,6 @@ public class ObjectiveIndicator : MonoBehaviour
 
     private IEnumerator DrawPathToPassenger()
     {
-        Debug.Log("Spawning line");
         WaitForSeconds wait = new WaitForSeconds(pathUpdateSpeed);
         NavMeshPath navPath = new NavMeshPath();
 

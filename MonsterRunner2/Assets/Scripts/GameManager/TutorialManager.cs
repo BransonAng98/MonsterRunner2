@@ -14,7 +14,7 @@ public class TutorialManager : MonoBehaviour
     public missionManagerScript missionManager;
     public QuestDialogueManager questDialogue;
     public AbilityTokenManager tokenManager;
-    
+    public EnemySpawner enemyspawnerScript;
     public CanvasGroup fadeToBlackImage; 
     public float fadeDuration = 1f; // Duration of the fade effect
 
@@ -24,7 +24,8 @@ public class TutorialManager : MonoBehaviour
     private bool shouldFadeIn = true;
     private float fadeTimer = 0f;
 
-    [SerializeField] private bool hasSpawned;
+    [SerializeField] private bool hasSpawnedPassenger;
+    [SerializeField] private bool hasSpawnedToken;
 
     private void Start()
     {
@@ -34,14 +35,23 @@ public class TutorialManager : MonoBehaviour
 
     void SpawnTutorialPassenger()
     {
-        if (questDialogue.introSequenceComplete == true)
+        if (questDialogue.isDoneExplaining == true)
         {
             missionManager.SpawnPassengers();
-            tokenManager.SpawnPowerUps();
-            hasSpawned = true;
+            hasSpawnedPassenger = true;
         }
     }
 
+    void SpawnTutorialTokens()
+    {
+        if (questDialogue.isDoneSecondExplaination == true)
+        {
+            tokenManager.SpawnPowerUps();
+            hasSpawnedToken = true;
+            enemyspawnerScript.startSpawning = true;
+        }
+
+    }
 
     void StartFade()
     {
@@ -71,11 +81,16 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(!hasSpawned)
+        if(!hasSpawnedPassenger)
         {
             SpawnTutorialPassenger();
         }
-   
+
+        if (!hasSpawnedToken)
+        {
+            SpawnTutorialTokens();
+        }
+
 
         if (scoreManager.missionsCompleted == 1)
         {

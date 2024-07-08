@@ -12,6 +12,8 @@ public class PassengerController : MonoBehaviour
     public QuestGiver questgiverScript;
     public missionManagerScript missionmanager;
     public ScoreManagerScript scoreManager;
+    public PlayerDataSO playerData;
+    public GameMenuManager menuManager;
 
     public bool pickedUp;
     private float moveSpeed = 30f;
@@ -76,7 +78,11 @@ public class PassengerController : MonoBehaviour
         {
             SetQuestTypeBasedOnPassengerType();
             missionmanager.DestroyOtherPassengers(gameObject);
-            questgiverScript.SpawnEnemies();
+            if(menuManager.sceneID == 2)
+            {
+                questgiverScript.SpawnEnemies();
+            }
+          
             //TriggerHouse(true);
             
             idleVFX.SetActive(false);

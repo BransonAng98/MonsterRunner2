@@ -19,15 +19,27 @@ public class QuestDialogueManager : MonoBehaviour
     public string[] abilityText;
     public string[] rewardText;
     public string[] warningText;
+    public string[] featureText; // Array for first set of feature explanations
+    public Image[] featureImages; // Array for first set of feature-related images
+
+    // Second set of feature explanations and images
+    public string[] secondFeatureText;
+    public Image[] secondFeatureImages;
 
     public float textSpd;
     public bool isAccepting;
     public bool isWarningTyping;
     public bool introSequenceComplete = false;
+    public bool isDoneExplaining = false;
+    public bool isDoneSecondExplaination = false;
 
     private Coroutine typingCoroutine; // Reference to the current coroutine
-    private Coroutine flickeringCouroutine; 
- 
+    private Coroutine flickeringCouroutine;
+
+    private bool isFeatureExplaining = false; // Flag for feature explanation
+    private int currentFeatureIndex = 0; // Index to track current feature explanation
+    private bool isWaitingForClick = false; // Debounce flag
+
     private void Start()
     {
         switch (menuManager.sceneID)
@@ -48,7 +60,7 @@ public class QuestDialogueManager : MonoBehaviour
         questWindow.SetActive(true);
         descriptionText.text = string.Empty;
         this.isAccepting = isAccepting;
-        
+
         if (!isWarningTyping)
         {
             if (flickeringCouroutine != null)
@@ -147,7 +159,6 @@ public class QuestDialogueManager : MonoBehaviour
         CloseWindow();
     }
 
-
     IEnumerator TypeAbilityTutorial(int index)
     {
         if (menuManager.currentScene == 1)
@@ -192,7 +203,7 @@ public class QuestDialogueManager : MonoBehaviour
     public void TypeIntro()
     {
         // Check if the current scene is the tutorial scene
-        if (menuManager.sceneID == 1) // Replace "TutorialScene" with your actual tutorial scene name
+        if (menuManager.sceneID == 1)
         {
             questWindow.SetActive(true);
             descriptionText.text = string.Empty;
@@ -226,23 +237,148 @@ public class QuestDialogueManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         introSequenceComplete = true;
-        Debug.Log("INTRO DONE");
-
         typingCoroutine = null; // Reset coroutine reference
+
+        // Start the feature explanation
+        StartCoroutine(TypeFeatureExplanation());
+    }
+
+    private IEnumerator TypeFeatureExplanation()
+    {
+        isFeatureExplaining = true; // Set the flag to true
+        currentFeatureIndex = 0; // Reset feature index
+
+        // Display the first set of feature explanations
+        DisplayFeature(currentFeatureIndex);
+
+        // Wait for player tap to progress through feature explanations
+        while (currentFeatureIndex < featureText.Length - 1)
+        {
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !isWaitingForClick);
+            currentFeatureIndex++;
+            DisplayFeature(currentFeatureIndex);
+            isWaitingForClick = true;
+            yield return new WaitForSeconds(0.2f); // Delay to avoid double click
+            isWaitingForClick = false;
+        }
+
+        // Wait for one final click before closing
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !isWaitingForClick);
+        isWaitingForClick = true;
+        yield return new WaitForSeconds(0.2f); // Delay to avoid double click
+        isWaitingForClick = false;
+
+        isFeatureExplaining = false; // Set the flag to false
+        isDoneExplaining = true;
+        player.canMove = true; // Allow player to move again
+
         CloseWindow();
-        player.canMove = true;
+    }
+
+    public void StartSecondTutorial()
+    {
+        player.StopCarInstantly();
+        player.canMove = false;
+        StartCoroutine(TypeSecondFeatureExplanation());
+    }
+
+    private IEnumerator TypeSecondFeatureExplanation()
+    {
         
+        currentFeatureIndex = 0; // Reset feature index for second set
+
+        // Display the second set of feature explanations
+        DisplaySecondFeature(currentFeatureIndex);
+
+        // Wait for player tap to progress through second feature explanations
+        while (currentFeatureIndex < secondFeatureText.Length - 1)
+        {
+            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !isWaitingForClick);
+            currentFeatureIndex++;
+            DisplaySecondFeature(currentFeatureIndex);
+            isWaitingForClick = true;
+            yield return new WaitForSeconds(0.2f); // Delay to avoid double click
+            isWaitingForClick = false;
+        }
+
+        // Wait for one final click before closing
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !isWaitingForClick);
+        isWaitingForClick = true;
+        yield return new WaitForSeconds(0.2f); // Delay to avoid double click
+        isWaitingForClick = false;
+
+        isFeatureExplaining = false; // Set the flag to false
+        isDoneSecondExplaination = true;
+        player.canMove = true;
+        player.RestoreCarSpeed();
+
+        CloseWindow();
+    }
+
+    private void DisplayFeature(int index)
+    {
+        questWindow.SetActive(true);
+        descriptionText.text = string.Empty;
+
+        // Update the feature image
+        if (index < featureImages.Length)
+        {
+            foreach (Image img in featureImages)
+            {
+                img.gameObject.SetActive(false); // Hide all images
+            }
+            featureImages[index].gameObject.SetActive(true); // Show the current image
+        }
+
+        foreach (char letter in featureText[index].ToCharArray())
+        {
+            descriptionText.text += letter;
+            // Yield return is not required here because text display will happen instantly
+        }
+    }
+
+    private void DisplaySecondFeature(int index)
+    {
+        questWindow.SetActive(true);
+        descriptionText.text = string.Empty;
+
+        // Update the second feature image
+        if (index < secondFeatureImages.Length)
+        {
+            foreach (Image img in secondFeatureImages)
+            {
+                img.gameObject.SetActive(false); // Hide all images
+            }
+            secondFeatureImages[index].gameObject.SetActive(true); // Show the current image
+        }
+
+        foreach (char letter in secondFeatureText[index].ToCharArray())
+        {
+            descriptionText.text += letter;
+            // Yield return is not required here because text display will happen instantly
+        }
     }
 
     void CloseWindow()
     {
-        questWindow.SetActive(false); 
+        questWindow.SetActive(false);
         if (flickeringCouroutine != null)
         {
             StopCoroutine(flickeringCouroutine);
             flickeringCouroutine = null;
         }
         speechFX.gameObject.SetActive(false);
+
+        foreach (Image img in featureImages)
+        {
+            img.gameObject.SetActive(false); // Hide all images from the first set
+        }
+
+        foreach (Image img in secondFeatureImages)
+        {
+            img.gameObject.SetActive(false); // Hide all images from the second set
+        }
+
         Debug.Log("Flicker closed");
     }
 }

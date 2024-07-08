@@ -107,6 +107,8 @@ public class missionManagerScript : MonoBehaviour
 
         if (passengerScript != null)
         {
+            passengerScript.menuManager = menuManager;
+            passengerScript.playerData  = playerInfoData;
             passengerScript.scoreManager = scoreManager;
             passengerScript.missionmanager = missionManager;
             passengerScript.questgiverScript = questgiverEntity;

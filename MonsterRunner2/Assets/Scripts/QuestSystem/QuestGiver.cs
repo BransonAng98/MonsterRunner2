@@ -180,8 +180,16 @@ public class QuestGiver : MonoBehaviour
 
     void PrintQuestDialogue()
     {
-        int index = Random.Range(0, questDialogue.questText.Length); //Show quest text when new quest is given
-        questDialogue.TypeText(true, index);
+        if (menuManager.sceneID == 2)
+        {
+            int index = Random.Range(0, questDialogue.questText.Length); //Show quest text when new quest is given
+            questDialogue.TypeText(true, index);
+        }
+        
+        if (menuManager.sceneID == 1)
+        {
+            questDialogue.StartSecondTutorial();
+        }
     }
 
     void PrintRewardDialogue()

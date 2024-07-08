@@ -90,6 +90,8 @@ public class DemoPlayer : MonoBehaviour
     [SerializeField] private float collisionSpeedReduction;
     [SerializeField] private float currentSpeed = 0f;
     private float originalSpeed;
+    private Vector3 originalVelocity;
+    private Vector3 originalAngularVelocity;
     [SerializeField] private bool isColliding;
 
     public ParticleSystem healingVFX;
@@ -155,13 +157,12 @@ public class DemoPlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
         if (collision.gameObject.CompareTag("Enemy"))
         {
             if (collision.gameObject.layer != 9)
             {
                 TakeDamage(1000);
-                Vector3 ExplodePos = new Vector3 (transform.position.x, transform.position.y + 2f, transform.position.z);
+                Vector3 ExplodePos = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
                 Instantiate(impactVFX, ExplodePos, Quaternion.identity);
             }
         }
@@ -185,6 +186,7 @@ public class DemoPlayer : MonoBehaviour
             isColliding = true;
         }
     }
+
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
@@ -202,6 +204,7 @@ public class DemoPlayer : MonoBehaviour
     {
         joystickInput = new Vector2(joystick.Horizontal, joystick.Vertical).normalized;
     }
+
     void NewMove()
     {
         for (int i = 0; i < trails.Count; i++)
@@ -217,7 +220,6 @@ public class DemoPlayer : MonoBehaviour
         {
             currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
         }
-
         else
         {
             currentSpeed *= collisionSpeedReduction;
@@ -406,8 +408,28 @@ public class DemoPlayer : MonoBehaviour
         }
     }
 
+
     void TurnOffVFX()
     {
         healingVFX.Stop();
+    }
+
+    // Stop the car instantly
+    public void StopCarInstantly()
+    {
+        originalSpeed = currentSpeed;
+        originalVelocity = rb.velocity;
+        originalAngularVelocity = rb.angularVelocity;
+        currentSpeed = 0f;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    // Restore the car's speed
+    public void RestoreCarSpeed()
+    {
+        currentSpeed = originalSpeed;
+        rb.velocity = originalVelocity;
+        rb.angularVelocity = originalAngularVelocity;
     }
 }
