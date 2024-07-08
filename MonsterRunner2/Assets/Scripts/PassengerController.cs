@@ -114,7 +114,15 @@ public class PassengerController : MonoBehaviour
 
     private void AssignPassengerType()
     {
-        passengerType = Random.Range(1, 3); // Assign a random passenger type between 1 and 3
+      if(menuManager.sceneID == 1)
+        {
+            passengerType = Random.Range(1, 1); // Assign a random passenger type between 1 and 3
+        }
+     else
+        {
+            passengerType = Random.Range(1, 3); // Assign a random passenger type between 1 and 3
+        }
+       
     }
 
     private void SetQuestTypeBasedOnPassengerType()
