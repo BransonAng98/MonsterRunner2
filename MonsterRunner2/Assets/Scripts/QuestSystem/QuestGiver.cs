@@ -199,7 +199,6 @@ public class QuestGiver : MonoBehaviour
         int index = Random.Range(0, questDialogue.rewardText.Length);
         questDialogue.TypeText(false, index); // Show reward text when quest is completed
         isInProgress = false;
-        
     }
 
     public void UpdateRedDot()
@@ -216,23 +215,26 @@ public class QuestGiver : MonoBehaviour
 
     public void RunGoalType(string goaltype)
     {
-        PrintQuestDialogue();
+       
         quest.goldRewardAmt();
         switch (goaltype)
         {
             case "Kill":
+                PrintQuestDialogue();
                 quest.goal.EnemyKilled();
                 enemykilled = quest.goal.requiredKillAmount;
                 isInProgress = true;
                 break;
 
             case "Survive":
+                PrintQuestDialogue();
                 quest.goal.SurviveWave();
                 survivaltime = quest.goal.survivalTime;
                 isInProgress = true;
                 break;
 
             case "Reach":
+                PrintQuestDialogue();
                 quest.goal.ReachDestination();
                 isInProgress = true;
                 break;

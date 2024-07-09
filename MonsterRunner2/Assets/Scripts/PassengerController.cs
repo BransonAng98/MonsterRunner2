@@ -14,6 +14,7 @@ public class PassengerController : MonoBehaviour
     public ScoreManagerScript scoreManager;
     public PlayerDataSO playerData;
     public GameMenuManager menuManager;
+    public Audiomanager audiomanagerScript;
 
     public bool pickedUp;
     private float moveSpeed = 30f;
@@ -76,6 +77,7 @@ public class PassengerController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            audiomanagerScript.PlayPowerUp();
             SetQuestTypeBasedOnPassengerType();
             missionmanager.DestroyOtherPassengers(gameObject);
             if(menuManager.sceneID == 2)

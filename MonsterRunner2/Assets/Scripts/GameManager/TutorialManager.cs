@@ -20,10 +20,9 @@ public class TutorialManager : MonoBehaviour
 
     public GameObject exitButton;
     public GameObject retryButton;
-
-    private bool shouldFadeIn = true;
     private float fadeTimer = 0f;
 
+    [SerializeField] private bool shouldFadeIn = true;
     [SerializeField] private bool hasSpawnedPassenger;
     [SerializeField] private bool hasSpawnedToken;
 

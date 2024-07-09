@@ -141,6 +141,7 @@ MonoBehaviour:
   questgiverScript: {fileID: 0}
   initialSpeedDuration: 3
   initialSpeed: 10
+  audiomanagerScript: {fileID: 0}
 --- !u!114 &5039597518212396642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +173,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 7
   m_Speed: 3.5
-  m_Acceleration: 28
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 200
   m_StoppingDistance: 3

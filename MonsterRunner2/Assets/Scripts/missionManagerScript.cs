@@ -34,6 +34,7 @@ public class missionManagerScript : MonoBehaviour
     public List<Transform> SpawnLocations;
     // List to hold references to instantiated passengers
     public List<GameObject> passengers = new List<GameObject>();
+    public Audiomanager audiomanagerScript;
 
     void Start()
     {
@@ -107,6 +108,7 @@ public class missionManagerScript : MonoBehaviour
 
         if (passengerScript != null)
         {
+            passengerScript.audiomanagerScript = audiomanagerScript;
             passengerScript.menuManager = menuManager;
             passengerScript.playerData  = playerInfoData;
             passengerScript.scoreManager = scoreManager;

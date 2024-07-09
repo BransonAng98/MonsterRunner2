@@ -23136,6 +23136,7 @@ MonoBehaviour:
   - {fileID: 2128198473}
   - {fileID: 331924810}
   passengers: []
+  audiomanagerScript: {fileID: 540042080}
 --- !u!4 &171047679
 Transform:
   m_ObjectHideFlags: 0
