@@ -7,9 +7,11 @@ public class ThundercrackerGrenade : MonoBehaviour
     public float timeToDetonate;
     public GameObject thunderbolt;
     public bool isTriggered;
-
+    public float speed; // Speed at which the grenade homes in on the target
     public List<enemyCarDriver> affectedEnemyList = new List<enemyCarDriver>();
     [SerializeField] SphereCollider aoeRadius;
+
+    private enemyCarDriver targetEnemy;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -43,10 +45,9 @@ public class ThundercrackerGrenade : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(timeToDetonate > 0)
+        if (timeToDetonate > 0)
         {
             timeToDetonate -= Time.deltaTime;
         }
@@ -58,5 +59,38 @@ public class ThundercrackerGrenade : MonoBehaviour
             }
         }
 
+        if (!isTriggered)
+        {
+            TrackTarget();
+        }
+    }
+
+    void TrackTarget()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, aoeRadius.radius);
+        float closestDistance = Mathf.Infinity;
+        enemyCarDriver closestEnemy = null;
+
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.CompareTag("Enemy"))
+            {
+                enemyCarDriver enemyCar = collider.GetComponent<enemyCarDriver>();
+                float distance = Vector3.Distance(transform.position, enemyCar.transform.position);
+
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    closestEnemy = enemyCar;
+                }
+            }
+        }
+
+        if (closestEnemy != null)
+        {
+            targetEnemy = closestEnemy;
+            Vector3 direction = (targetEnemy.transform.position - transform.position).normalized;
+            transform.position += direction * speed * Time.deltaTime;
+        }
     }
 }

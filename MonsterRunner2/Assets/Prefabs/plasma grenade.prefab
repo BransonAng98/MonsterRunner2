@@ -232,6 +232,7 @@ MonoBehaviour:
   thunderbolt: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 3}
   isTriggered: 0
+  speed: 50
   affectedEnemyList: []
   aoeRadius: {fileID: 4563751475396952457}
 --- !u!135 &4563751475396952457
@@ -245,7 +246,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 4.75
+  m_Radius: 30
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9065257961234388597
 GameObject:
