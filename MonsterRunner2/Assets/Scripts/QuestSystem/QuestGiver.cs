@@ -40,7 +40,7 @@ public class QuestGiver : MonoBehaviour
     public bool gameStarted;
 
     public DetectionBar dectectionBar;
-
+    public Audiomanager audiomanagerScript; 
 
 
     private void Start()
@@ -139,6 +139,7 @@ public class QuestGiver : MonoBehaviour
 
     public void CompleteQuest()
     {
+        audiomanagerScript.StopPoliceSiren(3f);
         Debug.Log("QuestCompleted");
         player.contractCompleteVFX.SetActive(true);
         questCompleted = true;
@@ -160,6 +161,7 @@ public class QuestGiver : MonoBehaviour
 
     public void SpawnEnemies()
     {
+        audiomanagerScript.PlayPoliceSiren();
         enemySpawnerScript.startSpawning = true;
     }
 

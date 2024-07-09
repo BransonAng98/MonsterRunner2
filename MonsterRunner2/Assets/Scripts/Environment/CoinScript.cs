@@ -11,11 +11,17 @@ public class CoinScript : MonoBehaviour
     public bool startRespawn;
     public Collider coinCollider;
     public MeshRenderer coinRenderer;
+    public Audiomanager audiomanagerScript;
 
     private float respawnTimeHolder;
     // Start is called before the first frame update
     void Start()
     {
+        GameObject audioManagerObject = GameObject.Find("SoundManager");
+        if (audioManagerObject != null)
+        {
+            audiomanagerScript = audioManagerObject.GetComponent<Audiomanager>();
+        }
         respawnTimeHolder = respawnTime;
     }
 
@@ -23,6 +29,7 @@ public class CoinScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            audiomanagerScript.playCoinPickup();
             //Activate particles here
             playerData.moneyAccumulatedInGame += money;
             Instantiate(particles, transform.position, transform.rotation);

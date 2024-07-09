@@ -7,19 +7,31 @@ public class Audiomanager : MonoBehaviour
     //AUDIO SOURCE
     public AudioSource bgmSource;
     public AudioSource feedbackAudioSource;
+    public AudioSource carHit;
     public AudioSource policeDeath;
     public AudioSource policeSiren;
+    public AudioSource coinPickup;
+    public AudioSource powerupPickup;
+    public AudioSource cartoonTalking;
 
     //AUDIO CLIP
     public AudioClip[] bgmClip;
     public AudioClip[] feedbackSFX;
     public AudioClip[] policeDeathSFX;
     public AudioClip policeSirenSFX;
+    public AudioClip[] coinPickupSFX;
+    public AudioClip[] carHitSFX;
+    public AudioClip[] powerupSFX;
+    public AudioClip[] cartoontalkingSFX;
 
 
     //BOOLS
     private bool ispoliceDeathPlaying = false;
-    private float policedeathCooldown = 0.1f;   // Start is called before the first frame update
+    private float policedeathCooldown = 0.1f;
+    private bool iscoinSFXPlaying = false;
+    private float coinSFXCooldown = 0.01f;
+    private bool iscarHitPlaying = false;
+    private float carHitSFXCooldown = 0.1f;
     void Start()
     {
         
@@ -51,6 +63,17 @@ public class Audiomanager : MonoBehaviour
         feedbackAudioSource.PlayOneShot(soundtoPlay);
     }
 
+    public void PlayPowerUp()
+    {
+        AudioClip soundtoPlay = powerupSFX[Random.Range(0, powerupSFX.Length)]; //play Idle Music
+        powerupPickup.PlayOneShot(soundtoPlay);
+    }
+    public void PlayCartoonTalking()
+    {
+        AudioClip soundtoPlay = cartoontalkingSFX[Random.Range(0, cartoontalkingSFX.Length)]; //play Idle Music
+        cartoonTalking.PlayOneShot(soundtoPlay);
+    }
+
     public void PlayPoliceSiren()
     {
         policeSiren.volume = 0.7f;
@@ -79,6 +102,8 @@ public class Audiomanager : MonoBehaviour
         policeSiren.volume = 0f;
     }
 
+
+
     public void playPoliceDeathSFX()
     {
         if(!ispoliceDeathPlaying)
@@ -98,4 +123,44 @@ public class Audiomanager : MonoBehaviour
 
         ispoliceDeathPlaying = false;
     }
+    public void playCoinPickup()
+    {
+        if (!iscoinSFXPlaying)
+        {
+            StartCoroutine(PlayCoinPickUpWithCooldown());
+        }
+    }
+
+    private IEnumerator PlayCoinPickUpWithCooldown()
+    {
+        iscoinSFXPlaying = true;
+
+        AudioClip coinsoundtoPlay = coinPickupSFX[Random.Range(0, coinPickupSFX.Length)];
+        coinPickup.PlayOneShot(coinsoundtoPlay);
+
+        yield return new WaitForSeconds(coinSFXCooldown);
+
+        iscoinSFXPlaying = false;
+    }
+
+    public void playCarHit()
+    {
+        if (!iscarHitPlaying)
+        {
+            StartCoroutine(PlayCarHitWithCooldown());
+        }
+    }
+
+    private IEnumerator PlayCarHitWithCooldown()
+    {
+        iscarHitPlaying = true;
+
+        AudioClip soundtoPlay = carHitSFX[Random.Range(0, carHitSFX.Length)];
+        carHit.PlayOneShot(soundtoPlay);
+
+        yield return new WaitForSeconds(coinSFXCooldown);
+
+        iscarHitPlaying = false;
+    }
 }
+

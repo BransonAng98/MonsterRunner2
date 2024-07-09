@@ -44,6 +44,7 @@ public class PlayerDataManager : MonoBehaviour
     public AbilityTokenManager tokenManager;
     public CameraFade cameraFaderManager;
     public QuestGiver questgiverManager;
+    public Audiomanager audiomanagerScript;
     private string vehicleDataFilePath;
     private string playerDataFilePath;
 
@@ -81,7 +82,7 @@ public class PlayerDataManager : MonoBehaviour
                     missionManager.player = playerCar;
                     abilityManager.player = playerData;
                     detectionBar.player = playerData;
-
+                    playerData.audiomanagerScript = audiomanagerScript;
                     playerData.abilityManager = playerAbManager;
                     playerData.playerDataManager = playerDataManager;
                     playerData.joystick = joystick;

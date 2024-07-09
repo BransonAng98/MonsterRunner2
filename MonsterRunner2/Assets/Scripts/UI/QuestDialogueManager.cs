@@ -39,7 +39,7 @@ public class QuestDialogueManager : MonoBehaviour
     private bool isFeatureExplaining = false; // Flag for feature explanation
     private int currentFeatureIndex = 0; // Index to track current feature explanation
     private bool isWaitingForClick = false; // Debounce flag
-
+    public Audiomanager audiomanagerScript;
     private void Start()
     {
         switch (menuManager.sceneID)
@@ -57,6 +57,7 @@ public class QuestDialogueManager : MonoBehaviour
 
     public void TypeText(bool isAccepting, int index)
     {
+        audiomanagerScript.PlayCartoonTalking();
         questWindow.SetActive(true);
         descriptionText.text = string.Empty;
         this.isAccepting = isAccepting;

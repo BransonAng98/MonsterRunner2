@@ -46,6 +46,7 @@ public class enemyCarDriver : MonoBehaviour
     public float initialSpeed = 10f; // Replace with your desired initial speed
 
     private bool setInitialSpeed = true;
+    public Audiomanager audiomanagerScript; 
     #endregion
 
     private void Awake()
@@ -276,7 +277,7 @@ public class enemyCarDriver : MonoBehaviour
     {
         if (!isDead && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle")))
         {
-           
+            audiomanagerScript.playCarHit();
             CarDeath(0);
         }
     }
@@ -312,6 +313,7 @@ public class enemyCarDriver : MonoBehaviour
 
             gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
             speed = 0;
+            audiomanagerScript.playPoliceDeathSFX();
             TurnOnExplosion();
             carRigidbody.constraints = RigidbodyConstraints.None;
 

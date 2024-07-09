@@ -125,6 +125,9 @@ public class DemoPlayer : MonoBehaviour
     public GameObject invunSphere;
     public GameObject abilityActivatedVFX;
 
+    private bool hasStartedSound = false;
+    public CarSounds carsoundScript;
+    public Audiomanager audiomanagerScript;
     private void Awake()
     {
         health = playerData.health;
@@ -172,6 +175,7 @@ public class DemoPlayer : MonoBehaviour
             abilityManager.abilityID = collision.gameObject.GetComponent<AbilityToken>().abilityID;
             abilityManager.isTriggered = true;
             PowerUp triggerCollectedVFX = collision.gameObject.GetComponent<PowerUp>();
+            audiomanagerScript.PlayPowerUp();
             triggerCollectedVFX.Pickup();
         }
 
@@ -369,6 +373,18 @@ public class DemoPlayer : MonoBehaviour
     {
         GetInput();
         CheckHealthState();
+
+        if (rb.velocity.magnitude >= 0f && !hasStartedSound)
+        {
+            carsoundScript.StartSound();
+            hasStartedSound = true; // Set the flag to true to indicate the sound has been played
+        }
+
+        if (!canMove && isDead)
+        {
+            carsoundScript.StopEngine(2f);
+            hasStartedSound = false; // Reset the flag if needed when the car stops and is dead
+        }
     }
 
     private void FixedUpdate()

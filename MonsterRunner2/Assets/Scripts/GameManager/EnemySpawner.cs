@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
     [SerializeField] public QuestGiver QuestGiverScript;
     [SerializeField] public bool startSpawning;
+    [SerializeField] public Audiomanager audiomanagerScript;
     public GameObject player;
     private float spawnRadius = 140f;
     [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
@@ -281,6 +282,7 @@ public class EnemySpawner : MonoBehaviour
         }
         if (enemyDriverlogic != null)
         {
+            enemyDriverlogic.audiomanagerScript = audiomanagerScript;
             enemyDriverlogic.playerscript = playerData;
             enemyDriverlogic.enemySpawnerScript = this;
             enemyDriverlogic.sideobjective = SideObjectiveQuestGiverScript;
@@ -295,6 +297,10 @@ public class EnemySpawner : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(playerPos.position, spawnRadius);
+        if(playerPos != null)
+        {
+            Gizmos.DrawWireSphere(playerPos.position, spawnRadius);
+        }
+     
     }
 }
