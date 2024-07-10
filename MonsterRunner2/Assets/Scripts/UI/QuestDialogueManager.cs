@@ -296,7 +296,7 @@ public class QuestDialogueManager : MonoBehaviour
         }
 
         // Wait for one final delay before closing
-        yield return new WaitForSeconds(2f); // Adjust the duration to match the typing speed and length of the text
+        yield return new WaitForSeconds(1f); // Adjust the duration to match the typing speed and length of the text
 
         isFeatureExplaining = false; // Set the flag to false
         isDoneSecondExplaination = true;
