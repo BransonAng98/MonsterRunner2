@@ -16,8 +16,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public Audiomanager audiomanagerScript;
     public GameObject player;
     private float spawnRadius = 140f;
+    private float tutorialspawnRadius = 10f;
     [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
+    public Transform tutorialSpawner;
+    public GameMenuManager menuManagerScript;
     [SerializeField] private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
+ 
 
     {
         { 0, new List<int> { 2, 0 } }, // 4 of type 1, 0 of type 2
@@ -194,18 +198,28 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPosition()
     {
-       
         float minSpacing = 30f;
         float minDistanceFromPlayer = 120f; // Minimum distance from the player
         int maxAttempts = 100; // Avoid infinite loops
 
         for (int attempts = 0; attempts < maxAttempts; attempts++)
         {
-            Vector3 randomDirection = Random.insideUnitSphere * spawnRadius;
-            randomDirection += playerPos.position;
+            Vector3 randomDirection;
+
+            if (menuManagerScript.sceneID == 1)
+            {
+                randomDirection = Random.insideUnitSphere * tutorialspawnRadius;
+                randomDirection += tutorialSpawner.position;
+            }
+            else
+            {
+                randomDirection = Random.insideUnitSphere * spawnRadius;
+                randomDirection += playerPos.position;
+            }
+
             randomDirection.y = 0f; // Set the Y position to 0
 
-            if (Vector3.Distance(randomDirection, playerPos.position) < minDistanceFromPlayer)
+            if (menuManagerScript.sceneID != 1 && Vector3.Distance(randomDirection, playerPos.position) < minDistanceFromPlayer)
                 continue;
 
             if (IsPositionOnNavMesh(randomDirection, minSpacing))
@@ -215,7 +229,15 @@ public class EnemySpawner : MonoBehaviour
         }
 
         Debug.LogError("No valid spawn positions found!");
-        return playerPos.position + new Vector3(minDistanceFromPlayer, 0, 0); // Default to a position if none found
+
+        if (menuManagerScript.sceneID == 1)
+        {
+            return tutorialSpawner.position + new Vector3(spawnRadius, 0, 0); // Default to a position if none found
+        }
+        else
+        {
+            return playerPos.position + new Vector3(minDistanceFromPlayer, 0, 0); // Default to a position if none found
+        }
     }
 
     private bool IsPositionOnNavMesh(Vector3 position, float minSpacing)

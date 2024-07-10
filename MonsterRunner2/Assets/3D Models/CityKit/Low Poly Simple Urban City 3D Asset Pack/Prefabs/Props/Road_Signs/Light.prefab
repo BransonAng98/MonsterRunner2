@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3062384931409526121}
   - component: {fileID: 8512328487316635251}
   - component: {fileID: 7524456728508164689}
+  - component: {fileID: 3803460769989950194}
   m_Layer: 15
   m_Name: Light
   m_TagString: Untagged
@@ -97,7 +98,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -114,3 +115,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.500282, y: 6.0770903, z: 0.5463677}
   m_Center: {x: 0, y: 3.0385451, z: 0.025013484}
+--- !u!114 &3803460769989950194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3566633951122676924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83efcf8967fea964eadbce2cd8dee7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathVFX: {fileID: 1362961888439876361, guid: c3a03b8eefba61f42930cc1d1694ff54,
+    type: 3}
+  Renderer: {fileID: 3062384931409526121}
+  entityCollider: {fileID: 7524456728508164689}
+  isDead: 0

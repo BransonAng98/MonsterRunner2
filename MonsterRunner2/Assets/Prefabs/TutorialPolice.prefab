@@ -116,8 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  speedMax: 24
-  speedMin: 20
+  speedMax: 26
+  speedMin: 25
   acceleration: 0
   turnSpeed: 0
   particleList:
@@ -173,7 +173,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 7
   m_Speed: 3.5
-  m_Acceleration: 20
+  m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 200
   m_StoppingDistance: 3
