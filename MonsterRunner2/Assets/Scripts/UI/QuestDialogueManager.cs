@@ -24,7 +24,6 @@ public class QuestDialogueManager : MonoBehaviour
 
     // Second set of feature explanations and images
     public string[] secondFeatureText;
-    public Image[] secondFeatureImages;
 
     public float textSpd;
     public bool isAccepting;
@@ -278,40 +277,30 @@ public class QuestDialogueManager : MonoBehaviour
 
     public void StartSecondTutorial()
     {
-        player.StopCarInstantly();
-        player.canMove = false;
         StartCoroutine(TypeSecondFeatureExplanation());
     }
 
     private IEnumerator TypeSecondFeatureExplanation()
     {
-        
         currentFeatureIndex = 0; // Reset feature index for second set
 
         // Display the second set of feature explanations
         DisplaySecondFeature(currentFeatureIndex);
 
-        // Wait for player tap to progress through second feature explanations
+        // Automatically progress through second feature explanations
         while (currentFeatureIndex < secondFeatureText.Length - 1)
         {
-            yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !isWaitingForClick);
+            yield return new WaitForSeconds(2f); // Adjust the duration to match the typing speed and length of the text
             currentFeatureIndex++;
             DisplaySecondFeature(currentFeatureIndex);
-            isWaitingForClick = true;
-            yield return new WaitForSeconds(0.2f); // Delay to avoid double click
-            isWaitingForClick = false;
         }
 
-        // Wait for one final click before closing
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && !isWaitingForClick);
-        isWaitingForClick = true;
-        yield return new WaitForSeconds(0.2f); // Delay to avoid double click
-        isWaitingForClick = false;
+        // Wait for one final delay before closing
+        yield return new WaitForSeconds(2f); // Adjust the duration to match the typing speed and length of the text
 
         isFeatureExplaining = false; // Set the flag to false
         isDoneSecondExplaination = true;
         player.canMove = true;
-        player.RestoreCarSpeed();
 
         CloseWindow();
     }
@@ -343,16 +332,6 @@ public class QuestDialogueManager : MonoBehaviour
         questWindow.SetActive(true);
         descriptionText.text = string.Empty;
 
-        // Update the second feature image
-        if (index < secondFeatureImages.Length)
-        {
-            foreach (Image img in secondFeatureImages)
-            {
-                img.gameObject.SetActive(false); // Hide all images
-            }
-            secondFeatureImages[index].gameObject.SetActive(true); // Show the current image
-        }
-
         foreach (char letter in secondFeatureText[index].ToCharArray())
         {
             descriptionText.text += letter;
@@ -373,11 +352,6 @@ public class QuestDialogueManager : MonoBehaviour
         foreach (Image img in featureImages)
         {
             img.gameObject.SetActive(false); // Hide all images from the first set
-        }
-
-        foreach (Image img in secondFeatureImages)
-        {
-            img.gameObject.SetActive(false); // Hide all images from the second set
         }
 
         Debug.Log("Flicker closed");
