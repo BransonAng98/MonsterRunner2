@@ -5,6 +5,7 @@ using UnityEngine;
 public class FadeToBlackTrigger : MonoBehaviour
 {
     public TutorialManager tutorialManagerScript;
+    [SerializeField] private bool triggerfade;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,11 +15,16 @@ public class FadeToBlackTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (triggerfade == true)
+        {
+            tutorialManagerScript.StartFade();
+           
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        tutorialManagerScript.StartFade();
+        triggerfade = true;
+        tutorialManagerScript.TypeCompleteText();
     }
 }

@@ -12,6 +12,7 @@ public class QuestDialogueManager : MonoBehaviour
     public GameMenuManager menuManager;
     public TextMeshProUGUI descriptionText;
     public Image speechFX;
+    public Image blackscreen;
     public float flickerDuration;
 
     public string[] introText;
@@ -22,8 +23,6 @@ public class QuestDialogueManager : MonoBehaviour
     public string[] featureText; // Array for first set of feature explanations
     public Image[] featureImages; // Array for first set of feature-related images
 
-    // Second set of feature explanations and images
-    public string[] secondFeatureText;
 
     public float textSpd;
     public bool isAccepting;
@@ -223,6 +222,8 @@ public class QuestDialogueManager : MonoBehaviour
 
     private IEnumerator TypeIntroSequence()
     {
+        blackscreen.gameObject.SetActive(true);
+
         for (int i = 0; i < introText.Length; i++)
         {
             descriptionText.text = string.Empty;
@@ -237,6 +238,7 @@ public class QuestDialogueManager : MonoBehaviour
         }
         introSequenceComplete = true;
         typingCoroutine = null; // Reset coroutine reference
+        blackscreen.gameObject.SetActive(false);
 
         // Start the feature explanation
         StartCoroutine(TypeFeatureExplanation());

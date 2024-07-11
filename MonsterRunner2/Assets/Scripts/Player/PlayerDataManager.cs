@@ -30,6 +30,7 @@ public class PlayerDataManager : MonoBehaviour
     public PlayerInfoData playerInfoData;
     public Joystick joystick;
     public QuestDialogueManager questDManager;
+    public TutorialManager tutorialManager;
     public GameMenuManager menuManager;
     public EnemySpawner enemySpawnerScript;
     public DetectionBar detectionBar;
@@ -80,6 +81,7 @@ public class PlayerDataManager : MonoBehaviour
                     missionManager.demoPlayer = playerData;
                     missionManager.objectiveIndicator = playerData.questIndicator;
                     missionManager.player = playerCar;
+                    tutorialManager.player = playerData;
                     abilityManager.player = playerData;
                     detectionBar.player = playerData;
                     playerData.audiomanagerScript = audiomanagerScript;

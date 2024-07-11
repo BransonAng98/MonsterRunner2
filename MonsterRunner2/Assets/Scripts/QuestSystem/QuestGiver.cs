@@ -47,10 +47,11 @@ public class QuestGiver : MonoBehaviour
     {
         quest.goal.playerDataSO = playerInfoData;
         quest.goal.goaltype = "None";
+
         StartCoroutine(StartGameSequence());
+
         questCompleted = false;
         countdownStart = false;
-        //quest.goal.ChooseRandomGoal();
         gameStarted = true;
         quest.enemyspawnerScript = enemySpawnerScript;
         buildingObjects = missionManager.buildingObjectsList;

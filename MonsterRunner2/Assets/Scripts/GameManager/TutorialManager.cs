@@ -9,6 +9,7 @@ public class TutorialManager : MonoBehaviour
 {
     public PlayerDataManager playerManager;
     public PlayerDataSO playerData;
+    public DemoPlayer player;
 
     public ScoreManagerScript scoreManager;
     public missionManagerScript missionManager;
@@ -45,7 +46,6 @@ public class TutorialManager : MonoBehaviour
 
     public void StartFade()
     {
-        Debug.Log("FadeStart");
         fadeTimer += Time.deltaTime;
         float alpha = Mathf.Clamp01(fadeTimer / fadeDuration);
         fadeToBlackImage.alpha = alpha;
@@ -54,6 +54,12 @@ public class TutorialManager : MonoBehaviour
             StopPlayerMovement();
             shouldFadeIn = false;
         }
+    }
+
+    public void TypeCompleteText()
+    {
+        int index = Random.Range(0, questDialogue.rewardText.Length);
+        questDialogue.TypeText(false, index);
     }
 
     void StopPlayerMovement()
@@ -72,36 +78,10 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(!hasSpawnedToken)
+        if (!hasSpawnedToken)
         {
             SpawnAbilityTokens();
         }
 
-        if (scoreManager.missionsCompleted == 1)
-        {
-            if (shouldFadeIn)
-            {
-                Invoke("StartFade", 4f);
-
-                missionManager.enabled = false;
-
-                for (int i = missionManager.passengers.Count - 1; i >= 0; i--)
-                {
-                    GameObject passenger = missionManager.passengers[i];
-                    missionManager.passengers.RemoveAt(i);
-                    Destroy(passenger);
-                }
-            }
-        }
-        else
-        {
-            Debug.Log("Waiting for player to complete the mission");
-        }
-
-    }
-
-    public void InvokeFade()
-    {
-       
     }
 }
