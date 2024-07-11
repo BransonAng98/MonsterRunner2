@@ -36,6 +36,7 @@ public class PlayerDataManager : MonoBehaviour
     public DetectionBar detectionBar;
     public LineRenderer lineRenderer;
     public IDriveTokenManager driveTokenManager;
+    public WaterTrigger waterTrigger;
 
     //Scriptst that require player data
     public CinemachineVirtualCamera mainCam;
@@ -77,7 +78,7 @@ public class PlayerDataManager : MonoBehaviour
                     driveTokenManager.playerData = playerData;
                     questDManager.player = playerData;
                     mainCam.Follow = playerCar.transform;
-
+                    waterTrigger.demoPlayer = playerData;
                     missionManager.demoPlayer = playerData;
                     missionManager.objectiveIndicator = playerData.questIndicator;
                     missionManager.player = playerCar;

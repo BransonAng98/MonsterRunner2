@@ -169,9 +169,7 @@ public class DemoPlayer : MonoBehaviour
         {
             if (collision.gameObject.layer != 9)
             {
-                TakeDamage(1000);
-                Vector3 ExplodePos = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
-                Instantiate(impactVFX, ExplodePos, Quaternion.identity);
+                KillPlayer();
             }
         }
 
@@ -217,6 +215,12 @@ public class DemoPlayer : MonoBehaviour
                 DestroyCollisionVFX();
             }
         }
+    }
+    public void KillPlayer()
+    {
+        TakeDamage(1000);
+        Vector3 ExplodePos = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
+        Instantiate(impactVFX, ExplodePos, Quaternion.identity);
     }
 
     void GetInput()

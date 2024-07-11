@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class FadeToBlackTrigger : MonoBehaviour
 {
-    public TutorialManager tutorialManagerScript;
-    [SerializeField] private bool triggerfade;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public TutorialManager tutorialManagerScript;
+    [SerializeField] private bool triggerFade;
+
+    private void Update()
     {
-        if (triggerfade == true)
+        if (triggerFade)
         {
             tutorialManagerScript.StartFade();
-           
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        triggerfade = true;
-        tutorialManagerScript.TypeCompleteText();
+        if(other.gameObject.tag == "player")
+        {
+            if (!triggerFade) // Ensure it's only triggered once
+            {
+                triggerFade = true;
+                tutorialManagerScript.TypeCompleteText();
+            }
+        }
+       
     }
 }
