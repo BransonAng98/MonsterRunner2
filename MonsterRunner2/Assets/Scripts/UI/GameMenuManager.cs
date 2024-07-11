@@ -13,8 +13,6 @@ public class GameMenuManager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject loadingScreen;
     public GameObject popUpScreen;
-    public GameObject tutorialScreen1;
-    public GameObject tutorialScreen2;
     public Slider loadingSlider;
 
     [SerializeField] GameObject currentMenu;
@@ -42,8 +40,7 @@ public class GameMenuManager : MonoBehaviour
 
     private void Start()
     {
-        StartOfGameplayScene();
-        DeactiveScene();
+
     }
 
     void AssignSceneID()
@@ -60,36 +57,6 @@ public class GameMenuManager : MonoBehaviour
                 break;
             case "TheCity":
                 sceneID = 2;
-                break;
-        }
-    }
-
-    void DeactiveScene()
-    {
-        switch (sceneID)
-        {
-            case 1:
-                tutorialScreen2.SetActive(false);
-                break;
-
-            case 2:
-                tutorialScreen1.SetActive(false);
-                tutorialScreen2.SetActive(false);
-                break;
-        }
-    }
-
-    void StartOfGameplayScene()
-    {
-        switch (sceneID)
-        {
-            case 1:
-                Time.timeScale = 0f;
-                tutorialScreen1.SetActive(true);
-                tutorialScreen2.SetActive(false);
-                break;
-
-            case 2:
                 break;
         }
     }
@@ -169,7 +136,6 @@ public class GameMenuManager : MonoBehaviour
         switch (sceneID)
         {
             case 1:
-                tutorialScreen1.SetActive(false);
                 Time.timeScale = 1f;
                 break;
 
@@ -179,28 +145,7 @@ public class GameMenuManager : MonoBehaviour
                 break;
         }
     }
-
-    public void OpenTutorialPage2()
-    {
-        tutorialScreen1.SetActive(false);
-        tutorialScreen2.SetActive(true);
-    }
-
-    public void StartTutorialGameplay()
-    {
-        if (tutorialScreen1.activeSelf == true)
-        {
-            tutorialScreen1.SetActive(false);
-        }
-
-        if(tutorialScreen2.activeSelf == true)
-        {
-            tutorialScreen2.SetActive(false);
-        }
-
-        Time.timeScale = 1f;
-    }
-
+   
     public void OpenPopUpScreen()
     {
         popUpScreen.SetActive(true);

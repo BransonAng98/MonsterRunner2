@@ -32,24 +32,15 @@ public class TutorialManager : MonoBehaviour
         exitButton.SetActive(false);
     }
 
-    void SpawnTutorialPassenger()
+    void SpawnAbilityTokens()
     {
         if (questDialogue.isDoneExplaining == true)
-        {
-            missionManager.SpawnPassengers();
-            hasSpawnedPassenger = true;
-        }
-    }
-
-    void SpawnTutorialTokens()
-    {
-        if (questDialogue.isDoneSecondExplaination == true)
         {
             tokenManager.SpawnPowerUps();
             hasSpawnedToken = true;
             enemyspawnerScript.startSpawning = true;
         }
-
+        
     }
 
     void StartFade()
@@ -80,16 +71,10 @@ public class TutorialManager : MonoBehaviour
 
     private void Update()
     {
-        if(!hasSpawnedPassenger)
+        if(!hasSpawnedToken)
         {
-            SpawnTutorialPassenger();
+            SpawnAbilityTokens();
         }
-
-        if (!hasSpawnedToken)
-        {
-            SpawnTutorialTokens();
-        }
-
 
         if (scoreManager.missionsCompleted == 1)
         {

@@ -30,7 +30,6 @@ public class QuestDialogueManager : MonoBehaviour
     public bool isWarningTyping;
     public bool introSequenceComplete = false;
     public bool isDoneExplaining = false;
-    public bool isDoneSecondExplaination = false;
 
     private Coroutine typingCoroutine; // Reference to the current coroutine
     private Coroutine flickeringCouroutine;
@@ -275,36 +274,6 @@ public class QuestDialogueManager : MonoBehaviour
         CloseWindow();
     }
 
-    public void StartSecondTutorial()
-    {
-        StartCoroutine(TypeSecondFeatureExplanation());
-    }
-
-    private IEnumerator TypeSecondFeatureExplanation()
-    {
-        currentFeatureIndex = 0; // Reset feature index for second set
-
-        // Display the second set of feature explanations
-        DisplaySecondFeature(currentFeatureIndex);
-
-        // Automatically progress through second feature explanations
-        while (currentFeatureIndex < secondFeatureText.Length - 1)
-        {
-            yield return new WaitForSeconds(2f); // Adjust the duration to match the typing speed and length of the text
-            currentFeatureIndex++;
-            DisplaySecondFeature(currentFeatureIndex);
-        }
-
-        // Wait for one final delay before closing
-        yield return new WaitForSeconds(1f); // Adjust the duration to match the typing speed and length of the text
-
-        isFeatureExplaining = false; // Set the flag to false
-        isDoneSecondExplaination = true;
-        player.canMove = true;
-
-        CloseWindow();
-    }
-
     private void DisplayFeature(int index)
     {
         questWindow.SetActive(true);
@@ -321,18 +290,6 @@ public class QuestDialogueManager : MonoBehaviour
         }
 
         foreach (char letter in featureText[index].ToCharArray())
-        {
-            descriptionText.text += letter;
-            // Yield return is not required here because text display will happen instantly
-        }
-    }
-
-    private void DisplaySecondFeature(int index)
-    {
-        questWindow.SetActive(true);
-        descriptionText.text = string.Empty;
-
-        foreach (char letter in secondFeatureText[index].ToCharArray())
         {
             descriptionText.text += letter;
             // Yield return is not required here because text display will happen instantly
