@@ -12,7 +12,7 @@ public class NavmeshChasePlayer : MonoBehaviour
     private float intervalTimer = 0f;
 
     public EnemyCarAI enemyCarAIScript; // Reference to the EnemyCarAI script
-    private float switchDistance = 25f;  // Distance at which to switch scripts
+    public float switchDistance;  // Distance at which to switch scripts
 
     [SerializeField] private float distancetoPlayer;
 

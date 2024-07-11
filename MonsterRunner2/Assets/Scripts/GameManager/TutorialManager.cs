@@ -38,13 +38,14 @@ public class TutorialManager : MonoBehaviour
         {
             tokenManager.SpawnPowerUps();
             hasSpawnedToken = true;
-            enemyspawnerScript.startSpawning = true;
+            //enemyspawnerScript.startSpawning = true;
         }
         
     }
 
-    void StartFade()
+    public void StartFade()
     {
+        Debug.Log("FadeStart");
         fadeTimer += Time.deltaTime;
         float alpha = Mathf.Clamp01(fadeTimer / fadeDuration);
         fadeToBlackImage.alpha = alpha;
@@ -97,5 +98,10 @@ public class TutorialManager : MonoBehaviour
             Debug.Log("Waiting for player to complete the mission");
         }
 
+    }
+
+    public void InvokeFade()
+    {
+       
     }
 }

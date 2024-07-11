@@ -1,36 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI; // Import NavMesh
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
     public Transform playerPos;
     [SerializeField] public int threatlvl;
     [SerializeField] private GameObject[] enemyTypesPrefabs;
-    [SerializeField] public DemoPlayer playerData; // Assuming you have a PlayerData script to pass to enemies
+    [SerializeField] public DemoPlayer playerData;
     [SerializeField] private float Radius;
-    [SerializeField] public SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
-    [SerializeField] public QuestGiver QuestGiverScript;
+    [SerializeField] private SideObjectiveQuestGiver SideObjectiveQuestGiverScript;
+    [SerializeField] private QuestGiver QuestGiverScript;
     [SerializeField] public bool startSpawning;
-    [SerializeField] public Audiomanager audiomanagerScript;
+    [SerializeField] private Audiomanager audiomanagerScript;
     public GameObject player;
     private float spawnRadius = 140f;
-    private float tutorialspawnRadius = 10f;
+    private float tutorialSpawnRadius = 10f;
     [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
     public Transform tutorialSpawner;
     public GameMenuManager menuManagerScript;
-    [SerializeField] private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
- 
 
+    private float tutorialMinSpacing = 10f;
+    private float tutorialMinDistanceFromPlayer = 20f;
+
+    [SerializeField]
+    private Dictionary<int, List<int>> threatLevelEnemies = new Dictionary<int, List<int>>()
     {
-        { 0, new List<int> { 2, 0 } }, // 4 of type 1, 0 of type 2
-        { 1, new List<int> { 4, 0 } }, // 4 of type 1, 0 of type 2
-        { 2, new List<int> { 6, 0 } }, // 4 of type 1, 2 of type 2
+        { 0, new List<int> { 2, 0 } },
+        { 1, new List<int> { 4, 0 } },
+        { 2, new List<int> { 6, 0 } },
         { 3, new List<int> { 8, 0 } },
         { 4, new List<int> { 6, 2 } },
         { 5, new List<int> { 4, 4 } },
-        // Add more threat levels as needed
     };
 
     [SerializeField] private int currentThreatLevel = 0;
@@ -132,32 +134,6 @@ public class EnemySpawner : MonoBehaviour
         return null;
     }
 
-    //private void SpawnEnemies()
-    //{
-    //    Debug.Log("Spawn Wave");
-    //    spawnedEnemies.Clear();
-
-    //    if (!threatLevelEnemies.ContainsKey(threatlvl))
-    //    {
-    //        Debug.LogError("Threat level not defined!");
-    //        return;
-    //    }
-
-    //    List<int> enemyCounts = threatLevelEnemies[threatlvl];
-
-    //    for (int i = 0; i < enemyCounts.Count; i++)
-    //    {
-    //        for (int j = 0; j < enemyCounts[i]; j++)
-    //        {
-    //            Vector3 spawnPosition = GetRandomSpawnPosition();
-    //            GameObject enemy = Instantiate(enemyTypesPrefabs[i], spawnPosition, Quaternion.identity);
-    //            enemy.transform.LookAt(playerPos);
-    //            spawnedEnemies.Add(enemy);
-    //            AssignEnemyProperties(enemy);
-    //        }
-    //    }
-    //}
-
     public void SpawnSingleEnemy(int enemyType)
     {
         if (!threatLevelEnemies.ContainsKey(threatlvl))
@@ -185,12 +161,12 @@ public class EnemySpawner : MonoBehaviour
     {
         if (spawnedEnemies.Contains(enemyToRemove))
         {
-            spawnedEnemies.Remove(enemyToRemove); // Remove the enemy car from the list
+            spawnedEnemies.Remove(enemyToRemove);
 
             enemyCarDriver enemyAI = enemyToRemove.GetComponent<enemyCarDriver>();
             if (enemyAI != null)
             {
-                int enemyType = enemyAI.enemyType; // Assuming you have a property to get the enemy type
+                int enemyType = enemyAI.enemyType;
                 SpawnSingleEnemy(enemyType);
             }
         }
@@ -198,9 +174,9 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomSpawnPosition()
     {
-        float minSpacing = 30f;
-        float minDistanceFromPlayer = 120f; // Minimum distance from the player
-        int maxAttempts = 100; // Avoid infinite loops
+        float minSpacing = menuManagerScript.sceneID == 1 ? tutorialMinSpacing : 30f;
+        float minDistanceFromPlayer = menuManagerScript.sceneID == 1 ? 0f : 120f; // Set to 0 to disregard distance when sceneID is 1
+        int maxAttempts = 100;
 
         for (int attempts = 0; attempts < maxAttempts; attempts++)
         {
@@ -208,8 +184,16 @@ public class EnemySpawner : MonoBehaviour
 
             if (menuManagerScript.sceneID == 1)
             {
-                randomDirection = Random.insideUnitSphere * tutorialspawnRadius;
-                randomDirection += tutorialSpawner.position;
+                if (tutorialSpawner != null)
+                {
+                    randomDirection = Random.insideUnitSphere * tutorialSpawnRadius;
+                    randomDirection += tutorialSpawner.position;
+                }
+                else
+                {
+                    Debug.LogError("Tutorial Spawner not set!");
+                    return Vector3.zero;
+                }
             }
             else
             {
@@ -217,7 +201,7 @@ public class EnemySpawner : MonoBehaviour
                 randomDirection += playerPos.position;
             }
 
-            randomDirection.y = 0f; // Set the Y position to 0
+            randomDirection.y = 0f;
 
             if (menuManagerScript.sceneID != 1 && Vector3.Distance(randomDirection, playerPos.position) < minDistanceFromPlayer)
                 continue;
@@ -230,13 +214,13 @@ public class EnemySpawner : MonoBehaviour
 
         Debug.LogError("No valid spawn positions found!");
 
-        if (menuManagerScript.sceneID == 1)
+        if (menuManagerScript.sceneID == 1 && tutorialSpawner != null)
         {
-            return tutorialSpawner.position + new Vector3(spawnRadius, 0, 0); // Default to a position if none found
+            return tutorialSpawner.position + new Vector3(tutorialSpawnRadius, 0, 0);
         }
         else
         {
-            return playerPos.position + new Vector3(minDistanceFromPlayer, 0, 0); // Default to a position if none found
+            return playerPos.position + new Vector3(minDistanceFromPlayer, 0, 0);
         }
     }
 
@@ -319,10 +303,9 @@ public class EnemySpawner : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        if(playerPos != null)
+        if (playerPos != null)
         {
             Gizmos.DrawWireSphere(playerPos.position, spawnRadius);
         }
-     
     }
 }

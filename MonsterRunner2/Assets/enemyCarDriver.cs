@@ -277,9 +277,13 @@ public class enemyCarDriver : MonoBehaviour
     {
         if (!isDead && (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Obstacle")))
         {
-            audiomanagerScript.playCarHit();
-            CarDeath(0);
+            if(isDead != true)
+            {
+                audiomanagerScript.playCarHit();
+                CarDeath(0);
+            }
         }
+      
     }
 
     public void CarDeath(int causeOfDeath)
@@ -289,10 +293,16 @@ public class enemyCarDriver : MonoBehaviour
         {
             case 0:
                 isDead = true;
+                audiomanagerScript.playPoliceDeathSFX();
+                TurnOnExplosion();
+              
                 Debug.Log("Killed by another car");
                 break;
             case 1:
                 isDead = true;
+                audiomanagerScript.playPoliceDeathSFX();
+                TurnOnExplosion();
+               
                 questgiverScript.currentenemykilled++;
                 sideobjective.currentenemykilled++;
                 
@@ -310,11 +320,10 @@ public class enemyCarDriver : MonoBehaviour
             {
                 enemySpawnerScript.RemoveEnemyFromList(gameObject); // Notify the spawner to remove this car from the list
             }
-
+          
             gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
             speed = 0;
-            audiomanagerScript.playPoliceDeathSFX();
-            TurnOnExplosion();
+          
             carRigidbody.constraints = RigidbodyConstraints.None;
 
             // Apply an impulse force to fling the car

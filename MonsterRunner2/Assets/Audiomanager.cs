@@ -102,7 +102,7 @@ public class Audiomanager : MonoBehaviour
         policeSiren.volume = 0f;
     }
 
-
+    
 
     public void playPoliceDeathSFX()
     {
@@ -158,7 +158,7 @@ public class Audiomanager : MonoBehaviour
         AudioClip soundtoPlay = carHitSFX[Random.Range(0, carHitSFX.Length)];
         carHit.PlayOneShot(soundtoPlay);
 
-        yield return new WaitForSeconds(coinSFXCooldown);
+        yield return new WaitForSeconds(carHitSFXCooldown);
 
         iscarHitPlaying = false;
     }

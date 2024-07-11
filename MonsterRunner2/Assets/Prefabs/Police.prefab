@@ -315,6 +315,7 @@ MonoBehaviour:
   navMeshAgent: {fileID: 202582957467173566}
   target: {fileID: 0}
   enemyCarAIScript: {fileID: 5039597518212396642}
+  switchDistance: 25
   distancetoPlayer: 0
 --- !u!1 &6372198578092894673
 GameObject:
