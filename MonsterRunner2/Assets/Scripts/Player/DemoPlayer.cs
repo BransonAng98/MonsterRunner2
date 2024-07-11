@@ -218,6 +218,7 @@ public class DemoPlayer : MonoBehaviour
     }
     public void KillPlayer()
     {
+        carsoundScript.playCarDeath();
         TakeDamage(1000);
         Vector3 ExplodePos = new Vector3(transform.position.x, transform.position.y + 2f, transform.position.z);
         Instantiate(impactVFX, ExplodePos, Quaternion.identity);

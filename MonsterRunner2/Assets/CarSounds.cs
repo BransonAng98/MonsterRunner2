@@ -10,7 +10,10 @@ public class CarSounds : MonoBehaviour
 
     public AudioSource carAudio;
     public AudioSource hitSound;
+    public AudioSource deathSound;
     public AudioClip[] carHitSFX;
+    public AudioClip[] cardeathSFX;
+
 
     private bool iscarHitPlaying = false;
     private float carHitSFXCooldown = 1f;
@@ -102,4 +105,12 @@ public class CarSounds : MonoBehaviour
 
         iscarHitPlaying = false;
     }
+
+    public void playCarDeath()
+    {
+        AudioClip soundtoPlay = cardeathSFX[Random.Range(0, cardeathSFX.Length)]; //play Chase Music
+        deathSound.PlayOneShot(soundtoPlay);
+    }
+
+    
 }
