@@ -130,6 +130,9 @@ public class DemoPlayer : MonoBehaviour
     public Audiomanager audiomanagerScript;
     private bool hasPlayedCarHitSound = false; // Flag to track if the car hit sound has been played
 
+    public GameObject collidedobject;
+    public GameObject previouscollidedObject;
+
     private void Awake()
     {
         health = playerData.health;
@@ -183,9 +186,16 @@ public class DemoPlayer : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            carsoundScript.playCarHit();
+            collidedobject = collision.gameObject;
+            previouscollidedObject = collidedobject;
+            if (!hasPlayedCarHitSound && collidedobject != previouscollidedObject || !hasPlayedCarHitSound && collidedobject == null)
+            {
+               
+                hasPlayedCarHitSound = true; // Set the flag to true after playing the sound
+            }
             if (obstacleCollisionCount == 0) // First obstacle collision
             {
-                carsoundScript.playCarHit();
                 Vector3 contactPoint = collision.contacts[0].point; // Get the first contact point
                 InstantiateCollisionVFX(contactPoint);
             }
@@ -198,6 +208,8 @@ public class DemoPlayer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
+            collidedobject = null;
+            hasPlayedCarHitSound = false;
             obstacleCollisionCount--;
             isColliding = false;
             if (obstacleCollisionCount == 0)

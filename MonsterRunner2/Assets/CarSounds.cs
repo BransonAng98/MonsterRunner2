@@ -13,7 +13,7 @@ public class CarSounds : MonoBehaviour
     public AudioClip[] carHitSFX;
 
     private bool iscarHitPlaying = false;
-    private float carHitSFXCooldown = 0.1f;
+    private float carHitSFXCooldown = 1f;
 
     public float minPitch;
     public float maxPitch;
