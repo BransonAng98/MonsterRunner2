@@ -9,6 +9,11 @@ public class CarSounds : MonoBehaviour
     [SerializeField]private float currentSpeed;
 
     public AudioSource carAudio;
+    public AudioSource hitSound;
+    public AudioClip[] carHitSFX;
+
+    private bool iscarHitPlaying = false;
+    private float carHitSFXCooldown = 0.1f;
 
     public float minPitch;
     public float maxPitch;
@@ -76,5 +81,25 @@ public class CarSounds : MonoBehaviour
         }
 
         carAudio.volume = 0f;
+    }
+
+    public void playCarHit()
+    {
+        if (!iscarHitPlaying)
+        {
+            StartCoroutine(PlayCarHitWithCooldown());
+        }
+    }
+
+    private IEnumerator PlayCarHitWithCooldown()
+    {
+        iscarHitPlaying = true;
+
+        AudioClip soundtoPlay = carHitSFX[Random.Range(0, carHitSFX.Length)];
+        hitSound.PlayOneShot(soundtoPlay);
+
+        yield return new WaitForSeconds(carHitSFXCooldown);
+
+        iscarHitPlaying = false;
     }
 }

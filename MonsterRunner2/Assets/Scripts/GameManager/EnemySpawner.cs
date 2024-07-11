@@ -58,6 +58,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (allNull && startSpawning)
         {
+            audiomanagerScript.PlayPoliceSiren();
             UpdateEnemiesForThreatLevel();
         }
     }

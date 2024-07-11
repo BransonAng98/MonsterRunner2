@@ -128,6 +128,8 @@ public class DemoPlayer : MonoBehaviour
     private bool hasStartedSound = false;
     public CarSounds carsoundScript;
     public Audiomanager audiomanagerScript;
+    private bool hasPlayedCarHitSound = false; // Flag to track if the car hit sound has been played
+
     private void Awake()
     {
         health = playerData.health;
@@ -183,6 +185,7 @@ public class DemoPlayer : MonoBehaviour
         {
             if (obstacleCollisionCount == 0) // First obstacle collision
             {
+                carsoundScript.playCarHit();
                 Vector3 contactPoint = collision.contacts[0].point; // Get the first contact point
                 InstantiateCollisionVFX(contactPoint);
             }
@@ -224,10 +227,10 @@ public class DemoPlayer : MonoBehaviour
         {
             currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
         }
-        else
-        {
-            currentSpeed *= collisionSpeedReduction;
-        }
+        //else
+        //{
+        //    currentSpeed *= collisionSpeedReduction;
+        //}
 
         Vector3 rotatedInputDirection = Quaternion.Euler(0, 45, 0) * new Vector3(joystickInput.x, 0, joystickInput.y);
         if (rotatedInputDirection.magnitude >= maxSteeringAngle)
