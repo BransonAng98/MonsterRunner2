@@ -77,24 +77,30 @@ public class PlayerDataManager : MonoBehaviour
                     ab2 = playerData.playerData.ability2Level;
                     driveTokenManager.playerData = playerData;
                     questDManager.player = playerData;
+                    
                     mainCam.Follow = playerCar.transform;
                     waterTrigger.demoPlayer = playerData;
+
                     missionManager.demoPlayer = playerData;
                     missionManager.objectiveIndicator = playerData.questIndicator;
                     missionManager.player = playerCar;
+
                     tutorialManager.player = playerData;
                     abilityManager.player = playerData;
                     detectionBar.player = playerData;
+                   
                     playerData.audiomanagerScript = audiomanagerScript;
                     playerData.abilityManager = playerAbManager;
                     playerData.playerDataManager = playerDataManager;
                     playerData.joystick = joystick;
                     playerData.questdialogueScript = questDManager;
                     playerData.menuManager = menuManager;
+                   
                     questgiverManager.player = playerData;
                     enemySpawnerScript.playerPos = playerData.transform;
                     enemySpawnerScript.playerData = playerData;
                     cameraFaderManager.player = playerData.gameObject;
+                   
                     if (ab2 > 0)
                     {
                         tokenManager.spawnType2 = true;

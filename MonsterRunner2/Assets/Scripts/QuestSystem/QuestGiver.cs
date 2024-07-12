@@ -68,11 +68,11 @@ public class QuestGiver : MonoBehaviour
     private void Update()
     {
         UpdateRedDot();
-        if (destination != null)
-        {
-            distancetoDestination = Vector3.Distance(player.transform.position, destination.transform.position);
-            // Now distancetoDestination holds the distance between player and destination
-        }
+        //if (destination != null)
+        //{
+        //    distancetoDestination = Vector3.Distance(player.transform.position, destination.transform.position);
+        //    // Now distancetoDestination holds the distance between player and destination
+        //}
 
         if (countdownStart == true)
         {

@@ -49,17 +49,17 @@ public class ScoreManagerScript : MonoBehaviour
         AssignSideObjectiveText();
         UpdateObjIcon();
         // Check if missions completed has increased
-        if (missionsCompleted > lastMissionCount)
-        {
-            // Increase threat level for every 2 missions completed
-            if (missionsCompleted % 2 == 0)
-            {
-                enemySpawnerScript.threatlvl++;
-                Debug.Log("Threat level increased to: " + enemySpawnerScript.threatlvl);
-            }
+        //if (missionsCompleted > lastMissionCount)
+        //{
+        //    // Increase threat level for every 2 missions completed
+        //    if (missionsCompleted % 2 == 0)
+        //    {
+        //        enemySpawnerScript.threatlvl++;
+        //        Debug.Log("Threat level increased to: " + enemySpawnerScript.threatlvl);
+        //    }
 
-            lastMissionCount = missionsCompleted;
-        }
+        //    lastMissionCount = missionsCompleted;
+        //}
 
 
     }

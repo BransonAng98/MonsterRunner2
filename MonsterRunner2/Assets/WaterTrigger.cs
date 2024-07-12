@@ -6,6 +6,7 @@ using Cinemachine;
 public class WaterTrigger : MonoBehaviour
 {
     public DemoPlayer demoPlayer;
+    public enemyCarDriver enemyCarDriver;
     public CinemachineVirtualCamera virtualCamera;
 
     private void OnTriggerEnter(Collider other)
@@ -14,6 +15,10 @@ public class WaterTrigger : MonoBehaviour
         {
             virtualCamera.enabled = false; // Disable the VCam to stop following the player
             demoPlayer.KillPlayer();
+        }
+        if (other.CompareTag("Enemy"))
+        {
+            enemyCarDriver.CarDeath(0);
         }
     }
 }

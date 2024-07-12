@@ -40,11 +40,6 @@ public class missionManagerScript : MonoBehaviour
     {
         CollectBuildingObjects();
         objectiveIndicator = player.GetComponentInChildren<ObjectiveIndicator>();
-        
-        if(menuManager.sceneID != 1)
-        {
-            SpawnPassengers();
-        }
     }
 
     public void SpawnPassengers()

@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public bool startSpawning;
     [SerializeField] private Audiomanager audiomanagerScript;
     public GameObject player;
-    private float spawnRadius = 140f;
+    private float spawnRadius = 200f;
     private float tutorialSpawnRadius = 10f;
     [SerializeField] private List<GameObject> spawnedEnemies = new List<GameObject>();
     public Transform tutorialSpawner;
@@ -35,11 +35,12 @@ public class EnemySpawner : MonoBehaviour
         { 5, new List<int> { 4, 4 } },
     };
 
-    [SerializeField] private int currentThreatLevel = 0;
+    [SerializeField] private int currentThreatLevel = 3;
 
     private void Start()
     {
         startSpawning = false;
+        currentThreatLevel = 3;
     }
 
     private void Update()
@@ -61,6 +62,12 @@ public class EnemySpawner : MonoBehaviour
             audiomanagerScript.PlayPoliceSiren();
             UpdateEnemiesForThreatLevel();
         }
+
+        if(menuManagerScript.sceneID == 2)
+        {
+            startSpawning = true;
+        }
+
     }
 
     public void UpdateEnemiesForThreatLevel()

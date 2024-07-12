@@ -391,7 +391,7 @@ public class DemoPlayer : MonoBehaviour
 
     void Update()
     {
-        GetInput();
+            GetInput();
         CheckHealthState();
 
         if (rb.velocity.magnitude >= 0f && !hasStartedSound)

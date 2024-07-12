@@ -80,10 +80,7 @@ public class PassengerController : MonoBehaviour
             audiomanagerScript.PlayPowerUp();
             SetQuestTypeBasedOnPassengerType();
             missionmanager.DestroyOtherPassengers(gameObject);
-            if(menuManager.sceneID == 2)
-            {
-                questgiverScript.SpawnEnemies();
-            }
+  
           
             //TriggerHouse(true);
             
